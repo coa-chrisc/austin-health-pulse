@@ -58,11 +58,6 @@ export default function ZctaPicker({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // Reset highlight when filtered list changes
-  useEffect(() => {
-    setHighlightedIndex(0);
-  }, [filtered.length]);
-
   function handleSelect(zcta: string) {
     onAdd(zcta);
     setQuery("");
@@ -87,7 +82,7 @@ export default function ZctaPicker({
       setHighlightedIndex((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter") {
       e.preventDefault();
-      handleSelect(filtered[highlightedIndex]);
+      handleSelect(filtered[Math.min(highlightedIndex, filtered.length - 1)]);
     } else if (e.key === "Escape") {
       setIsOpen(false);
     }
@@ -206,6 +201,7 @@ export default function ZctaPicker({
             onChange={(e) => {
               const val = e.target.value.replace(/[^0-9]/g, "").slice(0, 5);
               setQuery(val);
+              setHighlightedIndex(0);
               setIsOpen(val.trim().length > 0);
             }}
             onFocus={() => {

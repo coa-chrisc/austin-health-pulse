@@ -16,10 +16,7 @@ export function useAnimatedNumber(
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (target === null) {
-      setCurrent(null);
-      return;
-    }
+    if (target === null) return;
 
     const startTime = performance.now();
 
@@ -46,5 +43,5 @@ export function useAnimatedNumber(
     };
   }, [target, duration]);
 
-  return current;
+  return target === null ? null : current;
 }

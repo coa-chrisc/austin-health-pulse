@@ -3,7 +3,7 @@ import { APH_COLORS } from "../../lib/constants";
 import { getComparisonColor } from "../../lib/colorScales";
 import { formatValue } from "../../lib/formatters";
 
-export const INDICATOR_DESCRIPTIONS: Record<string, string> = {
+const INDICATOR_DESCRIPTIONS: Record<string, string> = {
   "Poverty Rate":
     "Percentage of residents living below the federal poverty level (ACS 2022)",
   "Uninsured Rate":
@@ -56,11 +56,10 @@ export default function GaugeChart({
     : Math.max(0, Math.min(1, (countyAvg - min) / range));
 
   // Animate the gauge fill on mount / value change
+  // When value is null the filled arc isn't rendered, so there is nothing to
+  // animate or reset.
   useEffect(() => {
-    if (value === null) {
-      setAnimatedFraction(0);
-      return;
-    }
+    if (value === null) return;
 
     const start = performance.now();
     const duration = 800;

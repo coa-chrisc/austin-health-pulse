@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useEffect } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -19,16 +19,14 @@ export default function AppShell() {
   const { isIdle } = useIdleTimer();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
-  const [hasSeenTour, setHasSeenTour] = useState(true);
-
-  useEffect(() => {
+  const [hasSeenTour, setHasSeenTour] = useState(() => {
     try {
-      setHasSeenTour(localStorage.getItem(TOUR_SEEN_KEY) === "1");
+      return localStorage.getItem(TOUR_SEEN_KEY) === "1";
     } catch {
       // localStorage may be blocked — fall back to "seen" so we don't auto-pop
-      setHasSeenTour(true);
+      return true;
     }
-  }, []);
+  });
 
   const openTour = () => setTourOpen(true);
   const closeTour = () => {
