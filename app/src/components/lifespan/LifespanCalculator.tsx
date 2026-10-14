@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { APH_COLORS } from "../../lib/constants";
 import {
   computeLifespan,
@@ -113,10 +113,11 @@ function Slider({
   display,
   onChange,
 }: SliderProps) {
+  const id = useId();
   return (
     <div>
       <div className="flex items-baseline justify-between mb-1">
-        <label className="text-sm text-aph-dark-blue font-medium">
+        <label htmlFor={id} className="text-sm text-aph-dark-blue font-medium">
           {label}
         </label>
         <span className="text-aph-dark-blue font-bold text-base tabular-nums">
@@ -124,6 +125,7 @@ function Slider({
         </span>
       </div>
       <input
+        id={id}
         type="range"
         min={min}
         max={max}
@@ -138,7 +140,9 @@ function Slider({
 
 export default function LifespanCalculator() {
   const [inputs, setInputs] = useState<LifespanInputs>(defaultInputs());
+  const fieldId = useId();
   // Drafts are strings so users can type freely without per-keystroke clamping.
+  const [ageDraft, setAgeDraft] = useState(String(inputs.age));
   const [heightFtDraft, setHeightFtDraft] = useState("5");
   const [heightInDraft, setHeightInDraft] = useState("8");
   const [weightLbDraft, setWeightLbDraft] = useState("160");
@@ -147,16 +151,17 @@ export default function LifespanCalculator() {
     const ft = Number(ftStr);
     const inch = Number(inchStr);
     const lb = Number(lbStr);
+    // Only sync complete, in-range values. Mid-edit states (an emptied
+    // field reads as 0) would otherwise produce BMIs in the hundreds.
     if (
-      !Number.isFinite(ft) ||
-      !Number.isFinite(inch) ||
-      !Number.isFinite(lb) ||
-      lb <= 0
+      [ftStr, inchStr, lbStr].some((v) => v.trim() === "") ||
+      !(ft >= 3 && ft <= 8) ||
+      !(inch >= 0 && inch <= 11) ||
+      !(lb >= 50 && lb <= 500)
     ) {
       return;
     }
     const totalIn = ft * 12 + inch;
-    if (totalIn <= 0) return;
     const bmi = bmiFromHeightWeight(totalIn, lb);
     setInputs((prev) => ({ ...prev, bmi: Math.round(bmi * 10) / 10 }));
   }
@@ -205,18 +210,34 @@ export default function LifespanCalculator() {
           <Section title="About you">
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="text-xs text-aph-dark-gray">Age</label>
+                <label
+                  htmlFor={`${fieldId}-age`}
+                  className="text-xs text-aph-dark-gray"
+                >
+                  Age
+                </label>
                 <input
+                  id={`${fieldId}-age`}
                   type="number"
                   min={18}
                   max={100}
-                  value={inputs.age}
-                  onChange={(e) =>
-                    update(
-                      "age",
-                      Math.max(18, Math.min(100, Number(e.target.value) || 0)),
-                    )
-                  }
+                  value={ageDraft}
+                  onChange={(e) => {
+                    setAgeDraft(e.target.value);
+                    const n = Number(e.target.value);
+                    if (e.target.value.trim() !== "" && n >= 18 && n <= 100) {
+                      update("age", Math.round(n));
+                    }
+                  }}
+                  onBlur={(e) => {
+                    // Empty or invalid input restores the last valid age.
+                    const raw = e.target.value.trim();
+                    const n = raw
+                      ? Math.round(Number(clampField(raw, 18, 100, inputs.age)))
+                      : inputs.age;
+                    setAgeDraft(String(n));
+                    update("age", n);
+                  }}
                   className="w-full px-3 py-2 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold focus:outline-none focus:ring-2 focus:ring-aph-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
@@ -238,10 +259,10 @@ export default function LifespanCalculator() {
               <div className="mt-3">
                 <Slider
                   label="Age you quit"
-                  value={inputs.ageAtQuit}
+                  value={Math.min(inputs.ageAtQuit, inputs.age)}
                   min={18}
-                  max={Math.max(75, inputs.age)}
-                  display={`${inputs.ageAtQuit}`}
+                  max={inputs.age}
+                  display={`${Math.min(inputs.ageAtQuit, inputs.age)}`}
                   onChange={(v) => update("ageAtQuit", v)}
                 />
               </div>
@@ -289,10 +310,14 @@ export default function LifespanCalculator() {
           <Section title="Body mass index">
             <div className="grid grid-cols-3 gap-2 mb-2">
               <div>
-                <label className="text-xs text-aph-dark-gray">
+                <label
+                  htmlFor={`${fieldId}-ft`}
+                  className="text-xs text-aph-dark-gray"
+                >
                   Height (ft)
                 </label>
                 <input
+                  id={`${fieldId}-ft`}
                   type="number"
                   inputMode="numeric"
                   min={3}
@@ -315,10 +340,14 @@ export default function LifespanCalculator() {
                 />
               </div>
               <div>
-                <label className="text-xs text-aph-dark-gray">
+                <label
+                  htmlFor={`${fieldId}-in`}
+                  className="text-xs text-aph-dark-gray"
+                >
                   Height (in)
                 </label>
                 <input
+                  id={`${fieldId}-in`}
                   type="number"
                   inputMode="numeric"
                   min={0}
@@ -341,10 +370,14 @@ export default function LifespanCalculator() {
                 />
               </div>
               <div>
-                <label className="text-xs text-aph-dark-gray">
+                <label
+                  htmlFor={`${fieldId}-lb`}
+                  className="text-xs text-aph-dark-gray"
+                >
                   Weight (lb)
                 </label>
                 <input
+                  id={`${fieldId}-lb`}
                   type="number"
                   inputMode="numeric"
                   min={50}
