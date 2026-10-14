@@ -15,15 +15,19 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
 
   // Auto-cycle slides
   useEffect(() => {
+    let fadeTimer: ReturnType<typeof setTimeout> | undefined;
     const interval = setInterval(() => {
       setFadeIn(false);
-      setTimeout(() => {
+      fadeTimer = setTimeout(() => {
         setCurrentSlide((prev) => (prev + 1) % TOTAL_SLIDES);
         setFadeIn(true);
       }, 300);
     }, SLIDE_INTERVAL_MS);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(fadeTimer);
+    };
   }, []);
 
   // Dismiss on any user interaction
