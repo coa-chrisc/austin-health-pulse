@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import type { IndicatorKey } from "../../types/health";
 import { useHealthData } from "../../hooks/useHealthData";
 import ChoroplethMap from "./ChoroplethMap";
@@ -8,8 +9,13 @@ import ZctaPopupCard from "./ZctaPopupCard";
 
 export default function ExploreMode() {
   const [indicator, setIndicator] = useState<IndicatorKey>("lifeExpectancy");
-  const [selectedZcta, setSelectedZcta] = useState<string | null>(null);
-  const { summary, loading, error } = useHealthData();
+  const { healthData, summary, loading, error } = useHealthData();
+  const [searchParams] = useSearchParams();
+  // "View on Map" from the neighborhood page links here with ?zcta=<zip>.
+  const [selectedZcta, setSelectedZcta] = useState<string | null>(() => {
+    const zcta = searchParams.get("zcta");
+    return zcta && healthData?.zctas[zcta] ? zcta : null;
+  });
 
   if (loading) {
     return (
