@@ -88,6 +88,8 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
         }`}
         style={{ zIndex: 2001 }}
         aria-hidden={!isOpen}
+        // Keep the hidden dialog's buttons out of the tab order when closed.
+        inert={!isOpen}
       >
         <div
           ref={drawerRef}
