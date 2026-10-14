@@ -14,8 +14,8 @@ app/dist/
 .env
 .env.local
 
-# Claude context layer
-.claude/context-layer/
+# Local Claude Code config and memory (CLAUDE.md at the root is tracked)
+.claude/
 
 # Python
 __pycache__/
