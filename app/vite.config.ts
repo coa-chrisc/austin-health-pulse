@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/APH-LE-Calc/",
+  base: "/austin-health-pulse/",
   build: {
     outDir: "dist",
   },

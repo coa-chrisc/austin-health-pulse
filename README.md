@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://crypticpy.github.io/APH-LE-Calc/">
+  <a href="https://coa-chrisc.github.io/austin-health-pulse/">
     <img src="https://img.shields.io/badge/Live_Demo-GitHub_Pages-44499C?style=for-the-badge&logo=github" alt="Live Demo" />
   </a>
 </p>
@@ -123,7 +123,7 @@ npm install --legacy-peer-deps
 
 CI uses `npm ci --legacy-peer-deps` for the same reason.
 
-The app will be available at `http://localhost:5173/APH-LE-Calc/`.
+The app will be available at `http://localhost:5173/austin-health-pulse/`.
 
 ### Build for Production
 

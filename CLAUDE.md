@@ -15,7 +15,7 @@ All frontend commands run from `app/`:
 ```bash
 cd app
 npm install              # first-time / after dependency changes
-npm run dev              # dev server at http://localhost:5173/APH-LE-Calc/
+npm run dev              # dev server at http://localhost:5173/austin-health-pulse/
 npm run build            # tsc -b && vite build → app/dist
 npm run lint             # eslint
 npm run preview          # serve the production build locally
@@ -42,7 +42,7 @@ The export script reads `TX_A.CSV`/`TX_B.CSV` locally and fetches HUD crosswalk 
 
 ### Routing & modes
 
-`HashRouter` (so the GitHub Pages base path `/APH-LE-Calc/` works without server config). `AppShell` renders three top-level routes corresponding to the product's three modes:
+`HashRouter` (so the GitHub Pages base path `/austin-health-pulse/` works without server config). `AppShell` renders three top-level routes corresponding to the product's three modes:
 
 - `/` → `NeighborhoodMode` — single-ZIP lookup with gauge charts
 - `/explore` → `ExploreMode` (lazy) — Leaflet choropleth
@@ -52,7 +52,7 @@ The export script reads `TX_A.CSV`/`TX_B.CSV` locally and fetches HUD crosswalk 
 
 ### Key invariants
 
-- `BASE_URL` is `/APH-LE-Calc/` (set in `vite.config.ts`). Any new data fetch must go through `import.meta.env.BASE_URL`, not a hardcoded `/`.
+- `BASE_URL` is `/austin-health-pulse/` (set in `vite.config.ts`). Any new data fetch must go through `import.meta.env.BASE_URL`, not a hardcoded `/`.
 - `HashRouter` is required by Pages deployment — do not switch to `BrowserRouter` without changing the deploy strategy.
 - `TRAVIS_COUNTY_ZCTAS` in `src/lib/constants.ts` is the canonical list of 63 ZCTAs. The pipeline and frontend both filter to this set; if you add/remove ZCTAs, update both sides.
 - Indicator metadata (`IndicatorKey`, `INDICATOR_LABELS`, `INDICATOR_UNITS`, `INDICATOR_HIGHER_IS_BETTER`) lives in `src/types/health.ts`. Adding a new indicator requires updating the Python export, the `ZctaHealthData` / `CountySummary` types, and these three lookup maps.
