@@ -161,7 +161,9 @@ export function baselineLifespan(age: number, sex: Sex): number {
  * (U.S. Surgeon General 2014, attributed mortality risk).
  */
 function smokingDelta(input: LifespanInputs): number {
-  const { smokingStatus, ageAtQuit, secondhand } = input;
+  const { smokingStatus, secondhand } = input;
+  // Can't have quit in the future: cap at current age.
+  const ageAtQuit = Math.min(input.ageAtQuit, input.age);
   let d = 0;
   if (smokingStatus === "current") {
     d = -10;
@@ -348,10 +350,9 @@ export function idealizeInputs(input: LifespanInputs): LifespanInputs {
     ...input,
     smokingStatus:
       input.smokingStatus === "current" ? "former" : input.smokingStatus,
+    // A current smoker's best realistic option is quitting now.
     ageAtQuit:
-      input.smokingStatus === "current"
-        ? Math.min(input.age, 40)
-        : input.ageAtQuit,
+      input.smokingStatus === "current" ? input.age : input.ageAtQuit,
     secondhand: false,
     exerciseMinutesPerWeek: 300,
     dietScore: 5,
