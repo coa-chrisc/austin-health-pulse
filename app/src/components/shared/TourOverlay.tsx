@@ -25,7 +25,7 @@ const STEPS: TourStep[] = [
   {
     icon: "calculate",
     title: "Try the personal-factors calculators",
-    body: "Scroll down to see how smoking history or generational change shifts life expectancy. These are population-level estimates from peer-reviewed sources.",
+    body: "Scroll down to see how personal factors like smoking, exercise, diet, and sleep, plus generational change, shift life expectancy. These are population-level estimates from peer-reviewed sources.",
   },
 ];
 
