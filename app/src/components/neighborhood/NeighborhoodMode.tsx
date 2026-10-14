@@ -325,8 +325,14 @@ export default function NeighborhoodMode({
     submittedAge !== null ? getAgeGroup(submittedAge) : null;
   const ageGroupLabel =
     submittedAge !== null ? getAgeGroupLabel(submittedAge) : null;
-  const ageSpecific =
+  // Suppressed tracts come through as { ex: null, se: null } (e.g. 78712),
+  // so treat a null ex the same as a missing table.
+  const ageEntry =
     ageGroup && zctaData?.ageSpecific ? zctaData.ageSpecific[ageGroup] : null;
+  const ageSpecific =
+    ageEntry && ageEntry.ex != null
+      ? { ex: ageEntry.ex, se: ageEntry.se }
+      : null;
 
   // Life expectancy color
   const leColor =
@@ -675,7 +681,7 @@ export default function NeighborhoodMode({
                             {(submittedAge + ageSpecific.ex).toFixed(0)}
                           </span>
                         </p>
-                        {ageSpecific.se > 0 && (
+                        {ageSpecific.se != null && ageSpecific.se > 0 && (
                           <p className="text-xs text-aph-dark-gray mt-1">
                             Standard error: {"\u00B1"}
                             {ageSpecific.se.toFixed(1)} years
@@ -687,9 +693,7 @@ export default function NeighborhoodMode({
                 )}
 
                 {/* Age entered but no age-specific data available */}
-                {submittedAge !== null &&
-                  !ageSpecific &&
-                  zctaData.ageSpecific === null && (
+                {submittedAge !== null && !ageSpecific && (
                     <div className="mt-6 pt-6 border-t border-aph-light-gray/50">
                       <div className="flex items-center gap-3">
                         <span className="material-symbols-outlined text-aph-dark-gray text-2xl">

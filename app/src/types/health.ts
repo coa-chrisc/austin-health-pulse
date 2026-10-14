@@ -12,8 +12,9 @@ export type AgeGroupKey =
   | "85 and older";
 
 export interface AgeSpecificData {
-  ex: number;
-  se: number;
+  // null when USALEEP suppressed every tract in the ZCTA
+  ex: number | null;
+  se: number | null;
 }
 
 export interface ZctaHealthData {
