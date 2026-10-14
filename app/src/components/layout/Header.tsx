@@ -1,9 +1,19 @@
 import { NavLink } from "react-router-dom";
 
 const modes = [
-  { to: "/", label: "Check Your Neighborhood", icon: "home" },
-  { to: "/explore", label: "Explore the Map", icon: "map" },
-  { to: "/compare", label: "Compare Zip Codes", icon: "compare_arrows" },
+  {
+    to: "/",
+    label: "Check Your Neighborhood",
+    shortLabel: "Neighborhood",
+    icon: "home",
+  },
+  { to: "/explore", label: "Explore the Map", shortLabel: "Map", icon: "map" },
+  {
+    to: "/compare",
+    label: "Compare Zip Codes",
+    shortLabel: "Compare",
+    icon: "compare_arrows",
+  },
 ];
 
 interface HeaderProps {
@@ -77,7 +87,7 @@ export default function Header({ onInfoClick }: HeaderProps) {
             <span className="material-symbols-outlined text-lg">
               {mode.icon}
             </span>
-            {mode.label.split(" ").slice(0, 2).join(" ")}
+            {mode.shortLabel}
           </NavLink>
         ))}
       </nav>
