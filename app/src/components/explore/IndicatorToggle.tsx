@@ -13,7 +13,12 @@ export default function IndicatorToggle({
   onChange,
 }: IndicatorToggleProps) {
   const unit = INDICATOR_UNITS[selected];
-  const unitLabel = unit === "years" ? "years" : "percent of residents";
+  const unitLabel =
+    unit === "years"
+      ? "years"
+      : unit === "per1k"
+        ? "incidents per 1,000 residents"
+        : "percent of residents";
 
   return (
     <div
@@ -38,10 +43,14 @@ export default function IndicatorToggle({
           shown as {unitLabel}
         </div>
 
-        <label className="block text-[10px] font-semibold uppercase tracking-wide text-aph-dark-gray mb-1">
+        <label
+          htmlFor="indicator-select"
+          className="block text-[10px] font-semibold uppercase tracking-wide text-aph-dark-gray mb-1"
+        >
           Switch indicator
         </label>
         <select
+          id="indicator-select"
           value={selected}
           onChange={(e) => onChange(e.target.value as IndicatorKey)}
           className="w-full px-3 py-2 pr-8 text-sm font-semibold text-aph-dark-blue bg-aph-light-blue/40 border border-aph-blue/30 rounded-lg cursor-pointer hover:bg-aph-light-blue/60 focus:outline-none focus:ring-2 focus:ring-aph-blue/40 appearance-none transition"

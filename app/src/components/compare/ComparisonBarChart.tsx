@@ -71,7 +71,9 @@ export default function ComparisonBarChart({
             <div key={key}>
               <h4 className="text-sm font-semibold text-aph-dark-blue mb-2">
                 {label}{" "}
-                <span className="font-normal text-aph-dark-gray">({unit})</span>
+                <span className="font-normal text-aph-dark-gray">
+                  ({unit === "per1k" ? "per 1,000" : unit})
+                </span>
               </h4>
               <ResponsiveContainer width="100%" height={160}>
                 <BarChart
