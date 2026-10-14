@@ -32,6 +32,10 @@ jobs:
 
       - name: Build
         working-directory: app
+        env:
+          # Optional repo variable (Settings > Secrets and variables > Actions >
+          # Variables). When unset the service-guide handoff link is hidden.
+          VITE_SERVICE_GUIDE_URL: ${{ vars.SERVICE_GUIDE_URL }}
         run: npm run build
 
       - name: Upload artifact

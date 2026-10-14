@@ -22,7 +22,10 @@ const FACTOR_TO_CATEGORY: Record<string, string> = {
   stress: "mental_health",
 };
 
-function buildIntakeUrl(opportunities: ImprovementOpportunity[]): string {
+function buildIntakeUrl(
+  baseUrl: string,
+  opportunities: ImprovementOpportunity[],
+): string {
   const focus = Array.from(
     new Set(
       opportunities
@@ -32,7 +35,7 @@ function buildIntakeUrl(opportunities: ImprovementOpportunity[]): string {
   ).join(",");
   const params = new URLSearchParams({ event: "healthspan" });
   if (focus) params.set("focus", focus);
-  const base = SERVICE_GUIDE_URL.replace(/\/+$/, "");
+  const base = baseUrl.replace(/\/+$/, "");
   return `${base}/intake?${params.toString()}`;
 }
 
@@ -59,27 +62,32 @@ export default function ServiceMatchCTA({
               You're already covering the modifiable factors well.
             </p>
             <p className="text-white/85 text-sm mt-1">
-              Keep doing what you're doing. If anything changes, the Austin
-              Service Guide can help match you to local resources.
+              Keep doing what you're doing.
+              {SERVICE_GUIDE_URL &&
+                " If anything changes, the Austin Service Guide can help match you to local resources."}
             </p>
           </div>
         </div>
-        <a
-          href={buildIntakeUrl([])}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 mt-4 px-4 py-2 rounded-lg bg-white text-aph-dark-green font-semibold text-sm hover:bg-white/90 transition"
-        >
-          Browse Austin services
-          <span className="material-symbols-outlined text-base">
-            open_in_new
-          </span>
-        </a>
+        {SERVICE_GUIDE_URL && (
+          <a
+            href={buildIntakeUrl(SERVICE_GUIDE_URL, [])}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 mt-4 px-4 py-2 rounded-lg bg-white text-aph-dark-green font-semibold text-sm hover:bg-white/90 transition"
+          >
+            Browse Austin services
+            <span className="material-symbols-outlined text-base">
+              open_in_new
+            </span>
+          </a>
+        )}
       </div>
     );
   }
 
-  const url = buildIntakeUrl(opportunities);
+  const url = SERVICE_GUIDE_URL
+    ? buildIntakeUrl(SERVICE_GUIDE_URL, opportunities)
+    : null;
   const totalGain = opportunities.reduce((s, o) => s + o.potentialGain, 0);
 
   return (
@@ -106,8 +114,9 @@ export default function ServiceMatchCTA({
           </h4>
           <p className="text-sm text-aph-dark-blue/80 mt-1">
             Based on your inputs, these are the factors with the most years
-            recoverable. Austin Public Health partners with services that can
-            help.
+            recoverable.
+            {url &&
+              " Austin Public Health partners with services that can help."}
           </p>
         </div>
       </div>
@@ -137,22 +146,28 @@ export default function ServiceMatchCTA({
         ))}
       </ul>
 
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-lg bg-aph-green text-white font-semibold text-sm hover:brightness-110 active:scale-[0.97] transition"
-      >
-        <span className="material-symbols-outlined text-base">handshake</span>
-        Find Austin services that can help
-        <span className="material-symbols-outlined text-base">
-          arrow_forward
-        </span>
-      </a>
-      <p className="text-xs text-aph-dark-gray mt-3">
-        Opens the Austin Service Guide. Your responses on this page are not sent
-        — only the factor categories are shared.
-      </p>
+      {url && (
+        <>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-lg bg-aph-green text-white font-semibold text-sm hover:brightness-110 active:scale-[0.97] transition"
+          >
+            <span className="material-symbols-outlined text-base">
+              handshake
+            </span>
+            Find Austin services that can help
+            <span className="material-symbols-outlined text-base">
+              arrow_forward
+            </span>
+          </a>
+          <p className="text-xs text-aph-dark-gray mt-3">
+            Opens the Austin Service Guide. Your responses on this page are not
+            sent — only the factor categories are shared.
+          </p>
+        </>
+      )}
     </div>
   );
 }

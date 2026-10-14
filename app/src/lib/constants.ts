@@ -50,10 +50,13 @@ export const AGE_GROUP_RANGES: Array<{
  * Base URL for the Austin Service Guide intake page. The lifespan calculator
  * deep-links into the service guide with `?event=healthspan&focus=<factors>`
  * so improvement opportunities flow into the resident services intake.
- * Override locally with `VITE_SERVICE_GUIDE_URL` if running both demos.
+ * Set `VITE_SERVICE_GUIDE_URL` at build time (see app/.env.example). Dev
+ * builds fall back to a local guide; production builds without it get `null`
+ * and the handoff link is hidden rather than pointing at localhost.
  */
-export const SERVICE_GUIDE_URL =
-  import.meta.env.VITE_SERVICE_GUIDE_URL ?? "http://localhost:5173";
+export const SERVICE_GUIDE_URL: string | null =
+  import.meta.env.VITE_SERVICE_GUIDE_URL ||
+  (import.meta.env.DEV ? "http://localhost:5173" : null);
 
 export const IDLE_TIMEOUT_MS = 300_000; // 5 min — conference booth kiosk mode
 export const IDLE_DISABLE_MOBILE_BREAKPOINT_PX = 768; // skip kiosk overlay on phones
