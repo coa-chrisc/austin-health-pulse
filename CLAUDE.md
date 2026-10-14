@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repo layout
 
-This is a two-part project: a **Vite/React frontend** (`app/`) and a **Python data pipeline** (`scripts/`) that produces the static JSON the frontend consumes. The repo root also holds raw source data (`TX_A.CSV`, `TX_B.CSV` from CDC USALEEP) that the pipeline reads.
+This is a two-part project: a **Vite/React frontend** (`app/`) and a **Python data pipeline** (`scripts/`) that produces the static JSON the frontend consumes. Raw source data (`data/raw/TX_A.CSV`, `data/raw/TX_B.CSV` from CDC USALEEP) lives in `data/raw/`; see `data/README.md` for sources and pipeline order.
 
 The frontend is deployed as a **fully static** site to GitHub Pages — there is no backend, no database, no API. All data is precomputed by the Python scripts into JSON files in `app/public/data/`.
 
@@ -30,13 +30,13 @@ python scripts/export_frontend_json.py     # zcta_health_data.json + county_summ
 python scripts/prepare_geojson.py          # zcta_boundaries.geojson
 ```
 
-The export script reads `TX_A.CSV`/`TX_B.CSV` locally and fetches HUD crosswalk + Census ACS + CDC PLACES over HTTP. Set `CENSUS_API_KEY` in the env if rate-limited.
+The export script reads `data/raw/TX_A.CSV`/`TX_B.CSV` locally and fetches Census ZCTA-tract crosswalks + ACS + CDC PLACES + APD crime data over HTTP. Set `CENSUS_API_KEY` in the env if rate-limited.
 
 ## Architecture
 
 ### Data flow
 
-1. Python pipeline aggregates **tract-level** USALEEP life expectancy to **ZCTA** using HUD USPS crosswalk population weights, joins ACS poverty/uninsured + PLACES diabetes/hypertension/obesity, and writes three static files into `app/public/data/`.
+1. Python pipeline aggregates **tract-level** USALEEP life expectancy to **ZCTA** using Census 2010 ZCTA-tract relationship population weights, joins ACS poverty/uninsured + PLACES diabetes/hypertension/obesity/asthma + APD violent crime, and writes three static files into `app/public/data/`.
 2. On app load, `App.tsx` calls `loadAllData()` (`src/lib/dataLoader.ts`), which fetches all three JSON/GeoJSON files in parallel and module-caches them.
 3. Loaded data is stored in `HealthDataContext` (defined in `src/hooks/useHealthData.ts`) and consumed by every mode via `useHealthData()`. Components should not re-fetch — always go through the context.
 
@@ -64,5 +64,5 @@ Tailwind CSS 4 via `@tailwindcss/vite` (no `tailwind.config.js` — config is in
 
 ## Things to know
 
-- The repo root holds large data files (`TX_A.CSV`, `TX_B.CSV`, `*.XLSX`, brand-guidelines PDF). Excel duplicates and PDFs are gitignored; the CSVs are committed because the pipeline needs them.
+- `data/raw/` holds the USALEEP CSVs, committed because the pipeline needs them. Excel duplicates (`*.XLSX`) and the brand-guidelines PDF are gitignored local files.
 - `.claude/context-layer/` is gitignored — that's the local memory layer, not project state.

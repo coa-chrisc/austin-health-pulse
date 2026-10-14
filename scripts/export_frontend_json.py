@@ -1,8 +1,9 @@
 """
 Export Frontend JSON Data for Austin Health Pulse
 ==================================================
-Reads local USALEEP data (TX_A.CSV, TX_B.CSV), downloads HUD crosswalk and
-ACS/CDC PLACES data, aggregates everything to ZCTA level, and exports
+Reads local USALEEP data (data/raw/TX_A.CSV, data/raw/TX_B.CSV), downloads
+Census ZCTA-tract crosswalks plus ACS, CDC PLACES, and APD crime data,
+aggregates everything to ZCTA level, and exports
 frontend-ready JSON files.
 
 Requirements:
@@ -30,8 +31,8 @@ import pandas as pd
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(PROJECT_ROOT, "app", "public", "data")
 
-TX_A_PATH = os.path.join(PROJECT_ROOT, "TX_A.CSV")
-TX_B_PATH = os.path.join(PROJECT_ROOT, "TX_B.CSV")
+TX_A_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "TX_A.CSV")
+TX_B_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "TX_B.CSV")
 
 CENSUS_API_KEY = os.environ.get("CENSUS_API_KEY", "")
 

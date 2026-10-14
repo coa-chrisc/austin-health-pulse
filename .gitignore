@@ -36,3 +36,6 @@ cb_2020_us_zcta520_500k.*
 # Logs
 *.log
 npm-debug.log*
+
+# Output of scripts/travis_county_health_data_pull.py
+travis_county_health_merged.csv

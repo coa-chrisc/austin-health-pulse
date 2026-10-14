@@ -14,7 +14,14 @@ Census API Key:
     Set it in the CENSUS_API_KEY variable below (or as env var CENSUS_API_KEY).
 
 Output:
-    travis_county_health_merged.csv  — ArcGIS-ready, one row per ZCTA
+    travis_county_health_merged.csv  — ArcGIS-ready, one row per ZCTA,
+    written to the current working directory (gitignored)
+
+Usage:
+    python scripts/travis_county_health_data_pull.py
+
+Note: this is the original standalone ArcGIS pull. The web app's data comes
+from scripts/export_frontend_json.py and scripts/prepare_geojson.py.
 """
 
 import os
