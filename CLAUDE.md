@@ -14,14 +14,15 @@ All frontend commands run from `app/`:
 
 ```bash
 cd app
-npm install              # first-time / after dependency changes
+npm ci                   # first-time / after dependency changes (Node 22.12+)
 npm run dev              # dev server at http://localhost:5173/austin-health-pulse/
 npm run build            # tsc -b && vite build → app/dist
 npm run lint             # eslint
+npm test                 # vitest (lifespan model)
 npm run preview          # serve the production build locally
 ```
 
-There is no test suite. CI runs `npm ci --legacy-peer-deps` then `npm run build` (see `.github/workflows/deploy.yml`); use `--legacy-peer-deps` locally too if a fresh install fails on peer-dep conflicts (recharts/react 19).
+CI runs `npm ci`, `npm run lint`, `npm test`, then `npm run build` on Node 22 (see `.github/workflows/deploy.yml`). The build reads `VITE_SERVICE_GUIDE_URL` (repo variable `SERVICE_GUIDE_URL`; see `app/.env.example`); when unset, production hides the service guide link.
 
 Data pipeline (run from repo root, regenerates files in `app/public/data/`):
 
@@ -48,7 +49,7 @@ The export script reads `data/raw/TX_A.CSV`/`TX_B.CSV` locally and fetches Censu
 - `/explore` → `ExploreMode` (lazy) — Leaflet choropleth
 - `/compare` → `CompareMode` (lazy) — multi-ZIP radar / bars / table
 
-`AppShell` also drives the **kiosk idle showcase**: after `IDLE_TIMEOUT_MS` (60s) of inactivity, `IdleShowcase` overlays the app. This is a real product feature for conference booths, not a debug toggle — keep `useIdleTimer` wired in.
+`AppShell` also drives the **kiosk idle showcase**: after `IDLE_TIMEOUT_MS` (5 min) of inactivity, `IdleShowcase` overlays the app. This is a real product feature for conference booths, not a debug toggle — keep `useIdleTimer` wired in.
 
 ### Key invariants
 
@@ -65,4 +66,4 @@ Tailwind CSS 4 via `@tailwindcss/vite` (no `tailwind.config.js` — config is in
 ## Things to know
 
 - `data/raw/` holds the USALEEP CSVs, committed because the pipeline needs them. Excel duplicates (`*.XLSX`) and the brand-guidelines PDF are gitignored local files.
-- `.claude/context-layer/` is gitignored — that's the local memory layer, not project state.
+- `.claude/` is gitignored: local editor/agent state, not project state.
