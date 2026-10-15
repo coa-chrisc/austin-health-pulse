@@ -22,9 +22,9 @@ export const MAP_CONFIG = {
   zoom: 11,
   minZoom: 9,
   maxZoom: 16,
-  tileUrl: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+  tileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   tileAttribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 } as const;
 
 export const AGE_GROUP_RANGES: Array<{

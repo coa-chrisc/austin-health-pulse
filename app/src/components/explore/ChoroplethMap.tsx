@@ -212,13 +212,6 @@ export default function ChoroplethMap({
         style={style}
         onEachFeature={onEachFeature}
       />
-      {/* Place-name labels overlay rendered ABOVE the choropleth so cities and
-          neighborhoods stay readable on top of the colored polygons. */}
-      <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png"
-        attribution=""
-        pane="markerPane"
-      />
     </MapContainer>
   );
 }
