@@ -154,6 +154,16 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 source="CDC PLACES: Local Data for Better Health"
                 period="2023"
               />
+              <DataSourceItem
+                label="Asthma"
+                source="CDC PLACES: Local Data for Better Health (current asthma)"
+                period="2023"
+              />
+              <DataSourceItem
+                label="Violent Crime"
+                source="City of Austin Open Data Portal, APD Crime Reports (UCR Part 1 violent offenses)"
+                period="Rolling 12 months"
+              />
             </Section>
 
             {/* Methodology */}
@@ -165,7 +175,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 residential ratios.
               </MethodologyItem>
               <MethodologyItem>
-                Health indicators (diabetes, hypertension, obesity prevalence)
+                Health indicators (diabetes, hypertension, obesity, asthma prevalence)
                 are model-based estimates from CDC PLACES, derived from
                 Behavioral Risk Factor Surveillance System (BRFSS) survey data
                 using multilevel regression and poststratification.
