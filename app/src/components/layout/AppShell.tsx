@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useHealthData } from "../../hooks/useHealthData";
@@ -8,6 +8,7 @@ import NeighborhoodMode from "../neighborhood/NeighborhoodMode";
 import IdleShowcase from "../showcase/IdleShowcase";
 import AboutDrawer from "../shared/AboutDrawer";
 import TourOverlay from "../shared/TourOverlay";
+import ErrorBoundary from "../shared/ErrorBoundary";
 
 const TOUR_SEEN_KEY = "aph_tour_seen_v1";
 
@@ -17,6 +18,7 @@ const CompareMode = lazy(() => import("../compare/CompareMode"));
 export default function AppShell() {
   const { loading, error } = useHealthData();
   const { isIdle } = useIdleTimer();
+  const { pathname } = useLocation();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
   const [hasSeenTour, setHasSeenTour] = useState(() => {
@@ -72,28 +74,30 @@ export default function AppShell() {
     <div className="min-h-screen flex flex-col bg-aph-white">
       <Header onInfoClick={() => setAboutOpen(true)} />
       <main className="flex-1">
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center h-64">
-              <div className="text-center">
-                <div className="w-12 h-12 border-4 border-aph-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                <p className="text-aph-dark-blue font-semibold">Loading...</p>
+        <ErrorBoundary key={pathname}>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center">
+                  <div className="w-12 h-12 border-4 border-aph-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                  <p className="text-aph-dark-blue font-semibold">Loading...</p>
+                </div>
               </div>
-            </div>
-          }
-        >
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <NeighborhoodMode onAboutClick={() => setAboutOpen(true)} />
-              }
-            />
-            <Route path="/explore" element={<ExploreMode />} />
-            <Route path="/compare" element={<CompareMode />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
+            }
+          >
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <NeighborhoodMode onAboutClick={() => setAboutOpen(true)} />
+                }
+              />
+              <Route path="/explore" element={<ExploreMode />} />
+              <Route path="/compare" element={<CompareMode />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
 
