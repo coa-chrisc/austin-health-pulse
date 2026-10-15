@@ -1419,7 +1419,7 @@
       "lifeExpectancy": null,
       "lifeExpectancySE": null,
       "povertyRate": null,
-      "uninsuredRate": 0.0,
+      "uninsuredRate": null,
       "diabetes": 11.9,
       "hypertension": 26.7,
       "obesity": 33.9,

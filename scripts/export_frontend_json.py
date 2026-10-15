@@ -43,6 +43,11 @@ TRAVIS_COUNTY_FIPS = "48453"
 SENTINEL_MISSING = 88888
 SENTINEL_SUPPRESSED = 99999
 
+# Suppress rates for very-low-population ZCTAs (e.g. 78712, the UT-Austin
+# campus ZIP) — small denominators make ACS and crime rates unreliable and
+# let one outlier dominate the choropleth color scale.
+MIN_POP_FOR_RATE = 1000
+
 # Age groups in TX_B.CSV (11 groups, ordered)
 AGE_GROUPS = [
     "Under 1",
@@ -474,6 +479,9 @@ def pull_acs():
         print("      WARNING: ACS population query failed; crime rates will be null.")
         df["population"] = np.nan
 
+    low_pop = df["population"].isna() | (df["population"] < MIN_POP_FOR_RATE)
+    df.loc[low_pop, ["povertyRate", "uninsuredRate"]] = np.nan
+
     print(f"      ACS data retrieved for {len(df)} ZCTAs.")
     return df
 
@@ -736,11 +744,6 @@ def pull_violent_crime(xwalk_2020, acs_df):
         if "population" in acs_df.columns
         else None
     )
-
-    # Suppress rates for very-low-population ZCTAs (e.g. 78712, the UT-Austin
-    # campus ZIP) — small denominators turn a handful of incidents into wildly
-    # high "rates" that dominate the choropleth color scale.
-    MIN_POP_FOR_RATE = 1000
 
     def rate_for(z, count, cov):
         if served_tracts and cov < JURISDICTION_COVERAGE_THRESHOLD:

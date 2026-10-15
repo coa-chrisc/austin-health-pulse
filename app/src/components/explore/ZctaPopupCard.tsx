@@ -8,6 +8,7 @@ import { useHealthData } from "../../hooks/useHealthData";
 import { formatValue, formatDifference } from "../../lib/formatters";
 import { getComparisonColor } from "../../lib/colorScales";
 import { APH_COLORS } from "../../lib/constants";
+import { getDataQualityNote } from "../../lib/dataQuality";
 
 interface ZctaPopupCardProps {
   zcta: string | null;
@@ -43,6 +44,7 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
   }
 
   const lifeExpVal = data.lifeExpectancy;
+  const qualityNote = getDataQualityNote(zcta);
 
   return (
     <Card zcta={zcta} onClose={onClose}>
@@ -74,6 +76,12 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
           </p>
         )}
       </div>
+
+      {qualityNote && (
+        <p className="text-xs text-aph-dark-gray bg-aph-light-gray/20 rounded-lg px-3 py-2 mb-4">
+          {qualityNote}
+        </p>
+      )}
 
       {/* Mini bar charts */}
       <div className="space-y-3">

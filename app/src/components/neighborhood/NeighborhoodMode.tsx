@@ -7,6 +7,7 @@ import { TRAVIS_COUNTY_ZCTAS, APH_COLORS } from "../../lib/constants";
 import { getAgeGroup, getAgeGroupLabel } from "../../lib/ageGroupMapper";
 import { getComparisonColor } from "../../lib/colorScales";
 import { formatDifference } from "../../lib/formatters";
+import { getDataQualityNote } from "../../lib/dataQuality";
 import {
   INDICATOR_LABELS,
   INDICATOR_UNITS,
@@ -845,6 +846,11 @@ export default function NeighborhoodMode({
                     </span>
                     Health Indicators
                   </h3>
+                  {getDataQualityNote(submittedZip) && (
+                    <p className="text-sm text-aph-dark-gray mb-4">
+                      {getDataQualityNote(submittedZip)}
+                    </p>
+                  )}
                   <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
                     {GAUGE_INDICATORS.map((key) => {
                       const indicatorSummary = summary?.indicators[key];

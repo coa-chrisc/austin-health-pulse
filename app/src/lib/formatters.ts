@@ -1,5 +1,5 @@
-export function formatValue(value: number | null, unit: string): string {
-  if (value === null) return "N/A";
+export function formatValue(value: number | null | undefined, unit: string): string {
+  if (value == null || !Number.isFinite(value)) return "N/A";
   if (unit === "years") return value.toFixed(1);
   if (unit === "%") return value.toFixed(1) + "%";
   if (unit === "per1k") return value.toFixed(1) + " /1k";

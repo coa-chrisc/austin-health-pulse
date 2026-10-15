@@ -21,12 +21,12 @@
       "higherIsBetter": false
     },
     "uninsuredRate": {
-      "min": 0.0,
+      "min": 0.4,
       "max": 27.5,
-      "avg": 11.72,
+      "avg": 11.91,
       "median": 10.5,
-      "p25": 6.65,
-      "p75": 15.97,
+      "p25": 6.8,
+      "p75": 16.0,
       "unit": "%",
       "higherIsBetter": false
     },

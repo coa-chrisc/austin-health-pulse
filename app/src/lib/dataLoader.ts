@@ -1,5 +1,6 @@
 import type { HealthDataStore, CountySummary } from "../types/health";
 import type { FeatureCollection } from "geojson";
+import { sanitizeHealthData } from "./dataQuality";
 
 let cachedHealthData: HealthDataStore | null = null;
 let cachedSummary: CountySummary | null = null;
@@ -11,7 +12,7 @@ export async function loadHealthData(): Promise<HealthDataStore> {
   if (cachedHealthData) return cachedHealthData;
   const res = await fetch(`${BASE}data/zcta_health_data.json`);
   if (!res.ok) throw new Error(`Failed to load health data: ${res.status}`);
-  cachedHealthData = await res.json();
+  cachedHealthData = sanitizeHealthData(await res.json());
   return cachedHealthData!;
 }
 
