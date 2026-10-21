@@ -5,4 +5,4 @@ requests>=2.31
 pandas>=2.2
 numpy>=1.26
 scipy>=1.11
-geopandas>=1.0  # installs pyogrio, used by prepare_geojson.py
+geopandas>=1.2.0  # installs pyogrio, used by prepare_geojson.py
