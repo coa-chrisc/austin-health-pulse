@@ -192,7 +192,6 @@ export default function GaugeChart({
             x={cx}
             y={cy - 8}
             textAnchor="middle"
-            className="font-geist"
             fill={THEME.colors.ink}
             fontSize="26" // theme-exempt: SVG viewBox units, not CSS px
             fontWeight="700"
@@ -204,7 +203,6 @@ export default function GaugeChart({
             x={cx}
             y={cy - 12}
             textAnchor="middle"
-            className="font-geist"
             fill={THEME.colors.muted}
             fontSize="12" // theme-exempt: SVG viewBox units, not CSS px
             fontWeight="500"
@@ -218,7 +216,6 @@ export default function GaugeChart({
             x={cx}
             y={cy + 4}
             textAnchor="middle"
-            className="font-geist"
             fill={THEME.colors.muted}
             fontSize="12" // theme-exempt: SVG viewBox units, not CSS px
             fontWeight="500"

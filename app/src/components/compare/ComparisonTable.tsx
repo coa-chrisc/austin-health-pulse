@@ -68,7 +68,7 @@ export default function ComparisonTable({
       <h3 className="text-lg font-semibold text-ink mb-4">
         Side-by-Side Comparison
       </h3>
-      <table className="w-full text-sm font-geist min-w-[400px]">
+      <table className="w-full text-sm min-w-[400px]">
         <thead>
           <tr className="border-b-2 border-ink/20">
             <th className="text-left py-3 px-2 sm:px-4 text-ink font-semibold">

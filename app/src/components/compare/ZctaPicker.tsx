@@ -229,7 +229,7 @@ export default function ZctaPicker({
                     onClick={() => handleSelect(zcta)}
                     onMouseEnter={() => setHighlightedIndex(index)}
                     className={`w-full text-left px-4 py-3 flex items-center justify-between
-                      text-sm font-geist transition-colors border-b border-line/20 last:border-b-0
+                      text-sm transition-colors border-b border-line/20 last:border-b-0
                       ${index === highlightedIndex ? "bg-primary-soft text-ink" : "text-ink hover:bg-primary-soft/50"}`}
                   >
                     <div className="flex items-center gap-2">

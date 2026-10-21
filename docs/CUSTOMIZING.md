@@ -55,7 +55,7 @@ To make your config the default, copy it over `config/city.config.json`.
 | `line` | Borders and dividers |
 | `noData` | Map and chart fill for missing data |
 | `positive` | Text and numbers that mean "better" |
-| `positiveFill` | Bars and fills that mean "better" |
+| `positiveFill` | Bars, fills, and short labels that mean "better" |
 | `negative` | Text and fills that mean "worse"; errors |
 | `warning` | Caution icons |
 | `scrim` | Backdrop behind modals and overlays (used at 20 to 60 percent opacity) |
@@ -69,7 +69,7 @@ Check contrast yourself or let `validate:data` do it. It prints a warning (not a
 
 - `body` on `page` and `surface`; `muted` on `page` and `surface`
 - `ink` on `page` and `primarySoft`
-- `primary`, `positive`, and `negative` on `surface` (4.5:1)
+- `primary`, `positive`, `positiveFill`, and `negative` on `surface` (4.5:1)
 - `onBrand` on `primary`, `ink`, `accent`, and `positiveFill` (4.5:1)
 - `warning` on `surface` (3:1, because it is used for icons)
 

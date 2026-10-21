@@ -79,7 +79,7 @@
             "line": { "$ref": "#/$defs/hex", "description": "Borders and dividers." },
             "noData": { "$ref": "#/$defs/hex", "description": "Map/chart fill for missing data." },
             "positive": { "$ref": "#/$defs/hex", "description": "'Better' text and numbers." },
-            "positiveFill": { "$ref": "#/$defs/hex", "description": "'Better' bars and fills." },
+            "positiveFill": { "$ref": "#/$defs/hex", "description": "'Better' bars, fills, and short labels (checked for contrast on surface)." },
             "negative": { "$ref": "#/$defs/hex", "description": "'Worse' text and fills, errors." },
             "warning": { "$ref": "#/$defs/hex", "description": "Caution icons." },
             "scrim": { "$ref": "#/$defs/hex", "description": "Modal/overlay backdrop, used at 20-60% opacity." }

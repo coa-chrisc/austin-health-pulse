@@ -29,6 +29,7 @@ const CONTRAST_PAIRS = [
   ["onBrand", "accent", 4.5],
   ["onBrand", "positiveFill", 4.5],
   ["positive", "surface", 4.5],
+  ["positiveFill", "surface", 4.5],
   ["negative", "surface", 4.5],
   ["warning", "surface", 3],
 ];
