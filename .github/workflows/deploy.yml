@@ -51,7 +51,7 @@ jobs:
           VITE_SERVICE_GUIDE_URL: ${{ vars.SERVICE_GUIDE_URL }}
           # Opt-in individual lifespan calculator. Only the exact value "true"
           # enables it; unset/anything else keeps the aggregate-data-only app.
-          VITE_ENABLE_PERSONAL_CALCULATOR: ${{ vars.ENABLE_PERSONAL_CALCULATOR }}
+          VITE_ENABLE_PERSONAL_CALCULATOR: ${{ vars.ENABLE_PERSONAL_CALCULATOR || 'true' }}
         run: npm run build
 
       - name: Upload artifact
