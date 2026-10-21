@@ -1,7 +1,7 @@
 ---
 name: Data question or correction
 about: A number looks wrong, or you have a question about a source or method
-labels: data
+labels: question
 ---
 
 **Which figure**

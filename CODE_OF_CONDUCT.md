@@ -60,9 +60,10 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the project maintainer, [@coa-chrisc](https://github.com/coa-chrisc)
-on GitHub. Mention @coa-chrisc in an issue, or for a private report use the
-contact details on that GitHub profile. Do not include private details about
-other people in a public issue.
+on GitHub. Mention @coa-chrisc in an issue. For a private report, open an issue
+that only asks for a private contact, without describing the incident, and the
+maintainer will follow up privately. Do not include private details about other
+people in a public issue.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
