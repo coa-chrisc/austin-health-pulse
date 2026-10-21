@@ -1,7 +1,7 @@
 <h1 align="center">Austin Health Pulse</h1>
 
 <p align="center">
-  <strong>Life Expectancy & Health Indicator Explorer for Travis County</strong>
+  <strong>Life Expectancy & Health Indicator Explorer for Greater Austin</strong>
 </p>
 
 <p align="center">
@@ -15,14 +15,14 @@
 </p>
 
 <p align="center">
-  An interactive public health data visualization tool that lets Austin residents and policymakers explore health outcomes across <strong>63 ZIP codes</strong> in the Austin area (labeled "Travis County"; see [known limitations](#known-limitations)). Configuration-driven, so another city can be added without code changes.
+  An interactive public health data tool that lets Austin residents and policymakers explore health outcomes across <strong>63 ZIP codes</strong> in Greater Austin (Travis County and neighboring areas; see <a href="#known-limitations">known limitations</a>). City settings live in a configuration file, so another city can be added without code changes.
 </p>
 
 ---
 
 ## Built rapidly with AI assistance
 
-This entire prototype — Python data pipeline, three interactive modes, choropleth map, comparison views, gauge charts, calculators, kiosk showcase, and deploy pipeline — was built by **Austin Public Health IT staff in approximately 12 hours of internal development time** (three four-hour sessions) using Claude as an AI pair programmer.
+This entire prototype (Python data pipeline, three interactive modes, choropleth map, comparison views, gauge charts, calculators, kiosk showcase, and deploy pipeline) was built by **Austin Public Health IT staff in approximately 12 hours of internal development time** (three four-hour sessions) using Claude as an AI pair programmer.
 
 |                      | APH IT (this build) | Typical agency engagement        |
 | -------------------- | ------------------- | -------------------------------- |
@@ -30,7 +30,7 @@ This entire prototype — Python data pipeline, three interactive modes, choropl
 | **Hours**            | 3 × 4-hr sessions   | 250-400 hours                    |
 | **Approximate cost** | ~$1.5K loaded staff | $50K-$100K (blended $175-250/hr) |
 
-This project demonstrates how AI-assisted development can compress data-product timelines from months to days, enabling public-sector teams to prototype quickly, validate ideas with the community, and inform decisions about full production builds. See the in-app **About → How This Was Built** panel for the per-session breakdown.
+This project demonstrates how AI-assisted development can compress data-product timelines from months to days. It lets public-sector teams prototype quickly, validate ideas with the community, and inform decisions about full production builds. See the in-app **About → How This Was Built** panel for the per-session breakdown.
 
 ---
 
@@ -38,8 +38,8 @@ This project demonstrates how AI-assisted development can compress data-product 
 
 Work on the `feat/bchc-hardening` branch, in preparation for a BCHC grant review. Everything below is in the repo today.
 
-- **Aggregate public data only by default.** The default build collects, stores, and transmits no personal information; the individual calculator is behind a build flag. See [SECURITY.md](SECURITY.md#data-handling).
-- **Config-driven city setup.** Branding, map, featured ZIPs, data sources, and data files come from one validated config: [`config/`](config/), schema [`city.config.schema.json`](config/city.config.schema.json). Presets: [Austin / Travis](config/presets/austin-travis-tx.json) and a [Harris County TX / Houston demo](config/presets/partner-city-demo.json) built from real pipeline output (130 ZIPs, 16.3-year life expectancy gap). The demo's branding and agency name are placeholders, not Houston Health Department's.
+- **Privacy by design.** The neighborhood figures come only from aggregate public data. Nothing a visitor enters (ZIP code, location, age, or estimator answers) leaves the browser or is stored; the only browser storage is a "tour seen" flag. The optional individual lifespan estimator is a build flag: off by default in code and in Docker builds, and on in the GitHub Pages demo workflow. See [SECURITY.md](SECURITY.md#data-handling).
+- **Config-driven city setup.** Branding, map, featured ZIPs, data sources, and data files come from one validated config: [`config/`](config/), schema [`city.config.schema.json`](config/city.config.schema.json). Presets: [Greater Austin / Travis County](config/presets/austin-travis-tx.json) and a [Harris County TX / Houston demo](config/presets/partner-city-demo.json) built from real pipeline output (130 ZIPs, 16.3-year life expectancy gap). The demo's branding and agency name are placeholders, not Houston Health Department's.
 - **Equity Scenario Simulator** with confidence intervals and an inclusion rule; model is computed by the pipeline ([`scripts/scenario_model.py`](scripts/scenario_model.py)).
 - **Data validation.** [`npm run validate:data`](app/scripts/validate-data.mjs) schema-checks configs and data, boundary coverage, and scenario model presence. Runs in [CI](.github/workflows/deploy.yml) before the build and in the Docker build.
 - **Container.** Multi-stage [`Dockerfile`](Dockerfile), nginx-unprivileged as UID 101 on port 8080, with CSP and security headers ([`deploy/nginx.conf`](deploy/nginx.conf)). Built, run, and rendered locally in headless Chrome with no CSP or console errors.
@@ -55,7 +55,7 @@ Works today for Texas counties; other states need life-expectancy files first (s
 ```bash
 cp config/presets/partner-city-demo.json config/presets/my-city.json
 # edit id, agency, region, brand, map, data paths, and the "pipeline" block (state/county FIPS)
-pip install requests pandas numpy openpyxl geopandas
+pip install requests pandas numpy openpyxl geopandas scipy
 python scripts/export_frontend_json.py --preset config/presets/my-city.json
 python scripts/prepare_geojson.py      --preset config/presets/my-city.json
 cd app
@@ -63,7 +63,7 @@ CITY_CONFIG=presets/my-city.json npm run validate:data
 CITY_CONFIG=presets/my-city.json BASE_PATH=/ npm run build
 ```
 
-`CITY_CONFIG` is relative to `config/`. Output goes to `config/data/<id>/`. If `pipeline.zctas` is omitted the ZIP list is derived (ZCTAs with at least 50% of their 2010 population in the county). Set `CENSUS_API_KEY` for the Census API; without it the pipeline falls back to ACS 2022 summary files. Crime data is Austin-APD-only (`pipeline.crimeSource: "apd-austin"` or `null`).
+`CITY_CONFIG` is relative to `config/`. Output goes to `config/data/<id>/`. If `pipeline.zctas` is omitted the ZIP list is derived (ZCTAs with at least 50% of their 2010 population in the county). The Census API needs a free key: set `CENSUS_API_KEY` before running the pipeline (steps in [`data/README.md`](data/README.md#census-api-key)). Without a key the pipeline downloads the ACS 2022 summary files instead. Crime data is Austin-APD-only (`pipeline.crimeSource: "apd-austin"` or `null`).
 
 ---
 
@@ -83,8 +83,8 @@ Starting point today: FIPS-driven generation already works for Texas counties wh
 
 ## Known limitations
 
-- **Region label.** The curated 63-ZIP Austin list covers the Austin metro and includes 16 ZCTAs with under 50% of their population in Travis County (6 with none), but the app labels the region "Travis County".
-- **Scenario model** is ecological and cross-sectional, and is not adjusted for age structure. For example, the best diabetes and hypertension ZIP in Austin is 78705 (student-heavy West Campus).
+- **Region label and area averages.** The curated 63-ZIP Austin list covers Travis County and neighboring areas. Sixteen ZIP codes have under half of their population in Travis County, and 6 of those have none. The app previously labeled this region "Travis County"; it now says "Greater Austin". Area "averages" are simple unweighted means of the ZIP values, not population-weighted county figures.
+- **Scenario model** is ecological and cross-sectional, and is not adjusted for age structure. For example, the best diabetes and hypertension ZIP in Austin is 78705 (student-heavy West Campus). The simulator says on screen that its fits are not age-adjusted.
 - **Life expectancy** is USALEEP 2010-2015; current conditions may differ.
 - Pipeline supports Texas only; crime data is Austin-only.
 
@@ -94,11 +94,11 @@ Starting point today: FIPS-driven generation already works for Texas counties wh
 
 ### Check Your Neighborhood
 
-Enter a ZIP code (or use geolocation) to instantly see your neighborhood's **life expectancy at birth** alongside five key health indicators — poverty rate, uninsured rate, diabetes, hypertension, and obesity prevalence — displayed as animated gauge charts compared to county averages. Optionally enter your age for **age-specific remaining life expectancy** estimates.
+Enter a ZIP code (or use geolocation) to see your neighborhood's **life expectancy at birth** alongside five key health indicators: poverty rate, uninsured rate, diabetes, hypertension, and obesity prevalence. Animated gauge charts compare each value with the Greater Austin average (a simple unweighted mean of the ZIP values). Optionally enter your age for an **age-specific remaining life expectancy** estimate.
 
 ### Disparity views
 
-A **disparity hero card** surfaces the gap between Travis County's longest- and shortest-living ZIP codes, with the user's ZIP positioned in context. A **sorted bar strip** ranks all 60+ Travis County ZCTAs by life expectancy, color-graded from red to green, with the user's ZIP highlighted and a percentile-based rank summary ("ranks #N of 63 — near the top of the county").
+A **disparity hero card** shows the gap between the longest- and shortest-living ZIP codes in the region, with the user's ZIP in context. In Austin the gap is 11.6 years, between 78732 (86.85 years) and 78721 (75.26 years); both are majority-Travis ZIP codes. A **sorted bar strip** ranks all 63 ZIP codes by life expectancy, color-graded from red to green. It highlights the user's ZIP and gives a percentile-based rank summary (for example, "ranks #N of 63").
 
 ### Neighborhood Equity Scenario Simulator
 
@@ -108,29 +108,37 @@ Pick one lever (for example uninsured rate) and slide it from the ZIP's current 
 
 Birth-year slider (1900-2022) over NCHS historical U.S. life expectancy, compared with the region's current average. The optional age field in the ZIP lookup indexes that ZIP's published life table.
 
-### Individual lifespan calculator (optional, off by default)
+### Individual lifespan estimator (optional build flag)
 
-An age/sex estimator on the U.S. 2022 life table, adjusted for six modifiable factors using published effect sizes (Doll & Peto 2004, Lee 2012, Fadnes 2022, Prospective Studies Collaboration 2009, Cappuccio 2010, Russ 2012). It is only included when the build sets `VITE_ENABLE_PERSONAL_CALCULATOR=true` (CI: repository variable `ENABLE_PERSONAL_CALCULATOR`). In the default build its code sits in a lazy chunk that is never loaded.
+An age/sex estimator on the U.S. 2022 life table, adjusted for six modifiable factors using published effect sizes (Doll & Peto 2004, Lee 2012, Fadnes 2022, Prospective Studies Collaboration 2009, Cappuccio 2010, Russ 2012). Unlike the neighborhood figures, it asks about the individual (age, sex, and habits). It runs entirely in the browser and sends and stores nothing.
+
+The build includes it only when `VITE_ENABLE_PERSONAL_CALCULATOR=true`:
+
+- **Code and Docker builds:** off unless you set the flag.
+- **GitHub Pages workflow:** on by default for the live Austin demo. Set the repository variable `ENABLE_PERSONAL_CALCULATOR` to `false` to turn it off.
+- **When off:** its code sits in a lazy chunk that is never loaded.
 
 ### Service Guide link from ZIP views
 
-ZIP detail views link to the companion Austin Service Guide for that ZIP when a guide URL is configured; see [Service guide handoff](#service-guide-handoff).
+ZIP detail views link to the companion Austin Service Guide for that ZIP when a guide URL is configured. The link carries the ZIP code. See [Service guide handoff](#service-guide-handoff).
 
 ### Explore the Map
 
-A full interactive **choropleth map** powered by Leaflet lets you visually explore how health indicators vary across Travis County. Switch between indicators, hover for quick stats, or click any ZIP code for a detailed breakdown.
+A full interactive **choropleth map** powered by Leaflet shows how health indicators vary across Greater Austin. Switch between indicators, hover for quick stats, or click any ZIP code for a detailed breakdown.
 
 ### Compare ZIP Codes
 
-Select 2–3 ZIP codes to see them side-by-side with a **radar chart**, grouped bar charts, and a color-coded comparison table — making health disparities immediately visible.
+Select 2–3 ZIP codes to compare them side by side with a **radar chart**, grouped bar charts, and a color-coded comparison table — which makes health disparities easy to see.
 
 ### 60-second guided tour
 
-A floating tour button opens a 4-step guided walkthrough of the app's core features. Persists a "seen" flag in localStorage (the only thing the app stores); first-time visitors get a soft attention ring.
+A floating tour button opens a 4-step guided walkthrough of the app's core features. The app saves a "seen" flag in localStorage (the only thing it stores). First-time visitors see a soft attention ring on the button.
 
 ### Kiosk showcase mode
 
-After 5 minutes of inactivity (auto-disabled on screens narrower than 768px, and by adding `?kiosk=off` before the `#`, e.g. `/austin-health-pulse/?kiosk=off#/`), an animated showcase overlay rotates through four slides: title, key statistics, an auto-rotating "Did you know?" insight panel that surfaces interesting cross-indicator facts (e.g. diabetes ratios between ZIP extremes), and a closing "explore your neighborhood" call to action. Designed for conference booths and public health events.
+After 5 minutes of inactivity (auto-disabled on screens narrower than 768px, and by adding `?kiosk=off` before the `#`, e.g. `/austin-health-pulse/?kiosk=off#/`), an animated showcase overlay rotates through four slides: title, key statistics, an auto-rotating "Did you know?" insight panel that surfaces interesting cross-indicator facts (e.g. diabetes ratios between ZIP extremes), and a closing "explore your neighborhood" call to action. It is designed for conference booths and public health events.
+
+When the showcase starts, every view remounts and the app returns to the home screen. This clears the previous visitor's ZIP code, age, and other inputs before the next person uses the kiosk.
 
 ### About panel — methodology + build story
 
@@ -151,7 +159,7 @@ A modal (centered on desktop, full-screen sheet on mobile) covers data sources, 
 | Current Asthma           | CDC PLACES                                                        | 2023      |
 | Violent Crime Rate       | [City of Austin Open Data](https://data.austintexas.gov/) (APD Crime Reports, UCR Part 1 violent, per 1,000 residents) | Rolling 12 months at export time |
 
-Tract-level life expectancy data is aggregated to ZIP code (ZCTA) level using **population-weighted averages** via the Census 2010 ZCTA-to-tract relationship file. Violent crime covers APD's jurisdiction only; ZIPs outside it show no data. See [`data/README.md`](data/README.md) for details.
+The pipeline aggregates tract-level life expectancy to ZIP code (ZCTA) level using **population-weighted averages** from the Census 2010 ZCTA-to-tract relationship file. The area averages shown in the app are simple, unweighted means of the ZIP values. Violent crime covers APD's jurisdiction only; ZIPs outside it show no data. See [`data/README.md`](data/README.md) for details.
 
 ---
 
@@ -166,8 +174,8 @@ Tract-level life expectancy data is aggregated to ZIP code (ZCTA) level using **
 | Maps       | Leaflet + React Leaflet     |
 | Charts     | Recharts                    |
 | Tests      | Vitest                      |
-| Font       | Geist (Google Fonts)        |
-| Icons      | Material Symbols            |
+| Font       | Geist (bundled, `@fontsource`) |
+| Icons      | Material Symbols (bundled)  |
 | Deployment | GitHub Pages via Actions    |
 
 ---
@@ -206,7 +214,7 @@ npm run build
 npm run preview  # serves app/dist at http://localhost:4173/austin-health-pulse/
 ```
 
-Build-time settings: `CITY_CONFIG` (config file relative to `config/`, default `city.config.json`), `BASE_PATH` (default `/austin-health-pulse/`), `VITE_SERVICE_GUIDE_URL`, `VITE_ENABLE_PERSONAL_CALCULATOR`.
+Build-time settings (see [`app/.env.example`](app/.env.example)): `CITY_CONFIG` (config file relative to `config/`, default `city.config.json`), `BASE_PATH` (default `/austin-health-pulse/`), `VITE_SERVICE_GUIDE_URL`, `VITE_ENABLE_PERSONAL_CALCULATOR`.
 
 ### Service guide handoff
 
@@ -214,14 +222,16 @@ ZIP views link to the companion Austin Service Guide at `<serviceGuideUrl>/servi
 
 - `npm run dev` falls back to `http://localhost:5173` when neither is set.
 - A production build with neither hides the links instead of pointing at localhost.
-- The calculator's `/intake?event=healthspan&focus=<categories>` handoff exists only when the calculator flag is on.
+- The estimator's `/intake?event=healthspan&focus=<categories>` handoff exists only when the estimator flag is on. It sends general service-topic names, never the answers entered.
 
 ### Deploying to GitHub Pages
 
 `.github/workflows/deploy.yml` lints, tests, validates data (`validate:data -- --all`), builds, and deploys on every push to `main`. To turn it on:
 
 1. In **Settings > Pages**, set **Source** to **GitHub Actions**.
-2. Optionally, add repository variables `SERVICE_GUIDE_URL` and `ENABLE_PERSONAL_CALCULATOR` (`true` to include the calculator) (**Settings > Secrets and variables > Actions > Variables**). `SERVICE_GUIDE_URL` should point at the hosted Service Guide; the workflow passes the variables through as `VITE_SERVICE_GUIDE_URL` and `VITE_ENABLE_PERSONAL_CALCULATOR`.
+2. Optionally, add repository variables under **Settings > Secrets and variables > Actions > Variables**. The workflow passes them to the build as `VITE_SERVICE_GUIDE_URL` and `VITE_ENABLE_PERSONAL_CALCULATOR`:
+   - `SERVICE_GUIDE_URL`: the URL of the hosted Service Guide.
+   - `ENABLE_PERSONAL_CALCULATOR`: the workflow treats an unset variable as `true`, so the live demo includes the individual estimator. Set it to `false` to remove the estimator.
 
 The site is served from `/austin-health-pulse/` (the `base` in `app/vite.config.ts`). If you fork under a different repository name, change `base` to match, or assets will 404. Routing uses `HashRouter`, so deep links such as `#/compare` survive a refresh without a 404 fallback page.
 
@@ -233,8 +243,10 @@ Containers and cloud blueprints (AWS, Azure, GCP): see [`deploy/README.md`](depl
 
 Precomputed data is committed under `config/data/<id>/`, so you only need the pipeline to refresh or add a city. Run from the repo root:
 
+Before the first run, [get a free Census API key](data/README.md#census-api-key) and run `export CENSUS_API_KEY=<your-key>` in your shell. The app build and CI do not need the key. Without it, the export downloads about 260 MB of ACS summary files instead (slower, same values).
+
 ```bash
-pip install requests pandas numpy openpyxl geopandas
+pip install requests pandas numpy openpyxl geopandas scipy
 python scripts/export_frontend_json.py [--preset config/presets/<id>.json] [--model-only]
 python scripts/prepare_geojson.py      [--preset config/presets/<id>.json]
 ```

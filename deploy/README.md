@@ -7,7 +7,7 @@ These are **starter templates** for running one isolated, single-tenant instance
 Run from the repo root (the build needs both `app/` and `config/`).
 
 ```bash
-# Default city (Austin / Travis County), served at "/"
+# Default city (Greater Austin), served at "/"
 docker build -t health-pulse:1 .
 
 # Second city using a preset
@@ -15,13 +15,13 @@ docker build -t health-pulse-partner:1 \
   --build-arg CITY_CONFIG=presets/partner-city-demo.json .
 ```
 
-Build args: `BASE_PATH` (default `/`), `CITY_CONFIG` (path relative to `config/`, default `city.config.json`), `VITE_SERVICE_GUIDE_URL`, `VITE_ENABLE_PERSONAL_CALCULATOR` (default `false`). These are baked in at build time; a different city or setting means a different image.
+Build args: `BASE_PATH` (default `/`), `CITY_CONFIG` (path relative to `config/`, default `city.config.json`), `VITE_SERVICE_GUIDE_URL`, `VITE_ENABLE_PERSONAL_CALCULATOR` (default `false`). The build bakes these in, so a different city or setting needs a different image. The estimator flag defaults to off here, unlike the GitHub Pages workflow, which turns it on for the Austin demo.
 
 Run locally: `docker compose up --build`, then open http://localhost:8080/. Compose reads the same args from the environment (for example `CITY_CONFIG=presets/partner-city-demo.json docker compose up --build`).
 
 Verify: `curl -i localhost:8080/` returns 200 with a CSP header, and `curl localhost:8080/healthz` returns `ok`.
 
-The container runs as UID 101 (nginx), listens on 8080, and serves files from the image only. The CSP allows only same-origin resources plus Google Fonts (`fonts.googleapis.com`, `fonts.gstatic.com`) and OpenStreetMap tiles (`tile.openstreetmap.org`). If you add other external resources, edit `deploy/nginx.conf`.
+The container runs as UID 101 (nginx), listens on 8080, and serves files from the image only. The CSP allows same-origin resources plus OpenStreetMap map tiles (`tile.openstreetmap.org`, images only). Fonts are bundled, so no font host is needed. If you add other external resources, edit `deploy/nginx.conf`.
 
 ## AWS (ECS Fargate behind an ALB)
 

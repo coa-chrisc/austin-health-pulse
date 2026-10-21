@@ -11,15 +11,36 @@ These are the CSV exports of the Texas files on the USALEEP download page. They 
 
 ## Fetched at run time
 
-`scripts/export_frontend_json.py` downloads the rest over HTTP. Nothing is cached:
+`scripts/export_frontend_json.py` downloads the rest over HTTP. It caches nothing:
 
 - Census ZCTA-to-tract relationship files (2010 for USALEEP tracts, 2020 for crime data)
 - Census ZCTA-to-county relationship files (2010 and 2020), only when a preset derives its ZCTA list
-- ACS 5-Year 2022: poverty (S1701), uninsured (S2701), total population (B01003). With `CENSUS_API_KEY` set these come from the Census Data API. The API rejects keyless requests, so without a key the script streams the ACS table-based summary files instead and rebuilds the same rates: poverty = B17001_002 / B17001_001, uninsured = the B27001 "no health insurance coverage" cells / B27001_001, both rounded to one decimal as S1701/S2701 publish them. For the 62 Austin ZCTAs the two paths give identical values.
+- ACS 5-Year 2022: poverty (S1701), uninsured (S2701), total population (B01003). With `CENSUS_API_KEY` set these come from the Census Data API. The API rejects keyless requests, so without a key the script streams the ACS table-based summary files instead and rebuilds the same rates: poverty = B17001_002 / B17001_001, uninsured = the B27001 "no health insurance coverage" cells / B27001_001, both rounded to one decimal as S1701/S2701 publish them. For the 62 Austin ZCTAs with data, the two paths give identical values.
 - CDC PLACES 2023: diabetes, hypertension, obesity, current asthma
 - Violent crime, only for presets with `pipeline.crimeSource: "apd-austin"`: City of Austin Open Data Portal, APD Crime Reports (`fdj4-gpfu`), UCR Part 1 violent offenses, rolling 12 months
 
 `scripts/prepare_geojson.py` downloads the Census 2020 cartographic boundary ZCTA shapefile (`cb_2020_us_zcta520_500k`).
+
+## Census API key
+
+The Census Data API requires a key. The key is free. You need it only to run the data pipeline; the app build and CI do not use it.
+
+1. Open [https://api.census.gov/data/key_signup.html](https://api.census.gov/data/key_signup.html).
+2. Enter your organization name and your email address, then submit the form.
+3. Open the email from the Census Bureau. It contains your key.
+4. Click the activation link in that email. The key does not work until you activate it.
+5. In the terminal where you will run the pipeline, set the key:
+
+   ```bash
+   export CENSUS_API_KEY=<your-key>
+   ```
+
+   To keep it for future sessions, add that line to your shell profile (for example `~/.zshrc` or `~/.bashrc`).
+6. Run the pipeline from the repo root as shown in [Pipeline](#pipeline). The script reads the `CENSUS_API_KEY` environment variable.
+
+Keep the key private. Do not commit it, and do not put it in `config/` or in any `app/.env` file.
+
+**Without a key**, the export prints a notice and downloads the ACS 2022 summary files from the Census Bureau instead (about 260 MB). This is slower, and it gives the same poverty and uninsured values.
 
 ## Pipeline
 
@@ -37,7 +58,7 @@ python scripts/prepare_geojson.py      --preset config/presets/partner-city-demo
 
 `python scripts/export_frontend_json.py --preset <preset> --model-only` recomputes only the `scenarioModel` block of `county-summary.json` from the existing `zip-indicators.json`. It makes no network requests.
 
-The two scripts are independent, so you can run them in either order. Set `CENSUS_API_KEY` ([free signup](https://api.census.gov/data/key_signup.html)) to pull ACS from the Census Data API. Without a key the export streams about 260 MB of ACS summary files instead.
+The two scripts are independent, so you can run them in either order. Get a Census API key first ([steps below](#census-api-key)), or the export downloads about 260 MB of ACS summary files instead.
 
 `scripts/travis_county_health_data_pull.py` is the original standalone pull that produced an ArcGIS-ready CSV. The web app does not use it.
 
@@ -52,7 +73,9 @@ The two scripts are independent, so you can run them in either order. Set `CENSU
 
 `dataQualityNotes` lists low-population ZIPs whose ACS rates are unreliable. The frontend flags them, and the scenario model leaves them out of the poverty and uninsured fits.
 
-The Austin preset keeps its original hand-curated 63-ZCTA list. The 50% rule gives a different list for Travis County: it selects 47 ZCTAs, all of them in the curated list, and leaves out 16. Fifteen of those have most of their population in neighboring counties. The other, 78646, is not in the 2010 relationship file.
+The Austin preset keeps its original hand-curated 63-ZCTA list, labeled "Greater Austin" in the app. The list covers Travis County and neighboring areas. For Travis County, the 50% rule selects 47 ZCTAs, all of them in the curated list, and leaves out the other 16. Fifteen of those 16 have most of their population in neighboring counties. The sixteenth, 78646, is not in the 2010 relationship file. Six of the 16 have no population in Travis County.
+
+`county-summary.json` reports each indicator's `avg` as a simple, unweighted mean of the ZIP values. It is not a population-weighted county figure.
 
 ## Scenario model (`county-summary.json` → `scenarioModel`)
 

@@ -18,7 +18,7 @@ Austin Health Pulse is a fully static site. A Python pipeline produces data file
 
 ## Pipeline
 
-[`scripts/`](scripts/) reads a preset's `pipeline` block (state and county FIPS, optional ZCTA list, crime source) and writes to the preset's `data` paths under `config/data/<id>/`. If no ZCTA list is given it is derived: ZCTAs with at least 50% of their 2010 population in the county. USALEEP tract life expectancy is aggregated to ZCTA with Census 2010 ZCTA-tract population weights. Texas only today (the CSVs in `data/raw` are Texas statewide); other states fail with a message naming the file to download. Crime is Austin-APD-only. Sources and order: [`data/README.md`](data/README.md).
+[`scripts/`](scripts/) reads a preset's `pipeline` block (state and county FIPS, optional ZCTA list, crime source) and writes to the preset's `data` paths under `config/data/<id>/`. If no ZCTA list is given it is derived: ZCTAs with at least 50% of their 2010 population in the county. The pipeline aggregates USALEEP tract life expectancy to ZCTA with Census 2010 ZCTA-tract population weights. Area averages in `county-summary.json` are simple unweighted means of the ZIP values. The pipeline supports Texas only today (the CSVs in `data/raw` are Texas statewide); for other states it stops with a message naming the file to download. Crime is Austin-APD-only. Sources, order, and the Census API key: [`data/README.md`](data/README.md).
 
 ## Config selection
 
@@ -29,8 +29,9 @@ Austin Health Pulse is a fully static site. A Python pipeline produces data file
 - `App.tsx` calls `loadAllData()` (`src/lib/dataLoader.ts`), which fetches the three data URLs in parallel and caches them. The result goes into `HealthDataContext`; components read it with `useHealthData()` and do not fetch themselves.
 - The ZIP list is the set of keys in the loaded indicators file; there is no hardcoded ZIP list in the frontend.
 - `HashRouter` (required so the static host needs no rewrite rules). Routes: `/` Neighborhood, `/explore` (lazy, Leaflet choropleth), `/compare` (lazy).
-- Kiosk mode: after `IDLE_TIMEOUT_MS` (5 min) `IdleShowcase` overlays the app (disabled under 768px wide and with `?kiosk=off`). This is a product feature for booths; keep `useIdleTimer` wired in.
-- Optional features: the individual lifespan calculator (build flag `VITE_ENABLE_PERSONAL_CALCULATOR=true`, lazy chunk never loaded when off) and the Service Guide link (`serviceGuideUrl` or `VITE_SERVICE_GUIDE_URL`).
+- Kiosk mode: after `IDLE_TIMEOUT_MS` (5 min) `IdleShowcase` overlays the app (disabled under 768px wide and with `?kiosk=off`). When it starts, `AppShell` remounts all views and returns home, which clears the previous visitor's inputs. This is a product feature for booths; keep `useIdleTimer` wired in.
+- Optional features: the individual lifespan estimator and the Service Guide link (`serviceGuideUrl` or `VITE_SERVICE_GUIDE_URL`). The estimator is controlled by `VITE_ENABLE_PERSONAL_CALCULATOR`. The code default is off, and its lazy chunk is never loaded when off. Docker builds default to off. The GitHub Pages workflow defaults it to on for the live demo (repository variable `ENABLE_PERSONAL_CALCULATOR=false` turns it off). It runs in the browser and sends and stores nothing.
+- Fonts (Geist, Material Symbols) are bundled through `@fontsource` packages. The only third-party host the browser contacts is `tile.openstreetmap.org`, for map tiles.
 
 ## Scenario model
 
@@ -44,7 +45,7 @@ Method:
 - The slider runs from the ZIP's current rate to the best observed ZIP rate; there is no extrapolation beyond observed data.
 - Output: years of life expectancy with 95% CI, R², and n, labeled as an association, not a forecast.
 
-Limitations: the model is ecological (ZIP-level) and cross-sectional, and is not adjusted for age structure or other confounders. For example, the "best" diabetes and hypertension ZIP in Austin is 78705, a student-heavy area (West Campus). It does not show that changing a rate would change life expectancy. Method review with epidemiologists is proposed Phase 2 work ([README](README.md#phase-2-roadmap-proposed-grant-funded)).
+Limitations: the model is ecological (ZIP-level) and cross-sectional, and is not adjusted for age structure or other confounders. For example, the "best" diabetes and hypertension ZIP in Austin is 78705, a student-heavy area (West Campus). The simulator tells users on screen that its fits are not age-adjusted. The model does not show that changing a rate would change life expectancy. Method review with epidemiologists is proposed Phase 2 work ([README](README.md#phase-2-roadmap-proposed-grant-funded)).
 
 ## Validation
 
@@ -52,7 +53,7 @@ Limitations: the model is ecological (ZIP-level) and cross-sectional, and is not
 
 ## Known data caveat
 
-The curated Austin 63-ZIP list covers the Austin metro and includes 16 ZCTAs with under 50% of their population in Travis County (6 with none), yet the app labels the region "Travis County".
+The curated Austin 63-ZIP list covers Travis County and neighboring areas. Sixteen ZCTAs have under 50% of their population in Travis County, and 6 of those have none. The app used to label the region "Travis County". It now says "Greater Austin" (`region.name` in the config). Area "averages" are simple unweighted means of the ZIP values, not population-weighted county figures. The 11.6-year life expectancy gap runs from 78732 (86.85 years) to 78721 (75.26 years), both majority-Travis ZIP codes.
 
 ## Deploy targets
 
