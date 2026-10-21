@@ -157,7 +157,7 @@ export default function ZctaPicker({
               <span className="material-symbols-outlined text-sm align-text-bottom mr-1 text-aph-blue">
                 arrow_downward
               </span>
-              Pick your first zip code to get started
+              Pick your first ZIP code to get started
             </>
           )}
           {selectedZctas.length === 1 && (
@@ -165,7 +165,7 @@ export default function ZctaPicker({
               <span className="material-symbols-outlined text-sm align-text-bottom mr-1 text-aph-orange">
                 add_circle
               </span>
-              Add one more to start comparing
+              Add one more ZIP code to start comparing
             </>
           )}
           {selectedZctas.length === 2 && (
@@ -173,8 +173,7 @@ export default function ZctaPicker({
               <span className="material-symbols-outlined text-sm align-text-bottom mr-1 text-aph-green">
                 check_circle
               </span>
-              Comparison ready! Add a 3rd zip code or scroll down to see
-              results.
+              Your comparison is ready below. You can also add a 3rd ZIP code.
             </>
           )}
         </p>
@@ -203,14 +202,14 @@ export default function ZctaPicker({
             onKeyDown={handleKeyDown}
             placeholder={
               selectedZctas.length === 0
-                ? `Enter a 5-digit zip code (e.g. ${POPULAR_ZIPS[0].zip})`
-                : `Add ${remaining > 0 ? "another" : "a 3rd"} zip code...`
+                ? `Enter a 5-digit ZIP code (e.g. ${POPULAR_ZIPS[0].zip})`
+                : `Add ${remaining > 0 ? "another" : "a 3rd"} ZIP code...`
             }
             className="w-full max-w-md pl-10 pr-4 py-3 rounded-lg border-2 border-aph-blue/30
               bg-white text-aph-dark-blue placeholder:text-aph-dark-gray/50
               focus:outline-none focus:ring-2 focus:ring-aph-blue/40 focus:border-aph-blue
               font-semibold text-lg"
-            aria-label="Search zip codes"
+            aria-label="Search ZIP codes"
           />
 
           {/* Dropdown */}
@@ -259,8 +258,8 @@ export default function ZctaPicker({
             >
               <p className="text-sm text-aph-dark-gray text-center">
                 {selectedZctas.includes(query)
-                  ? "This zip code is already selected"
-                  : `No matching zip codes in ${cityConfig.region.name}`}
+                  ? "That ZIP code is already selected"
+                  : `No matching ZIP codes in ${cityConfig.region.name}`}
               </p>
             </div>
           )}
@@ -299,7 +298,7 @@ export default function ZctaPicker({
           <span className="material-symbols-outlined text-sm align-text-bottom mr-1 text-aph-green">
             check_circle
           </span>
-          Maximum {maxSelections} zip codes selected. Remove one to swap.
+          You can compare up to {maxSelections} ZIP codes. Remove one to pick a different one.
         </p>
       )}
     </div>

@@ -47,7 +47,7 @@ const GAUGE_INDICATORS: Exclude<IndicatorKey, "violentCrimeRate">[] = [
   "obesity",
 ];
 
-/** Build a plain-English narrative from the ZCTA data and county average. */
+/** Build a plain-English narrative from the ZCTA data and area average. */
 function generateNarrative(
   zcta: string,
   data: ZctaHealthData,
@@ -61,15 +61,15 @@ function generateNarrative(
     const absDiff = Math.abs(diff);
     if (absDiff < 0.3) {
       parts.push(
-        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 right around the ${cityConfig.region.name} average.`,
+        `Life expectancy at birth in ${zcta} is ${data.lifeExpectancy.toFixed(1)} years, about the same as the ${cityConfig.region.name} average.`,
       );
     } else if (diff > 0) {
       parts.push(
-        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 about ${absDiff.toFixed(1)} years longer than the ${cityConfig.region.name} average.`,
+        `Life expectancy at birth in ${zcta} is ${data.lifeExpectancy.toFixed(1)} years, about ${absDiff.toFixed(1)} years longer than the ${cityConfig.region.name} average.`,
       );
     } else {
       parts.push(
-        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 about ${absDiff.toFixed(1)} years shorter than the ${cityConfig.region.name} average.`,
+        `Life expectancy at birth in ${zcta} is ${data.lifeExpectancy.toFixed(1)} years, about ${absDiff.toFixed(1)} years shorter than the ${cityConfig.region.name} average.`,
       );
     }
   }
@@ -81,7 +81,7 @@ function generateNarrative(
     const pDiff = data.povertyRate - countyAvg.povertyRate;
     if (Math.abs(pDiff) >= 1.0) {
       highlights.push(
-        `${pDiff < 0 ? "lower" : "higher"} poverty (${data.povertyRate.toFixed(1)}%)`,
+        `${pDiff < 0 ? "lower" : "higher"} poverty rates (${data.povertyRate.toFixed(1)}%)`,
       );
     }
   }
@@ -97,7 +97,7 @@ function generateNarrative(
 
   if (highlights.length > 0) {
     parts.push(
-      `This area has ${highlights.join(" and ")} compared to the county.`,
+      `This area has ${highlights.join(" and ")} compared with the ${cityConfig.region.name} average.`,
     );
   }
 
@@ -365,7 +365,7 @@ export default function NeighborhoodMode({
       ? generateNarrative(submittedZip, zctaData, countyAvg)
       : null;
 
-  // County range — longest- and shortest-LE ZIPs in the region
+  // Area range — longest- and shortest-LE ZIPs in the region
   const countyRange = useMemo(() => {
     if (!healthData) return null;
     let longest: { zip: string; le: number } | null = null;
@@ -397,9 +397,9 @@ export default function NeighborhoodMode({
           Check Your Neighborhood
         </h2>
         <p className="text-aph-dark-gray text-lg max-w-2xl mx-auto">
-          Enter a zip code to explore health data for your community in{" "}
-          {cityConfig.region.name}. See how life expectancy and health indicators compare to the
-          county average.
+          Enter a ZIP code to see health data for your neighborhood in{" "}
+          {cityConfig.region.name}. See how life expectancy and other health
+          indicators compare with the area average.
         </p>
         <button
           onClick={onAboutClick}
@@ -457,7 +457,7 @@ export default function NeighborhoodMode({
             type="text"
             inputMode="numeric"
             maxLength={5}
-            placeholder="Zip code"
+            placeholder="ZIP code"
             value={zipInput}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, "").slice(0, 5);
@@ -466,7 +466,7 @@ export default function NeighborhoodMode({
             }}
             onKeyDown={handleKeyDown}
             className="pl-10 pr-4 py-3 w-full sm:w-44 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-aph-blue transition"
-            aria-label="Zip code"
+            aria-label="ZIP code"
           />
         </div>
 
@@ -520,11 +520,11 @@ export default function NeighborhoodMode({
             wrong_location
           </span>
           <p className="text-aph-dark-blue font-semibold text-lg mb-1">
-            Zip code {zipInput} not found
+            ZIP code {zipInput} not found
           </p>
           <p className="text-aph-dark-gray text-sm mb-3">
-            We only have data for {cityConfig.region.name} zip codes. Try one of these
-            nearby areas:
+            We only have data for {cityConfig.region.name} ZIP codes. Try one of
+            these nearby ZIP codes:
           </p>
           {nearbySuggestions.length > 0 ? (
             <div className="flex flex-wrap justify-center gap-2">
@@ -573,9 +573,9 @@ export default function NeighborhoodMode({
                 No data available
               </p>
               <p className="text-sm text-aph-dark-gray max-w-md mx-auto">
-                Health data is not available for zip code {submittedZip}. This
-                area may have too few residents for reliable estimates or may
-                cross county boundaries.
+                We don&rsquo;t have health data for ZIP code {submittedZip}. The
+                area may have too few residents for reliable estimates, or it
+                may extend beyond the area this tool covers.
               </p>
             </section>
           ) : (
@@ -608,8 +608,9 @@ export default function NeighborhoodMode({
                           info
                         </span>
                         <p className="text-sm text-aph-dark-blue leading-snug">
-                          Life expectancy data is not available for this zip
-                          code. This area may cross county boundaries.
+                          We don&rsquo;t have life expectancy data for this ZIP
+                          code. The area may have too few residents for
+                          reliable estimates.
                         </p>
                       </div>
                     )}
@@ -622,7 +623,7 @@ export default function NeighborhoodMode({
                         pin_drop
                       </span>
                       <span className="text-aph-dark-blue font-semibold text-lg">
-                        Zip Code {submittedZip}
+                        ZIP Code {submittedZip}
                       </span>
                     </div>
 
@@ -644,7 +645,7 @@ export default function NeighborhoodMode({
                             </span>
                           </div>
                           <span className="text-sm text-aph-dark-gray">
-                            County average:{" "}
+                            Area average:{" "}
                             <span className="font-semibold text-aph-dark-blue">
                               {countyAvg.lifeExpectancy.toFixed(1)} years
                             </span>
@@ -674,18 +675,19 @@ export default function NeighborhoodMode({
                           Age group: {ageGroupLabel} ({ageGroup})
                         </p>
                         <p className="text-aph-dark-blue text-lg">
-                          At age{" "}
-                          <span className="font-bold">{submittedAge}</span>,
-                          estimated remaining years:{" "}
+                          People who are{" "}
+                          <span className="font-bold">{submittedAge}</span> in
+                          this ZIP code have on average about{" "}
                           <span
                             className="font-bold text-2xl"
                             style={{ color: APH_COLORS.blue }}
                           >
                             {ageSpecific.ex.toFixed(1)}
-                          </span>
+                          </span>{" "}
+                          years of life left
                         </p>
                         <p className="text-aph-dark-gray mt-1">
-                          Expected to reach approximately age{" "}
+                          On average, that means reaching about age{" "}
                           <span className="font-semibold text-aph-dark-blue">
                             {(submittedAge + ageSpecific.ex).toFixed(0)}
                           </span>
@@ -709,8 +711,8 @@ export default function NeighborhoodMode({
                           info
                         </span>
                         <p className="text-aph-dark-gray">
-                          Age-specific life expectancy data is not available for
-                          this zip code.
+                          We don&rsquo;t have life expectancy data for that age in
+                          this ZIP code.
                         </p>
                       </div>
                     </div>
@@ -752,7 +754,7 @@ export default function NeighborhoodMode({
                         </p>
                         <p className="text-aph-dark-blue/80 text-sm mt-1">
                           years between {cityConfig.region.name}&rsquo;s longest- and
-                          shortest-living ZIPs
+                          shortest-lived ZIPs
                         </p>
                       </div>
                       <div className="flex-1 grid grid-cols-3 gap-3 md:gap-4">
@@ -767,7 +769,7 @@ export default function NeighborhoodMode({
                             className="text-sm font-semibold"
                             style={{ color: APH_COLORS.darkGreen }}
                           >
-                            {countyRange.longest.le.toFixed(1)} yrs
+                            {countyRange.longest.le.toFixed(1)} years
                           </p>
                         </div>
                         <div className="bg-white rounded-lg p-3 border border-aph-light-gray/50">
@@ -781,7 +783,7 @@ export default function NeighborhoodMode({
                             className="text-sm font-semibold"
                             style={{ color: APH_COLORS.red }}
                           >
-                            {countyRange.shortest.le.toFixed(1)} yrs
+                            {countyRange.shortest.le.toFixed(1)} years
                           </p>
                         </div>
                         <div
@@ -802,17 +804,17 @@ export default function NeighborhoodMode({
                             style={{ color: APH_COLORS.darkGreen }}
                           >
                             {submittedZip === countyRange.longest.zip
-                              ? "Top of county"
+                              ? "Top of the area"
                               : submittedZip === countyRange.shortest.zip
-                                ? "Bottom of county"
-                                : `${(countyRange.longest.le - zctaData.lifeExpectancy).toFixed(1)} yrs behind top`}
+                                ? "Bottom of the area"
+                                : `${(countyRange.longest.le - zctaData.lifeExpectancy).toFixed(1)} years behind the top`}
                           </p>
                         </div>
                       </div>
                     </div>
                     <p className="text-xs text-aph-dark-blue/70 mt-4 leading-relaxed max-w-3xl">
-                      A gap shaped by income, access to care, environment, and
-                      other social determinants of health.
+                      Income, access to care, environment, and other social factors
+                      all shape this gap.
                     </p>
                   </section>
                 )}

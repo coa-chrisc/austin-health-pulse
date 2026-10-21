@@ -72,7 +72,7 @@ export default function EquityScenarioSimulator({
       </h3>
       <p className="text-sm text-aph-dark-gray max-w-2xl mx-auto">
         {model.levers.length > 0
-          ? `Explore how population-level improvements in a ZIP code's ${leverNames} are associated with differences in life expectancy across ${cityConfig.region.name}, and how much of the ${gap.toFixed(1)}-year gap between its longest- and shortest-lived ZIPs they correspond to.`
+          ? `Explore how lower ${leverNames} in a ZIP are associated with differences in life expectancy across ${cityConfig.region.name}. See how much of the ${gap.toFixed(1)}-year gap between ${cityConfig.region.name}'s longest- and shortest-lived ZIPs that difference represents.`
           : `Compare ZIP codes across ${cityConfig.region.name} using public, aggregate indicators.`}
       </p>
     </div>
@@ -172,14 +172,14 @@ export default function EquityScenarioSimulator({
         <div className="rounded-xl bg-white p-4 border border-aph-light-gray/50">
           <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray mb-3">
             Gap to the longest-lived ZIP ({extremes.top.zip},{" "}
-            {extremes.top.le.toFixed(1)} yrs)
+            {extremes.top.le.toFixed(1)} years)
           </p>
           <div className="space-y-2 text-sm text-aph-dark-blue">
             <div>
               <div className="flex justify-between mb-1">
                 <span>Today</span>
                 <span className="font-semibold tabular-nums">
-                  {sim.currentGap.toFixed(1)} yrs
+                  {sim.currentGap.toFixed(1)} years
                 </span>
               </div>
               <div className="h-2.5 rounded-full bg-aph-light-gray/40 overflow-hidden">
@@ -193,7 +193,7 @@ export default function EquityScenarioSimulator({
               <div className="flex justify-between mb-1">
                 <span>At the lower {copy.name}</span>
                 <span className="font-semibold tabular-nums">
-                  {sim.projectedGap.toFixed(1)} yrs
+                  {sim.projectedGap.toFixed(1)} years
                 </span>
               </div>
               <div className="h-2.5 rounded-full bg-aph-light-gray/40 overflow-hidden">
@@ -245,7 +245,7 @@ export default function EquityScenarioSimulator({
               >
                 {zipOptions.map((z) => (
                   <option key={z} value={z}>
-                    {z} &mdash; {healthData.zctas[z].lifeExpectancy!.toFixed(1)} yrs
+                    {z} &mdash; {healthData.zctas[z].lifeExpectancy!.toFixed(1)} years
                   </option>
                 ))}
               </select>

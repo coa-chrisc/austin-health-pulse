@@ -29,8 +29,8 @@ const SMOKING_OPTIONS: { value: SmokingStatus; label: string }[] = [
 ];
 
 const DIET_LABELS: Record<DietScore, string> = {
-  1: "Mostly fast food / processed",
-  2: "Some home cooking, lots of red meat & sugar",
+  1: "Mostly fast food and processed food",
+  2: "Some home cooking, lots of red meat and sugar",
   3: "Typical American mix",
   4: "Mostly whole foods, some red meat",
   5: "Mediterranean-style: vegetables, fish, whole grains",
@@ -158,8 +158,9 @@ export default function LifespanCalculator() {
         </h3>
       </div>
       <p className="text-sm text-aph-dark-gray mb-5">
-        Combines your age with six modifiable factors from large prospective
-        cohort studies. Move any control to see how it changes the estimate.
+        Combines your age with six factors you can change, based on large
+        long-term studies. Move any control to see how it changes the estimate.
+        Your answers stay in your browser.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

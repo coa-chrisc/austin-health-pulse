@@ -12,7 +12,7 @@ export default function PersonalFactorsSection() {
           How do personal factors affect life expectancy?
         </h3>
         <p className="text-sm text-aph-dark-gray max-w-2xl mx-auto">
-          Neighborhood is one factor — personal choices and exposures matter
+          Neighborhood is one factor. Personal choices and exposures matter
           too. Try these tools to see how.
         </p>
       </div>

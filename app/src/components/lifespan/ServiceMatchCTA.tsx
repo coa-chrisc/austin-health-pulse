@@ -60,7 +60,7 @@ export default function ServiceMatchCTA({
           </span>
           <div>
             <p className="font-semibold text-lg">
-              You're already covering the modifiable factors well.
+              Your answers show no factors with room to improve.
             </p>
             <p className="text-white/85 text-sm mt-1">
               Keep doing what you're doing.
@@ -111,11 +111,11 @@ export default function ServiceMatchCTA({
             <span style={{ color: APH_COLORS.darkGreen }}>
               +{totalGain.toFixed(1)} years
             </span>{" "}
-            could be on the table
+            of estimated gain
           </h4>
           <p className="text-sm text-aph-dark-blue/80 mt-1">
-            Based on your inputs, these are the factors with the most years
-            recoverable.
+            Based on your answers, these factors offer the largest estimated
+            gains.
             {url &&
               ` ${cityConfig.agency.name} partners with services that can help.`}
           </p>
@@ -141,7 +141,7 @@ export default function ServiceMatchCTA({
               className="text-sm font-bold tabular-nums whitespace-nowrap"
               style={{ color: APH_COLORS.darkGreen }}
             >
-              +{o.potentialGain.toFixed(1)} yrs
+              +{o.potentialGain.toFixed(1)} years
             </span>
           </li>
         ))}
@@ -164,8 +164,8 @@ export default function ServiceMatchCTA({
             </span>
           </a>
           <p className="text-xs text-aph-dark-gray mt-3">
-            Opens the {cityConfig.region.cityName} Service Guide. Your responses on this page are not
-            sent — only the factor categories are shared.
+            Opens the {cityConfig.region.cityName} Service Guide. Your answers stay in your browser. The link
+            includes only general service topics.
           </p>
         </>
       )}

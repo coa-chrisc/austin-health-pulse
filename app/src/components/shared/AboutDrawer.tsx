@@ -135,7 +135,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 {cityConfig.region.name} neighborhoods. Built by{" "}
                 {cityConfig.agency.name}, it
                 combines life expectancy, chronic disease, and socioeconomic
-                data to reveal health patterns at the ZIP code level.
+                data to show health patterns at the ZIP code level.
               </p>
             </Section>
 
@@ -144,7 +144,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
               {cityConfig.dataSources.map((d) => (
                 <DataSourceItem key={d.label} label={d.label} source={d.source} />
               ))}
-              <p className="text-xs">Data current as of {cityConfig.dataAsOf}.</p>
+              <p className="text-xs">Data last updated {cityConfig.dataAsOf}. Each source covers its own time period.</p>
             </Section>
 
             {/* Methodology */}
@@ -177,7 +177,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
             {/* Limitations */}
             <Section title="Limitations">
               <LimitationItem>
-                Life expectancy data is from 2010-2015 and may not reflect
+                Life expectancy data is from 2010–2015 and may not reflect
                 current conditions. More recent estimates are not yet available
                 at this geographic level.
               </LimitationItem>
@@ -187,13 +187,13 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 not captured here.
               </LimitationItem>
               <LimitationItem>
-                ZIP code level data may mask significant variation within
+                Data at the ZIP code level may hide significant variation within
                 neighborhoods. Health outcomes can differ substantially even
                 within a single ZIP code.
               </LimitationItem>
               <LimitationItem>
-                Model-based estimates from CDC PLACES have associated margins of
-                error and should be interpreted with appropriate caution.
+                CDC PLACES figures are model-based estimates with margins of
+                error. Use them with caution.
               </LimitationItem>
             </Section>
 
@@ -217,12 +217,12 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                   icon="dashboard"
                   label="Session 2"
                   title="Three audience modes"
-                  detail="Added the policy-maker explorer, neighborhood lookup, and indicator gauges; wired up geolocation and ZIP search; computed the county comparisons."
+                  detail="Added the policy-maker explorer, neighborhood lookup, and indicator gauges; wired up geolocation and ZIP search; computed the area comparisons."
                 />
                 <TimelineEntry
                   icon="auto_awesome"
                   label="Session 3"
-                  title="Calculators & demo polish"
+                  title="Calculators and demo polish"
                   detail="Added the smoking-impact and generations calculators; built the kiosk showcase mode; tightened mobile responsiveness; added this About panel."
                 />
               </div>

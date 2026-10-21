@@ -127,7 +127,7 @@ export default function ChoroplethMap({
 
         const rank = allValues.findIndex((e) => e.zcta === zcta) + 1;
         if (rank > 0) {
-          rankLine = `<span style="color:#636262;font-size:11px">${toOrdinal(rank)} of ${allValues.length} zip codes</span>`;
+          rankLine = `<span style="color:#636262;font-size:11px">${toOrdinal(rank)} of ${allValues.length} ZIP codes</span>`;
         }
       }
 

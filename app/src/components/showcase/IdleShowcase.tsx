@@ -109,8 +109,8 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
       const ratio = dHigh.v / dLow.v;
       if (ratio >= 1.4) {
         items.push({
-          headline: `Diabetes is ${ratio.toFixed(1)}× more common in ${dHigh.zip} than ${dLow.zip}`,
-          detail: `${dHigh.v.toFixed(1)}% vs ${dLow.v.toFixed(1)}% prevalence — a gap shaped by access to care, food environment, and income.`,
+          headline: `Diabetes is ${ratio.toFixed(1)}times as common in ${dHigh.zip} as in ${dLow.zip}`,
+          detail: `${dHigh.v.toFixed(1)}% of adults compared with ${dLow.v.toFixed(1)}%. Access to care, food environment, and income all shape this gap.`,
         });
       }
     }
@@ -126,8 +126,8 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
     const countyPoverty = healthData.meta.countyAverage.povertyRate;
     if (pHigh && pHigh.v > countyPoverty * 1.5) {
       items.push({
-        headline: `${pHigh.zip} has ${pHigh.v.toFixed(1)}% poverty`,
-        detail: `That's ${(pHigh.v / countyPoverty).toFixed(1)}× the ${cityConfig.region.name} average of ${countyPoverty.toFixed(1)}%.`,
+        headline: `${pHigh.zip} has a poverty rate of ${pHigh.v.toFixed(1)}%`,
+        detail: `That is ${(pHigh.v / countyPoverty).toFixed(1)} times the ${cityConfig.region.name} average of ${countyPoverty.toFixed(1)}%.`,
       });
     }
 
@@ -141,8 +141,8 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
     }
     if (uHigh && uHigh.v >= 20) {
       items.push({
-        headline: `1 in ${Math.round(100 / uHigh.v)} adults in ${uHigh.zip} is uninsured`,
-        detail: `${uHigh.v.toFixed(1)}% lack health coverage — the highest rate in ${cityConfig.region.name}.`,
+        headline: `About 1 in ${Math.round(100 / uHigh.v)} residents in ${uHigh.zip} has no health insurance`,
+        detail: `${uHigh.v.toFixed(1)}% of residents are uninsured. That is the highest rate among ${cityConfig.region.name} ZIPs.`,
       });
     }
 
@@ -286,7 +286,7 @@ function SlideStats({
             Life Expectancy Range
           </p>
           <p className="text-3xl font-bold">
-            {minLE.toFixed(1)} - {maxLE.toFixed(1)}
+            {minLE.toFixed(1)}–{maxLE.toFixed(1)}
           </p>
           <p className="text-white/60 text-sm mt-1">years</p>
         </div>
@@ -303,13 +303,13 @@ function SlideStats({
           <span className="material-symbols-outlined text-aph-green text-base align-text-bottom mr-1">
             arrow_upward
           </span>
-          Highest: {highestZcta}
+          Longest-lived ZIP: {highestZcta}
         </span>
         <span>
           <span className="material-symbols-outlined text-aph-red text-base align-text-bottom mr-1">
             arrow_downward
           </span>
-          Lowest: {lowestZcta}
+          Shortest-lived ZIP: {lowestZcta}
         </span>
       </div>
     </div>
@@ -351,10 +351,11 @@ function SlideCTA() {
         Explore your neighborhood.
       </h2>
       <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-xl mx-auto mb-8">
-        Look up any {cityConfig.region.name} ZIP, compare neighborhoods side by
-        side, or {ENABLE_PERSONAL_CALCULATOR
-          ? "see how modifiable factors shape lifespan."
-          : "explore how population-level changes relate to life expectancy."}
+        Look up any {cityConfig.region.name} ZIP code, compare neighborhoods side by
+        side, or{" "}
+        {ENABLE_PERSONAL_CALCULATOR
+          ? "see how habits are linked to life expectancy."
+          : "see how area-wide changes are linked to life expectancy."}
       </p>
       <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20">
         <span className="material-symbols-outlined text-aph-green text-base">

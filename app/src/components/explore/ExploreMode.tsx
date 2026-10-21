@@ -23,7 +23,7 @@ export default function ExploreMode() {
         <div className="text-center">
           <div className="w-10 h-10 border-4 border-aph-blue border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           <p className="text-aph-dark-blue font-semibold text-sm">
-            Loading map data...
+            Loading map data…
           </p>
         </div>
       </div>

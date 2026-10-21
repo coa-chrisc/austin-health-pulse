@@ -11,7 +11,7 @@ const modes = [
   { to: "/explore", label: "Explore the Map", shortLabel: "Map", icon: "map" },
   {
     to: "/compare",
-    label: "Compare Zip Codes",
+    label: "Compare ZIP Codes",
     shortLabel: "Compare",
     icon: "compare_arrows",
   },

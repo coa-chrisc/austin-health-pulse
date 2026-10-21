@@ -51,7 +51,7 @@ export default function ComparisonBarChart({
         Indicator Breakdown
       </h3>
       <p className="text-sm text-aph-dark-gray mb-6">
-        Grouped bars per indicator with county average reference line.
+        Each chart compares your selected ZIP codes. The dashed line shows the area average.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {indicators.map((key) => {
@@ -138,7 +138,7 @@ export default function ComparisonBarChart({
                       strokeDasharray="6 3"
                       strokeWidth={2}
                       label={{
-                        value: `Avg: ${formatValue(avg, unit)}`,
+                        value: `Area average: ${formatValue(avg, unit)}`,
                         position: "insideTopRight",
                         style: {
                           fontSize: 10,

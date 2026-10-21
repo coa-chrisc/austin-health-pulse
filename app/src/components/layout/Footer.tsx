@@ -31,7 +31,7 @@ export default function Footer() {
               </p>
             ))}
             <p className="mt-2 text-aph-light-gray">
-              Data current as of {cityConfig.dataAsOf}
+              Data last updated {cityConfig.dataAsOf}
             </p>
           </div>
         </div>
@@ -50,14 +50,18 @@ export default function Footer() {
             datasets: {sources}.
           </p>
           <p className="max-w-3xl mt-1">
-            What you enter here (a ZIP code, your age, your location
-            {ENABLE_PERSONAL_CALCULATOR && ", or your lifespan estimator answers"}
-            ) is used only in your browser. It is not sent anywhere or saved.
+            What you enter here (
+            {ENABLE_PERSONAL_CALCULATOR
+              ? "a ZIP code, your age, your location, or your lifespan estimator answers"
+              : "a ZIP code, your age, or your location"}
+            ) stays in your browser. It is not sent anywhere or saved, and
+            it is cleared when the idle screen starts.
             {SERVICE_GUIDE_URL &&
               (ENABLE_PERSONAL_CALCULATOR
                 ? " If you open a Service Guide link, the link includes the ZIP code or the general service topics, never your answers."
                 : " If you open a Service Guide link, the link includes the ZIP code.")}{" "}
-            The map loads street tiles from OpenStreetMap. This site has no
+            The map loads its tiles from OpenStreetMap, the only outside site
+            this page loads from. This site has no
             accounts, cookies, or analytics; it only remembers, on your device,
             whether you have seen the tour.
           </p>

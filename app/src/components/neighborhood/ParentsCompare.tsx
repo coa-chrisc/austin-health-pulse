@@ -75,7 +75,7 @@ export default function ParentsCompare() {
               >
                 {parentLE.toFixed(1)}
               </p>
-              <p className="text-xs text-aph-dark-gray mt-1">years (US avg)</p>
+              <p className="text-xs text-aph-dark-gray mt-1">years (U.S. average)</p>
             </div>
             {todayLE !== null && (
               <div>
@@ -94,13 +94,12 @@ export default function ParentsCompare() {
           </div>
           {gain !== null && (
             <p className="text-sm text-aph-dark-blue mt-4 leading-relaxed">
-              {cityConfig.region.name} residents today live about{" "}
+              Life expectancy in {cityConfig.region.name} today is about{" "}
               <span className="font-bold" style={{ color: APH_COLORS.green }}>
-                {gain >= 0 ? "+" : ""}
-                {gain.toFixed(1)} years
+                {Math.abs(gain).toFixed(1)} years
               </span>{" "}
               {gain >= 0 ? "longer" : "shorter"} than the U.S. average for
-              someone born in {birthYear}.
+              people born in {birthYear}.
             </p>
           )}
         </div>

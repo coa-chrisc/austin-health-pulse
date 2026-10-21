@@ -89,7 +89,7 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
         <div
           className="flex items-end gap-0 sm:gap-[2px] h-24 sm:h-28"
           role="img"
-          aria-label={`Sorted bar chart of ${bars.length} ZIP codes by life expectancy. ${highlightZip} ranks ${
+          aria-label={`Bar chart of ${bars.length} ZIP codes, sorted from shortest to longest life expectancy. ${highlightZip} is number ${
             highlightIndex >= 0 ? highlightIndex + 1 : "unknown"
           } of ${bars.length}.`}
         >
@@ -113,7 +113,7 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
                   zIndex: isHighlight ? 2 : 1,
                   opacity: isHighlight ? 1 : 0.9,
                 }}
-                title={`${b.zip}: ${b.le.toFixed(1)} yrs`}
+                title={`${b.zip}: ${b.le.toFixed(1)} years`}
               >
                 {isHighlight && (
                   <div
@@ -138,7 +138,7 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
         <div className="flex justify-between mt-2 text-[11px] text-aph-dark-gray">
           <span>
             <span className="font-semibold text-aph-red">
-              {minLE.toFixed(1)} yrs
+              {minLE.toFixed(1)} years
             </span>{" "}
             shortest
           </span>
@@ -148,7 +148,7 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
           <span className="text-right">
             longest{" "}
             <span className="font-semibold text-aph-green">
-              {maxLE.toFixed(1)} yrs
+              {maxLE.toFixed(1)} years
             </span>
           </span>
         </div>
@@ -157,9 +157,10 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
       {/* Rank summary */}
       {highlightIndex >= 0 && (
         <p className="text-sm text-aph-dark-blue mt-3 leading-relaxed">
-          ZIP <span className="font-semibold">{highlightZip}</span> ranks{" "}
-          <span className="font-bold text-aph-blue">#{highlightIndex + 1}</span>{" "}
-          of {bars.length} — {percentileLabel(highlightIndex, bars.length)}.
+          ZIP <span className="font-semibold">{highlightZip}</span> is number{" "}
+          <span className="font-bold text-aph-blue">{highlightIndex + 1}</span>{" "}
+          of {bars.length} when ranked from shortest to longest life
+          expectancy, {percentileLabel(highlightIndex, bars.length)}.
         </p>
       )}
     </section>
@@ -182,9 +183,9 @@ function interpolate(a: string, b: string, t: number): string {
 function percentileLabel(index: number, total: number): string {
   // index 0 = lowest LE, index total-1 = highest
   const pct = index / (total - 1);
-  if (pct >= 0.9) return "near the top of the county";
-  if (pct >= 0.7) return "above the county middle";
-  if (pct >= 0.4) return "around the county middle";
-  if (pct >= 0.15) return "below the county middle";
-  return "near the bottom of the county";
+  if (pct >= 0.9) return "near the top of the area";
+  if (pct >= 0.7) return "above the middle of the area";
+  if (pct >= 0.4) return "around the middle of the area";
+  if (pct >= 0.15) return "below the middle of the area";
+  return "near the bottom of the area";
 }

@@ -92,7 +92,7 @@ export default function ComparisonTable({
               </th>
             ))}
             <th className="text-center py-3 px-2 sm:px-4 text-aph-dark-blue font-semibold whitespace-nowrap">
-              County Avg
+              Area Average
             </th>
           </tr>
         </thead>

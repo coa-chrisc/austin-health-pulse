@@ -77,7 +77,7 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
         Health Profile Comparison
       </h3>
       <p className="text-sm text-aph-dark-gray mb-4">
-        Higher values indicate better health outcomes across all indicators.
+        Each indicator is scaled from 0 to 100 across all ZIP codes. A higher score always means a better outcome, and a larger shape means better outcomes overall.
       </p>
       <div className="w-full" style={{ height: "min(380px, 60vw)" }}>
         <ResponsiveContainer width="100%" height="100%">

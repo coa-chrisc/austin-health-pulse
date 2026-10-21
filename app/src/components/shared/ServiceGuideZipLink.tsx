@@ -21,7 +21,7 @@ export default function ServiceGuideZipLink({
       className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-aph-green text-white font-semibold text-sm hover:brightness-110 active:scale-[0.97] transition ${className}`}
     >
       <span className="material-symbols-outlined text-base">handshake</span>
-      Find public health &amp; social services in ZIP {zip}
+      Find public health and social services in ZIP {zip}
       <span className="material-symbols-outlined text-base">open_in_new</span>
     </a>
   );
