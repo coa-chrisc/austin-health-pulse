@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # Build context is the repo root: the build needs both app/ and config/.
 
-FROM node:22-alpine AS build
+FROM node:25-alpine AS build
 WORKDIR /src
 
 # BASE_PATH defaults to "/" here (the app's own default is /austin-health-pulse/ for GitHub Pages).
