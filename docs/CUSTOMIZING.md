@@ -37,55 +37,126 @@ To make your config the default, copy it over `config/city.config.json`.
 
 ## 3. Colors
 
-`brand.colors` sets 16 colors. The key names come from the Austin Public Health palette, but each one plays a role:
+`theme.colors` sets 18 colors by role. Every key is required and must be a six-digit hex value such as `#44499C`.
 
-| Key | Role |
+| Key | Where it shows |
 | --- | --- |
-| `blue` | Primary: active navigation, buttons, links, section headings, slider fills |
-| `darkBlue` | Ink: header and footer background, headings, large numbers |
-| `green` | Secondary: logo tile, "Explore" button, accents, and the "better" end of data scales |
-| `darkGreen` | Strongest "better" color in data scales; positive numbers |
-| `compliantGreen` | Part of the Austin palette. It is exposed as `aph-compliant-green` but no component uses it yet. |
-| `white` | Page background (an off-white in Austin's palette) |
-| `lightBlue`, `lightGreen` | Tinted card backgrounds and soft gradients |
-| `red`, `orange`, `yellow` | The "worse" end of data scales: map shading, the bar strip, gauges, and comparison table highlights |
-| `cyan`, `purple`, `brown` | Extra series colors for charts |
-| `lightGray`, `darkGray` | "No data" fills, borders, and secondary text |
+| `primary` | Active navigation, buttons, links, section headings, slider fills |
+| `primarySoft` | Tinted panels and soft gradients |
+| `accent` | Logo tile, "Explore" button, browser-tab icon, highlights |
+| `accentSoft` | Tinted accent backgrounds |
+| `ink` | Header and footer background, headings, large numbers |
+| `onBrand` | Text and icons on `primary`, `ink`, `accent`, and `positiveFill` |
+| `page` | Page background |
+| `surface` | Cards, popovers, tooltips |
+| `subtle` | Progress tracks and empty slots |
+| `body` | Body text |
+| `muted` | Secondary text |
+| `line` | Borders and dividers |
+| `noData` | Map and chart fill for missing data |
+| `positive` | Text and numbers that mean "better" |
+| `positiveFill` | Bars and fills that mean "better" |
+| `negative` | Text and fills that mean "worse"; errors |
+| `warning` | Caution icons |
+| `scrim` | Backdrop behind modals and overlays (used at 20 to 60 percent opacity) |
 
-Two things to keep in mind:
+Two more lists sit next to `colors`:
 
-- **The data scales use your colors.** The map, the bar strip, and the comparison table run from `red` through `orange` and `yellow` to `green` and `darkGreen`. If your secondary brand color isn't a green, those scales will no longer read as bad-to-good. Pick a `green` and `darkGreen` that still read as "better" next to your `red`.
-- **Check contrast.** White text sits on `blue`, `darkBlue`, and `green`, and `darkBlue` text sits on `white`, `lightBlue`, and `lightGreen`. Aim for WCAG AA contrast (4.5:1 for body text).
+- **`dataScale`** is exactly five colors, ordered worst to best. The map, the bar strip, gauges, and comparison table highlights run along it. Choose any five colors you like, such as a blue-to-orange scale, as long as the first reads as worst and the last as best.
+- **`series`** is 3 to 8 colors used in order for the lines, bars, and radar in Compare mode, one per ZIP code selected.
 
-How it works: the build writes your colors into the page `<head>` as `--color-aph-*` CSS variables, so the page never shows the default palette first. Components use them through Tailwind utilities such as `bg-aph-blue` and `text-aph-dark-blue`, or through `APH_COLORS` in TypeScript. The `aph` prefix is historical; it carries your colors, not Austin's. When you add UI, use these tokens instead of hex values.
+Check contrast yourself or let `validate:data` do it. It prints a warning (not an error) for each of these pairs that falls below WCAG AA:
+
+- `body` on `page` and `surface`; `muted` on `page` and `surface`
+- `ink` on `page` and `primarySoft`
+- `primary`, `positive`, and `negative` on `surface` (4.5:1)
+- `onBrand` on `primary`, `ink`, `accent`, and `positiveFill` (4.5:1)
+- `warning` on `surface` (3:1, because it is used for icons)
+
+How it works: the build writes your theme into one `<style id="theme">` element in the page `<head>`, so the page never shows default values first. That element holds the color variables, the font, the text sizes, and the corner radii.
 
 ## 4. Logo and browser-tab icon
 
 Put your logo under `config/brand/<your-id>/` and point `brand.logoUrl` at it, relative to `config/`:
 
 ```json
-"brand": { "logoUrl": "brand/my-city/logo.svg", "colors": { … } }
+"brand": { "logoUrl": "brand/my-city/logo.svg" }
 ```
 
 - **Format:** SVG, PNG, or WebP.
-- **Where it shows:** in a 40-pixel tile filled with `green` in the header, so a white or light mark works best.
+- **Where it shows:** in a 40-pixel tile filled with `accent` in the header, so a white or light mark works best.
 - **How it's served:** the build bundles the file with the app, so it is served from your own site and passes the Content-Security-Policy. Logos hosted elsewhere are not supported.
 - **When it's `null`:** a health-and-safety icon appears instead.
 - **Checks:** `validate:data` and the build both fail if the file is missing.
 
-The browser-tab icon is generated from your `green`: a rounded square with a white plus.
+The browser-tab icon is generated from your `accent`: a rounded square with a white plus.
 
 ## 5. Fonts
 
-The app uses Geist for text and Material Symbols for icons. Both are bundled with the app through `@fontsource` packages, so the browser contacts no font service.
+The app uses one text font and the Material Symbols icon font. Both are bundled with the app through `@fontsource` packages, so the browser contacts no font service. The icon font is fixed.
 
 To change the text font:
 
-1. `npm install @fontsource/<font>` in `app/`.
-2. Import the weights you need in `app/src/main.tsx`, replacing the Geist imports.
-3. Change `--font-geist` in `app/src/index.css`.
+1. Run `npm install @fontsource/<font>` in `app/`.
+2. Set `theme.typography` in your config:
+
+```json
+"typography": {
+  "fontPackage": "@fontsource/inter",
+  "family": "Inter",
+  "fallback": "Helvetica, Arial, sans-serif",
+  "baseSize": 16,
+  "sizes": {}
+}
+```
+
+| Key | Meaning |
+| --- | --- |
+| `fontPackage` | The installed `@fontsource` package |
+| `family` | The CSS font name the package defines |
+| `fallback` | Fonts to use while it loads or if it fails |
+
+The build loads the Latin subset at weights 400, 500, 600, and 700 automatically. The package must provide all four. `validate:data` and the build fail if the package is not installed or a weight is missing.
 
 Don't load fonts from a third-party host. The Content-Security-Policy in `deploy/nginx.conf` blocks them, and loading them would tell that host about every visitor.
+
+## Sizes
+
+`baseSize` (12 to 24, default 16) scales all text and spacing, because both are sized in `rem`. The build applies it to `<html>` as a percentage (16 becomes 100%), so a visitor's browser text-size setting still works.
+
+`sizes` overrides single text steps. Values are `rem`, from 0.5 to 6. Leave it as `{}` to keep the defaults.
+
+| Step | Default (rem) | Step | Default (rem) |
+| --- | --- | --- | --- |
+| `3xs` | 0.625 | `2xl` | 1.5 |
+| `2xs` | 0.6875 | `3xl` | 1.875 |
+| `xs` | 0.75 | `4xl` | 2.25 |
+| `sm` | 0.875 | `5xl` | 3 |
+| `base` | 1 | `6xl` | 3.75 |
+| `lg` | 1.125 | `7xl` | 4.5 |
+| `xl` | 1.25 | | |
+
+## Radius
+
+`theme.radius` sets four corner sizes, each a `rem` or `px` value such as `0.5rem`:
+
+| Key | Used for |
+| --- | --- |
+| `chip` | Small tags and badges |
+| `control` | Buttons and inputs |
+| `card` | Cards |
+| `panel` | Large panels and dialogs |
+
+Set them all to `0rem` to get square corners. The Harris County demo uses smaller values than Austin to show the difference.
+
+## For developers
+
+When you add UI, use the theme instead of literal values:
+
+- Tailwind role utilities: `bg-primary`, `text-muted`, `border-line`, `rounded-card`, `text-2xs`.
+- In TypeScript (charts, inline styles): `THEME`, `fontSize()`, and `FONT_FAMILY` from `app/src/lib/theme.ts`.
+
+`themeGuard.test.ts` fails on hex or `rgb()` literals, Tailwind palette colors, arbitrary text sizes such as `text-[11px]`, Tailwind radius classes such as `rounded-lg`, and literal font sizes or families. For a rare exception, add a `theme-exempt: <reason>` comment on the same line.
 
 ## 6. Map
 

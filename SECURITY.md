@@ -30,7 +30,7 @@ The neighborhood figures come only from aggregate, de-identified public data. Th
 | --- | --- |
 | `tile.openstreetmap.org` | Map tiles (Explore mode) |
 
-Fonts (Geist and Material Symbols) are bundled with the app through `@fontsource` packages, so the browser does not contact Google Fonts. OpenStreetMap sees the visitor's IP address and request metadata when the map loads. Data files are served from the same origin. In the container, the Content-Security-Policy in [`deploy/nginx.conf`](deploy/nginx.conf) allows images only from the same origin, `data:` URIs (Leaflet icons), and `tile.openstreetmap.org`, and fonts only from the same origin (`font-src 'self'`).
+Fonts (the configured text font and Material Symbols) are bundled with the app through `@fontsource` packages, so the browser does not contact Google Fonts. OpenStreetMap sees the visitor's IP address and request metadata when the map loads. Data files are served from the same origin. In the container, the Content-Security-Policy in [`deploy/nginx.conf`](deploy/nginx.conf) allows images only from the same origin, `data:` URIs (Leaflet icons), and `tile.openstreetmap.org`, and fonts only from the same origin (`font-src 'self'`).
 
 ## Container hardening
 
