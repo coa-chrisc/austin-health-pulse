@@ -55,7 +55,7 @@ export default function Footer() {
               ? "a ZIP code, your age, your location, or your lifespan estimator answers"
               : "a ZIP code, your age, or your location"}
             ) stays in your browser. It is not sent anywhere or saved, and
-            it is cleared when the idle screen starts.
+            on kiosk displays it is cleared when the idle screen starts.
             {SERVICE_GUIDE_URL &&
               (ENABLE_PERSONAL_CALCULATOR
                 ? " If you open a Service Guide link, the link includes the ZIP code or the general service topics, never your answers."

@@ -109,7 +109,7 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
       const ratio = dHigh.v / dLow.v;
       if (ratio >= 1.4) {
         items.push({
-          headline: `Diabetes is ${ratio.toFixed(1)}times as common in ${dHigh.zip} as in ${dLow.zip}`,
+          headline: `Diabetes is ${ratio.toFixed(1)} times as common in ${dHigh.zip} as in ${dLow.zip}`,
           detail: `${dHigh.v.toFixed(1)}% of adults compared with ${dLow.v.toFixed(1)}%. Access to care, food environment, and income all shape this gap.`,
         });
       }

@@ -49,8 +49,8 @@ jobs:
           # Variables). Overrides serviceGuideUrl in the city config; when both
           # are unset the Service Guide links are hidden.
           VITE_SERVICE_GUIDE_URL: ${{ vars.SERVICE_GUIDE_URL }}
-          # Opt-in individual lifespan calculator. Only the exact value "true"
-          # enables it; unset/anything else keeps the aggregate-data-only app.
+          # Individual lifespan calculator. On by default for the live demo; set the
+          # repo variable ENABLE_PERSONAL_CALCULATOR=false to turn it off.
           VITE_ENABLE_PERSONAL_CALCULATOR: ${{ vars.ENABLE_PERSONAL_CALCULATOR || 'true' }}
         run: npm run build
 
