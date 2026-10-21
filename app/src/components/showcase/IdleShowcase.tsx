@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useHealthData } from "../../hooks/useHealthData";
 import { cityConfig } from "../../lib/cityConfig";
-import { APH_COLORS, ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
+import { ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
+import { THEME } from "../../lib/theme";
 
 const SLIDE_INTERVAL_MS = 8_000;
 const TOTAL_SLIDES = 4;
@@ -167,17 +168,17 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(135deg, ${APH_COLORS.darkBlue} 0%, ${APH_COLORS.blue} 40%, ${APH_COLORS.green} 100%)`,
+          background: `linear-gradient(135deg, ${THEME.colors.ink} 0%, ${THEME.colors.primary} 40%, ${THEME.colors.accent} 100%)`,
           animation: "showcaseGradient 12s ease-in-out infinite alternate",
         }}
       />
 
       {/* Semi-transparent overlay */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-scrim/30" />
 
       {/* Slide content */}
       <div
-        className={`relative z-10 text-center text-white px-8 max-w-2xl mx-auto transition-opacity duration-300 ${
+        className={`relative z-10 text-center text-on-brand px-8 max-w-2xl mx-auto transition-opacity duration-300 ${
           fadeIn ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -209,14 +210,14 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
           <div
             key={i}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              i === currentSlide ? "bg-aph-green scale-125" : "bg-white/40"
+              i === currentSlide ? "bg-accent scale-125" : "bg-on-brand/40"
             }`}
           />
         ))}
       </div>
 
       {/* Tap hint */}
-      <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/50 text-sm z-10">
+      <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-on-brand/50 text-sm z-10">
         Tap anywhere to explore
       </p>
 
@@ -242,15 +243,15 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
 function SlideTitle() {
   return (
     <div className="slide-float">
-      <div className="w-20 h-20 bg-aph-green rounded-2xl flex items-center justify-center mx-auto mb-8">
-        <span className="material-symbols-outlined text-white text-5xl">
+      <div className="w-20 h-20 bg-accent rounded-panel flex items-center justify-center mx-auto mb-8">
+        <span className="material-symbols-outlined text-on-brand text-5xl">
           health_and_safety
         </span>
       </div>
       <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
         {cityConfig.appName}
       </h1>
-      <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
+      <p className="text-xl md:text-2xl text-on-brand/80 leading-relaxed">
         Explore life expectancy and health data
         <br />
         across {cityConfig.region.name}
@@ -276,37 +277,37 @@ function SlideStats({
 }: SlideStatsProps) {
   return (
     <div className="slide-float">
-      <span className="material-symbols-outlined text-aph-green text-5xl mb-6 block">
+      <span className="material-symbols-outlined text-accent text-5xl mb-6 block">
         analytics
       </span>
       <h2 className="text-3xl md:text-4xl font-bold mb-8">Key Statistics</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-          <p className="text-aph-green text-sm font-semibold uppercase tracking-wider mb-2">
+        <div className="bg-on-brand/10 backdrop-blur-sm rounded-card p-6">
+          <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-2">
             Life Expectancy Range
           </p>
           <p className="text-3xl font-bold">
             {minLE.toFixed(1)}–{maxLE.toFixed(1)}
           </p>
-          <p className="text-white/60 text-sm mt-1">years</p>
+          <p className="text-on-brand/60 text-sm mt-1">years</p>
         </div>
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-          <p className="text-aph-green text-sm font-semibold uppercase tracking-wider mb-2">
+        <div className="bg-on-brand/10 backdrop-blur-sm rounded-card p-6">
+          <p className="text-accent text-sm font-semibold uppercase tracking-wider mb-2">
             Gap Between Neighborhoods
           </p>
           <p className="text-3xl font-bold">{gap.toFixed(1)} years</p>
-          <p className="text-white/60 text-sm mt-1">difference</p>
+          <p className="text-on-brand/60 text-sm mt-1">difference</p>
         </div>
       </div>
-      <div className="flex justify-center gap-8 text-sm text-white/70">
+      <div className="flex justify-center gap-8 text-sm text-on-brand/70">
         <span>
-          <span className="material-symbols-outlined text-aph-green text-base align-text-bottom mr-1">
+          <span className="material-symbols-outlined text-accent text-base align-text-bottom mr-1">
             arrow_upward
           </span>
           Longest-lived ZIP: {highestZcta}
         </span>
         <span>
-          <span className="material-symbols-outlined text-aph-red text-base align-text-bottom mr-1">
+          <span className="material-symbols-outlined text-negative text-base align-text-bottom mr-1">
             arrow_downward
           </span>
           Shortest-lived ZIP: {lowestZcta}
@@ -325,16 +326,16 @@ function SlideInsight({
 }) {
   return (
     <div className="slide-float">
-      <span className="material-symbols-outlined text-aph-green text-5xl mb-6 block">
+      <span className="material-symbols-outlined text-accent text-5xl mb-6 block">
         insights
       </span>
-      <p className="text-aph-green text-sm font-semibold uppercase tracking-widest mb-4">
+      <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-4">
         Did you know?
       </p>
       <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight max-w-2xl mx-auto">
         {headline}
       </h2>
-      <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-xl mx-auto">
+      <p className="text-lg md:text-xl text-on-brand/85 leading-relaxed max-w-xl mx-auto">
         {detail}
       </p>
     </div>
@@ -344,24 +345,24 @@ function SlideInsight({
 function SlideCTA() {
   return (
     <div className="slide-float">
-      <span className="material-symbols-outlined text-aph-green text-5xl mb-6 block">
+      <span className="material-symbols-outlined text-accent text-5xl mb-6 block">
         explore
       </span>
       <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
         Explore your neighborhood.
       </h2>
-      <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-xl mx-auto mb-8">
+      <p className="text-lg md:text-xl text-on-brand/85 leading-relaxed max-w-xl mx-auto mb-8">
         Look up any {cityConfig.region.name} ZIP code, compare neighborhoods side by
         side, or{" "}
         {ENABLE_PERSONAL_CALCULATOR
           ? "see how habits are linked to life expectancy."
           : "see how area-wide changes are linked to life expectancy."}
       </p>
-      <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20">
-        <span className="material-symbols-outlined text-aph-green text-base">
+      <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-on-brand/15 backdrop-blur-sm border border-on-brand/20">
+        <span className="material-symbols-outlined text-accent text-base">
           touch_app
         </span>
-        <span className="text-white text-sm font-semibold">
+        <span className="text-on-brand text-sm font-semibold">
           Tap anywhere to begin
         </span>
       </div>

@@ -1,8 +1,4 @@
 import { cityConfig } from "./cityConfig";
-import type { BrandColors } from "../types/cityConfig";
-
-/** Brand palette from the active city config (also mirrored to --color-aph-* CSS vars at startup). */
-export const APH_COLORS: Readonly<BrandColors> = cityConfig.brand.colors;
 
 export const MAP_CONFIG = {
   center: cityConfig.map.center,

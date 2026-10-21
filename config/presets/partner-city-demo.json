@@ -13,24 +13,56 @@
     "state": "TX"
   },
   "brand": {
-    "logoUrl": "brand/partner-city-demo/logo.svg",
+    "logoUrl": "brand/partner-city-demo/logo.svg"
+  },
+  "theme": {
     "colors": {
-      "blue": "#1F4E79",
-      "green": "#2E8B57",
-      "white": "#f7f6f5",
-      "darkBlue": "#0F2740",
-      "darkGreen": "#1B5E3A",
-      "compliantGreen": "#237A4B",
-      "lightBlue": "#E3EEF8",
-      "lightGreen": "#E2F2E8",
-      "red": "#F83125",
-      "orange": "#FF8F00",
-      "yellow": "#FFC600",
-      "cyan": "#009CDE",
-      "purple": "#9F3CC9",
-      "brown": "#8F5201",
-      "lightGray": "#C6C5C4",
-      "darkGray": "#636262"
+      "primary": "#1F4E79",
+      "primarySoft": "#E3EEF8",
+      "accent": "#2E8B57",
+      "accentSoft": "#E2F2E8",
+      "ink": "#0F2740",
+      "onBrand": "#ffffff",
+      "page": "#f7f6f5",
+      "surface": "#ffffff",
+      "subtle": "#f3f4f6",
+      "body": "#1a1a1a",
+      "muted": "#636262",
+      "line": "#C6C5C4",
+      "noData": "#C6C5C4",
+      "positive": "#1B5E3A",
+      "positiveFill": "#2E8B57",
+      "negative": "#F83125",
+      "warning": "#FF8F00",
+      "scrim": "#000000"
+    },
+    "dataScale": [
+      "#F83125",
+      "#FF8F00",
+      "#FFC600",
+      "#2E8B57",
+      "#1B5E3A"
+    ],
+    "series": [
+      "#1F4E79",
+      "#2E8B57",
+      "#FF8F00",
+      "#009CDE",
+      "#9F3CC9",
+      "#8F5201"
+    ],
+    "typography": {
+      "fontPackage": "@fontsource/inter",
+      "family": "Inter",
+      "fallback": "Helvetica, Arial, sans-serif",
+      "baseSize": 16,
+      "sizes": {}
+    },
+    "radius": {
+      "chip": "0.125rem",
+      "control": "0.25rem",
+      "card": "0.375rem",
+      "panel": "0.5rem"
     }
   },
   "map": {

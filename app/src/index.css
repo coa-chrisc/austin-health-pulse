@@ -2,31 +2,58 @@
 @import 'leaflet/dist/leaflet.css';
 
 @theme {
-  /* Official Palette */
-  --color-aph-blue: #44499C;
-  --color-aph-green: #009F4D;
-  --color-aph-white: #f7f6f5;
+  /* Placeholders only. The real values come from the city config's `theme`
+     block: cityConfigPlugin injects an unlayered <style id="theme"> into
+     index.html, which beats this @layer theme. Magenta means a token is
+     missing from that injection. */
+  --color-*: initial;
 
-  /* Supporting Palette */
-  --color-aph-dark-blue: #22254E;
-  --color-aph-dark-green: #005027;
-  --color-aph-compliant-green: #008743;
-  --color-aph-light-blue: #dcf2fd;
-  --color-aph-light-green: #dff0e3;
+  --color-primary: #ff00ff;
+  --color-primary-soft: #ff00ff;
+  --color-accent: #ff00ff;
+  --color-accent-soft: #ff00ff;
+  --color-ink: #ff00ff;
+  --color-on-brand: #ff00ff;
+  --color-page: #ff00ff;
+  --color-surface: #ff00ff;
+  --color-subtle: #ff00ff;
+  --color-body: #ff00ff;
+  --color-muted: #ff00ff;
+  --color-line: #ff00ff;
+  --color-no-data: #ff00ff;
+  --color-positive: #ff00ff;
+  --color-positive-fill: #ff00ff;
+  --color-negative: #ff00ff;
+  --color-warning: #ff00ff;
+  --color-scrim: #ff00ff;
 
-  /* Extended Palette (data viz) */
-  --color-aph-red: #F83125;
-  --color-aph-orange: #FF8F00;
-  --color-aph-yellow: #FFC600;
-  --color-aph-cyan: #009CDE;
-  --color-aph-purple: #9F3CC9;
-  --color-aph-brown: #8F5201;
-  --color-aph-light-gray: #C6C5C4;
-  --color-aph-dark-gray: #636262;
+  --color-scale-1: #ff00ff;
+  --color-scale-2: #ff00ff;
+  --color-scale-3: #ff00ff;
+  --color-scale-4: #ff00ff;
+  --color-scale-5: #ff00ff;
 
-  /* Typography. To swap the font: install an @fontsource package, import its
-     weights in src/main.tsx, and change the family name below. */
-  --font-geist: 'Geist', 'Helvetica', 'Aptos', sans-serif;
+  --color-series-1: #ff00ff;
+  --color-series-2: #ff00ff;
+  --color-series-3: #ff00ff;
+  --color-series-4: #ff00ff;
+  --color-series-5: #ff00ff;
+  --color-series-6: #ff00ff;
+  --color-series-7: #ff00ff;
+  --color-series-8: #ff00ff;
+
+  --font-sans: sans-serif;
+
+  /* Steps below Tailwind's xs (defaults mirrored in src/lib/theme.ts). */
+  --text-3xs: 0.625rem;
+  --text-3xs--line-height: 1.5;
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1.5;
+
+  --radius-chip: 0.25rem;
+  --radius-control: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-panel: 1rem;
 }
 
 /* Icon ligature class (previously supplied by the Google Fonts stylesheet). */
@@ -34,7 +61,7 @@
   font-family: "Material Symbols Outlined";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -47,19 +74,19 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Soft brand-tinted panel background (light-blue based). */
+/* Soft brand-tinted panel background (primarySoft based). */
 .brand-soft-gradient {
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--color-aph-light-blue) 45%, white) 0%,
-    var(--color-aph-light-blue) 100%
+    color-mix(in srgb, var(--color-primary-soft) 45%, var(--color-surface)) 0%,
+    var(--color-primary-soft) 100%
   );
 }
 
 body {
-  font-family: var(--font-geist);
-  background-color: var(--color-aph-white);
-  color: #1a1a1a;
+  font-family: var(--font-sans);
+  background-color: var(--color-page);
+  color: var(--color-body);
   margin: 0;
 }
 
@@ -95,16 +122,16 @@ body {
 
 /* Leaflet tooltip theming */
 .zcta-tooltip {
-  background: white !important;
-  border: 1px solid #C6C5C4 !important;
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-line) !important;
   border-radius: 8px !important;
   padding: 6px 10px !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
-  color: #22254E !important;
+  color: var(--color-ink) !important;
 }
 
 .zcta-tooltip::before {
-  border-top-color: white !important;
+  border-top-color: var(--color-surface) !important;
 }
 
 /* Permanent value label rendered at the center of each ZCTA polygon. The
@@ -118,7 +145,7 @@ body {
   color: #ffffff !important;
   font-weight: 700 !important;
   font-size: 12px !important;
-  font-family: var(--font-geist) !important;
+  font-family: var(--font-sans) !important;
   text-shadow:
     0 0 3px rgba(0, 0, 0, 0.85),
     0 0 2px rgba(0, 0, 0, 0.85),

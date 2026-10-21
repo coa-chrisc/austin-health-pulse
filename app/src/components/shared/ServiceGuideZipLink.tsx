@@ -18,7 +18,7 @@ export default function ServiceGuideZipLink({
       href={buildZipServicesUrl(SERVICE_GUIDE_URL, zip)}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-aph-green text-white font-semibold text-sm hover:brightness-110 active:scale-[0.97] transition ${className}`}
+      className={`inline-flex items-center gap-2 px-4 py-2 rounded-control bg-accent text-on-brand font-semibold text-sm hover:brightness-110 active:scale-[0.97] transition ${className}`}
     >
       <span className="material-symbols-outlined text-base">handshake</span>
       Find public health and social services in ZIP {zip}

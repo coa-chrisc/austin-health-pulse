@@ -28,10 +28,10 @@ export default function MapLegend({ indicator, min, max }: MapLegendProps) {
 
   return (
     <div
-      className="absolute bottom-6 left-4 right-4 sm:right-auto sm:min-w-[200px] bg-white rounded-xl shadow-lg border border-aph-light-gray/50 px-4 py-3"
+      className="absolute bottom-6 left-4 right-4 sm:right-auto sm:min-w-[200px] bg-surface rounded-card shadow-lg border border-line/50 px-4 py-3"
       style={{ zIndex: 1000 }}
     >
-      <p className="text-xs font-semibold text-aph-dark-blue mb-2">
+      <p className="text-xs font-semibold text-ink mb-2">
         {INDICATOR_LABELS[indicator]}
       </p>
 
@@ -40,20 +40,20 @@ export default function MapLegend({ indicator, min, max }: MapLegendProps) {
 
       {/* Labels */}
       <div className="flex justify-between mt-1">
-        <span className="text-[11px] text-aph-dark-gray">
+        <span className="text-2xs text-muted">
           {formatValue(min, unit)}
         </span>
-        <span className="text-[11px] text-aph-dark-gray">
+        <span className="text-2xs text-muted">
           {formatValue(max, unit)}
         </span>
       </div>
 
       {/* Missing data indicator */}
-      <div className="flex items-center gap-2 mt-2 pt-2 border-t border-aph-light-gray/50">
+      <div className="flex items-center gap-2 mt-2 pt-2 border-t border-line/50">
         <div
-          className="w-4 h-3 rounded-sm bg-aph-light-gray opacity-30"
+          className="w-4 h-3 rounded-chip bg-line opacity-30"
         />
-        <span className="text-[11px] text-aph-dark-gray">No data</span>
+        <span className="text-2xs text-muted">No data</span>
       </div>
     </div>
   );

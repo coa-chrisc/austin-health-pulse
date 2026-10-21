@@ -72,7 +72,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-scrim/60 backdrop-blur-sm transition-opacity duration-300 ${
           isOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -97,28 +97,28 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
           role="dialog"
           aria-modal="true"
           aria-label={`About ${cityConfig.appName}`}
-          className={`bg-white shadow-2xl flex flex-col w-full md:max-w-2xl h-[92vh] md:h-auto md:max-h-[85vh] rounded-t-2xl md:rounded-2xl overflow-hidden transition-all duration-300 ease-out ${
+          className={`bg-surface shadow-2xl flex flex-col w-full md:max-w-2xl h-[92vh] md:h-auto md:max-h-[85vh] rounded-t-panel md:rounded-panel overflow-hidden transition-all duration-300 ease-out ${
             isOpen
               ? "pointer-events-auto translate-y-0 md:scale-100 opacity-100"
               : "pointer-events-none translate-y-full md:translate-y-4 md:scale-95 opacity-0"
           }`}
         >
           {/* Mobile drag-handle indicator */}
-          <div className="md:hidden flex justify-center pt-2 pb-1 bg-aph-dark-blue">
-            <div className="w-10 h-1 rounded-full bg-white/30" />
+          <div className="md:hidden flex justify-center pt-2 pb-1 bg-ink">
+            <div className="w-10 h-1 rounded-full bg-on-brand/30" />
           </div>
 
           {/* Header */}
-          <div className="bg-aph-dark-blue text-white px-5 md:px-6 py-4 md:py-5 flex items-center justify-between shrink-0">
+          <div className="bg-ink text-on-brand px-5 md:px-6 py-4 md:py-5 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-aph-green text-2xl">
+              <span className="material-symbols-outlined text-accent text-2xl">
                 info
               </span>
               <h2 className="text-lg font-semibold">About This Tool</h2>
             </div>
             <button
               onClick={onClose}
-              className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors"
+              className="w-9 h-9 rounded-control flex items-center justify-center hover:bg-on-brand/10 transition-colors"
               aria-label="Close about"
             >
               <span className="material-symbols-outlined text-xl">close</span>
@@ -228,45 +228,45 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 </div>
 
                 {/* Agency comparison */}
-                <div className="mt-5 rounded-lg border border-aph-light-gray/60 overflow-hidden">
-                  <div className="bg-aph-dark-blue text-white px-3 py-2">
+                <div className="mt-5 rounded-control border border-line/60 overflow-hidden">
+                  <div className="bg-ink text-on-brand px-3 py-2">
                     <p className="text-xs font-semibold uppercase tracking-wider">
                       How this compares
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 divide-x divide-aph-light-gray/60">
-                    <div className="p-3 bg-white">
-                      <p className="text-[10px] font-semibold text-aph-green uppercase tracking-wider mb-1">
+                  <div className="grid grid-cols-2 divide-x divide-line/60">
+                    <div className="p-3 bg-surface">
+                      <p className="text-3xs font-semibold text-accent uppercase tracking-wider mb-1">
                         APH IT (this build)
                       </p>
-                      <p className="text-2xl font-bold text-aph-dark-blue leading-none">
+                      <p className="text-2xl font-bold text-ink leading-none">
                         ~12 hrs
                       </p>
-                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                      <p className="text-2xs text-muted mt-1 leading-tight">
                         3 × 4-hour sessions
                       </p>
-                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                      <p className="text-2xs text-muted mt-1 leading-tight">
                         Loaded staff cost:{" "}
                         <span className="font-semibold">~$1.5K</span>
                       </p>
                     </div>
-                    <div className="p-3 bg-aph-white">
-                      <p className="text-[10px] font-semibold text-aph-dark-gray uppercase tracking-wider mb-1">
+                    <div className="p-3 bg-page">
+                      <p className="text-3xs font-semibold text-muted uppercase tracking-wider mb-1">
                         Typical agency
                       </p>
-                      <p className="text-2xl font-bold text-aph-dark-blue leading-none">
+                      <p className="text-2xl font-bold text-ink leading-none">
                         6-8 wks
                       </p>
-                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                      <p className="text-2xs text-muted mt-1 leading-tight">
                         250-400 hours
                       </p>
-                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                      <p className="text-2xs text-muted mt-1 leading-tight">
                         Estimated cost:{" "}
                         <span className="font-semibold">$50K-$100K</span>
                       </p>
                     </div>
                   </div>
-                  <p className="text-[10px] text-aph-dark-gray px-3 py-2 bg-aph-white/60 border-t border-aph-light-gray/60 leading-snug">
+                  <p className="text-3xs text-muted px-3 py-2 bg-page/60 border-t border-line/60 leading-snug">
                     Agency estimate based on typical small-to-mid agency rates
                     ($175-$250/hr blended) for an interactive data product with
                     pipeline, map, three modes, and calculators.
@@ -274,7 +274,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 </div>
 
                 <div className="mt-5">
-                  <p className="font-semibold text-aph-dark-blue text-xs uppercase tracking-wider mb-2">
+                  <p className="font-semibold text-ink text-xs uppercase tracking-wider mb-2">
                     A production deployment would add
                   </p>
                   <ul className="text-xs space-y-1.5 list-disc pl-4">
@@ -297,16 +297,16 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
             {/* Credits */}
             <Section title="Credits" last>
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-aph-green rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                  <span className="material-symbols-outlined text-white text-xl">
+                <div className="w-10 h-10 bg-accent rounded-control flex items-center justify-center shrink-0 mt-0.5">
+                  <span className="material-symbols-outlined text-on-brand text-xl">
                     health_and_safety
                   </span>
                 </div>
                 <div>
-                  <p className="font-semibold text-aph-dark-blue">
+                  <p className="font-semibold text-ink">
                     {cityConfig.agency.name}
                   </p>
-                  <p className="text-sm text-aph-dark-gray">
+                  <p className="text-sm text-muted">
                     {cityConfig.agency.parent}
                   </p>
                 </div>
@@ -332,10 +332,10 @@ function Section({
 }) {
   return (
     <section className={last ? "" : "mb-8"}>
-      <h3 className="text-sm font-semibold uppercase tracking-wider text-aph-blue mb-3">
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">
         {title}
       </h3>
-      <div className="text-sm text-aph-dark-gray leading-relaxed space-y-3">
+      <div className="text-sm text-muted leading-relaxed space-y-3">
         {children}
       </div>
     </section>
@@ -350,9 +350,9 @@ function DataSourceItem({
   source: string;
 }) {
   return (
-    <div className="bg-aph-white rounded-lg p-3 border border-aph-light-gray/30">
-      <p className="font-semibold text-aph-dark-blue text-sm">{label}</p>
-      <p className="text-xs text-aph-dark-gray mt-1">{source}</p>
+    <div className="bg-page rounded-control p-3 border border-line/30">
+      <p className="font-semibold text-ink text-sm">{label}</p>
+      <p className="text-xs text-muted mt-1">{source}</p>
     </div>
   );
 }
@@ -360,7 +360,7 @@ function DataSourceItem({
 function MethodologyItem({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex gap-2">
-      <span className="material-symbols-outlined text-aph-green text-base mt-0.5 shrink-0">
+      <span className="material-symbols-outlined text-accent text-base mt-0.5 shrink-0">
         science
       </span>
       <p>{children}</p>
@@ -371,7 +371,7 @@ function MethodologyItem({ children }: { children: React.ReactNode }) {
 function LimitationItem({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex gap-2">
-      <span className="material-symbols-outlined text-aph-orange text-base mt-0.5 shrink-0">
+      <span className="material-symbols-outlined text-warning text-base mt-0.5 shrink-0">
         warning
       </span>
       <p>{children}</p>
@@ -393,22 +393,22 @@ function TimelineEntry({
   return (
     <div className="flex gap-3">
       <div className="flex flex-col items-center shrink-0">
-        <div className="w-9 h-9 rounded-full bg-aph-blue/10 border border-aph-blue/30 flex items-center justify-center">
-          <span className="material-symbols-outlined text-aph-blue text-lg">
+        <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
+          <span className="material-symbols-outlined text-primary text-lg">
             {icon}
           </span>
         </div>
       </div>
       <div className="flex-1 min-w-0 pb-1">
         <div className="flex items-baseline gap-2 flex-wrap">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-aph-blue">
+          <span className="text-3xs font-bold uppercase tracking-wider text-primary">
             {label}
           </span>
         </div>
-        <p className="text-sm font-semibold text-aph-dark-blue leading-tight mt-0.5">
+        <p className="text-sm font-semibold text-ink leading-tight mt-0.5">
           {title}
         </p>
-        <p className="text-xs text-aph-dark-gray mt-1 leading-relaxed">
+        <p className="text-xs text-muted mt-1 leading-relaxed">
           {detail}
         </p>
       </div>

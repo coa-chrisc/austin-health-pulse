@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useHealthData } from "../../hooks/useHealthData";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME, scaleColor } from "../../lib/theme";
 import { cityConfig } from "../../lib/cityConfig";
 
 interface DisparityStripProps {
@@ -58,28 +58,17 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
 
   if (bars.length === 0) return null;
 
-  const colorFor = (pct: number) => {
-    // Red → orange → yellow → green gradient
-    if (pct < 0.33) {
-      // red to orange
-      const t = pct / 0.33;
-      return interpolate(APH_COLORS.red, APH_COLORS.orange, t);
-    } else if (pct < 0.66) {
-      const t = (pct - 0.33) / 0.33;
-      return interpolate(APH_COLORS.orange, APH_COLORS.yellow, t);
-    } else {
-      const t = (pct - 0.66) / 0.34;
-      return interpolate(APH_COLORS.yellow, APH_COLORS.green, t);
-    }
-  };
+  // Red → orange → yellow → green gradient
+  const colorFor = (pct: number) =>
+    scaleColor(THEME.dataScale.slice(0, 4), pct);
 
   return (
-    <section className="mb-6 rounded-xl bg-white shadow-sm p-5 border border-aph-light-gray/30">
+    <section className="mb-6 rounded-card bg-surface shadow-sm p-5 border border-line/30">
       <div className="flex items-center gap-2 mb-3">
-        <span className="material-symbols-outlined text-aph-blue text-lg">
+        <span className="material-symbols-outlined text-primary text-lg">
           equalizer
         </span>
-        <h4 className="text-sm font-semibold uppercase tracking-wide text-aph-dark-gray">
+        <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">
           Where {highlightZip} ranks among {cityConfig.region.name} ZIPs
         </h4>
       </div>
@@ -104,10 +93,10 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
                 style={{
                   height: `${heightPct}%`,
                   backgroundColor: isHighlight
-                    ? APH_COLORS.darkBlue
+                    ? THEME.colors.ink
                     : colorFor(b.pct),
                   outline: isHighlight
-                    ? `2px solid ${APH_COLORS.darkBlue}`
+                    ? `2px solid ${THEME.colors.ink}`
                     : undefined,
                   outlineOffset: isHighlight ? "1px" : undefined,
                   zIndex: isHighlight ? 2 : 1,
@@ -117,13 +106,13 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
               >
                 {isHighlight && (
                   <div
-                    className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded text-[10px] font-bold text-white whitespace-nowrap shadow z-10"
-                    style={{ backgroundColor: APH_COLORS.darkBlue }}
+                    className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-chip text-3xs font-bold text-on-brand whitespace-nowrap shadow z-10"
+                    style={{ backgroundColor: THEME.colors.ink }}
                   >
                     {b.zip}
                     <div
                       className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 rotate-45"
-                      style={{ backgroundColor: APH_COLORS.darkBlue }}
+                      style={{ backgroundColor: THEME.colors.ink }}
                     />
                   </div>
                 )}
@@ -135,9 +124,9 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
         </div>
 
         {/* Axis labels */}
-        <div className="flex justify-between mt-2 text-[11px] text-aph-dark-gray">
+        <div className="flex justify-between mt-2 text-2xs text-muted">
           <span>
-            <span className="font-semibold text-aph-red">
+            <span className="font-semibold text-negative">
               {minLE.toFixed(1)} years
             </span>{" "}
             shortest
@@ -147,7 +136,7 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
           </span>
           <span className="text-right">
             longest{" "}
-            <span className="font-semibold text-aph-green">
+            <span className="font-semibold text-positive-fill">
               {maxLE.toFixed(1)} years
             </span>
           </span>
@@ -156,28 +145,15 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
 
       {/* Rank summary */}
       {highlightIndex >= 0 && (
-        <p className="text-sm text-aph-dark-blue mt-3 leading-relaxed">
+        <p className="text-sm text-ink mt-3 leading-relaxed">
           ZIP <span className="font-semibold">{highlightZip}</span> is number{" "}
-          <span className="font-bold text-aph-blue">{highlightIndex + 1}</span>{" "}
+          <span className="font-bold text-primary">{highlightIndex + 1}</span>{" "}
           of {bars.length} when ranked from shortest to longest life
           expectancy, {percentileLabel(highlightIndex, bars.length)}.
         </p>
       )}
     </section>
   );
-}
-
-function interpolate(a: string, b: string, t: number): string {
-  const ar = parseInt(a.slice(1, 3), 16);
-  const ag = parseInt(a.slice(3, 5), 16);
-  const ab = parseInt(a.slice(5, 7), 16);
-  const br = parseInt(b.slice(1, 3), 16);
-  const bg = parseInt(b.slice(3, 5), 16);
-  const bb = parseInt(b.slice(5, 7), 16);
-  const r = Math.round(ar + (br - ar) * t);
-  const g = Math.round(ag + (bg - ag) * t);
-  const bl = Math.round(ab + (bb - ab) * t);
-  return `rgb(${r}, ${g}, ${bl})`;
 }
 
 function percentileLabel(index: number, total: number): string {

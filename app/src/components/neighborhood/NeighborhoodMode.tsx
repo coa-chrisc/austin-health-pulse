@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 import type { Feature, Geometry, Position } from "geojson";
 import { useHealthData } from "../../hooks/useHealthData";
 import { useAnimatedNumber } from "../../hooks/useAnimatedNumber";
-import { APH_COLORS, ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
+import { ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
+import { THEME, fontSize } from "../../lib/theme";
 import { cityConfig } from "../../lib/cityConfig";
 import { listZips } from "../../lib/zips";
 import { getAgeGroup, getAgeGroupLabel } from "../../lib/ageGroupMapper";
@@ -351,7 +352,7 @@ export default function NeighborhoodMode({
           countyAvg.lifeExpectancy,
           true,
         )
-      : APH_COLORS.darkGray;
+      : THEME.colors.muted;
 
   // Check if ALL indicator data is null (truly empty record)
   const hasAnyGaugeData =
@@ -393,30 +394,30 @@ export default function NeighborhoodMode({
     <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Hero Section */}
       <section className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-aph-dark-blue mb-3">
+        <h2 className="text-3xl md:text-4xl font-bold text-ink mb-3">
           Check Your Neighborhood
         </h2>
-        <p className="text-aph-dark-gray text-lg max-w-2xl mx-auto">
+        <p className="text-muted text-lg max-w-2xl mx-auto">
           Enter a ZIP code to see health data for your neighborhood in{" "}
           {cityConfig.region.name}. See how life expectancy and other health
           indicators compare with the area average.
         </p>
         <button
           onClick={onAboutClick}
-          className="group mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-aph-light-blue/60 hover:bg-aph-light-blue text-aph-dark-blue text-xs font-semibold border border-aph-blue/20 hover:border-aph-blue/40 transition cursor-pointer"
+          className="group mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary-soft/60 hover:bg-primary-soft text-ink text-xs font-semibold border border-primary/20 hover:border-primary/40 transition cursor-pointer"
         >
           <span
-            className="material-symbols-outlined text-aph-green"
-            style={{ fontSize: "14px" }}
+            className="material-symbols-outlined text-accent"
+            style={{ fontSize: fontSize("sm") }}
           >
             auto_awesome
           </span>
           <span>Built by {cityConfig.agency.shortName} for the community</span>
-          <span className="text-aph-blue/40">·</span>
-          <span className="text-aph-blue group-hover:underline">See how</span>
+          <span className="text-primary/40">·</span>
+          <span className="text-primary group-hover:underline">See how</span>
           <span
-            className="material-symbols-outlined text-aph-blue transition-transform group-hover:translate-x-0.5"
-            style={{ fontSize: "14px" }}
+            className="material-symbols-outlined text-primary transition-transform group-hover:translate-x-0.5"
+            style={{ fontSize: fontSize("sm") }}
           >
             arrow_forward
           </span>
@@ -428,7 +429,7 @@ export default function NeighborhoodMode({
         <button
           onClick={handleGeolocate}
           disabled={geoStatus === "locating"}
-          className="p-3 rounded-lg border border-aph-light-gray bg-white text-aph-blue hover:text-aph-green disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center gap-1.5"
+          className="p-3 rounded-control border border-line bg-surface text-primary hover:text-accent disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center gap-1.5"
           aria-label="Use my location"
           title="Use my location"
         >
@@ -438,19 +439,19 @@ export default function NeighborhoodMode({
             my_location
           </span>
           {geoStatus === "locating" && (
-            <span className="text-sm font-medium text-aph-dark-gray whitespace-nowrap">
+            <span className="text-sm font-medium text-muted whitespace-nowrap">
               Locating...
             </span>
           )}
           {geoStatus === "error" && geoError && (
-            <span className="text-sm font-medium text-aph-red whitespace-nowrap">
+            <span className="text-sm font-medium text-negative whitespace-nowrap">
               {geoError}
             </span>
           )}
         </button>
 
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-aph-dark-gray text-xl">
+          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted text-xl">
             location_on
           </span>
           <input
@@ -465,13 +466,13 @@ export default function NeighborhoodMode({
               setNotFound(false);
             }}
             onKeyDown={handleKeyDown}
-            className="pl-10 pr-4 py-3 w-full sm:w-44 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-aph-blue transition"
+            className="pl-10 pr-4 py-3 w-full sm:w-44 rounded-control border border-line bg-surface text-ink font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-primary transition"
             aria-label="ZIP code"
           />
         </div>
 
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-aph-dark-gray text-xl">
+          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted text-xl">
             person
           </span>
           <input
@@ -482,7 +483,7 @@ export default function NeighborhoodMode({
             value={ageInput}
             onChange={(e) => setAgeInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="pl-10 pr-4 py-3 w-full sm:w-48 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-aph-blue transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            className="pl-10 pr-4 py-3 w-full sm:w-48 rounded-control border border-line bg-surface text-ink font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-primary transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             aria-label="Age (optional)"
           />
         </div>
@@ -490,7 +491,7 @@ export default function NeighborhoodMode({
         <button
           onClick={() => handleExplore()}
           disabled={!zipIsValid || !ageIsValid}
-          className="px-8 py-3 bg-aph-green text-white font-semibold text-lg rounded-lg hover:brightness-110 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
+          className="px-8 py-3 bg-accent text-on-brand font-semibold text-lg rounded-control hover:brightness-110 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
         >
           <span className="material-symbols-outlined text-xl">search</span>
           Explore
@@ -499,13 +500,13 @@ export default function NeighborhoodMode({
 
       {/* Featured zip quick-select pills */}
       <section className="flex flex-col items-center mb-10">
-        <p className="text-xs text-aph-dark-gray mb-2">Try a neighborhood:</p>
+        <p className="text-xs text-muted mb-2">Try a neighborhood:</p>
         <div className="flex flex-wrap justify-center gap-2">
           {cityConfig.featuredZips.map(({ label, zip }) => (
             <button
               key={zip}
               onClick={() => handleFeaturedClick(zip)}
-              className="px-3 py-1.5 rounded-full text-sm border border-aph-blue/30 text-aph-blue hover:bg-aph-blue hover:text-white transition cursor-pointer"
+              className="px-3 py-1.5 rounded-full text-sm border border-primary/30 text-primary hover:bg-primary hover:text-on-brand transition cursor-pointer"
             >
               {label} {zip}
             </button>
@@ -515,14 +516,14 @@ export default function NeighborhoodMode({
 
       {/* Not found message */}
       {notFound && (
-        <div className="text-center mb-8 p-6 bg-white rounded-xl shadow-sm border border-aph-light-gray/40 max-w-lg mx-auto">
-          <span className="material-symbols-outlined text-aph-orange text-4xl mb-2 block">
+        <div className="text-center mb-8 p-6 bg-surface rounded-card shadow-sm border border-line/40 max-w-lg mx-auto">
+          <span className="material-symbols-outlined text-warning text-4xl mb-2 block">
             wrong_location
           </span>
-          <p className="text-aph-dark-blue font-semibold text-lg mb-1">
+          <p className="text-ink font-semibold text-lg mb-1">
             ZIP code {zipInput} not found
           </p>
-          <p className="text-aph-dark-gray text-sm mb-3">
+          <p className="text-muted text-sm mb-3">
             We only have data for {cityConfig.region.name} ZIP codes. Try one of
             these nearby ZIP codes:
           </p>
@@ -532,7 +533,7 @@ export default function NeighborhoodMode({
                 <button
                   key={z}
                   onClick={() => handleSuggestionClick(z)}
-                  className="px-4 py-1.5 rounded-full border border-aph-blue text-aph-blue text-sm font-semibold hover:bg-aph-blue hover:text-white transition"
+                  className="px-4 py-1.5 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary hover:text-on-brand transition"
                 >
                   {z}
                 </button>
@@ -544,7 +545,7 @@ export default function NeighborhoodMode({
                 <button
                   key={z}
                   onClick={() => handleSuggestionClick(z)}
-                  className="px-4 py-1.5 rounded-full border border-aph-blue text-aph-blue text-sm font-semibold hover:bg-aph-blue hover:text-white transition"
+                  className="px-4 py-1.5 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary hover:text-on-brand transition"
                 >
                   {z}
                 </button>
@@ -565,14 +566,14 @@ export default function NeighborhoodMode({
         >
           {/* ALL data missing — single empty state */}
           {allDataMissing ? (
-            <section className="bg-white rounded-2xl shadow-md border border-aph-light-gray/30 p-6 md:p-8 mb-6 text-center">
-              <span className="material-symbols-outlined text-aph-dark-gray text-5xl mb-3 block">
+            <section className="bg-surface rounded-panel shadow-md border border-line/30 p-6 md:p-8 mb-6 text-center">
+              <span className="material-symbols-outlined text-muted text-5xl mb-3 block">
                 info
               </span>
-              <p className="text-lg text-aph-dark-blue font-semibold mb-1">
+              <p className="text-lg text-ink font-semibold mb-1">
                 No data available
               </p>
-              <p className="text-sm text-aph-dark-gray max-w-md mx-auto">
+              <p className="text-sm text-muted max-w-md mx-auto">
                 We don&rsquo;t have health data for ZIP code {submittedZip}. The
                 area may have too few residents for reliable estimates, or it
                 may extend beyond the area this tool covers.
@@ -581,11 +582,11 @@ export default function NeighborhoodMode({
           ) : (
             <>
               {/* Life expectancy hero card */}
-              <section className="bg-white rounded-2xl shadow-md border border-aph-light-gray/30 p-6 md:p-8 mb-6">
+              <section className="bg-surface rounded-panel shadow-md border border-line/30 p-6 md:p-8 mb-6">
                 <div className="flex flex-col md:flex-row items-center gap-6">
                   {/* Big number */}
                   <div className="text-center md:text-left flex-shrink-0">
-                    <p className="text-sm font-semibold text-aph-dark-gray uppercase tracking-wide mb-1">
+                    <p className="text-sm font-semibold text-muted uppercase tracking-wide mb-1">
                       Life Expectancy at Birth
                     </p>
                     {hasLifeExpectancy ? (
@@ -596,18 +597,18 @@ export default function NeighborhoodMode({
                         >
                           {(animatedLE ?? zctaData.lifeExpectancy!).toFixed(1)}
                         </p>
-                        <p className="text-lg text-aph-dark-gray mt-1">years</p>
+                        <p className="text-lg text-muted mt-1">years</p>
                       </>
                     ) : (
                       /* Partial data: life expectancy missing but other data exists */
-                      <div className="flex items-start gap-2.5 mt-2 p-3 rounded-lg bg-aph-light-blue/40 border border-aph-blue/15 max-w-sm">
+                      <div className="flex items-start gap-2.5 mt-2 p-3 rounded-control bg-primary-soft/40 border border-primary/15 max-w-sm">
                         <span
-                          className="material-symbols-outlined text-aph-blue mt-0.5 flex-shrink-0"
-                          style={{ fontSize: "20px" }}
+                          className="material-symbols-outlined text-primary mt-0.5 flex-shrink-0"
+                          style={{ fontSize: fontSize("xl") }}
                         >
                           info
                         </span>
-                        <p className="text-sm text-aph-dark-blue leading-snug">
+                        <p className="text-sm text-ink leading-snug">
                           We don&rsquo;t have life expectancy data for this ZIP
                           code. The area may have too few residents for
                           reliable estimates.
@@ -619,10 +620,10 @@ export default function NeighborhoodMode({
                   {/* Comparison details */}
                   <div className="flex-1 space-y-3">
                     <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-aph-blue">
+                      <span className="material-symbols-outlined text-primary">
                         pin_drop
                       </span>
-                      <span className="text-aph-dark-blue font-semibold text-lg">
+                      <span className="text-ink font-semibold text-lg">
                         ZIP Code {submittedZip}
                       </span>
                     </div>
@@ -635,7 +636,7 @@ export default function NeighborhoodMode({
                               className="w-3 h-3 rounded-full"
                               style={{ backgroundColor: leColor }}
                             />
-                            <span className="text-sm text-aph-dark-gray">
+                            <span className="text-sm text-muted">
                               {formatDifference(
                                 zctaData.lifeExpectancy!,
                                 countyAvg.lifeExpectancy,
@@ -644,16 +645,16 @@ export default function NeighborhoodMode({
                               )}
                             </span>
                           </div>
-                          <span className="text-sm text-aph-dark-gray">
+                          <span className="text-sm text-muted">
                             Area average:{" "}
-                            <span className="font-semibold text-aph-dark-blue">
+                            <span className="font-semibold text-ink">
                               {countyAvg.lifeExpectancy.toFixed(1)} years
                             </span>
                           </span>
                         </div>
 
                         {zctaData.lifeExpectancySE != null && (
-                          <p className="text-xs text-aph-dark-gray">
+                          <p className="text-xs text-muted">
                             Standard error: {"\u00B1"}
                             {zctaData.lifeExpectancySE.toFixed(1)} years
                           </p>
@@ -665,35 +666,35 @@ export default function NeighborhoodMode({
 
                 {/* Age-specific result */}
                 {submittedAge !== null && ageSpecific && (
-                  <div className="mt-6 pt-6 border-t border-aph-light-gray/50">
+                  <div className="mt-6 pt-6 border-t border-line/50">
                     <div className="flex items-start gap-3">
-                      <span className="material-symbols-outlined text-aph-green text-2xl mt-0.5">
+                      <span className="material-symbols-outlined text-accent text-2xl mt-0.5">
                         cake
                       </span>
                       <div>
-                        <p className="text-sm text-aph-dark-gray mb-1">
+                        <p className="text-sm text-muted mb-1">
                           Age group: {ageGroupLabel} ({ageGroup})
                         </p>
-                        <p className="text-aph-dark-blue text-lg">
+                        <p className="text-ink text-lg">
                           People who are{" "}
                           <span className="font-bold">{submittedAge}</span> in
                           this ZIP code have on average about{" "}
                           <span
                             className="font-bold text-2xl"
-                            style={{ color: APH_COLORS.blue }}
+                            style={{ color: THEME.colors.primary }}
                           >
                             {ageSpecific.ex.toFixed(1)}
                           </span>{" "}
                           years of life left
                         </p>
-                        <p className="text-aph-dark-gray mt-1">
+                        <p className="text-muted mt-1">
                           On average, that means reaching about age{" "}
-                          <span className="font-semibold text-aph-dark-blue">
+                          <span className="font-semibold text-ink">
                             {(submittedAge + ageSpecific.ex).toFixed(0)}
                           </span>
                         </p>
                         {ageSpecific.se != null && ageSpecific.se > 0 && (
-                          <p className="text-xs text-aph-dark-gray mt-1">
+                          <p className="text-xs text-muted mt-1">
                             Standard error: {"\u00B1"}
                             {ageSpecific.se.toFixed(1)} years
                           </p>
@@ -705,12 +706,12 @@ export default function NeighborhoodMode({
 
                 {/* Age entered but no age-specific data available */}
                 {submittedAge !== null && !ageSpecific && (
-                    <div className="mt-6 pt-6 border-t border-aph-light-gray/50">
+                    <div className="mt-6 pt-6 border-t border-line/50">
                       <div className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-aph-dark-gray text-2xl">
+                        <span className="material-symbols-outlined text-muted text-2xl">
                           info
                         </span>
-                        <p className="text-aph-dark-gray">
+                        <p className="text-muted">
                           We don&rsquo;t have life expectancy data for that age in
                           this ZIP code.
                         </p>
@@ -725,16 +726,16 @@ export default function NeighborhoodMode({
                 submittedZip &&
                 zctaData.lifeExpectancy != null && (
                   <section
-                    className="mb-6 rounded-2xl shadow-md p-6 md:p-8 text-aph-dark-blue border border-aph-blue/20 relative overflow-hidden brand-soft-gradient"
+                    className="mb-6 rounded-panel shadow-md p-6 md:p-8 text-ink border border-primary/20 relative overflow-hidden brand-soft-gradient"
                   >
                     <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
                       <span
                         className="material-symbols-outlined text-lg"
-                        style={{ color: APH_COLORS.darkGreen }}
+                        style={{ color: THEME.colors.positive }}
                       >
                         social_distance
                       </span>
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-aph-dark-blue/75">
+                      <h4 className="text-xs font-semibold uppercase tracking-wider text-ink/75">
                         The {cityConfig.region.name} gap
                       </h4>
                     </div>
@@ -742,64 +743,64 @@ export default function NeighborhoodMode({
                       <div className="md:flex-shrink-0 text-center md:text-left">
                         <p
                           className="text-6xl md:text-7xl font-bold leading-none tracking-tight tabular-nums"
-                          style={{ color: APH_COLORS.darkGreen }}
+                          style={{ color: THEME.colors.positive }}
                         >
                           {(
                             countyRange.longest.le - countyRange.shortest.le
                           ).toFixed(1)}
                         </p>
-                        <p className="text-aph-dark-blue/80 text-sm mt-1">
+                        <p className="text-ink/80 text-sm mt-1">
                           years between {cityConfig.region.name}&rsquo;s longest- and
                           shortest-lived ZIPs
                         </p>
                       </div>
                       <div className="flex-1 grid grid-cols-3 gap-3 md:gap-4">
-                        <div className="bg-white rounded-lg p-3 border border-aph-light-gray/50">
-                          <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray mb-1">
+                        <div className="bg-surface rounded-control p-3 border border-line/50">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">
                             Longest
                           </p>
-                          <p className="font-bold text-aph-dark-blue text-base">
+                          <p className="font-bold text-ink text-base">
                             {countyRange.longest.zip}
                           </p>
                           <p
                             className="text-sm font-semibold"
-                            style={{ color: APH_COLORS.darkGreen }}
+                            style={{ color: THEME.colors.positive }}
                           >
                             {countyRange.longest.le.toFixed(1)} years
                           </p>
                         </div>
-                        <div className="bg-white rounded-lg p-3 border border-aph-light-gray/50">
-                          <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray mb-1">
+                        <div className="bg-surface rounded-control p-3 border border-line/50">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">
                             Shortest
                           </p>
-                          <p className="font-bold text-aph-dark-blue text-base">
+                          <p className="font-bold text-ink text-base">
                             {countyRange.shortest.zip}
                           </p>
                           <p
                             className="text-sm font-semibold"
-                            style={{ color: APH_COLORS.red }}
+                            style={{ color: THEME.colors.negative }}
                           >
                             {countyRange.shortest.le.toFixed(1)} years
                           </p>
                         </div>
                         <div
-                          className="rounded-lg p-3 border"
+                          className="rounded-control p-3 border"
                           style={{
                             backgroundColor:
-                              "color-mix(in srgb, var(--color-aph-dark-green) 8%, transparent)",
+                              "color-mix(in srgb, var(--color-positive) 8%, transparent)",
                             borderColor:
-                              "color-mix(in srgb, var(--color-aph-dark-green) 35%, transparent)",
+                              "color-mix(in srgb, var(--color-positive) 35%, transparent)",
                           }}
                         >
-                          <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray mb-1">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">
                             Your ZIP
                           </p>
-                          <p className="font-bold text-aph-dark-blue text-base">
+                          <p className="font-bold text-ink text-base">
                             {submittedZip}
                           </p>
                           <p
                             className="text-sm font-semibold"
-                            style={{ color: APH_COLORS.darkGreen }}
+                            style={{ color: THEME.colors.positive }}
                           >
                             {submittedZip === countyRange.longest.zip
                               ? "Top of the area"
@@ -810,7 +811,7 @@ export default function NeighborhoodMode({
                         </div>
                       </div>
                     </div>
-                    <p className="text-xs text-aph-dark-blue/70 mt-4 leading-relaxed max-w-3xl">
+                    <p className="text-xs text-ink/70 mt-4 leading-relaxed max-w-3xl">
                       Income, access to care, environment, and other social factors
                       all shape this gap.
                     </p>
@@ -825,15 +826,15 @@ export default function NeighborhoodMode({
               {/* Narrative summary */}
               {narrative && (
                 <section
-                  className="mb-6 rounded-xl bg-white shadow-sm p-5 border border-aph-light-gray/30"
-                  style={{ borderLeft: `4px solid ${APH_COLORS.blue}` }}
+                  className="mb-6 rounded-card bg-surface shadow-sm p-5 border border-line/30"
+                  style={{ borderLeft: `4px solid ${THEME.colors.primary}` }}
                 >
-                  <p className="text-sm italic text-aph-dark-blue/85 leading-relaxed">
+                  <p className="text-sm italic text-ink/85 leading-relaxed">
                     {narrative.split(/(\d+(?:\.\d+)?%?)/g).map((part, i) =>
                       /^\d/.test(part) ? (
                         <strong
                           key={i}
-                          className="font-bold not-italic text-aph-dark-blue"
+                          className="font-bold not-italic text-ink"
                         >
                           {part}
                         </strong>
@@ -848,14 +849,14 @@ export default function NeighborhoodMode({
               {/* Health indicator gauges */}
               {hasAnyGaugeData && (
                 <section>
-                  <h3 className="text-xl font-bold text-aph-dark-blue mb-4 flex items-center gap-2">
-                    <span className="material-symbols-outlined text-aph-blue">
+                  <h3 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary">
                       monitoring
                     </span>
                     Health Indicators
                   </h3>
                   {getDataQualityNote(submittedZip) && (
-                    <p className="text-sm text-aph-dark-gray mb-4">
+                    <p className="text-sm text-muted mb-4">
                       {getDataQualityNote(submittedZip)}
                     </p>
                   )}
@@ -883,7 +884,7 @@ export default function NeighborhoodMode({
               <div className="mt-4 flex justify-center">
                 <button
                   onClick={() => navigate(`/explore?zcta=${submittedZip}`)}
-                  className="text-aph-blue text-sm font-semibold flex items-center gap-1 hover:underline"
+                  className="text-primary text-sm font-semibold flex items-center gap-1 hover:underline"
                 >
                   <span className="material-symbols-outlined text-base">
                     map

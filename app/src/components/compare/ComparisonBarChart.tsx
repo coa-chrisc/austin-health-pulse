@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useHealthData } from "../../hooks/useHealthData";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME, FONT_FAMILY, fontSize } from "../../lib/theme";
 import { isIndicatorAvailable } from "../../lib/indicators";
 import type { IndicatorKey } from "../../types/health";
 import { INDICATOR_LABELS, INDICATOR_UNITS } from "../../types/health";
@@ -46,11 +46,11 @@ export default function ComparisonBarChart({
   );
 
   return (
-    <div className="w-full bg-white rounded-xl shadow-sm p-6">
-      <h3 className="text-lg font-semibold text-aph-dark-blue mb-2">
+    <div className="w-full bg-surface rounded-card shadow-sm p-6">
+      <h3 className="text-lg font-semibold text-ink mb-2">
         Indicator Breakdown
       </h3>
-      <p className="text-sm text-aph-dark-gray mb-6">
+      <p className="text-sm text-muted mb-6">
         Each chart compares your selected ZIP codes. The dashed line shows the area average.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -73,9 +73,9 @@ export default function ComparisonBarChart({
 
           return (
             <div key={key}>
-              <h4 className="text-sm font-semibold text-aph-dark-blue mb-2">
+              <h4 className="text-sm font-semibold text-ink mb-2">
                 {label}{" "}
-                <span className="font-normal text-aph-dark-gray">
+                <span className="font-normal text-muted">
                   ({unit === "per1k" ? "per 1,000" : unit})
                 </span>
               </h4>
@@ -87,26 +87,26 @@ export default function ComparisonBarChart({
                 >
                   <CartesianGrid
                     strokeDasharray="3 3"
-                    stroke={APH_COLORS.darkBlue}
+                    stroke={THEME.colors.ink}
                     opacity={0.15}
                   />
                   <XAxis dataKey="name" tick={false} axisLine={false} />
                   <YAxis
                     tick={{
-                      fontSize: 11,
-                      fill: APH_COLORS.darkGray,
-                      fontFamily: "Geist, sans-serif",
+                      fontSize: fontSize("2xs"),
+                      fill: THEME.colors.muted,
+                      fontFamily: FONT_FAMILY,
                     }}
                     tickFormatter={(v: number) => formatValue(v, unit)}
                     width={45}
                   />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "white",
-                      border: `1px solid ${APH_COLORS.lightGray}`,
+                      backgroundColor: THEME.colors.surface,
+                      border: `1px solid ${THEME.colors.line}`,
                       borderRadius: "8px",
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "13px",
+                      fontFamily: FONT_FAMILY,
+                      fontSize: fontSize("sm"),
                     }}
                     formatter={(value: unknown, name: unknown) => [
                       value != null
@@ -117,8 +117,8 @@ export default function ComparisonBarChart({
                   />
                   <Legend
                     wrapperStyle={{
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "12px",
+                      fontFamily: FONT_FAMILY,
+                      fontSize: fontSize("xs"),
                     }}
                   />
                   {zctas.map((zcta, index) => (
@@ -134,16 +134,16 @@ export default function ComparisonBarChart({
                   {avg !== null && (
                     <ReferenceLine
                       y={avg}
-                      stroke={APH_COLORS.darkBlue}
+                      stroke={THEME.colors.ink}
                       strokeDasharray="6 3"
                       strokeWidth={2}
                       label={{
                         value: `Area average: ${formatValue(avg, unit)}`,
                         position: "insideTopRight",
                         style: {
-                          fontSize: 10,
-                          fill: APH_COLORS.darkBlue,
-                          fontFamily: "Geist, sans-serif",
+                          fontSize: fontSize("3xs"),
+                          fill: THEME.colors.ink,
+                          fontFamily: FONT_FAMILY,
                           fontWeight: 600,
                         },
                       }}

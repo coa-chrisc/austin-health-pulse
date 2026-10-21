@@ -1,5 +1,5 @@
 import { useId, useMemo, useState } from "react";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME } from "../../lib/theme";
 import {
   computeLifespan,
   defaultInputs,
@@ -51,7 +51,7 @@ interface SectionProps {
 function Section({ title, children }: SectionProps) {
   return (
     <div className="mb-5">
-      <p className="text-xs font-semibold text-aph-dark-gray uppercase tracking-wide mb-2">
+      <p className="text-xs font-semibold text-muted uppercase tracking-wide mb-2">
         {title}
       </p>
       {children}
@@ -72,7 +72,7 @@ function Segmented<T extends string>({
   return (
     <div
       role="radiogroup"
-      className="grid gap-2 rounded-lg bg-aph-white p-1 border border-aph-light-gray/40"
+      className="grid gap-2 rounded-control bg-page p-1 border border-line/40"
       style={{
         gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))`,
       }}
@@ -83,10 +83,10 @@ function Segmented<T extends string>({
           role="radio"
           aria-checked={value === opt.value}
           onClick={() => onChange(opt.value)}
-          className={`px-3 py-2 rounded-md text-sm font-semibold transition ${
+          className={`px-3 py-2 rounded-chip text-sm font-semibold transition ${
             value === opt.value
-              ? "bg-aph-blue text-white shadow-sm"
-              : "text-aph-dark-blue hover:bg-aph-light-blue/40"
+              ? "bg-primary text-on-brand shadow-sm"
+              : "text-ink hover:bg-primary-soft/40"
           }`}
         >
           {opt.label}
@@ -144,20 +144,20 @@ export default function LifespanCalculator() {
   ) => setInputs((prev) => ({ ...prev, [key]: value }));
 
   const totalDeltaColor =
-    result.totalDelta >= 0 ? APH_COLORS.darkGreen : APH_COLORS.red;
+    result.totalDelta >= 0 ? THEME.colors.positive : THEME.colors.negative;
   const projectedAge = Math.round(result.totalLifespan);
 
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-aph-light-gray/30 p-6 md:p-8">
+    <div className="bg-surface rounded-panel shadow-md border border-line/30 p-6 md:p-8">
       <div className="flex items-center gap-2 mb-1">
-        <span className="material-symbols-outlined text-aph-blue">
+        <span className="material-symbols-outlined text-primary">
           calculate
         </span>
-        <h3 className="text-xl font-bold text-aph-dark-blue">
+        <h3 className="text-xl font-bold text-ink">
           Personalized Lifespan Estimator
         </h3>
       </div>
-      <p className="text-sm text-aph-dark-gray mb-5">
+      <p className="text-sm text-muted mb-5">
         Combines your age with six factors you can change, based on large
         long-term studies. Move any control to see how it changes the estimate.
         Your answers stay in your browser.
@@ -171,7 +171,7 @@ export default function LifespanCalculator() {
               <div>
                 <label
                   htmlFor={`${fieldId}-age`}
-                  className="text-xs text-aph-dark-gray"
+                  className="text-xs text-muted"
                 >
                   Age
                 </label>
@@ -197,7 +197,7 @@ export default function LifespanCalculator() {
                     setAgeDraft(String(n));
                     update("age", n);
                   }}
-                  className="w-full px-3 py-2 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold focus:outline-none focus:ring-2 focus:ring-aph-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full px-3 py-2 rounded-control border border-line bg-surface text-ink font-semibold focus:outline-none focus:ring-2 focus:ring-primary [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
             </div>
@@ -226,12 +226,12 @@ export default function LifespanCalculator() {
                 />
               </div>
             )}
-            <label className="flex items-center gap-2 mt-3 text-sm text-aph-dark-blue cursor-pointer select-none">
+            <label className="flex items-center gap-2 mt-3 text-sm text-ink cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={inputs.secondhand}
                 onChange={(e) => update("secondhand", e.target.checked)}
-                className="w-4 h-4 accent-aph-blue cursor-pointer"
+                className="w-4 h-4 accent-primary cursor-pointer"
               />
               I live with someone who smokes
             </label>
@@ -247,7 +247,7 @@ export default function LifespanCalculator() {
               display={`${inputs.exerciseMinutesPerWeek} min`}
               onChange={(v) => update("exerciseMinutesPerWeek", v)}
             />
-            <p className="text-xs text-aph-dark-gray mt-1">
+            <p className="text-xs text-muted mt-1">
               WHO recommends ~150 min/week.
             </p>
           </Section>
@@ -261,7 +261,7 @@ export default function LifespanCalculator() {
               display={`${inputs.dietScore} / 5`}
               onChange={(v) => update("dietScore", v as DietScore)}
             />
-            <p className="text-xs text-aph-dark-gray mt-1 italic">
+            <p className="text-xs text-muted mt-1 italic">
               {DIET_LABELS[inputs.dietScore]}
             </p>
           </Section>
@@ -271,7 +271,7 @@ export default function LifespanCalculator() {
               <div>
                 <label
                   htmlFor={`${fieldId}-ft`}
-                  className="text-xs text-aph-dark-gray"
+                  className="text-xs text-muted"
                 >
                   Height (ft)
                 </label>
@@ -295,13 +295,13 @@ export default function LifespanCalculator() {
                     setHeightFtDraft(clamped);
                     syncBmiFromDrafts(clamped, heightInDraft, weightLbDraft);
                   }}
-                  className="w-full px-2 py-1.5 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold focus:outline-none focus:ring-2 focus:ring-aph-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full px-2 py-1.5 rounded-control border border-line bg-surface text-ink font-semibold focus:outline-none focus:ring-2 focus:ring-primary [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
               <div>
                 <label
                   htmlFor={`${fieldId}-in`}
-                  className="text-xs text-aph-dark-gray"
+                  className="text-xs text-muted"
                 >
                   Height (in)
                 </label>
@@ -325,13 +325,13 @@ export default function LifespanCalculator() {
                     setHeightInDraft(clamped);
                     syncBmiFromDrafts(heightFtDraft, clamped, weightLbDraft);
                   }}
-                  className="w-full px-2 py-1.5 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold focus:outline-none focus:ring-2 focus:ring-aph-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full px-2 py-1.5 rounded-control border border-line bg-surface text-ink font-semibold focus:outline-none focus:ring-2 focus:ring-primary [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
               <div>
                 <label
                   htmlFor={`${fieldId}-lb`}
-                  className="text-xs text-aph-dark-gray"
+                  className="text-xs text-muted"
                 >
                   Weight (lb)
                 </label>
@@ -355,11 +355,11 @@ export default function LifespanCalculator() {
                     setWeightLbDraft(clamped);
                     syncBmiFromDrafts(heightFtDraft, heightInDraft, clamped);
                   }}
-                  className="w-full px-2 py-1.5 rounded-lg border border-aph-light-gray bg-white text-aph-dark-blue font-semibold focus:outline-none focus:ring-2 focus:ring-aph-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full px-2 py-1.5 rounded-control border border-line bg-surface text-ink font-semibold focus:outline-none focus:ring-2 focus:ring-primary [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
             </div>
-            <p className="text-xs text-aph-dark-gray">
+            <p className="text-xs text-muted">
               BMI {inputs.bmi.toFixed(1)} — {bmiCategory(inputs.bmi)}
             </p>
           </Section>
@@ -385,7 +385,7 @@ export default function LifespanCalculator() {
               display={`${inputs.stressScore} / 5`}
               onChange={(v) => update("stressScore", v as StressScore)}
             />
-            <p className="text-xs text-aph-dark-gray mt-1 italic">
+            <p className="text-xs text-muted mt-1 italic">
               {STRESS_LABELS[inputs.stressScore]}
             </p>
           </Section>
@@ -394,32 +394,32 @@ export default function LifespanCalculator() {
         {/* ------------------ Result column ------------------ */}
         <div className="space-y-5">
           <div
-            className="rounded-2xl p-6 text-center text-aph-dark-blue border border-aph-blue/20 shadow-sm brand-soft-gradient"
+            className="rounded-panel p-6 text-center text-ink border border-primary/20 shadow-sm brand-soft-gradient"
           >
-            <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-blue/75">
+            <p className="text-xs font-semibold uppercase tracking-wider text-ink/75">
               Estimated lifespan
             </p>
             <p
               className="text-6xl font-bold leading-none mt-2 tabular-nums"
-              style={{ color: APH_COLORS.darkBlue }}
+              style={{ color: THEME.colors.ink }}
             >
               {result.totalLifespan.toFixed(1)}
             </p>
-            <p className="text-aph-dark-blue/75 mt-1">years</p>
+            <p className="text-ink/75 mt-1">years</p>
             <div className="grid grid-cols-2 gap-3 mt-5 text-left">
-              <div className="bg-white rounded-lg p-3 border border-aph-light-gray/50">
-                <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray">
+              <div className="bg-surface rounded-control p-3 border border-line/50">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted">
                   Years remaining
                 </p>
-                <p className="text-2xl font-bold tabular-nums text-aph-dark-blue">
+                <p className="text-2xl font-bold tabular-nums text-ink">
                   {result.remainingYears.toFixed(0)}
                 </p>
-                <p className="text-xs text-aph-dark-gray mt-0.5">
+                <p className="text-xs text-muted mt-0.5">
                   Reaching about age {projectedAge}
                 </p>
               </div>
-              <div className="bg-white rounded-lg p-3 border border-aph-light-gray/50">
-                <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray">
+              <div className="bg-surface rounded-control p-3 border border-line/50">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted">
                   Net adjustment
                 </p>
                 <p
@@ -429,7 +429,7 @@ export default function LifespanCalculator() {
                   {result.totalDelta >= 0 ? "+" : "−"}
                   {Math.abs(result.totalDelta).toFixed(1)}
                 </p>
-                <p className="text-xs text-aph-dark-gray mt-0.5">
+                <p className="text-xs text-muted mt-0.5">
                   vs. average for your age
                 </p>
               </div>
@@ -446,8 +446,8 @@ export default function LifespanCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-aph-light-gray/40">
-        <p className="text-xs text-aph-dark-gray leading-relaxed">
+      <div className="mt-6 pt-4 border-t border-line/40">
+        <p className="text-xs text-muted leading-relaxed">
           Estimates combine the U.S. 2022 life table (NCHS) with effect sizes
           from Doll &amp; Peto (BMJ 2004), Lee et al. (Lancet 2012), Fadnes et
           al. (PLoS Med 2022), the Prospective Studies Collaboration (Lancet

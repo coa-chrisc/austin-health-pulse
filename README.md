@@ -185,7 +185,7 @@ The pipeline aggregates tract-level life expectancy to ZIP code (ZCTA) level usi
 | Maps       | Leaflet + React Leaflet     |
 | Charts     | Recharts                    |
 | Tests      | Vitest                      |
-| Font       | Geist (bundled, `@fontsource`) |
+| Font       | Configurable via `theme.typography` (Geist by default; bundled, `@fontsource`) |
 | Icons      | Material Symbols (bundled)  |
 | Deployment | GitHub Pages via Actions    |
 

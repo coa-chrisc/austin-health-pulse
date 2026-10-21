@@ -14,24 +14,56 @@
   },
   "showBuildStory": true,
   "brand": {
-    "logoUrl": null,
+    "logoUrl": null
+  },
+  "theme": {
     "colors": {
-      "blue": "#44499C",
-      "green": "#009F4D",
-      "white": "#f7f6f5",
-      "darkBlue": "#22254E",
-      "darkGreen": "#005027",
-      "compliantGreen": "#008743",
-      "lightBlue": "#dcf2fd",
-      "lightGreen": "#dff0e3",
-      "red": "#F83125",
-      "orange": "#FF8F00",
-      "yellow": "#FFC600",
-      "cyan": "#009CDE",
-      "purple": "#9F3CC9",
-      "brown": "#8F5201",
-      "lightGray": "#C6C5C4",
-      "darkGray": "#636262"
+      "primary": "#44499C",
+      "primarySoft": "#dcf2fd",
+      "accent": "#009F4D",
+      "accentSoft": "#dff0e3",
+      "ink": "#22254E",
+      "onBrand": "#ffffff",
+      "page": "#f7f6f5",
+      "surface": "#ffffff",
+      "subtle": "#f3f4f6",
+      "body": "#1a1a1a",
+      "muted": "#636262",
+      "line": "#C6C5C4",
+      "noData": "#C6C5C4",
+      "positive": "#005027",
+      "positiveFill": "#009F4D",
+      "negative": "#F83125",
+      "warning": "#FF8F00",
+      "scrim": "#000000"
+    },
+    "dataScale": [
+      "#F83125",
+      "#FF8F00",
+      "#FFC600",
+      "#009F4D",
+      "#005027"
+    ],
+    "series": [
+      "#44499C",
+      "#009F4D",
+      "#FF8F00",
+      "#009CDE",
+      "#9F3CC9",
+      "#8F5201"
+    ],
+    "typography": {
+      "fontPackage": "@fontsource/geist",
+      "family": "Geist",
+      "fallback": "Helvetica, Aptos, sans-serif",
+      "baseSize": 16,
+      "sizes": {}
+    },
+    "radius": {
+      "chip": "0.25rem",
+      "control": "0.5rem",
+      "card": "0.75rem",
+      "panel": "1rem"
     }
   },
   "map": {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME, fontSize } from "../../lib/theme";
 import { getComparisonColor } from "../../lib/colorScales";
 import { formatValue } from "../../lib/formatters";
 
@@ -120,7 +120,7 @@ export default function GaugeChart({
   const fillColor =
     value !== null
       ? getComparisonColor(value, countyAvg, higherIsBetter)
-      : APH_COLORS.lightGray;
+      : THEME.colors.noData;
 
   const avgPoint = fractionToPoint(avgFraction);
 
@@ -141,13 +141,13 @@ export default function GaugeChart({
   const tooltipText = INDICATOR_DESCRIPTIONS[label] ?? null;
 
   return (
-    <div className="flex flex-col items-center p-4 bg-white rounded-xl shadow-sm border border-aph-light-gray/40">
+    <div className="flex flex-col items-center p-4 bg-surface rounded-card shadow-sm border border-line/40">
       <svg viewBox="0 0 200 120" className="w-full">
         {/* Background arc */}
         <path
           d={arcPath(1)}
           fill="none"
-          stroke={APH_COLORS.lightGray}
+          stroke={THEME.colors.line}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
         />
@@ -171,7 +171,7 @@ export default function GaugeChart({
               y1={avgPoint.y - 12}
               x2={avgPoint.x}
               y2={avgPoint.y + 12}
-              stroke={APH_COLORS.darkBlue}
+              stroke={THEME.colors.ink}
               strokeWidth={2.5}
               strokeLinecap="round"
               transform={`rotate(${-(Math.acos(Math.max(-1, Math.min(1, (avgPoint.x - cx) / r))) * 180) / Math.PI + 90}, ${avgPoint.x}, ${avgPoint.y})`}
@@ -181,7 +181,7 @@ export default function GaugeChart({
               cx={avgPoint.x}
               cy={avgPoint.y}
               r={4}
-              fill={APH_COLORS.darkBlue}
+              fill={THEME.colors.ink}
             />
           </g>
         )}
@@ -192,9 +192,8 @@ export default function GaugeChart({
             x={cx}
             y={cy - 8}
             textAnchor="middle"
-            className="font-geist"
-            fill={APH_COLORS.darkBlue}
-            fontSize="26"
+            fill={THEME.colors.ink}
+            fontSize="26" // theme-exempt: SVG viewBox units, not CSS px
             fontWeight="700"
           >
             {formatValue(value, unit)}
@@ -204,9 +203,8 @@ export default function GaugeChart({
             x={cx}
             y={cy - 12}
             textAnchor="middle"
-            className="font-geist"
-            fill={APH_COLORS.darkGray}
-            fontSize="12"
+            fill={THEME.colors.muted}
+            fontSize="12" // theme-exempt: SVG viewBox units, not CSS px
             fontWeight="500"
           >
             Data Not
@@ -218,9 +216,8 @@ export default function GaugeChart({
             x={cx}
             y={cy + 4}
             textAnchor="middle"
-            className="font-geist"
-            fill={APH_COLORS.darkGray}
-            fontSize="12"
+            fill={THEME.colors.muted}
+            fontSize="12" // theme-exempt: SVG viewBox units, not CSS px
             fontWeight="500"
           >
             Available
@@ -232,8 +229,8 @@ export default function GaugeChart({
           x={cx - r - 2}
           y={cy + 16}
           textAnchor="middle"
-          fill={APH_COLORS.darkGray}
-          fontSize="9"
+          fill={THEME.colors.muted}
+          fontSize="9" // theme-exempt: SVG viewBox units, not CSS px
         >
           {formatValue(min, unit)}
         </text>
@@ -241,8 +238,8 @@ export default function GaugeChart({
           x={cx + r + 2}
           y={cy + 16}
           textAnchor="middle"
-          fill={APH_COLORS.darkGray}
-          fontSize="9"
+          fill={THEME.colors.muted}
+          fontSize="9" // theme-exempt: SVG viewBox units, not CSS px
         >
           {formatValue(max, unit)}
         </text>
@@ -250,20 +247,20 @@ export default function GaugeChart({
 
       {/* Label with info tooltip */}
       <div className="flex items-center gap-1 mt-1 justify-center">
-        <p className="text-sm font-semibold text-aph-dark-blue text-center">
+        <p className="text-sm font-semibold text-ink text-center">
           {label}
         </p>
         {tooltipText && (
           <span className="relative group cursor-help">
             <span
-              className="material-symbols-outlined text-aph-dark-gray/60 hover:text-aph-blue transition"
-              style={{ fontSize: "14px" }}
+              className="material-symbols-outlined text-muted/60 hover:text-primary transition"
+              style={{ fontSize: fontSize("sm") }}
             >
               info
             </span>
-            <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 w-44 sm:w-52 rounded-lg bg-aph-dark-blue text-white text-xs px-3 py-2 leading-snug opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg z-20 text-center">
+            <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 w-44 sm:w-52 rounded-control bg-ink text-on-brand text-xs px-3 py-2 leading-snug opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg z-20 text-center">
               {tooltipText}
-              <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-aph-dark-blue" />
+              <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-ink" />
             </span>
           </span>
         )}
@@ -275,7 +272,7 @@ export default function GaugeChart({
           {diffText}
         </p>
       ) : (
-        <p className="text-xs mt-0.5 text-aph-dark-gray text-center">
+        <p className="text-xs mt-0.5 text-muted text-center">
           No data for this area
         </p>
       )}

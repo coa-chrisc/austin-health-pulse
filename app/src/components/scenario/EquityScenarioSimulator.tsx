@@ -1,6 +1,6 @@
 import { useId, useMemo, useState } from "react";
 import { useHealthData } from "../../hooks/useHealthData";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME } from "../../lib/theme";
 import { cityConfig } from "../../lib/cityConfig";
 import { listZips } from "../../lib/zips";
 import {
@@ -67,10 +67,10 @@ export default function EquityScenarioSimulator({
 
   const header = (
     <div className="text-center mb-6">
-      <h3 className="text-2xl font-bold text-aph-dark-blue mb-2">
+      <h3 className="text-2xl font-bold text-ink mb-2">
         Neighborhood Equity Scenario Simulator
       </h3>
-      <p className="text-sm text-aph-dark-gray max-w-2xl mx-auto">
+      <p className="text-sm text-muted max-w-2xl mx-auto">
         {model.levers.length > 0
           ? `Explore how lower ${leverNames} in a ZIP are associated with differences in life expectancy across ${cityConfig.region.name}. See how much of the ${gap.toFixed(1)}-year gap between ${cityConfig.region.name}'s longest- and shortest-lived ZIPs that difference represents.`
           : `Compare ZIP codes across ${cityConfig.region.name} using public, aggregate indicators.`}
@@ -82,7 +82,7 @@ export default function EquityScenarioSimulator({
     return (
       <section className="mt-12">
         {header}
-        <div className="max-w-2xl mx-auto rounded-xl bg-white shadow-sm p-5 border border-aph-light-gray/30 text-sm text-aph-dark-gray leading-relaxed">
+        <div className="max-w-2xl mx-auto rounded-card bg-surface shadow-sm p-5 border border-line/30 text-sm text-muted leading-relaxed">
           No indicator showed a statistically reliable relationship with life
           expectancy across {cityConfig.region.name} ZIP codes in the current
           data, so there is no scenario to explore. Indicators are only offered
@@ -132,49 +132,49 @@ export default function EquityScenarioSimulator({
 
     results = (
       <>
-        <div className="rounded-2xl p-6 text-center border border-aph-blue/20 shadow-sm bg-aph-light-blue/30">
-          <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-blue/75">
+        <div className="rounded-panel p-6 text-center border border-primary/20 shadow-sm bg-primary-soft/30">
+          <p className="text-xs font-semibold uppercase tracking-wider text-ink/75">
             Associated difference in life expectancy
           </p>
           <p
             className="text-5xl font-bold leading-none mt-2 tabular-nums"
-            style={{ color: APH_COLORS.darkGreen }}
+            style={{ color: THEME.colors.positive }}
           >
             {signed(sim.deltaYears)} years
           </p>
-          <p className="text-sm text-aph-dark-blue/75 mt-2">
+          <p className="text-sm text-ink/75 mt-2">
             (95% CI {signed(sim.deltaLow)} to {signed(sim.deltaHigh)})
           </p>
           <div className="grid grid-cols-2 gap-3 mt-5 text-left">
-            <div className="bg-white rounded-lg p-3 border border-aph-light-gray/50">
-              <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray">
+            <div className="bg-surface rounded-control p-3 border border-line/50">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted">
                 Life expectancy today
               </p>
-              <p className="text-2xl font-bold tabular-nums text-aph-dark-blue">
+              <p className="text-2xl font-bold tabular-nums text-ink">
                 {currentLE.toFixed(1)}
               </p>
-              <p className="text-xs text-aph-dark-gray mt-0.5">years, ZIP {zip}</p>
+              <p className="text-xs text-muted mt-0.5">years, ZIP {zip}</p>
             </div>
-            <div className="bg-white rounded-lg p-3 border border-aph-light-gray/50">
-              <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray">
+            <div className="bg-surface rounded-control p-3 border border-line/50">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted">
                 At the lower {copy.name}
               </p>
-              <p className="text-2xl font-bold tabular-nums text-aph-dark-blue">
+              <p className="text-2xl font-bold tabular-nums text-ink">
                 {sim.projectedLE.toFixed(1)}
               </p>
-              <p className="text-xs text-aph-dark-gray mt-0.5">
+              <p className="text-xs text-muted mt-0.5">
                 years, fitted value
               </p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl bg-white p-4 border border-aph-light-gray/50">
-          <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray mb-3">
+        <div className="rounded-card bg-surface p-4 border border-line/50">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted mb-3">
             Gap to the longest-lived ZIP ({extremes.top.zip},{" "}
             {extremes.top.le.toFixed(1)} years)
           </p>
-          <div className="space-y-2 text-sm text-aph-dark-blue">
+          <div className="space-y-2 text-sm text-ink">
             <div>
               <div className="flex justify-between mb-1">
                 <span>Today</span>
@@ -182,10 +182,10 @@ export default function EquityScenarioSimulator({
                   {sim.currentGap.toFixed(1)} years
                 </span>
               </div>
-              <div className="h-2.5 rounded-full bg-aph-light-gray/40 overflow-hidden">
+              <div className="h-2.5 rounded-full bg-line/40 overflow-hidden">
                 <div
                   className="h-full rounded-full"
-                  style={{ width: "100%", backgroundColor: APH_COLORS.red }}
+                  style={{ width: "100%", backgroundColor: THEME.colors.negative }}
                 />
               </div>
             </div>
@@ -196,12 +196,12 @@ export default function EquityScenarioSimulator({
                   {sim.projectedGap.toFixed(1)} years
                 </span>
               </div>
-              <div className="h-2.5 rounded-full bg-aph-light-gray/40 overflow-hidden">
+              <div className="h-2.5 rounded-full bg-line/40 overflow-hidden">
                 <div
                   className="h-full rounded-full"
                   style={{
                     width: `${Math.min(100, gapShare)}%`,
-                    backgroundColor: APH_COLORS.green,
+                    backgroundColor: THEME.colors.positiveFill,
                   }}
                 />
               </div>
@@ -209,7 +209,7 @@ export default function EquityScenarioSimulator({
           </div>
         </div>
 
-        <p className="text-xs text-aph-dark-gray leading-relaxed">
+        <p className="text-xs text-muted leading-relaxed">
           One-variable fit across {fit.n} {cityConfig.region.name} ZIPs: life
           expectancy vs. {copy.name}, {signed(fit.slope, 2)} years per
           percentage point, R&sup2; = {fit.r2.toFixed(2)}, n = {fit.n}. This is
@@ -227,13 +227,13 @@ export default function EquityScenarioSimulator({
   return (
     <section className="mt-12">
       {header}
-      <div className="bg-white rounded-2xl shadow-sm border border-aph-light-gray/30 p-5 sm:p-6">
+      <div className="bg-surface rounded-panel shadow-sm border border-line/30 p-5 sm:p-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <div className="mb-5">
               <label
                 htmlFor={zipId}
-                className="block text-xs font-semibold text-aph-dark-gray uppercase tracking-wide mb-2"
+                className="block text-xs font-semibold text-muted uppercase tracking-wide mb-2"
               >
                 ZIP code
               </label>
@@ -241,7 +241,7 @@ export default function EquityScenarioSimulator({
                 id={zipId}
                 value={zip}
                 onChange={(e) => setZipOverride(e.target.value)}
-                className="w-full px-3 py-2 text-sm font-semibold text-aph-dark-blue bg-aph-light-blue/40 border border-aph-blue/30 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-aph-blue/40"
+                className="w-full px-3 py-2 text-sm font-semibold text-ink bg-primary-soft/40 border border-primary/30 rounded-control cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40"
               >
                 {zipOptions.map((z) => (
                   <option key={z} value={z}>
@@ -254,7 +254,7 @@ export default function EquityScenarioSimulator({
             {selected ? (
               <>
                 <div className="mb-5">
-                  <p className="text-xs font-semibold text-aph-dark-gray uppercase tracking-wide mb-2">
+                  <p className="text-xs font-semibold text-muted uppercase tracking-wide mb-2">
                     Population-level lever
                   </p>
                   <div
@@ -273,8 +273,8 @@ export default function EquityScenarioSimulator({
                           onClick={() => setLeverChoice(fit.indicator)}
                           className={`px-3.5 py-1.5 rounded-full text-sm font-semibold border transition ${
                             active
-                              ? "bg-aph-blue text-white border-aph-blue shadow-sm"
-                              : "border-aph-blue text-aph-blue hover:bg-aph-blue hover:text-white"
+                              ? "bg-primary text-on-brand border-primary shadow-sm"
+                              : "border-primary text-primary hover:bg-primary hover:text-on-brand"
                           }`}
                         >
                           {LEVER_COPY[fit.indicator].tab}
@@ -297,7 +297,7 @@ export default function EquityScenarioSimulator({
                   ).toFixed(1)}%`}
                   onChange={setProgressPct}
                 />
-                <div className="flex justify-between text-[11px] text-aph-dark-gray mt-1">
+                <div className="flex justify-between text-2xs text-muted mt-1">
                   <span>Current rate in {zip}</span>
                   <span>
                     Lowest observed: {selected.fit.observedMin.toFixed(1)}% (
@@ -306,7 +306,7 @@ export default function EquityScenarioSimulator({
                 </div>
               </>
             ) : (
-              <p className="text-sm text-aph-dark-gray leading-relaxed">
+              <p className="text-sm text-muted leading-relaxed">
                 No lever applies to {zip}: it has no life expectancy estimate,
                 or each indicator is already at the lowest observed rate or
                 unavailable for this ZIP.
@@ -318,7 +318,7 @@ export default function EquityScenarioSimulator({
         </div>
 
         {notIncluded.length > 0 && (
-          <p className="mt-5 pt-4 border-t border-aph-light-gray/40 text-xs text-aph-dark-gray leading-relaxed">
+          <p className="mt-5 pt-4 border-t border-line/40 text-xs text-muted leading-relaxed">
             <span className="font-semibold">Not included:</span>{" "}
             {notIncluded
               .map(
