@@ -1,0 +1,105 @@
+{
+  "$schema": "../city.config.schema.json",
+  "id": "harris-tx",
+  "appName": "Harris County Health Pulse (demo)",
+  "agency": {
+    "name": "Partner Health Department (demo preset)",
+    "shortName": "Demo",
+    "parent": "Harris County, Texas"
+  },
+  "region": {
+    "name": "Harris County",
+    "cityName": "Houston",
+    "state": "TX"
+  },
+  "brand": {
+    "logoUrl": null,
+    "colors": {
+      "blue": "#1F4E79",
+      "green": "#2E8B57",
+      "white": "#f7f6f5",
+      "darkBlue": "#0F2740",
+      "darkGreen": "#1B5E3A",
+      "complaintGreen": "#237A4B",
+      "lightBlue": "#E3EEF8",
+      "lightGreen": "#E2F2E8",
+      "red": "#F83125",
+      "orange": "#FF8F00",
+      "yellow": "#FFC600",
+      "cyan": "#009CDE",
+      "purple": "#9F3CC9",
+      "brown": "#8F5201",
+      "lightGray": "#C6C5C4",
+      "darkGray": "#636262"
+    }
+  },
+  "map": {
+    "center": [
+      29.86,
+      -95.39
+    ],
+    "zoom": 10,
+    "minZoom": 8,
+    "maxZoom": 16
+  },
+  "featuredZips": [
+    {
+      "label": "Downtown",
+      "zip": "77002"
+    },
+    {
+      "label": "Third Ward",
+      "zip": "77004"
+    },
+    {
+      "label": "Fifth Ward",
+      "zip": "77020"
+    },
+    {
+      "label": "West University",
+      "zip": "77005"
+    },
+    {
+      "label": "Gulfton",
+      "zip": "77081"
+    },
+    {
+      "label": "Spring",
+      "zip": "77373"
+    }
+  ],
+  "dataQualityNotes": {
+    "77010": "Downtown core ZIP — small residential population; estimates unreliable."
+  },
+  "serviceGuideUrl": null,
+  "data": {
+    "indicators": "data/harris-tx/zip-indicators.json",
+    "boundaries": "data/harris-tx/boundaries.geojson",
+    "summary": "data/harris-tx/county-summary.json"
+  },
+  "dataSources": [
+    {
+      "label": "Life Expectancy",
+      "source": "CDC USALEEP (2010-2015)"
+    },
+    {
+      "label": "Poverty & Insurance",
+      "source": "ACS 5-Year (2022)"
+    },
+    {
+      "label": "Chronic Disease",
+      "source": "CDC PLACES (2023)"
+    },
+    {
+      "label": "Asthma",
+      "source": "CDC PLACES (2023)"
+    }
+  ],
+  "dataAsOf": "October 2026",
+  "pipeline": {
+    "stateFips": "48",
+    "countyFips": "201",
+    "zctas": null,
+    "crimeSource": null
+  }
+}

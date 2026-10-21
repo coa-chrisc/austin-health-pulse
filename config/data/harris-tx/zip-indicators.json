@@ -1,0 +1,7566 @@
+{
+  "meta": {
+    "generated": "2026-10-21",
+    "sources": {
+      "lifeExpectancy": "CDC USALEEP (tract-level, pop-weighted to ZCTA)",
+      "povertyRate": "ACS 5-Year 2022, Table B17001 summary file (= S1701 poverty rate)",
+      "uninsuredRate": "ACS 5-Year 2022, Table B27001 summary file (= S2701 uninsured rate)",
+      "diabetes": "CDC PLACES 2023 (BRFSS model-based)",
+      "hypertension": "CDC PLACES 2023 (BRFSS model-based)",
+      "obesity": "CDC PLACES 2023 (BRFSS model-based)",
+      "asthma": "CDC PLACES 2023 (current asthma, BRFSS model-based)"
+    },
+    "countyAverage": {
+      "lifeExpectancy": 78.05,
+      "povertyRate": 17.04,
+      "uninsuredRate": 21.57,
+      "diabetes": 13.63,
+      "hypertension": 32.89,
+      "obesity": 37.63,
+      "asthma": 9.38,
+      "violentCrimeRate": null
+    }
+  },
+  "zctas": {
+    "77002": {
+      "lifeExpectancy": 80.02,
+      "lifeExpectancySE": 2.57,
+      "povertyRate": 17.9,
+      "uninsuredRate": 12.0,
+      "diabetes": 6.9,
+      "hypertension": 23.8,
+      "obesity": 33.7,
+      "asthma": 8.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.02,
+          "se": 2.57
+        },
+        "1-4": {
+          "ex": 79.5,
+          "se": 2.55
+        },
+        "5-14": {
+          "ex": 75.53,
+          "se": 2.55
+        },
+        "15-24": {
+          "ex": 65.62,
+          "se": 2.56
+        },
+        "25-34": {
+          "ex": 55.95,
+          "se": 2.57
+        },
+        "35-44": {
+          "ex": 46.28,
+          "se": 2.59
+        },
+        "45-54": {
+          "ex": 36.73,
+          "se": 2.61
+        },
+        "55-64": {
+          "ex": 28.01,
+          "se": 2.71
+        },
+        "65-74": {
+          "ex": 19.53,
+          "se": 2.89
+        },
+        "75-84": {
+          "ex": 11.93,
+          "se": 3.32
+        },
+        "85 and older": {
+          "ex": 6.16,
+          "se": 4.44
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77003": {
+      "lifeExpectancy": 78.79,
+      "lifeExpectancySE": 3.2,
+      "povertyRate": 21.3,
+      "uninsuredRate": 14.8,
+      "diabetes": 10.8,
+      "hypertension": 28.5,
+      "obesity": 36.2,
+      "asthma": 8.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.79,
+          "se": 3.2
+        },
+        "1-4": {
+          "ex": 78.53,
+          "se": 3.2
+        },
+        "5-14": {
+          "ex": 74.64,
+          "se": 3.2
+        },
+        "15-24": {
+          "ex": 64.74,
+          "se": 3.21
+        },
+        "25-34": {
+          "ex": 55.3,
+          "se": 3.22
+        },
+        "35-44": {
+          "ex": 45.78,
+          "se": 3.24
+        },
+        "45-54": {
+          "ex": 36.55,
+          "se": 3.29
+        },
+        "55-64": {
+          "ex": 28.4,
+          "se": 3.47
+        },
+        "65-74": {
+          "ex": 21.77,
+          "se": 3.89
+        },
+        "75-84": {
+          "ex": 14.83,
+          "se": 4.51
+        },
+        "85 and older": {
+          "ex": 10.76,
+          "se": 6.26
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77004": {
+      "lifeExpectancy": 74.75,
+      "lifeExpectancySE": 2.1,
+      "povertyRate": 27.3,
+      "uninsuredRate": 13.5,
+      "diabetes": 11.2,
+      "hypertension": 30.5,
+      "obesity": 35.9,
+      "asthma": 10.0,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 74.75,
+          "se": 2.1
+        },
+        "1-4": {
+          "ex": 74.74,
+          "se": 1.98
+        },
+        "5-14": {
+          "ex": 70.84,
+          "se": 1.98
+        },
+        "15-24": {
+          "ex": 61.03,
+          "se": 1.97
+        },
+        "25-34": {
+          "ex": 51.53,
+          "se": 1.98
+        },
+        "35-44": {
+          "ex": 42.19,
+          "se": 1.98
+        },
+        "45-54": {
+          "ex": 33.09,
+          "se": 1.99
+        },
+        "55-64": {
+          "ex": 25.45,
+          "se": 2.07
+        },
+        "65-74": {
+          "ex": 18.3,
+          "se": 2.22
+        },
+        "75-84": {
+          "ex": 12.29,
+          "se": 2.63
+        },
+        "85 and older": {
+          "ex": 6.91,
+          "se": 3.37
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77005": {
+      "lifeExpectancy": 82.12,
+      "lifeExpectancySE": 1.92,
+      "povertyRate": 4.3,
+      "uninsuredRate": 2.7,
+      "diabetes": 7.5,
+      "hypertension": 25.9,
+      "obesity": 25.1,
+      "asthma": 8.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 82.12,
+          "se": 1.92
+        },
+        "1-4": {
+          "ex": 81.45,
+          "se": 1.92
+        },
+        "5-14": {
+          "ex": 77.54,
+          "se": 1.92
+        },
+        "15-24": {
+          "ex": 67.55,
+          "se": 1.92
+        },
+        "25-34": {
+          "ex": 58.11,
+          "se": 1.9
+        },
+        "35-44": {
+          "ex": 48.79,
+          "se": 1.87
+        },
+        "45-54": {
+          "ex": 39.01,
+          "se": 1.87
+        },
+        "55-64": {
+          "ex": 29.43,
+          "se": 1.88
+        },
+        "65-74": {
+          "ex": 20.15,
+          "se": 1.92
+        },
+        "75-84": {
+          "ex": 11.49,
+          "se": 2.06
+        },
+        "85 and older": {
+          "ex": 5.6,
+          "se": 2.49
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77006": {
+      "lifeExpectancy": 78.75,
+      "lifeExpectancySE": 2.74,
+      "povertyRate": 8.8,
+      "uninsuredRate": 5.9,
+      "diabetes": 6.5,
+      "hypertension": 22.9,
+      "obesity": 28.8,
+      "asthma": 8.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.75,
+          "se": 2.74
+        },
+        "1-4": {
+          "ex": 78.21,
+          "se": 2.73
+        },
+        "5-14": {
+          "ex": 74.26,
+          "se": 2.73
+        },
+        "15-24": {
+          "ex": 64.31,
+          "se": 2.73
+        },
+        "25-34": {
+          "ex": 54.73,
+          "se": 2.73
+        },
+        "35-44": {
+          "ex": 45.1,
+          "se": 2.75
+        },
+        "45-54": {
+          "ex": 35.8,
+          "se": 2.78
+        },
+        "55-64": {
+          "ex": 27.48,
+          "se": 2.91
+        },
+        "65-74": {
+          "ex": 19.2,
+          "se": 3.12
+        },
+        "75-84": {
+          "ex": 11.41,
+          "se": 3.53
+        },
+        "85 and older": {
+          "ex": 6.14,
+          "se": 5.28
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77007": {
+      "lifeExpectancy": 80.21,
+      "lifeExpectancySE": 2.71,
+      "povertyRate": 5.8,
+      "uninsuredRate": 5.5,
+      "diabetes": 5.5,
+      "hypertension": 19.8,
+      "obesity": 27.8,
+      "asthma": 8.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.21,
+          "se": 2.71
+        },
+        "1-4": {
+          "ex": 79.65,
+          "se": 2.7
+        },
+        "5-14": {
+          "ex": 75.77,
+          "se": 2.7
+        },
+        "15-24": {
+          "ex": 65.87,
+          "se": 2.69
+        },
+        "25-34": {
+          "ex": 56.15,
+          "se": 2.7
+        },
+        "35-44": {
+          "ex": 46.43,
+          "se": 2.71
+        },
+        "45-54": {
+          "ex": 36.79,
+          "se": 2.72
+        },
+        "55-64": {
+          "ex": 27.84,
+          "se": 2.78
+        },
+        "65-74": {
+          "ex": 19.3,
+          "se": 2.9
+        },
+        "75-84": {
+          "ex": 11.32,
+          "se": 3.2
+        },
+        "85 and older": {
+          "ex": 5.23,
+          "se": 4.64
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77008": {
+      "lifeExpectancy": 78.76,
+      "lifeExpectancySE": 2.16,
+      "povertyRate": 6.4,
+      "uninsuredRate": 7.1,
+      "diabetes": 7.2,
+      "hypertension": 24.1,
+      "obesity": 30.1,
+      "asthma": 8.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.76,
+          "se": 2.16
+        },
+        "1-4": {
+          "ex": 78.13,
+          "se": 2.15
+        },
+        "5-14": {
+          "ex": 74.19,
+          "se": 2.15
+        },
+        "15-24": {
+          "ex": 64.28,
+          "se": 2.14
+        },
+        "25-34": {
+          "ex": 54.72,
+          "se": 2.13
+        },
+        "35-44": {
+          "ex": 45.01,
+          "se": 2.14
+        },
+        "45-54": {
+          "ex": 35.69,
+          "se": 2.15
+        },
+        "55-64": {
+          "ex": 26.71,
+          "se": 2.18
+        },
+        "65-74": {
+          "ex": 18.51,
+          "se": 2.31
+        },
+        "75-84": {
+          "ex": 12.24,
+          "se": 2.62
+        },
+        "85 and older": {
+          "ex": 8.22,
+          "se": 3.7
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77009": {
+      "lifeExpectancy": 76.95,
+      "lifeExpectancySE": 1.84,
+      "povertyRate": 11.6,
+      "uninsuredRate": 19.1,
+      "diabetes": 13.4,
+      "hypertension": 30.9,
+      "obesity": 36.9,
+      "asthma": 8.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.95,
+          "se": 1.84
+        },
+        "1-4": {
+          "ex": 76.58,
+          "se": 1.81
+        },
+        "5-14": {
+          "ex": 72.7,
+          "se": 1.81
+        },
+        "15-24": {
+          "ex": 62.77,
+          "se": 1.81
+        },
+        "25-34": {
+          "ex": 53.12,
+          "se": 1.81
+        },
+        "35-44": {
+          "ex": 43.56,
+          "se": 1.81
+        },
+        "45-54": {
+          "ex": 34.61,
+          "se": 1.81
+        },
+        "55-64": {
+          "ex": 26.07,
+          "se": 1.85
+        },
+        "65-74": {
+          "ex": 18.51,
+          "se": 1.98
+        },
+        "75-84": {
+          "ex": 11.86,
+          "se": 2.19
+        },
+        "85 and older": {
+          "ex": 7.06,
+          "se": 3.05
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77010": {
+      "lifeExpectancy": 81.3,
+      "lifeExpectancySE": 2.24,
+      "povertyRate": null,
+      "uninsuredRate": null,
+      "diabetes": 10.7,
+      "hypertension": 32.3,
+      "obesity": 34.5,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.3,
+          "se": 2.24
+        },
+        "1-4": {
+          "ex": 80.7,
+          "se": 2.24
+        },
+        "5-14": {
+          "ex": 76.7,
+          "se": 2.24
+        },
+        "15-24": {
+          "ex": 66.8,
+          "se": 2.24
+        },
+        "25-34": {
+          "ex": 57.1,
+          "se": 2.25
+        },
+        "35-44": {
+          "ex": 47.4,
+          "se": 2.27
+        },
+        "45-54": {
+          "ex": 37.7,
+          "se": 2.28
+        },
+        "55-64": {
+          "ex": 28.4,
+          "se": 2.33
+        },
+        "65-74": {
+          "ex": 19.6,
+          "se": 2.45
+        },
+        "75-84": {
+          "ex": 11.6,
+          "se": 2.74
+        },
+        "85 and older": {
+          "ex": 5.2,
+          "se": 3.42
+        }
+      },
+      "dataQuality": "partial"
+    },
+    "77011": {
+      "lifeExpectancy": 78.14,
+      "lifeExpectancySE": 2.12,
+      "povertyRate": 22.6,
+      "uninsuredRate": 34.9,
+      "diabetes": 18.5,
+      "hypertension": 35.2,
+      "obesity": 41.4,
+      "asthma": 8.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.14,
+          "se": 2.12
+        },
+        "1-4": {
+          "ex": 77.98,
+          "se": 2.0
+        },
+        "5-14": {
+          "ex": 74.14,
+          "se": 2.01
+        },
+        "15-24": {
+          "ex": 64.24,
+          "se": 2.01
+        },
+        "25-34": {
+          "ex": 54.52,
+          "se": 2.01
+        },
+        "35-44": {
+          "ex": 45.01,
+          "se": 2.01
+        },
+        "45-54": {
+          "ex": 35.58,
+          "se": 2.02
+        },
+        "55-64": {
+          "ex": 27.39,
+          "se": 2.09
+        },
+        "65-74": {
+          "ex": 20.11,
+          "se": 2.25
+        },
+        "75-84": {
+          "ex": 12.87,
+          "se": 2.52
+        },
+        "85 and older": {
+          "ex": 7.71,
+          "se": 3.59
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77012": {
+      "lifeExpectancy": 77.19,
+      "lifeExpectancySE": 2.16,
+      "povertyRate": 22.3,
+      "uninsuredRate": 40.6,
+      "diabetes": 17.4,
+      "hypertension": 33.1,
+      "obesity": 42.1,
+      "asthma": 8.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.19,
+          "se": 2.16
+        },
+        "1-4": {
+          "ex": 76.54,
+          "se": 2.16
+        },
+        "5-14": {
+          "ex": 72.76,
+          "se": 2.15
+        },
+        "15-24": {
+          "ex": 63.04,
+          "se": 2.13
+        },
+        "25-34": {
+          "ex": 53.51,
+          "se": 2.12
+        },
+        "35-44": {
+          "ex": 44.04,
+          "se": 2.11
+        },
+        "45-54": {
+          "ex": 34.66,
+          "se": 2.11
+        },
+        "55-64": {
+          "ex": 25.59,
+          "se": 2.13
+        },
+        "65-74": {
+          "ex": 18.1,
+          "se": 2.24
+        },
+        "75-84": {
+          "ex": 11.63,
+          "se": 2.36
+        },
+        "85 and older": {
+          "ex": 5.16,
+          "se": 3.3
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77013": {
+      "lifeExpectancy": 77.57,
+      "lifeExpectancySE": 1.64,
+      "povertyRate": 27.1,
+      "uninsuredRate": 31.9,
+      "diabetes": 18.4,
+      "hypertension": 37.1,
+      "obesity": 44.6,
+      "asthma": 9.6,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.57,
+          "se": 1.64
+        },
+        "1-4": {
+          "ex": 77.03,
+          "se": 1.62
+        },
+        "5-14": {
+          "ex": 73.15,
+          "se": 1.62
+        },
+        "15-24": {
+          "ex": 63.28,
+          "se": 1.62
+        },
+        "25-34": {
+          "ex": 53.68,
+          "se": 1.62
+        },
+        "35-44": {
+          "ex": 44.18,
+          "se": 1.61
+        },
+        "45-54": {
+          "ex": 34.8,
+          "se": 1.61
+        },
+        "55-64": {
+          "ex": 25.97,
+          "se": 1.64
+        },
+        "65-74": {
+          "ex": 17.98,
+          "se": 1.7
+        },
+        "75-84": {
+          "ex": 10.83,
+          "se": 1.85
+        },
+        "85 and older": {
+          "ex": 6.08,
+          "se": 2.6
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77014": {
+      "lifeExpectancy": 77.09,
+      "lifeExpectancySE": 2.07,
+      "povertyRate": 24.9,
+      "uninsuredRate": 27.2,
+      "diabetes": 15.1,
+      "hypertension": 35.4,
+      "obesity": 41.5,
+      "asthma": 10.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.09,
+          "se": 2.07
+        },
+        "1-4": {
+          "ex": 76.5,
+          "se": 2.08
+        },
+        "5-14": {
+          "ex": 72.6,
+          "se": 2.08
+        },
+        "15-24": {
+          "ex": 62.85,
+          "se": 2.08
+        },
+        "25-34": {
+          "ex": 53.45,
+          "se": 2.09
+        },
+        "35-44": {
+          "ex": 44.05,
+          "se": 2.11
+        },
+        "45-54": {
+          "ex": 34.32,
+          "se": 2.13
+        },
+        "55-64": {
+          "ex": 25.53,
+          "se": 2.2
+        },
+        "65-74": {
+          "ex": 17.72,
+          "se": 2.36
+        },
+        "75-84": {
+          "ex": 10.34,
+          "se": 2.73
+        },
+        "85 and older": {
+          "ex": 4.55,
+          "se": 4.16
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77015": {
+      "lifeExpectancy": 76.49,
+      "lifeExpectancySE": 2.23,
+      "povertyRate": 18.4,
+      "uninsuredRate": 27.7,
+      "diabetes": 15.2,
+      "hypertension": 33.1,
+      "obesity": 41.6,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.49,
+          "se": 2.23
+        },
+        "1-4": {
+          "ex": 75.93,
+          "se": 2.22
+        },
+        "5-14": {
+          "ex": 72.0,
+          "se": 2.22
+        },
+        "15-24": {
+          "ex": 62.14,
+          "se": 2.23
+        },
+        "25-34": {
+          "ex": 52.68,
+          "se": 2.23
+        },
+        "35-44": {
+          "ex": 43.29,
+          "se": 2.24
+        },
+        "45-54": {
+          "ex": 33.99,
+          "se": 2.26
+        },
+        "55-64": {
+          "ex": 25.6,
+          "se": 2.33
+        },
+        "65-74": {
+          "ex": 18.09,
+          "se": 2.5
+        },
+        "75-84": {
+          "ex": 11.54,
+          "se": 2.91
+        },
+        "85 and older": {
+          "ex": 6.05,
+          "se": 4.25
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77016": {
+      "lifeExpectancy": 70.6,
+      "lifeExpectancySE": 2.09,
+      "povertyRate": 22.3,
+      "uninsuredRate": 25.5,
+      "diabetes": 22.8,
+      "hypertension": 47.2,
+      "obesity": 48.2,
+      "asthma": 11.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 70.6,
+          "se": 2.09
+        },
+        "1-4": {
+          "ex": 71.28,
+          "se": 1.68
+        },
+        "5-14": {
+          "ex": 67.4,
+          "se": 1.68
+        },
+        "15-24": {
+          "ex": 57.6,
+          "se": 1.67
+        },
+        "25-34": {
+          "ex": 48.34,
+          "se": 1.62
+        },
+        "35-44": {
+          "ex": 39.37,
+          "se": 1.54
+        },
+        "45-54": {
+          "ex": 30.82,
+          "se": 1.49
+        },
+        "55-64": {
+          "ex": 23.3,
+          "se": 1.45
+        },
+        "65-74": {
+          "ex": 16.78,
+          "se": 1.46
+        },
+        "75-84": {
+          "ex": 10.47,
+          "se": 1.66
+        },
+        "85 and older": {
+          "ex": 5.06,
+          "se": 2.5
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77017": {
+      "lifeExpectancy": 78.17,
+      "lifeExpectancySE": 2.53,
+      "povertyRate": 24.5,
+      "uninsuredRate": 37.6,
+      "diabetes": 17.2,
+      "hypertension": 33.6,
+      "obesity": 41.1,
+      "asthma": 8.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.17,
+          "se": 2.53
+        },
+        "1-4": {
+          "ex": 77.58,
+          "se": 2.53
+        },
+        "5-14": {
+          "ex": 73.68,
+          "se": 2.53
+        },
+        "15-24": {
+          "ex": 63.86,
+          "se": 2.53
+        },
+        "25-34": {
+          "ex": 54.46,
+          "se": 2.54
+        },
+        "35-44": {
+          "ex": 45.13,
+          "se": 2.55
+        },
+        "45-54": {
+          "ex": 35.87,
+          "se": 2.58
+        },
+        "55-64": {
+          "ex": 27.4,
+          "se": 2.67
+        },
+        "65-74": {
+          "ex": 19.87,
+          "se": 2.88
+        },
+        "75-84": {
+          "ex": 14.03,
+          "se": 3.44
+        },
+        "85 and older": {
+          "ex": 9.75,
+          "se": 4.77
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77018": {
+      "lifeExpectancy": 77.95,
+      "lifeExpectancySE": 1.65,
+      "povertyRate": 8.2,
+      "uninsuredRate": 12.5,
+      "diabetes": 10.6,
+      "hypertension": 30.4,
+      "obesity": 33.8,
+      "asthma": 8.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.95,
+          "se": 1.65
+        },
+        "1-4": {
+          "ex": 77.49,
+          "se": 1.59
+        },
+        "5-14": {
+          "ex": 73.58,
+          "se": 1.59
+        },
+        "15-24": {
+          "ex": 63.66,
+          "se": 1.59
+        },
+        "25-34": {
+          "ex": 54.26,
+          "se": 1.55
+        },
+        "35-44": {
+          "ex": 44.77,
+          "se": 1.54
+        },
+        "45-54": {
+          "ex": 35.39,
+          "se": 1.54
+        },
+        "55-64": {
+          "ex": 26.75,
+          "se": 1.56
+        },
+        "65-74": {
+          "ex": 18.89,
+          "se": 1.64
+        },
+        "75-84": {
+          "ex": 12.11,
+          "se": 1.75
+        },
+        "85 and older": {
+          "ex": 6.31,
+          "se": 2.32
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77019": {
+      "lifeExpectancy": 82.07,
+      "lifeExpectancySE": 2.21,
+      "povertyRate": 10.3,
+      "uninsuredRate": 6.9,
+      "diabetes": 7.7,
+      "hypertension": 26.1,
+      "obesity": 29.2,
+      "asthma": 8.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 82.07,
+          "se": 2.21
+        },
+        "1-4": {
+          "ex": 81.48,
+          "se": 2.19
+        },
+        "5-14": {
+          "ex": 77.51,
+          "se": 2.19
+        },
+        "15-24": {
+          "ex": 67.58,
+          "se": 2.2
+        },
+        "25-34": {
+          "ex": 57.96,
+          "se": 2.2
+        },
+        "35-44": {
+          "ex": 48.53,
+          "se": 2.16
+        },
+        "45-54": {
+          "ex": 38.96,
+          "se": 2.17
+        },
+        "55-64": {
+          "ex": 29.62,
+          "se": 2.21
+        },
+        "65-74": {
+          "ex": 20.75,
+          "se": 2.29
+        },
+        "75-84": {
+          "ex": 12.56,
+          "se": 2.51
+        },
+        "85 and older": {
+          "ex": 6.04,
+          "se": 3.1
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77020": {
+      "lifeExpectancy": 75.49,
+      "lifeExpectancySE": 2.1,
+      "povertyRate": 27.9,
+      "uninsuredRate": 32.3,
+      "diabetes": 19.2,
+      "hypertension": 38.0,
+      "obesity": 44.5,
+      "asthma": 9.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.49,
+          "se": 2.1
+        },
+        "1-4": {
+          "ex": 75.12,
+          "se": 2.09
+        },
+        "5-14": {
+          "ex": 71.28,
+          "se": 2.09
+        },
+        "15-24": {
+          "ex": 61.45,
+          "se": 2.08
+        },
+        "25-34": {
+          "ex": 51.93,
+          "se": 2.08
+        },
+        "35-44": {
+          "ex": 42.76,
+          "se": 2.07
+        },
+        "45-54": {
+          "ex": 33.94,
+          "se": 2.08
+        },
+        "55-64": {
+          "ex": 26.02,
+          "se": 2.16
+        },
+        "65-74": {
+          "ex": 19.3,
+          "se": 2.35
+        },
+        "75-84": {
+          "ex": 13.5,
+          "se": 2.72
+        },
+        "85 and older": {
+          "ex": 9.14,
+          "se": 4.0
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77021": {
+      "lifeExpectancy": 73.71,
+      "lifeExpectancySE": 1.53,
+      "povertyRate": 28.2,
+      "uninsuredRate": 19.5,
+      "diabetes": 17.5,
+      "hypertension": 42.1,
+      "obesity": 43.2,
+      "asthma": 11.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 73.71,
+          "se": 1.53
+        },
+        "1-4": {
+          "ex": 73.69,
+          "se": 1.49
+        },
+        "5-14": {
+          "ex": 69.83,
+          "se": 1.48
+        },
+        "15-24": {
+          "ex": 59.94,
+          "se": 1.48
+        },
+        "25-34": {
+          "ex": 50.48,
+          "se": 1.47
+        },
+        "35-44": {
+          "ex": 41.28,
+          "se": 1.46
+        },
+        "45-54": {
+          "ex": 32.1,
+          "se": 1.46
+        },
+        "55-64": {
+          "ex": 24.29,
+          "se": 1.48
+        },
+        "65-74": {
+          "ex": 17.56,
+          "se": 1.55
+        },
+        "75-84": {
+          "ex": 11.67,
+          "se": 1.76
+        },
+        "85 and older": {
+          "ex": 7.24,
+          "se": 2.55
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77022": {
+      "lifeExpectancy": 74.83,
+      "lifeExpectancySE": 1.83,
+      "povertyRate": 27.0,
+      "uninsuredRate": 35.1,
+      "diabetes": 19.1,
+      "hypertension": 37.9,
+      "obesity": 43.4,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 74.83,
+          "se": 1.83
+        },
+        "1-4": {
+          "ex": 74.48,
+          "se": 1.77
+        },
+        "5-14": {
+          "ex": 70.58,
+          "se": 1.77
+        },
+        "15-24": {
+          "ex": 60.71,
+          "se": 1.77
+        },
+        "25-34": {
+          "ex": 51.33,
+          "se": 1.76
+        },
+        "35-44": {
+          "ex": 42.06,
+          "se": 1.75
+        },
+        "45-54": {
+          "ex": 33.01,
+          "se": 1.75
+        },
+        "55-64": {
+          "ex": 24.78,
+          "se": 1.8
+        },
+        "65-74": {
+          "ex": 17.99,
+          "se": 1.93
+        },
+        "75-84": {
+          "ex": 11.94,
+          "se": 2.24
+        },
+        "85 and older": {
+          "ex": 7.81,
+          "se": 3.38
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77023": {
+      "lifeExpectancy": 78.84,
+      "lifeExpectancySE": 2.26,
+      "povertyRate": 19.3,
+      "uninsuredRate": 25.8,
+      "diabetes": 15.1,
+      "hypertension": 32.0,
+      "obesity": 39.4,
+      "asthma": 8.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.84,
+          "se": 2.26
+        },
+        "1-4": {
+          "ex": 78.34,
+          "se": 2.25
+        },
+        "5-14": {
+          "ex": 74.43,
+          "se": 2.25
+        },
+        "15-24": {
+          "ex": 64.63,
+          "se": 2.25
+        },
+        "25-34": {
+          "ex": 55.06,
+          "se": 2.25
+        },
+        "35-44": {
+          "ex": 45.71,
+          "se": 2.25
+        },
+        "45-54": {
+          "ex": 36.44,
+          "se": 2.27
+        },
+        "55-64": {
+          "ex": 27.54,
+          "se": 2.31
+        },
+        "65-74": {
+          "ex": 20.09,
+          "se": 2.45
+        },
+        "75-84": {
+          "ex": 12.66,
+          "se": 2.7
+        },
+        "85 and older": {
+          "ex": 7.46,
+          "se": 3.92
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77024": {
+      "lifeExpectancy": 83.34,
+      "lifeExpectancySE": 1.69,
+      "povertyRate": 6.1,
+      "uninsuredRate": 5.4,
+      "diabetes": 9.7,
+      "hypertension": 30.9,
+      "obesity": 27.6,
+      "asthma": 8.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 83.34,
+          "se": 1.69
+        },
+        "1-4": {
+          "ex": 82.89,
+          "se": 1.63
+        },
+        "5-14": {
+          "ex": 78.95,
+          "se": 1.63
+        },
+        "15-24": {
+          "ex": 69.05,
+          "se": 1.63
+        },
+        "25-34": {
+          "ex": 59.43,
+          "se": 1.62
+        },
+        "35-44": {
+          "ex": 49.88,
+          "se": 1.62
+        },
+        "45-54": {
+          "ex": 40.29,
+          "se": 1.61
+        },
+        "55-64": {
+          "ex": 30.92,
+          "se": 1.62
+        },
+        "65-74": {
+          "ex": 22.15,
+          "se": 1.66
+        },
+        "75-84": {
+          "ex": 13.93,
+          "se": 1.78
+        },
+        "85 and older": {
+          "ex": 7.53,
+          "se": 2.3
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77025": {
+      "lifeExpectancy": 81.96,
+      "lifeExpectancySE": 1.89,
+      "povertyRate": 11.1,
+      "uninsuredRate": 10.0,
+      "diabetes": 9.8,
+      "hypertension": 29.2,
+      "obesity": 29.7,
+      "asthma": 8.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.96,
+          "se": 1.89
+        },
+        "1-4": {
+          "ex": 81.3,
+          "se": 1.89
+        },
+        "5-14": {
+          "ex": 77.35,
+          "se": 1.89
+        },
+        "15-24": {
+          "ex": 67.45,
+          "se": 1.89
+        },
+        "25-34": {
+          "ex": 57.82,
+          "se": 1.89
+        },
+        "35-44": {
+          "ex": 48.2,
+          "se": 1.9
+        },
+        "45-54": {
+          "ex": 38.73,
+          "se": 1.91
+        },
+        "55-64": {
+          "ex": 29.6,
+          "se": 1.94
+        },
+        "65-74": {
+          "ex": 21.05,
+          "se": 2.03
+        },
+        "75-84": {
+          "ex": 13.26,
+          "se": 2.22
+        },
+        "85 and older": {
+          "ex": 6.93,
+          "se": 2.57
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77026": {
+      "lifeExpectancy": 71.58,
+      "lifeExpectancySE": 1.82,
+      "povertyRate": 32.2,
+      "uninsuredRate": 31.5,
+      "diabetes": 22.5,
+      "hypertension": 45.2,
+      "obesity": 48.7,
+      "asthma": 11.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 71.58,
+          "se": 1.82
+        },
+        "1-4": {
+          "ex": 71.66,
+          "se": 1.71
+        },
+        "5-14": {
+          "ex": 67.77,
+          "se": 1.71
+        },
+        "15-24": {
+          "ex": 57.91,
+          "se": 1.71
+        },
+        "25-34": {
+          "ex": 48.52,
+          "se": 1.7
+        },
+        "35-44": {
+          "ex": 39.54,
+          "se": 1.7
+        },
+        "45-54": {
+          "ex": 30.79,
+          "se": 1.69
+        },
+        "55-64": {
+          "ex": 23.24,
+          "se": 1.74
+        },
+        "65-74": {
+          "ex": 16.92,
+          "se": 1.83
+        },
+        "75-84": {
+          "ex": 11.27,
+          "se": 2.04
+        },
+        "85 and older": {
+          "ex": 6.86,
+          "se": 2.96
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77027": {
+      "lifeExpectancy": 84.29,
+      "lifeExpectancySE": 2.68,
+      "povertyRate": 8.0,
+      "uninsuredRate": 7.1,
+      "diabetes": 7.1,
+      "hypertension": 24.7,
+      "obesity": 28.2,
+      "asthma": 8.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 84.29,
+          "se": 2.68
+        },
+        "1-4": {
+          "ex": 83.77,
+          "se": 2.66
+        },
+        "5-14": {
+          "ex": 79.86,
+          "se": 2.66
+        },
+        "15-24": {
+          "ex": 69.87,
+          "se": 2.66
+        },
+        "25-34": {
+          "ex": 60.47,
+          "se": 2.6
+        },
+        "35-44": {
+          "ex": 50.89,
+          "se": 2.59
+        },
+        "45-54": {
+          "ex": 41.45,
+          "se": 2.61
+        },
+        "55-64": {
+          "ex": 32.63,
+          "se": 2.61
+        },
+        "65-74": {
+          "ex": 24.18,
+          "se": 2.72
+        },
+        "75-84": {
+          "ex": 16.01,
+          "se": 2.92
+        },
+        "85 and older": {
+          "ex": 9.17,
+          "se": 3.56
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77028": {
+      "lifeExpectancy": 68.85,
+      "lifeExpectancySE": 1.78,
+      "povertyRate": 33.7,
+      "uninsuredRate": 28.1,
+      "diabetes": 21.7,
+      "hypertension": 45.8,
+      "obesity": 48.0,
+      "asthma": 11.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 68.85,
+          "se": 1.78
+        },
+        "1-4": {
+          "ex": 69.52,
+          "se": 1.52
+        },
+        "5-14": {
+          "ex": 65.65,
+          "se": 1.51
+        },
+        "15-24": {
+          "ex": 55.77,
+          "se": 1.51
+        },
+        "25-34": {
+          "ex": 46.76,
+          "se": 1.47
+        },
+        "35-44": {
+          "ex": 37.77,
+          "se": 1.45
+        },
+        "45-54": {
+          "ex": 29.65,
+          "se": 1.39
+        },
+        "55-64": {
+          "ex": 22.38,
+          "se": 1.39
+        },
+        "65-74": {
+          "ex": 15.64,
+          "se": 1.49
+        },
+        "75-84": {
+          "ex": 10.74,
+          "se": 1.64
+        },
+        "85 and older": {
+          "ex": 6.04,
+          "se": 2.41
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77029": {
+      "lifeExpectancy": 74.71,
+      "lifeExpectancySE": 1.7,
+      "povertyRate": 18.6,
+      "uninsuredRate": 24.9,
+      "diabetes": 19.4,
+      "hypertension": 38.9,
+      "obesity": 43.7,
+      "asthma": 9.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 74.71,
+          "se": 1.7
+        },
+        "1-4": {
+          "ex": 74.2,
+          "se": 1.67
+        },
+        "5-14": {
+          "ex": 70.31,
+          "se": 1.67
+        },
+        "15-24": {
+          "ex": 60.48,
+          "se": 1.66
+        },
+        "25-34": {
+          "ex": 51.11,
+          "se": 1.64
+        },
+        "35-44": {
+          "ex": 41.63,
+          "se": 1.62
+        },
+        "45-54": {
+          "ex": 32.5,
+          "se": 1.58
+        },
+        "55-64": {
+          "ex": 24.11,
+          "se": 1.58
+        },
+        "65-74": {
+          "ex": 16.68,
+          "se": 1.65
+        },
+        "75-84": {
+          "ex": 11.53,
+          "se": 1.69
+        },
+        "85 and older": {
+          "ex": 6.39,
+          "se": 2.34
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77030": {
+      "lifeExpectancy": 80.88,
+      "lifeExpectancySE": 1.43,
+      "povertyRate": 9.1,
+      "uninsuredRate": 3.9,
+      "diabetes": 7.4,
+      "hypertension": 24.2,
+      "obesity": 25.7,
+      "asthma": 7.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.88,
+          "se": 1.43
+        },
+        "1-4": {
+          "ex": 80.35,
+          "se": 1.41
+        },
+        "5-14": {
+          "ex": 76.48,
+          "se": 1.41
+        },
+        "15-24": {
+          "ex": 66.52,
+          "se": 1.41
+        },
+        "25-34": {
+          "ex": 56.81,
+          "se": 1.41
+        },
+        "35-44": {
+          "ex": 47.14,
+          "se": 1.42
+        },
+        "45-54": {
+          "ex": 37.45,
+          "se": 1.42
+        },
+        "55-64": {
+          "ex": 28.43,
+          "se": 1.44
+        },
+        "65-74": {
+          "ex": 19.65,
+          "se": 1.49
+        },
+        "75-84": {
+          "ex": 11.62,
+          "se": 1.55
+        },
+        "85 and older": {
+          "ex": 4.64,
+          "se": 2.01
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77031": {
+      "lifeExpectancy": 78.38,
+      "lifeExpectancySE": 2.01,
+      "povertyRate": 24.5,
+      "uninsuredRate": 37.4,
+      "diabetes": 17.4,
+      "hypertension": 37.6,
+      "obesity": 41.3,
+      "asthma": 9.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.38,
+          "se": 2.01
+        },
+        "1-4": {
+          "ex": 77.97,
+          "se": 1.99
+        },
+        "5-14": {
+          "ex": 73.99,
+          "se": 1.99
+        },
+        "15-24": {
+          "ex": 64.09,
+          "se": 1.99
+        },
+        "25-34": {
+          "ex": 54.44,
+          "se": 2.0
+        },
+        "35-44": {
+          "ex": 44.82,
+          "se": 2.01
+        },
+        "45-54": {
+          "ex": 35.65,
+          "se": 2.01
+        },
+        "55-64": {
+          "ex": 26.75,
+          "se": 2.06
+        },
+        "65-74": {
+          "ex": 18.42,
+          "se": 2.17
+        },
+        "75-84": {
+          "ex": 11.54,
+          "se": 2.49
+        },
+        "85 and older": {
+          "ex": 6.44,
+          "se": 3.54
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77032": {
+      "lifeExpectancy": 73.86,
+      "lifeExpectancySE": 2.33,
+      "povertyRate": 31.7,
+      "uninsuredRate": 29.6,
+      "diabetes": 16.6,
+      "hypertension": 36.4,
+      "obesity": 45.3,
+      "asthma": 10.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 73.86,
+          "se": 2.33
+        },
+        "1-4": {
+          "ex": 74.13,
+          "se": 2.11
+        },
+        "5-14": {
+          "ex": 70.15,
+          "se": 2.12
+        },
+        "15-24": {
+          "ex": 60.34,
+          "se": 2.11
+        },
+        "25-34": {
+          "ex": 50.93,
+          "se": 2.11
+        },
+        "35-44": {
+          "ex": 41.79,
+          "se": 2.11
+        },
+        "45-54": {
+          "ex": 33.46,
+          "se": 2.1
+        },
+        "55-64": {
+          "ex": 25.48,
+          "se": 2.15
+        },
+        "65-74": {
+          "ex": 17.6,
+          "se": 2.26
+        },
+        "75-84": {
+          "ex": 10.9,
+          "se": 2.53
+        },
+        "85 and older": {
+          "ex": 4.59,
+          "se": 3.6
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77033": {
+      "lifeExpectancy": 71.23,
+      "lifeExpectancySE": 1.67,
+      "povertyRate": 33.1,
+      "uninsuredRate": 28.0,
+      "diabetes": 23.4,
+      "hypertension": 48.1,
+      "obesity": 49.2,
+      "asthma": 11.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 71.23,
+          "se": 1.67
+        },
+        "1-4": {
+          "ex": 71.24,
+          "se": 1.49
+        },
+        "5-14": {
+          "ex": 67.48,
+          "se": 1.47
+        },
+        "15-24": {
+          "ex": 57.61,
+          "se": 1.47
+        },
+        "25-34": {
+          "ex": 48.24,
+          "se": 1.45
+        },
+        "35-44": {
+          "ex": 39.31,
+          "se": 1.4
+        },
+        "45-54": {
+          "ex": 30.88,
+          "se": 1.35
+        },
+        "55-64": {
+          "ex": 23.1,
+          "se": 1.36
+        },
+        "65-74": {
+          "ex": 16.78,
+          "se": 1.38
+        },
+        "75-84": {
+          "ex": 10.91,
+          "se": 1.59
+        },
+        "85 and older": {
+          "ex": 6.31,
+          "se": 2.4
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77034": {
+      "lifeExpectancy": 79.7,
+      "lifeExpectancySE": 2.22,
+      "povertyRate": 21.1,
+      "uninsuredRate": 34.2,
+      "diabetes": 14.3,
+      "hypertension": 31.1,
+      "obesity": 39.9,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.7,
+          "se": 2.22
+        },
+        "1-4": {
+          "ex": 79.08,
+          "se": 2.22
+        },
+        "5-14": {
+          "ex": 75.21,
+          "se": 2.22
+        },
+        "15-24": {
+          "ex": 65.31,
+          "se": 2.22
+        },
+        "25-34": {
+          "ex": 55.53,
+          "se": 2.23
+        },
+        "35-44": {
+          "ex": 45.83,
+          "se": 2.23
+        },
+        "45-54": {
+          "ex": 36.31,
+          "se": 2.25
+        },
+        "55-64": {
+          "ex": 27.37,
+          "se": 2.31
+        },
+        "65-74": {
+          "ex": 20.16,
+          "se": 2.51
+        },
+        "75-84": {
+          "ex": 13.39,
+          "se": 2.87
+        },
+        "85 and older": {
+          "ex": 7.63,
+          "se": 3.97
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77035": {
+      "lifeExpectancy": 78.31,
+      "lifeExpectancySE": 2.32,
+      "povertyRate": 21.3,
+      "uninsuredRate": 24.6,
+      "diabetes": 15.0,
+      "hypertension": 35.4,
+      "obesity": 40.6,
+      "asthma": 10.0,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.31,
+          "se": 2.32
+        },
+        "1-4": {
+          "ex": 78.05,
+          "se": 2.29
+        },
+        "5-14": {
+          "ex": 74.14,
+          "se": 2.29
+        },
+        "15-24": {
+          "ex": 64.24,
+          "se": 2.29
+        },
+        "25-34": {
+          "ex": 54.84,
+          "se": 2.27
+        },
+        "35-44": {
+          "ex": 45.3,
+          "se": 2.28
+        },
+        "45-54": {
+          "ex": 35.9,
+          "se": 2.3
+        },
+        "55-64": {
+          "ex": 27.15,
+          "se": 2.36
+        },
+        "65-74": {
+          "ex": 19.66,
+          "se": 2.55
+        },
+        "75-84": {
+          "ex": 13.44,
+          "se": 2.89
+        },
+        "85 and older": {
+          "ex": 8.98,
+          "se": 3.9
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77036": {
+      "lifeExpectancy": 80.01,
+      "lifeExpectancySE": 2.43,
+      "povertyRate": 27.4,
+      "uninsuredRate": 48.0,
+      "diabetes": 17.9,
+      "hypertension": 35.6,
+      "obesity": 41.6,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.01,
+          "se": 2.43
+        },
+        "1-4": {
+          "ex": 79.58,
+          "se": 2.42
+        },
+        "5-14": {
+          "ex": 75.68,
+          "se": 2.43
+        },
+        "15-24": {
+          "ex": 65.77,
+          "se": 2.43
+        },
+        "25-34": {
+          "ex": 56.22,
+          "se": 2.43
+        },
+        "35-44": {
+          "ex": 46.82,
+          "se": 2.44
+        },
+        "45-54": {
+          "ex": 37.34,
+          "se": 2.46
+        },
+        "55-64": {
+          "ex": 28.72,
+          "se": 2.54
+        },
+        "65-74": {
+          "ex": 20.94,
+          "se": 2.71
+        },
+        "75-84": {
+          "ex": 14.11,
+          "se": 3.06
+        },
+        "85 and older": {
+          "ex": 8.46,
+          "se": 4.07
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77037": {
+      "lifeExpectancy": 79.42,
+      "lifeExpectancySE": 2.67,
+      "povertyRate": 32.6,
+      "uninsuredRate": 38.5,
+      "diabetes": 18.0,
+      "hypertension": 33.9,
+      "obesity": 43.6,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.42,
+          "se": 2.67
+        },
+        "1-4": {
+          "ex": 78.94,
+          "se": 2.67
+        },
+        "5-14": {
+          "ex": 74.99,
+          "se": 2.68
+        },
+        "15-24": {
+          "ex": 65.09,
+          "se": 2.68
+        },
+        "25-34": {
+          "ex": 55.56,
+          "se": 2.69
+        },
+        "35-44": {
+          "ex": 46.14,
+          "se": 2.71
+        },
+        "45-54": {
+          "ex": 36.71,
+          "se": 2.74
+        },
+        "55-64": {
+          "ex": 27.82,
+          "se": 2.83
+        },
+        "65-74": {
+          "ex": 20.48,
+          "se": 3.06
+        },
+        "75-84": {
+          "ex": 14.34,
+          "se": 3.66
+        },
+        "85 and older": {
+          "ex": 11.12,
+          "se": 5.36
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77038": {
+      "lifeExpectancy": 76.56,
+      "lifeExpectancySE": 2.64,
+      "povertyRate": 23.3,
+      "uninsuredRate": 37.9,
+      "diabetes": 16.9,
+      "hypertension": 34.2,
+      "obesity": 43.0,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.56,
+          "se": 2.64
+        },
+        "1-4": {
+          "ex": 75.99,
+          "se": 2.63
+        },
+        "5-14": {
+          "ex": 72.18,
+          "se": 2.64
+        },
+        "15-24": {
+          "ex": 62.35,
+          "se": 2.64
+        },
+        "25-34": {
+          "ex": 52.82,
+          "se": 2.65
+        },
+        "35-44": {
+          "ex": 43.67,
+          "se": 2.68
+        },
+        "45-54": {
+          "ex": 34.64,
+          "se": 2.73
+        },
+        "55-64": {
+          "ex": 25.82,
+          "se": 2.81
+        },
+        "65-74": {
+          "ex": 17.62,
+          "se": 3.03
+        },
+        "75-84": {
+          "ex": 9.86,
+          "se": 3.5
+        },
+        "85 and older": {
+          "ex": 5.04,
+          "se": 4.79
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77039": {
+      "lifeExpectancy": 75.46,
+      "lifeExpectancySE": 2.17,
+      "povertyRate": 27.5,
+      "uninsuredRate": 38.6,
+      "diabetes": 18.7,
+      "hypertension": 35.7,
+      "obesity": 44.4,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.46,
+          "se": 2.17
+        },
+        "1-4": {
+          "ex": 74.94,
+          "se": 2.16
+        },
+        "5-14": {
+          "ex": 71.04,
+          "se": 2.16
+        },
+        "15-24": {
+          "ex": 61.15,
+          "se": 2.17
+        },
+        "25-34": {
+          "ex": 51.63,
+          "se": 2.17
+        },
+        "35-44": {
+          "ex": 42.27,
+          "se": 2.18
+        },
+        "45-54": {
+          "ex": 32.98,
+          "se": 2.21
+        },
+        "55-64": {
+          "ex": 24.32,
+          "se": 2.28
+        },
+        "65-74": {
+          "ex": 17.03,
+          "se": 2.5
+        },
+        "75-84": {
+          "ex": 10.82,
+          "se": 3.04
+        },
+        "85 and older": {
+          "ex": 4.8,
+          "se": 4.69
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77040": {
+      "lifeExpectancy": 77.27,
+      "lifeExpectancySE": 2.26,
+      "povertyRate": 18.9,
+      "uninsuredRate": 19.1,
+      "diabetes": 13.7,
+      "hypertension": 32.7,
+      "obesity": 37.8,
+      "asthma": 9.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.27,
+          "se": 2.26
+        },
+        "1-4": {
+          "ex": 76.71,
+          "se": 2.25
+        },
+        "5-14": {
+          "ex": 72.8,
+          "se": 2.25
+        },
+        "15-24": {
+          "ex": 62.9,
+          "se": 2.25
+        },
+        "25-34": {
+          "ex": 53.35,
+          "se": 2.25
+        },
+        "35-44": {
+          "ex": 43.77,
+          "se": 2.25
+        },
+        "45-54": {
+          "ex": 34.32,
+          "se": 2.27
+        },
+        "55-64": {
+          "ex": 25.52,
+          "se": 2.35
+        },
+        "65-74": {
+          "ex": 17.6,
+          "se": 2.52
+        },
+        "75-84": {
+          "ex": 11.22,
+          "se": 2.76
+        },
+        "85 and older": {
+          "ex": 5.35,
+          "se": 4.11
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77041": {
+      "lifeExpectancy": 79.68,
+      "lifeExpectancySE": 2.12,
+      "povertyRate": 8.3,
+      "uninsuredRate": 21.6,
+      "diabetes": 13.9,
+      "hypertension": 32.3,
+      "obesity": 34.6,
+      "asthma": 8.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.68,
+          "se": 2.12
+        },
+        "1-4": {
+          "ex": 78.98,
+          "se": 2.11
+        },
+        "5-14": {
+          "ex": 75.06,
+          "se": 2.11
+        },
+        "15-24": {
+          "ex": 65.16,
+          "se": 2.12
+        },
+        "25-34": {
+          "ex": 55.66,
+          "se": 2.11
+        },
+        "35-44": {
+          "ex": 45.94,
+          "se": 2.12
+        },
+        "45-54": {
+          "ex": 36.52,
+          "se": 2.14
+        },
+        "55-64": {
+          "ex": 27.62,
+          "se": 2.18
+        },
+        "65-74": {
+          "ex": 19.06,
+          "se": 2.3
+        },
+        "75-84": {
+          "ex": 11.78,
+          "se": 2.62
+        },
+        "85 and older": {
+          "ex": 5.9,
+          "se": 3.72
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77042": {
+      "lifeExpectancy": 78.72,
+      "lifeExpectancySE": 1.99,
+      "povertyRate": 19.5,
+      "uninsuredRate": 25.5,
+      "diabetes": 11.2,
+      "hypertension": 30.9,
+      "obesity": 37.4,
+      "asthma": 9.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.72,
+          "se": 1.99
+        },
+        "1-4": {
+          "ex": 78.33,
+          "se": 1.87
+        },
+        "5-14": {
+          "ex": 74.39,
+          "se": 1.87
+        },
+        "15-24": {
+          "ex": 64.49,
+          "se": 1.88
+        },
+        "25-34": {
+          "ex": 54.91,
+          "se": 1.85
+        },
+        "35-44": {
+          "ex": 45.31,
+          "se": 1.85
+        },
+        "45-54": {
+          "ex": 35.76,
+          "se": 1.87
+        },
+        "55-64": {
+          "ex": 26.83,
+          "se": 1.92
+        },
+        "65-74": {
+          "ex": 18.5,
+          "se": 2.01
+        },
+        "75-84": {
+          "ex": 10.73,
+          "se": 2.19
+        },
+        "85 and older": {
+          "ex": 4.31,
+          "se": 3.39
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77043": {
+      "lifeExpectancy": 80.19,
+      "lifeExpectancySE": 2.02,
+      "povertyRate": 14.8,
+      "uninsuredRate": 19.9,
+      "diabetes": 11.8,
+      "hypertension": 30.4,
+      "obesity": 34.3,
+      "asthma": 8.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.19,
+          "se": 2.02
+        },
+        "1-4": {
+          "ex": 79.67,
+          "se": 2.02
+        },
+        "5-14": {
+          "ex": 75.72,
+          "se": 2.02
+        },
+        "15-24": {
+          "ex": 65.79,
+          "se": 2.02
+        },
+        "25-34": {
+          "ex": 56.19,
+          "se": 2.02
+        },
+        "35-44": {
+          "ex": 46.54,
+          "se": 2.02
+        },
+        "45-54": {
+          "ex": 37.19,
+          "se": 2.01
+        },
+        "55-64": {
+          "ex": 28.36,
+          "se": 2.06
+        },
+        "65-74": {
+          "ex": 19.87,
+          "se": 2.17
+        },
+        "75-84": {
+          "ex": 12.58,
+          "se": 2.46
+        },
+        "85 and older": {
+          "ex": 5.85,
+          "se": 3.51
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77044": {
+      "lifeExpectancy": 75.75,
+      "lifeExpectancySE": 2.07,
+      "povertyRate": 12.3,
+      "uninsuredRate": 20.2,
+      "diabetes": 11.8,
+      "hypertension": 30.5,
+      "obesity": 39.2,
+      "asthma": 9.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.75,
+          "se": 2.07
+        },
+        "1-4": {
+          "ex": 75.18,
+          "se": 2.08
+        },
+        "5-14": {
+          "ex": 71.35,
+          "se": 2.07
+        },
+        "15-24": {
+          "ex": 61.42,
+          "se": 2.08
+        },
+        "25-34": {
+          "ex": 51.88,
+          "se": 2.09
+        },
+        "35-44": {
+          "ex": 42.35,
+          "se": 2.1
+        },
+        "45-54": {
+          "ex": 33.2,
+          "se": 2.14
+        },
+        "55-64": {
+          "ex": 24.38,
+          "se": 2.21
+        },
+        "65-74": {
+          "ex": 16.4,
+          "se": 2.42
+        },
+        "75-84": {
+          "ex": 11.55,
+          "se": 3.05
+        },
+        "85 and older": {
+          "ex": 5.8,
+          "se": 4.44
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77045": {
+      "lifeExpectancy": 77.18,
+      "lifeExpectancySE": 2.03,
+      "povertyRate": 21.3,
+      "uninsuredRate": 26.7,
+      "diabetes": 17.9,
+      "hypertension": 38.9,
+      "obesity": 43.3,
+      "asthma": 10.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.18,
+          "se": 2.03
+        },
+        "1-4": {
+          "ex": 76.61,
+          "se": 2.02
+        },
+        "5-14": {
+          "ex": 72.74,
+          "se": 2.02
+        },
+        "15-24": {
+          "ex": 62.85,
+          "se": 2.02
+        },
+        "25-34": {
+          "ex": 53.39,
+          "se": 2.02
+        },
+        "35-44": {
+          "ex": 43.78,
+          "se": 2.03
+        },
+        "45-54": {
+          "ex": 34.64,
+          "se": 2.04
+        },
+        "55-64": {
+          "ex": 26.21,
+          "se": 2.11
+        },
+        "65-74": {
+          "ex": 18.82,
+          "se": 2.28
+        },
+        "75-84": {
+          "ex": 12.32,
+          "se": 2.74
+        },
+        "85 and older": {
+          "ex": 7.76,
+          "se": 4.33
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77046": {
+      "lifeExpectancy": 84.69,
+      "lifeExpectancySE": 3.08,
+      "povertyRate": 6.5,
+      "uninsuredRate": 6.5,
+      "diabetes": 7.8,
+      "hypertension": 26.4,
+      "obesity": 28.6,
+      "asthma": 8.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 84.69,
+          "se": 3.08
+        },
+        "1-4": {
+          "ex": 84.4,
+          "se": 2.93
+        },
+        "5-14": {
+          "ex": 80.46,
+          "se": 2.93
+        },
+        "15-24": {
+          "ex": 70.5,
+          "se": 2.94
+        },
+        "25-34": {
+          "ex": 60.74,
+          "se": 2.94
+        },
+        "35-44": {
+          "ex": 50.89,
+          "se": 2.95
+        },
+        "45-54": {
+          "ex": 41.23,
+          "se": 2.96
+        },
+        "55-64": {
+          "ex": 31.93,
+          "se": 3.01
+        },
+        "65-74": {
+          "ex": 23.97,
+          "se": 3.19
+        },
+        "75-84": {
+          "ex": 15.84,
+          "se": 3.46
+        },
+        "85 and older": {
+          "ex": 8.87,
+          "se": 4.21
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77047": {
+      "lifeExpectancy": 75.79,
+      "lifeExpectancySE": 2.11,
+      "povertyRate": 9.0,
+      "uninsuredRate": 16.4,
+      "diabetes": 13.1,
+      "hypertension": 34.9,
+      "obesity": 40.1,
+      "asthma": 10.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.79,
+          "se": 2.11
+        },
+        "1-4": {
+          "ex": 76.09,
+          "se": 1.88
+        },
+        "5-14": {
+          "ex": 72.19,
+          "se": 1.87
+        },
+        "15-24": {
+          "ex": 62.25,
+          "se": 1.87
+        },
+        "25-34": {
+          "ex": 52.86,
+          "se": 1.87
+        },
+        "35-44": {
+          "ex": 43.62,
+          "se": 1.87
+        },
+        "45-54": {
+          "ex": 34.65,
+          "se": 1.88
+        },
+        "55-64": {
+          "ex": 26.24,
+          "se": 1.93
+        },
+        "65-74": {
+          "ex": 18.87,
+          "se": 2.1
+        },
+        "75-84": {
+          "ex": 12.07,
+          "se": 2.44
+        },
+        "85 and older": {
+          "ex": 6.35,
+          "se": 3.59
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77048": {
+      "lifeExpectancy": 73.54,
+      "lifeExpectancySE": 1.6,
+      "povertyRate": 28.8,
+      "uninsuredRate": 17.7,
+      "diabetes": 17.8,
+      "hypertension": 41.7,
+      "obesity": 45.4,
+      "asthma": 11.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 73.54,
+          "se": 1.6
+        },
+        "1-4": {
+          "ex": 73.19,
+          "se": 1.58
+        },
+        "5-14": {
+          "ex": 69.46,
+          "se": 1.57
+        },
+        "15-24": {
+          "ex": 59.68,
+          "se": 1.56
+        },
+        "25-34": {
+          "ex": 50.18,
+          "se": 1.55
+        },
+        "35-44": {
+          "ex": 40.97,
+          "se": 1.54
+        },
+        "45-54": {
+          "ex": 32.56,
+          "se": 1.51
+        },
+        "55-64": {
+          "ex": 24.47,
+          "se": 1.52
+        },
+        "65-74": {
+          "ex": 17.44,
+          "se": 1.61
+        },
+        "75-84": {
+          "ex": 11.3,
+          "se": 1.88
+        },
+        "85 and older": {
+          "ex": 5.04,
+          "se": 2.76
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77049": {
+      "lifeExpectancy": 77.73,
+      "lifeExpectancySE": 2.36,
+      "povertyRate": 15.7,
+      "uninsuredRate": 24.0,
+      "diabetes": 12.9,
+      "hypertension": 30.4,
+      "obesity": 40.0,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.73,
+          "se": 2.36
+        },
+        "1-4": {
+          "ex": 77.27,
+          "se": 2.36
+        },
+        "5-14": {
+          "ex": 73.33,
+          "se": 2.36
+        },
+        "15-24": {
+          "ex": 63.43,
+          "se": 2.37
+        },
+        "25-34": {
+          "ex": 53.87,
+          "se": 2.38
+        },
+        "35-44": {
+          "ex": 44.39,
+          "se": 2.4
+        },
+        "45-54": {
+          "ex": 35.09,
+          "se": 2.43
+        },
+        "55-64": {
+          "ex": 26.22,
+          "se": 2.51
+        },
+        "65-74": {
+          "ex": 18.57,
+          "se": 2.74
+        },
+        "75-84": {
+          "ex": 12.1,
+          "se": 3.3
+        },
+        "85 and older": {
+          "ex": 7.81,
+          "se": 4.63
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77050": {
+      "lifeExpectancy": 75.96,
+      "lifeExpectancySE": 1.9,
+      "povertyRate": 50.4,
+      "uninsuredRate": 48.1,
+      "diabetes": 22.2,
+      "hypertension": 42.9,
+      "obesity": 48.3,
+      "asthma": 10.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.96,
+          "se": 1.9
+        },
+        "1-4": {
+          "ex": 75.63,
+          "se": 1.85
+        },
+        "5-14": {
+          "ex": 71.64,
+          "se": 1.85
+        },
+        "15-24": {
+          "ex": 61.84,
+          "se": 1.85
+        },
+        "25-34": {
+          "ex": 52.25,
+          "se": 1.84
+        },
+        "35-44": {
+          "ex": 42.96,
+          "se": 1.84
+        },
+        "45-54": {
+          "ex": 33.69,
+          "se": 1.85
+        },
+        "55-64": {
+          "ex": 25.81,
+          "se": 1.87
+        },
+        "65-74": {
+          "ex": 17.79,
+          "se": 1.98
+        },
+        "75-84": {
+          "ex": 12.04,
+          "se": 2.46
+        },
+        "85 and older": {
+          "ex": 6.87,
+          "se": 3.7
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77051": {
+      "lifeExpectancy": 70.32,
+      "lifeExpectancySE": 1.62,
+      "povertyRate": 38.0,
+      "uninsuredRate": 23.3,
+      "diabetes": 22.3,
+      "hypertension": 47.8,
+      "obesity": 49.6,
+      "asthma": 12.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 70.32,
+          "se": 1.62
+        },
+        "1-4": {
+          "ex": 69.87,
+          "se": 1.49
+        },
+        "5-14": {
+          "ex": 65.97,
+          "se": 1.49
+        },
+        "15-24": {
+          "ex": 56.21,
+          "se": 1.48
+        },
+        "25-34": {
+          "ex": 46.86,
+          "se": 1.47
+        },
+        "35-44": {
+          "ex": 37.77,
+          "se": 1.44
+        },
+        "45-54": {
+          "ex": 29.56,
+          "se": 1.39
+        },
+        "55-64": {
+          "ex": 22.86,
+          "se": 1.27
+        },
+        "65-74": {
+          "ex": 16.24,
+          "se": 1.29
+        },
+        "75-84": {
+          "ex": 10.33,
+          "se": 1.33
+        },
+        "85 and older": {
+          "ex": 4.46,
+          "se": 1.89
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77054": {
+      "lifeExpectancy": 77.25,
+      "lifeExpectancySE": 3.08,
+      "povertyRate": 21.7,
+      "uninsuredRate": 12.8,
+      "diabetes": 7.7,
+      "hypertension": 24.3,
+      "obesity": 31.9,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.25,
+          "se": 3.08
+        },
+        "1-4": {
+          "ex": 76.65,
+          "se": 3.08
+        },
+        "5-14": {
+          "ex": 72.76,
+          "se": 3.08
+        },
+        "15-24": {
+          "ex": 63.64,
+          "se": 2.85
+        },
+        "25-34": {
+          "ex": 54.02,
+          "se": 2.86
+        },
+        "35-44": {
+          "ex": 44.33,
+          "se": 2.88
+        },
+        "45-54": {
+          "ex": 34.76,
+          "se": 2.91
+        },
+        "55-64": {
+          "ex": 27.5,
+          "se": 2.88
+        },
+        "65-74": {
+          "ex": 19.88,
+          "se": 3.11
+        },
+        "75-84": {
+          "ex": 12.29,
+          "se": 3.49
+        },
+        "85 and older": {
+          "ex": 6.88,
+          "se": 4.8
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77055": {
+      "lifeExpectancy": 78.24,
+      "lifeExpectancySE": 2.23,
+      "povertyRate": 21.5,
+      "uninsuredRate": 24.9,
+      "diabetes": 12.6,
+      "hypertension": 30.7,
+      "obesity": 36.2,
+      "asthma": 8.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.24,
+          "se": 2.23
+        },
+        "1-4": {
+          "ex": 77.71,
+          "se": 2.22
+        },
+        "5-14": {
+          "ex": 73.8,
+          "se": 2.22
+        },
+        "15-24": {
+          "ex": 63.93,
+          "se": 2.22
+        },
+        "25-34": {
+          "ex": 54.53,
+          "se": 2.21
+        },
+        "35-44": {
+          "ex": 45.12,
+          "se": 2.22
+        },
+        "45-54": {
+          "ex": 35.85,
+          "se": 2.23
+        },
+        "55-64": {
+          "ex": 27.24,
+          "se": 2.29
+        },
+        "65-74": {
+          "ex": 19.11,
+          "se": 2.4
+        },
+        "75-84": {
+          "ex": 12.16,
+          "se": 2.72
+        },
+        "85 and older": {
+          "ex": 7.94,
+          "se": 3.66
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77056": {
+      "lifeExpectancy": 81.33,
+      "lifeExpectancySE": 2.11,
+      "povertyRate": 8.2,
+      "uninsuredRate": 9.0,
+      "diabetes": 9.0,
+      "hypertension": 29.4,
+      "obesity": 29.1,
+      "asthma": 8.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.33,
+          "se": 2.11
+        },
+        "1-4": {
+          "ex": 81.01,
+          "se": 2.02
+        },
+        "5-14": {
+          "ex": 77.06,
+          "se": 2.02
+        },
+        "15-24": {
+          "ex": 67.43,
+          "se": 1.9
+        },
+        "25-34": {
+          "ex": 57.81,
+          "se": 1.89
+        },
+        "35-44": {
+          "ex": 48.16,
+          "se": 1.89
+        },
+        "45-54": {
+          "ex": 38.49,
+          "se": 1.89
+        },
+        "55-64": {
+          "ex": 29.4,
+          "se": 1.89
+        },
+        "65-74": {
+          "ex": 20.8,
+          "se": 1.95
+        },
+        "75-84": {
+          "ex": 12.47,
+          "se": 2.08
+        },
+        "85 and older": {
+          "ex": 7.15,
+          "se": 2.39
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77057": {
+      "lifeExpectancy": 81.89,
+      "lifeExpectancySE": 2.12,
+      "povertyRate": 18.0,
+      "uninsuredRate": 24.6,
+      "diabetes": 10.4,
+      "hypertension": 29.3,
+      "obesity": 34.2,
+      "asthma": 8.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.89,
+          "se": 2.12
+        },
+        "1-4": {
+          "ex": 81.27,
+          "se": 2.12
+        },
+        "5-14": {
+          "ex": 77.33,
+          "se": 2.12
+        },
+        "15-24": {
+          "ex": 67.37,
+          "se": 2.12
+        },
+        "25-34": {
+          "ex": 58.14,
+          "se": 2.01
+        },
+        "35-44": {
+          "ex": 48.5,
+          "se": 2.01
+        },
+        "45-54": {
+          "ex": 38.93,
+          "se": 2.03
+        },
+        "55-64": {
+          "ex": 29.66,
+          "se": 2.06
+        },
+        "65-74": {
+          "ex": 21.06,
+          "se": 2.15
+        },
+        "75-84": {
+          "ex": 13.33,
+          "se": 2.38
+        },
+        "85 and older": {
+          "ex": 6.63,
+          "se": 2.94
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77058": {
+      "lifeExpectancy": 79.81,
+      "lifeExpectancySE": 2.56,
+      "povertyRate": 11.8,
+      "uninsuredRate": 17.4,
+      "diabetes": 10.0,
+      "hypertension": 29.7,
+      "obesity": 32.3,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.81,
+          "se": 2.56
+        },
+        "1-4": {
+          "ex": 79.79,
+          "se": 2.3
+        },
+        "5-14": {
+          "ex": 75.93,
+          "se": 2.3
+        },
+        "15-24": {
+          "ex": 65.96,
+          "se": 2.3
+        },
+        "25-34": {
+          "ex": 56.23,
+          "se": 2.3
+        },
+        "35-44": {
+          "ex": 46.78,
+          "se": 2.31
+        },
+        "45-54": {
+          "ex": 37.11,
+          "se": 2.32
+        },
+        "55-64": {
+          "ex": 28.32,
+          "se": 2.38
+        },
+        "65-74": {
+          "ex": 20.15,
+          "se": 2.53
+        },
+        "75-84": {
+          "ex": 12.75,
+          "se": 2.86
+        },
+        "85 and older": {
+          "ex": 7.13,
+          "se": 4.13
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77059": {
+      "lifeExpectancy": 81.79,
+      "lifeExpectancySE": 2.52,
+      "povertyRate": 4.9,
+      "uninsuredRate": 6.1,
+      "diabetes": 10.1,
+      "hypertension": 30.6,
+      "obesity": 27.7,
+      "asthma": 8.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.79,
+          "se": 2.52
+        },
+        "1-4": {
+          "ex": 81.57,
+          "se": 2.18
+        },
+        "5-14": {
+          "ex": 77.79,
+          "se": 2.15
+        },
+        "15-24": {
+          "ex": 67.85,
+          "se": 2.15
+        },
+        "25-34": {
+          "ex": 58.28,
+          "se": 2.15
+        },
+        "35-44": {
+          "ex": 48.71,
+          "se": 2.16
+        },
+        "45-54": {
+          "ex": 39.19,
+          "se": 2.17
+        },
+        "55-64": {
+          "ex": 29.75,
+          "se": 2.19
+        },
+        "65-74": {
+          "ex": 20.69,
+          "se": 2.26
+        },
+        "75-84": {
+          "ex": 12.52,
+          "se": 2.48
+        },
+        "85 and older": {
+          "ex": 6.65,
+          "se": 3.43
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77060": {
+      "lifeExpectancy": 75.8,
+      "lifeExpectancySE": 2.51,
+      "povertyRate": 34.4,
+      "uninsuredRate": 41.7,
+      "diabetes": 17.8,
+      "hypertension": 35.4,
+      "obesity": 47.1,
+      "asthma": 10.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.8,
+          "se": 2.51
+        },
+        "1-4": {
+          "ex": 75.25,
+          "se": 2.49
+        },
+        "5-14": {
+          "ex": 71.35,
+          "se": 2.5
+        },
+        "15-24": {
+          "ex": 61.46,
+          "se": 2.5
+        },
+        "25-34": {
+          "ex": 51.91,
+          "se": 2.51
+        },
+        "35-44": {
+          "ex": 42.45,
+          "se": 2.54
+        },
+        "45-54": {
+          "ex": 33.2,
+          "se": 2.58
+        },
+        "55-64": {
+          "ex": 24.67,
+          "se": 2.7
+        },
+        "65-74": {
+          "ex": 17.1,
+          "se": 2.97
+        },
+        "75-84": {
+          "ex": 10.12,
+          "se": 3.51
+        },
+        "85 and older": {
+          "ex": 5.35,
+          "se": 4.82
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77061": {
+      "lifeExpectancy": 75.66,
+      "lifeExpectancySE": 1.75,
+      "povertyRate": 18.6,
+      "uninsuredRate": 29.3,
+      "diabetes": 17.2,
+      "hypertension": 36.0,
+      "obesity": 41.8,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.66,
+          "se": 1.75
+        },
+        "1-4": {
+          "ex": 75.34,
+          "se": 1.73
+        },
+        "5-14": {
+          "ex": 71.54,
+          "se": 1.73
+        },
+        "15-24": {
+          "ex": 61.64,
+          "se": 1.73
+        },
+        "25-34": {
+          "ex": 52.14,
+          "se": 1.73
+        },
+        "35-44": {
+          "ex": 42.56,
+          "se": 1.73
+        },
+        "45-54": {
+          "ex": 33.26,
+          "se": 1.74
+        },
+        "55-64": {
+          "ex": 24.77,
+          "se": 1.79
+        },
+        "65-74": {
+          "ex": 16.91,
+          "se": 1.9
+        },
+        "75-84": {
+          "ex": 10.66,
+          "se": 2.12
+        },
+        "85 and older": {
+          "ex": 5.19,
+          "se": 2.74
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77062": {
+      "lifeExpectancy": 81.98,
+      "lifeExpectancySE": 2.33,
+      "povertyRate": 9.8,
+      "uninsuredRate": 9.9,
+      "diabetes": 11.0,
+      "hypertension": 32.0,
+      "obesity": 31.3,
+      "asthma": 8.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.98,
+          "se": 2.33
+        },
+        "1-4": {
+          "ex": 81.61,
+          "se": 2.31
+        },
+        "5-14": {
+          "ex": 77.66,
+          "se": 2.31
+        },
+        "15-24": {
+          "ex": 67.75,
+          "se": 2.31
+        },
+        "25-34": {
+          "ex": 58.31,
+          "se": 2.28
+        },
+        "35-44": {
+          "ex": 48.7,
+          "se": 2.27
+        },
+        "45-54": {
+          "ex": 39.14,
+          "se": 2.28
+        },
+        "55-64": {
+          "ex": 30.05,
+          "se": 2.3
+        },
+        "65-74": {
+          "ex": 21.39,
+          "se": 2.39
+        },
+        "75-84": {
+          "ex": 13.68,
+          "se": 2.63
+        },
+        "85 and older": {
+          "ex": 7.96,
+          "se": 3.45
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77063": {
+      "lifeExpectancy": 79.23,
+      "lifeExpectancySE": 2.12,
+      "povertyRate": 18.5,
+      "uninsuredRate": 25.3,
+      "diabetes": 10.7,
+      "hypertension": 29.9,
+      "obesity": 35.6,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.23,
+          "se": 2.12
+        },
+        "1-4": {
+          "ex": 78.73,
+          "se": 2.09
+        },
+        "5-14": {
+          "ex": 74.86,
+          "se": 2.09
+        },
+        "15-24": {
+          "ex": 64.93,
+          "se": 2.09
+        },
+        "25-34": {
+          "ex": 55.33,
+          "se": 2.08
+        },
+        "35-44": {
+          "ex": 45.73,
+          "se": 2.09
+        },
+        "45-54": {
+          "ex": 36.43,
+          "se": 2.1
+        },
+        "55-64": {
+          "ex": 27.54,
+          "se": 2.13
+        },
+        "65-74": {
+          "ex": 19.47,
+          "se": 2.2
+        },
+        "75-84": {
+          "ex": 11.94,
+          "se": 2.43
+        },
+        "85 and older": {
+          "ex": 5.83,
+          "se": 3.1
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77064": {
+      "lifeExpectancy": 77.86,
+      "lifeExpectancySE": 2.06,
+      "povertyRate": 12.1,
+      "uninsuredRate": 18.1,
+      "diabetes": 12.9,
+      "hypertension": 31.3,
+      "obesity": 35.0,
+      "asthma": 9.0,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.86,
+          "se": 2.06
+        },
+        "1-4": {
+          "ex": 77.67,
+          "se": 2.04
+        },
+        "5-14": {
+          "ex": 73.75,
+          "se": 2.04
+        },
+        "15-24": {
+          "ex": 63.82,
+          "se": 2.04
+        },
+        "25-34": {
+          "ex": 54.19,
+          "se": 2.05
+        },
+        "35-44": {
+          "ex": 44.69,
+          "se": 2.07
+        },
+        "45-54": {
+          "ex": 35.35,
+          "se": 2.09
+        },
+        "55-64": {
+          "ex": 26.5,
+          "se": 2.16
+        },
+        "65-74": {
+          "ex": 18.5,
+          "se": 2.31
+        },
+        "75-84": {
+          "ex": 11.2,
+          "se": 2.6
+        },
+        "85 and older": {
+          "ex": 5.78,
+          "se": 3.51
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77065": {
+      "lifeExpectancy": 78.11,
+      "lifeExpectancySE": 2.57,
+      "povertyRate": 8.0,
+      "uninsuredRate": 18.1,
+      "diabetes": 11.9,
+      "hypertension": 32.0,
+      "obesity": 34.9,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.11,
+          "se": 2.57
+        },
+        "1-4": {
+          "ex": 77.88,
+          "se": 2.48
+        },
+        "5-14": {
+          "ex": 74.04,
+          "se": 2.47
+        },
+        "15-24": {
+          "ex": 64.14,
+          "se": 2.47
+        },
+        "25-34": {
+          "ex": 54.66,
+          "se": 2.48
+        },
+        "35-44": {
+          "ex": 45.05,
+          "se": 2.49
+        },
+        "45-54": {
+          "ex": 35.64,
+          "se": 2.52
+        },
+        "55-64": {
+          "ex": 26.58,
+          "se": 2.58
+        },
+        "65-74": {
+          "ex": 18.49,
+          "se": 2.74
+        },
+        "75-84": {
+          "ex": 11.13,
+          "se": 3.15
+        },
+        "85 and older": {
+          "ex": 7.55,
+          "se": 4.4
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77066": {
+      "lifeExpectancy": 79.03,
+      "lifeExpectancySE": 2.6,
+      "povertyRate": 16.0,
+      "uninsuredRate": 21.9,
+      "diabetes": 14.3,
+      "hypertension": 33.1,
+      "obesity": 36.8,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.03,
+          "se": 2.6
+        },
+        "1-4": {
+          "ex": 78.48,
+          "se": 2.59
+        },
+        "5-14": {
+          "ex": 74.58,
+          "se": 2.59
+        },
+        "15-24": {
+          "ex": 64.66,
+          "se": 2.6
+        },
+        "25-34": {
+          "ex": 55.36,
+          "se": 2.61
+        },
+        "35-44": {
+          "ex": 45.83,
+          "se": 2.63
+        },
+        "45-54": {
+          "ex": 36.74,
+          "se": 2.68
+        },
+        "55-64": {
+          "ex": 27.75,
+          "se": 2.75
+        },
+        "65-74": {
+          "ex": 20.06,
+          "se": 3.0
+        },
+        "75-84": {
+          "ex": 13.41,
+          "se": 3.57
+        },
+        "85 and older": {
+          "ex": 8.03,
+          "se": 5.23
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77067": {
+      "lifeExpectancy": 75.21,
+      "lifeExpectancySE": 2.29,
+      "povertyRate": 23.6,
+      "uninsuredRate": 28.6,
+      "diabetes": 16.0,
+      "hypertension": 35.1,
+      "obesity": 43.2,
+      "asthma": 10.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.21,
+          "se": 2.29
+        },
+        "1-4": {
+          "ex": 74.91,
+          "se": 2.29
+        },
+        "5-14": {
+          "ex": 71.01,
+          "se": 2.29
+        },
+        "15-24": {
+          "ex": 61.11,
+          "se": 2.29
+        },
+        "25-34": {
+          "ex": 51.65,
+          "se": 2.31
+        },
+        "35-44": {
+          "ex": 42.39,
+          "se": 2.33
+        },
+        "45-54": {
+          "ex": 33.32,
+          "se": 2.38
+        },
+        "55-64": {
+          "ex": 24.72,
+          "se": 2.49
+        },
+        "65-74": {
+          "ex": 17.32,
+          "se": 2.77
+        },
+        "75-84": {
+          "ex": 10.83,
+          "se": 3.31
+        },
+        "85 and older": {
+          "ex": 5.28,
+          "se": 4.85
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77068": {
+      "lifeExpectancy": 80.78,
+      "lifeExpectancySE": 2.13,
+      "povertyRate": 8.8,
+      "uninsuredRate": 17.7,
+      "diabetes": 13.6,
+      "hypertension": 35.3,
+      "obesity": 36.2,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.78,
+          "se": 2.13
+        },
+        "1-4": {
+          "ex": 80.18,
+          "se": 2.13
+        },
+        "5-14": {
+          "ex": 76.43,
+          "se": 2.13
+        },
+        "15-24": {
+          "ex": 66.63,
+          "se": 2.12
+        },
+        "25-34": {
+          "ex": 57.03,
+          "se": 2.12
+        },
+        "35-44": {
+          "ex": 47.97,
+          "se": 2.12
+        },
+        "45-54": {
+          "ex": 38.37,
+          "se": 2.13
+        },
+        "55-64": {
+          "ex": 29.96,
+          "se": 2.19
+        },
+        "65-74": {
+          "ex": 21.49,
+          "se": 2.28
+        },
+        "75-84": {
+          "ex": 13.75,
+          "se": 2.54
+        },
+        "85 and older": {
+          "ex": 9.27,
+          "se": 3.65
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77069": {
+      "lifeExpectancy": 84.14,
+      "lifeExpectancySE": 2.11,
+      "povertyRate": 18.9,
+      "uninsuredRate": 11.8,
+      "diabetes": 13.2,
+      "hypertension": 37.0,
+      "obesity": 35.3,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 84.14,
+          "se": 2.11
+        },
+        "1-4": {
+          "ex": 83.82,
+          "se": 2.09
+        },
+        "5-14": {
+          "ex": 79.92,
+          "se": 2.09
+        },
+        "15-24": {
+          "ex": 70.2,
+          "se": 2.09
+        },
+        "25-34": {
+          "ex": 60.45,
+          "se": 2.09
+        },
+        "35-44": {
+          "ex": 50.78,
+          "se": 2.09
+        },
+        "45-54": {
+          "ex": 41.31,
+          "se": 2.1
+        },
+        "55-64": {
+          "ex": 32.28,
+          "se": 2.14
+        },
+        "65-74": {
+          "ex": 23.58,
+          "se": 2.23
+        },
+        "75-84": {
+          "ex": 15.78,
+          "se": 2.46
+        },
+        "85 and older": {
+          "ex": 11.74,
+          "se": 3.48
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77070": {
+      "lifeExpectancy": 79.28,
+      "lifeExpectancySE": 1.81,
+      "povertyRate": 13.3,
+      "uninsuredRate": 16.5,
+      "diabetes": 11.9,
+      "hypertension": 32.2,
+      "obesity": 35.2,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.28,
+          "se": 1.81
+        },
+        "1-4": {
+          "ex": 78.86,
+          "se": 1.79
+        },
+        "5-14": {
+          "ex": 74.93,
+          "se": 1.79
+        },
+        "15-24": {
+          "ex": 65.04,
+          "se": 1.79
+        },
+        "25-34": {
+          "ex": 55.51,
+          "se": 1.79
+        },
+        "35-44": {
+          "ex": 45.84,
+          "se": 1.79
+        },
+        "45-54": {
+          "ex": 36.42,
+          "se": 1.8
+        },
+        "55-64": {
+          "ex": 27.47,
+          "se": 1.84
+        },
+        "65-74": {
+          "ex": 19.15,
+          "se": 1.94
+        },
+        "75-84": {
+          "ex": 12.06,
+          "se": 2.17
+        },
+        "85 and older": {
+          "ex": 6.26,
+          "se": 2.93
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77071": {
+      "lifeExpectancy": 79.04,
+      "lifeExpectancySE": 2.02,
+      "povertyRate": 14.8,
+      "uninsuredRate": 19.8,
+      "diabetes": 16.3,
+      "hypertension": 38.9,
+      "obesity": 39.6,
+      "asthma": 10.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.04,
+          "se": 2.02
+        },
+        "1-4": {
+          "ex": 78.6,
+          "se": 2.02
+        },
+        "5-14": {
+          "ex": 74.68,
+          "se": 2.02
+        },
+        "15-24": {
+          "ex": 64.77,
+          "se": 2.02
+        },
+        "25-34": {
+          "ex": 55.2,
+          "se": 2.03
+        },
+        "35-44": {
+          "ex": 45.77,
+          "se": 2.04
+        },
+        "45-54": {
+          "ex": 36.39,
+          "se": 2.06
+        },
+        "55-64": {
+          "ex": 27.75,
+          "se": 2.12
+        },
+        "65-74": {
+          "ex": 19.81,
+          "se": 2.28
+        },
+        "75-84": {
+          "ex": 12.79,
+          "se": 2.65
+        },
+        "85 and older": {
+          "ex": 7.36,
+          "se": 3.68
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77072": {
+      "lifeExpectancy": 78.86,
+      "lifeExpectancySE": 2.47,
+      "povertyRate": 21.5,
+      "uninsuredRate": 30.3,
+      "diabetes": 18.1,
+      "hypertension": 36.2,
+      "obesity": 38.7,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.86,
+          "se": 2.47
+        },
+        "1-4": {
+          "ex": 78.29,
+          "se": 2.46
+        },
+        "5-14": {
+          "ex": 74.38,
+          "se": 2.46
+        },
+        "15-24": {
+          "ex": 64.46,
+          "se": 2.47
+        },
+        "25-34": {
+          "ex": 54.86,
+          "se": 2.48
+        },
+        "35-44": {
+          "ex": 45.4,
+          "se": 2.49
+        },
+        "45-54": {
+          "ex": 36.1,
+          "se": 2.53
+        },
+        "55-64": {
+          "ex": 27.64,
+          "se": 2.63
+        },
+        "65-74": {
+          "ex": 20.01,
+          "se": 2.86
+        },
+        "75-84": {
+          "ex": 13.0,
+          "se": 3.34
+        },
+        "85 and older": {
+          "ex": 7.32,
+          "se": 4.78
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77073": {
+      "lifeExpectancy": 76.84,
+      "lifeExpectancySE": 2.83,
+      "povertyRate": 13.6,
+      "uninsuredRate": 20.5,
+      "diabetes": 12.9,
+      "hypertension": 31.3,
+      "obesity": 41.5,
+      "asthma": 9.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.84,
+          "se": 2.83
+        },
+        "1-4": {
+          "ex": 76.32,
+          "se": 2.85
+        },
+        "5-14": {
+          "ex": 72.4,
+          "se": 2.85
+        },
+        "15-24": {
+          "ex": 62.5,
+          "se": 2.85
+        },
+        "25-34": {
+          "ex": 52.86,
+          "se": 2.87
+        },
+        "35-44": {
+          "ex": 43.34,
+          "se": 2.89
+        },
+        "45-54": {
+          "ex": 34.0,
+          "se": 2.94
+        },
+        "55-64": {
+          "ex": 25.1,
+          "se": 3.04
+        },
+        "65-74": {
+          "ex": 16.84,
+          "se": 3.27
+        },
+        "75-84": {
+          "ex": 9.36,
+          "se": 3.81
+        },
+        "85 and older": {
+          "ex": 5.58,
+          "se": 6.48
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77074": {
+      "lifeExpectancy": 79.55,
+      "lifeExpectancySE": 2.31,
+      "povertyRate": 25.3,
+      "uninsuredRate": 38.0,
+      "diabetes": 16.6,
+      "hypertension": 34.8,
+      "obesity": 41.0,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.55,
+          "se": 2.31
+        },
+        "1-4": {
+          "ex": 79.23,
+          "se": 2.26
+        },
+        "5-14": {
+          "ex": 75.37,
+          "se": 2.26
+        },
+        "15-24": {
+          "ex": 65.51,
+          "se": 2.26
+        },
+        "25-34": {
+          "ex": 55.97,
+          "se": 2.26
+        },
+        "35-44": {
+          "ex": 46.53,
+          "se": 2.26
+        },
+        "45-54": {
+          "ex": 37.26,
+          "se": 2.26
+        },
+        "55-64": {
+          "ex": 28.43,
+          "se": 2.31
+        },
+        "65-74": {
+          "ex": 20.66,
+          "se": 2.43
+        },
+        "75-84": {
+          "ex": 13.41,
+          "se": 2.68
+        },
+        "85 and older": {
+          "ex": 8.15,
+          "se": 3.54
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77075": {
+      "lifeExpectancy": 77.66,
+      "lifeExpectancySE": 2.11,
+      "povertyRate": 12.2,
+      "uninsuredRate": 30.7,
+      "diabetes": 14.5,
+      "hypertension": 31.3,
+      "obesity": 38.6,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.66,
+          "se": 2.11
+        },
+        "1-4": {
+          "ex": 77.33,
+          "se": 2.09
+        },
+        "5-14": {
+          "ex": 73.43,
+          "se": 2.09
+        },
+        "15-24": {
+          "ex": 63.51,
+          "se": 2.1
+        },
+        "25-34": {
+          "ex": 53.91,
+          "se": 2.1
+        },
+        "35-44": {
+          "ex": 44.44,
+          "se": 2.11
+        },
+        "45-54": {
+          "ex": 35.06,
+          "se": 2.14
+        },
+        "55-64": {
+          "ex": 26.11,
+          "se": 2.2
+        },
+        "65-74": {
+          "ex": 18.02,
+          "se": 2.35
+        },
+        "75-84": {
+          "ex": 10.91,
+          "se": 2.71
+        },
+        "85 and older": {
+          "ex": 5.27,
+          "se": 3.82
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77076": {
+      "lifeExpectancy": 76.68,
+      "lifeExpectancySE": 1.64,
+      "povertyRate": 29.9,
+      "uninsuredRate": 36.2,
+      "diabetes": 18.9,
+      "hypertension": 35.5,
+      "obesity": 45.1,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.68,
+          "se": 1.64
+        },
+        "1-4": {
+          "ex": 76.15,
+          "se": 1.63
+        },
+        "5-14": {
+          "ex": 72.22,
+          "se": 1.63
+        },
+        "15-24": {
+          "ex": 62.39,
+          "se": 1.63
+        },
+        "25-34": {
+          "ex": 52.74,
+          "se": 1.64
+        },
+        "35-44": {
+          "ex": 43.2,
+          "se": 1.64
+        },
+        "45-54": {
+          "ex": 33.81,
+          "se": 1.66
+        },
+        "55-64": {
+          "ex": 25.47,
+          "se": 1.71
+        },
+        "65-74": {
+          "ex": 17.66,
+          "se": 1.82
+        },
+        "75-84": {
+          "ex": 10.84,
+          "se": 2.09
+        },
+        "85 and older": {
+          "ex": 5.92,
+          "se": 2.85
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77077": {
+      "lifeExpectancy": 80.52,
+      "lifeExpectancySE": 1.95,
+      "povertyRate": 11.0,
+      "uninsuredRate": 15.4,
+      "diabetes": 10.2,
+      "hypertension": 30.4,
+      "obesity": 33.2,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.52,
+          "se": 1.95
+        },
+        "1-4": {
+          "ex": 79.96,
+          "se": 1.94
+        },
+        "5-14": {
+          "ex": 76.03,
+          "se": 1.94
+        },
+        "15-24": {
+          "ex": 66.19,
+          "se": 1.94
+        },
+        "25-34": {
+          "ex": 56.5,
+          "se": 1.92
+        },
+        "35-44": {
+          "ex": 46.97,
+          "se": 1.92
+        },
+        "45-54": {
+          "ex": 37.43,
+          "se": 1.93
+        },
+        "55-64": {
+          "ex": 28.42,
+          "se": 1.97
+        },
+        "65-74": {
+          "ex": 19.88,
+          "se": 2.06
+        },
+        "75-84": {
+          "ex": 12.15,
+          "se": 2.3
+        },
+        "85 and older": {
+          "ex": 6.35,
+          "se": 2.87
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77078": {
+      "lifeExpectancy": 72.53,
+      "lifeExpectancySE": 1.43,
+      "povertyRate": 29.7,
+      "uninsuredRate": 29.2,
+      "diabetes": 20.8,
+      "hypertension": 43.2,
+      "obesity": 48.3,
+      "asthma": 11.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 72.53,
+          "se": 1.43
+        },
+        "1-4": {
+          "ex": 72.47,
+          "se": 1.4
+        },
+        "5-14": {
+          "ex": 68.65,
+          "se": 1.4
+        },
+        "15-24": {
+          "ex": 58.72,
+          "se": 1.4
+        },
+        "25-34": {
+          "ex": 49.28,
+          "se": 1.39
+        },
+        "35-44": {
+          "ex": 39.88,
+          "se": 1.39
+        },
+        "45-54": {
+          "ex": 31.03,
+          "se": 1.39
+        },
+        "55-64": {
+          "ex": 22.89,
+          "se": 1.41
+        },
+        "65-74": {
+          "ex": 15.34,
+          "se": 1.51
+        },
+        "75-84": {
+          "ex": 9.47,
+          "se": 1.81
+        },
+        "85 and older": {
+          "ex": 2.76,
+          "se": 2.7
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77079": {
+      "lifeExpectancy": 84.22,
+      "lifeExpectancySE": 2.37,
+      "povertyRate": 9.8,
+      "uninsuredRate": 12.9,
+      "diabetes": 9.0,
+      "hypertension": 28.4,
+      "obesity": 30.5,
+      "asthma": 8.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 84.22,
+          "se": 2.37
+        },
+        "1-4": {
+          "ex": 83.62,
+          "se": 2.34
+        },
+        "5-14": {
+          "ex": 79.68,
+          "se": 2.34
+        },
+        "15-24": {
+          "ex": 69.84,
+          "se": 2.34
+        },
+        "25-34": {
+          "ex": 60.18,
+          "se": 2.35
+        },
+        "35-44": {
+          "ex": 50.7,
+          "se": 2.34
+        },
+        "45-54": {
+          "ex": 41.17,
+          "se": 2.35
+        },
+        "55-64": {
+          "ex": 31.99,
+          "se": 2.39
+        },
+        "65-74": {
+          "ex": 23.7,
+          "se": 2.51
+        },
+        "75-84": {
+          "ex": 15.72,
+          "se": 2.72
+        },
+        "85 and older": {
+          "ex": 10.54,
+          "se": 3.63
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77080": {
+      "lifeExpectancy": 77.13,
+      "lifeExpectancySE": 1.72,
+      "povertyRate": 23.3,
+      "uninsuredRate": 35.0,
+      "diabetes": 14.9,
+      "hypertension": 32.8,
+      "obesity": 39.6,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.13,
+          "se": 1.72
+        },
+        "1-4": {
+          "ex": 76.74,
+          "se": 1.64
+        },
+        "5-14": {
+          "ex": 72.85,
+          "se": 1.64
+        },
+        "15-24": {
+          "ex": 63.04,
+          "se": 1.63
+        },
+        "25-34": {
+          "ex": 53.46,
+          "se": 1.64
+        },
+        "35-44": {
+          "ex": 43.9,
+          "se": 1.64
+        },
+        "45-54": {
+          "ex": 34.53,
+          "se": 1.65
+        },
+        "55-64": {
+          "ex": 25.75,
+          "se": 1.67
+        },
+        "65-74": {
+          "ex": 17.91,
+          "se": 1.73
+        },
+        "75-84": {
+          "ex": 10.85,
+          "se": 1.9
+        },
+        "85 and older": {
+          "ex": 4.86,
+          "se": 2.58
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77081": {
+      "lifeExpectancy": 78.83,
+      "lifeExpectancySE": 2.94,
+      "povertyRate": 32.6,
+      "uninsuredRate": 45.2,
+      "diabetes": 15.9,
+      "hypertension": 32.7,
+      "obesity": 43.5,
+      "asthma": 9.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.83,
+          "se": 2.94
+        },
+        "1-4": {
+          "ex": 78.31,
+          "se": 2.95
+        },
+        "5-14": {
+          "ex": 74.44,
+          "se": 2.95
+        },
+        "15-24": {
+          "ex": 64.53,
+          "se": 2.95
+        },
+        "25-34": {
+          "ex": 54.99,
+          "se": 2.97
+        },
+        "35-44": {
+          "ex": 45.51,
+          "se": 2.99
+        },
+        "45-54": {
+          "ex": 36.22,
+          "se": 3.04
+        },
+        "55-64": {
+          "ex": 27.63,
+          "se": 3.16
+        },
+        "65-74": {
+          "ex": 19.81,
+          "se": 3.42
+        },
+        "75-84": {
+          "ex": 13.03,
+          "se": 4.06
+        },
+        "85 and older": {
+          "ex": 7.67,
+          "se": 5.32
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77082": {
+      "lifeExpectancy": 79.66,
+      "lifeExpectancySE": 1.85,
+      "povertyRate": 21.1,
+      "uninsuredRate": 20.0,
+      "diabetes": 13.3,
+      "hypertension": 33.8,
+      "obesity": 37.2,
+      "asthma": 9.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.66,
+          "se": 1.85
+        },
+        "1-4": {
+          "ex": 79.19,
+          "se": 1.85
+        },
+        "5-14": {
+          "ex": 75.26,
+          "se": 1.85
+        },
+        "15-24": {
+          "ex": 65.37,
+          "se": 1.85
+        },
+        "25-34": {
+          "ex": 55.72,
+          "se": 1.86
+        },
+        "35-44": {
+          "ex": 46.08,
+          "se": 1.87
+        },
+        "45-54": {
+          "ex": 36.56,
+          "se": 1.88
+        },
+        "55-64": {
+          "ex": 27.46,
+          "se": 1.93
+        },
+        "65-74": {
+          "ex": 19.08,
+          "se": 2.04
+        },
+        "75-84": {
+          "ex": 11.86,
+          "se": 2.3
+        },
+        "85 and older": {
+          "ex": 6.43,
+          "se": 3.33
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77083": {
+      "lifeExpectancy": 79.44,
+      "lifeExpectancySE": 2.72,
+      "povertyRate": 15.1,
+      "uninsuredRate": 21.3,
+      "diabetes": 16.3,
+      "hypertension": 35.6,
+      "obesity": 34.8,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.44,
+          "se": 2.72
+        },
+        "1-4": {
+          "ex": 79.13,
+          "se": 2.72
+        },
+        "5-14": {
+          "ex": 75.3,
+          "se": 2.72
+        },
+        "15-24": {
+          "ex": 65.45,
+          "se": 2.72
+        },
+        "25-34": {
+          "ex": 56.07,
+          "se": 2.74
+        },
+        "35-44": {
+          "ex": 46.62,
+          "se": 2.76
+        },
+        "45-54": {
+          "ex": 37.38,
+          "se": 2.8
+        },
+        "55-64": {
+          "ex": 28.72,
+          "se": 2.89
+        },
+        "65-74": {
+          "ex": 20.53,
+          "se": 3.08
+        },
+        "75-84": {
+          "ex": 13.14,
+          "se": 3.51
+        },
+        "85 and older": {
+          "ex": 7.78,
+          "se": 4.98
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77084": {
+      "lifeExpectancy": 78.72,
+      "lifeExpectancySE": 2.29,
+      "povertyRate": 10.9,
+      "uninsuredRate": 19.9,
+      "diabetes": 12.4,
+      "hypertension": 30.5,
+      "obesity": 36.5,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.72,
+          "se": 2.29
+        },
+        "1-4": {
+          "ex": 78.46,
+          "se": 2.21
+        },
+        "5-14": {
+          "ex": 74.56,
+          "se": 2.21
+        },
+        "15-24": {
+          "ex": 64.64,
+          "se": 2.22
+        },
+        "25-34": {
+          "ex": 55.05,
+          "se": 2.22
+        },
+        "35-44": {
+          "ex": 45.59,
+          "se": 2.23
+        },
+        "45-54": {
+          "ex": 36.06,
+          "se": 2.25
+        },
+        "55-64": {
+          "ex": 26.97,
+          "se": 2.3
+        },
+        "65-74": {
+          "ex": 18.49,
+          "se": 2.45
+        },
+        "75-84": {
+          "ex": 11.28,
+          "se": 2.82
+        },
+        "85 and older": {
+          "ex": 4.8,
+          "se": 3.72
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77085": {
+      "lifeExpectancy": 77.56,
+      "lifeExpectancySE": 1.66,
+      "povertyRate": 12.2,
+      "uninsuredRate": 28.3,
+      "diabetes": 17.3,
+      "hypertension": 36.6,
+      "obesity": 42.6,
+      "asthma": 10.0,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.56,
+          "se": 1.66
+        },
+        "1-4": {
+          "ex": 77.1,
+          "se": 1.65
+        },
+        "5-14": {
+          "ex": 73.2,
+          "se": 1.65
+        },
+        "15-24": {
+          "ex": 63.3,
+          "se": 1.65
+        },
+        "25-34": {
+          "ex": 53.66,
+          "se": 1.66
+        },
+        "35-44": {
+          "ex": 44.33,
+          "se": 1.66
+        },
+        "45-54": {
+          "ex": 34.95,
+          "se": 1.68
+        },
+        "55-64": {
+          "ex": 26.26,
+          "se": 1.73
+        },
+        "65-74": {
+          "ex": 18.43,
+          "se": 1.86
+        },
+        "75-84": {
+          "ex": 11.53,
+          "se": 2.15
+        },
+        "85 and older": {
+          "ex": 5.57,
+          "se": 2.5
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77086": {
+      "lifeExpectancy": 78.7,
+      "lifeExpectancySE": 3.13,
+      "povertyRate": 15.9,
+      "uninsuredRate": 30.6,
+      "diabetes": 16.3,
+      "hypertension": 34.2,
+      "obesity": 40.9,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.7,
+          "se": 3.13
+        },
+        "1-4": {
+          "ex": 78.22,
+          "se": 3.14
+        },
+        "5-14": {
+          "ex": 74.34,
+          "se": 3.14
+        },
+        "15-24": {
+          "ex": 64.46,
+          "se": 3.14
+        },
+        "25-34": {
+          "ex": 55.04,
+          "se": 3.16
+        },
+        "35-44": {
+          "ex": 45.53,
+          "se": 3.19
+        },
+        "45-54": {
+          "ex": 36.2,
+          "se": 3.22
+        },
+        "55-64": {
+          "ex": 27.46,
+          "se": 3.33
+        },
+        "65-74": {
+          "ex": 20.03,
+          "se": 3.64
+        },
+        "75-84": {
+          "ex": 13.18,
+          "se": 4.2
+        },
+        "85 and older": {
+          "ex": 7.68,
+          "se": 5.4
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77087": {
+      "lifeExpectancy": 77.86,
+      "lifeExpectancySE": 2.15,
+      "povertyRate": 23.4,
+      "uninsuredRate": 35.0,
+      "diabetes": 17.7,
+      "hypertension": 35.6,
+      "obesity": 42.0,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.86,
+          "se": 2.15
+        },
+        "1-4": {
+          "ex": 77.34,
+          "se": 2.12
+        },
+        "5-14": {
+          "ex": 73.48,
+          "se": 2.12
+        },
+        "15-24": {
+          "ex": 63.59,
+          "se": 2.13
+        },
+        "25-34": {
+          "ex": 54.07,
+          "se": 2.12
+        },
+        "35-44": {
+          "ex": 44.67,
+          "se": 2.12
+        },
+        "45-54": {
+          "ex": 35.44,
+          "se": 2.13
+        },
+        "55-64": {
+          "ex": 26.98,
+          "se": 2.19
+        },
+        "65-74": {
+          "ex": 19.0,
+          "se": 2.31
+        },
+        "75-84": {
+          "ex": 12.61,
+          "se": 2.68
+        },
+        "85 and older": {
+          "ex": 7.42,
+          "se": 3.74
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77088": {
+      "lifeExpectancy": 76.51,
+      "lifeExpectancySE": 1.96,
+      "povertyRate": 19.2,
+      "uninsuredRate": 26.1,
+      "diabetes": 18.2,
+      "hypertension": 39.4,
+      "obesity": 43.8,
+      "asthma": 10.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.51,
+          "se": 1.96
+        },
+        "1-4": {
+          "ex": 76.25,
+          "se": 1.93
+        },
+        "5-14": {
+          "ex": 72.34,
+          "se": 1.94
+        },
+        "15-24": {
+          "ex": 62.44,
+          "se": 1.94
+        },
+        "25-34": {
+          "ex": 52.98,
+          "se": 1.94
+        },
+        "35-44": {
+          "ex": 43.63,
+          "se": 1.95
+        },
+        "45-54": {
+          "ex": 34.57,
+          "se": 1.97
+        },
+        "55-64": {
+          "ex": 26.29,
+          "se": 2.04
+        },
+        "65-74": {
+          "ex": 19.03,
+          "se": 2.21
+        },
+        "75-84": {
+          "ex": 12.54,
+          "se": 2.55
+        },
+        "85 and older": {
+          "ex": 7.36,
+          "se": 3.7
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77089": {
+      "lifeExpectancy": 79.79,
+      "lifeExpectancySE": 2.2,
+      "povertyRate": 11.0,
+      "uninsuredRate": 14.3,
+      "diabetes": 12.8,
+      "hypertension": 31.1,
+      "obesity": 34.8,
+      "asthma": 8.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.79,
+          "se": 2.2
+        },
+        "1-4": {
+          "ex": 79.14,
+          "se": 2.21
+        },
+        "5-14": {
+          "ex": 75.22,
+          "se": 2.21
+        },
+        "15-24": {
+          "ex": 65.29,
+          "se": 2.21
+        },
+        "25-34": {
+          "ex": 55.63,
+          "se": 2.22
+        },
+        "35-44": {
+          "ex": 46.2,
+          "se": 2.23
+        },
+        "45-54": {
+          "ex": 36.78,
+          "se": 2.25
+        },
+        "55-64": {
+          "ex": 27.95,
+          "se": 2.32
+        },
+        "65-74": {
+          "ex": 20.04,
+          "se": 2.48
+        },
+        "75-84": {
+          "ex": 12.83,
+          "se": 2.85
+        },
+        "85 and older": {
+          "ex": 7.11,
+          "se": 4.09
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77090": {
+      "lifeExpectancy": 76.54,
+      "lifeExpectancySE": 1.86,
+      "povertyRate": 17.5,
+      "uninsuredRate": 19.1,
+      "diabetes": 12.8,
+      "hypertension": 34.0,
+      "obesity": 42.5,
+      "asthma": 10.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.54,
+          "se": 1.86
+        },
+        "1-4": {
+          "ex": 76.22,
+          "se": 1.84
+        },
+        "5-14": {
+          "ex": 72.28,
+          "se": 1.85
+        },
+        "15-24": {
+          "ex": 62.42,
+          "se": 1.84
+        },
+        "25-34": {
+          "ex": 52.9,
+          "se": 1.85
+        },
+        "35-44": {
+          "ex": 43.46,
+          "se": 1.87
+        },
+        "45-54": {
+          "ex": 34.28,
+          "se": 1.89
+        },
+        "55-64": {
+          "ex": 25.66,
+          "se": 1.97
+        },
+        "65-74": {
+          "ex": 18.14,
+          "se": 2.14
+        },
+        "75-84": {
+          "ex": 11.1,
+          "se": 2.44
+        },
+        "85 and older": {
+          "ex": 5.14,
+          "se": 3.04
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77091": {
+      "lifeExpectancy": 74.17,
+      "lifeExpectancySE": 2.13,
+      "povertyRate": 32.6,
+      "uninsuredRate": 31.9,
+      "diabetes": 19.2,
+      "hypertension": 41.3,
+      "obesity": 46.3,
+      "asthma": 10.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 74.17,
+          "se": 2.13
+        },
+        "1-4": {
+          "ex": 74.02,
+          "se": 2.06
+        },
+        "5-14": {
+          "ex": 70.1,
+          "se": 2.06
+        },
+        "15-24": {
+          "ex": 60.19,
+          "se": 2.06
+        },
+        "25-34": {
+          "ex": 50.95,
+          "se": 2.01
+        },
+        "35-44": {
+          "ex": 41.79,
+          "se": 2.0
+        },
+        "45-54": {
+          "ex": 32.8,
+          "se": 2.01
+        },
+        "55-64": {
+          "ex": 24.94,
+          "se": 2.06
+        },
+        "65-74": {
+          "ex": 17.96,
+          "se": 2.22
+        },
+        "75-84": {
+          "ex": 11.58,
+          "se": 2.68
+        },
+        "85 and older": {
+          "ex": 7.3,
+          "se": 3.96
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77092": {
+      "lifeExpectancy": 77.43,
+      "lifeExpectancySE": 1.9,
+      "povertyRate": 20.8,
+      "uninsuredRate": 33.3,
+      "diabetes": 14.0,
+      "hypertension": 32.6,
+      "obesity": 39.6,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.43,
+          "se": 1.9
+        },
+        "1-4": {
+          "ex": 76.88,
+          "se": 1.89
+        },
+        "5-14": {
+          "ex": 72.94,
+          "se": 1.9
+        },
+        "15-24": {
+          "ex": 63.15,
+          "se": 1.88
+        },
+        "25-34": {
+          "ex": 53.49,
+          "se": 1.87
+        },
+        "35-44": {
+          "ex": 44.03,
+          "se": 1.87
+        },
+        "45-54": {
+          "ex": 34.65,
+          "se": 1.89
+        },
+        "55-64": {
+          "ex": 25.88,
+          "se": 1.94
+        },
+        "65-74": {
+          "ex": 18.48,
+          "se": 2.07
+        },
+        "75-84": {
+          "ex": 11.51,
+          "se": 2.35
+        },
+        "85 and older": {
+          "ex": 5.92,
+          "se": 3.28
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77093": {
+      "lifeExpectancy": 74.52,
+      "lifeExpectancySE": 2.04,
+      "povertyRate": 36.1,
+      "uninsuredRate": 36.4,
+      "diabetes": 20.0,
+      "hypertension": 37.0,
+      "obesity": 45.6,
+      "asthma": 9.6,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 74.52,
+          "se": 2.04
+        },
+        "1-4": {
+          "ex": 74.18,
+          "se": 2.02
+        },
+        "5-14": {
+          "ex": 70.33,
+          "se": 2.02
+        },
+        "15-24": {
+          "ex": 60.42,
+          "se": 2.02
+        },
+        "25-34": {
+          "ex": 50.96,
+          "se": 2.02
+        },
+        "35-44": {
+          "ex": 41.58,
+          "se": 2.03
+        },
+        "45-54": {
+          "ex": 32.58,
+          "se": 2.05
+        },
+        "55-64": {
+          "ex": 24.43,
+          "se": 2.12
+        },
+        "65-74": {
+          "ex": 17.35,
+          "se": 2.29
+        },
+        "75-84": {
+          "ex": 10.75,
+          "se": 2.65
+        },
+        "85 and older": {
+          "ex": 6.13,
+          "se": 4.08
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77094": {
+      "lifeExpectancy": 80.7,
+      "lifeExpectancySE": 1.36,
+      "povertyRate": 7.3,
+      "uninsuredRate": 8.6,
+      "diabetes": 9.8,
+      "hypertension": 29.2,
+      "obesity": 28.5,
+      "asthma": 8.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.7,
+          "se": 1.36
+        },
+        "1-4": {
+          "ex": 80.3,
+          "se": 1.33
+        },
+        "5-14": {
+          "ex": 76.3,
+          "se": 1.33
+        },
+        "15-24": {
+          "ex": 66.4,
+          "se": 1.33
+        },
+        "25-34": {
+          "ex": 56.6,
+          "se": 1.33
+        },
+        "35-44": {
+          "ex": 47.8,
+          "se": 1.23
+        },
+        "45-54": {
+          "ex": 38.3,
+          "se": 1.23
+        },
+        "55-64": {
+          "ex": 28.6,
+          "se": 1.24
+        },
+        "65-74": {
+          "ex": 19.4,
+          "se": 1.26
+        },
+        "75-84": {
+          "ex": 11.0,
+          "se": 1.36
+        },
+        "85 and older": {
+          "ex": 3.6,
+          "se": 1.62
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77095": {
+      "lifeExpectancy": 81.01,
+      "lifeExpectancySE": 2.46,
+      "povertyRate": 5.1,
+      "uninsuredRate": 10.0,
+      "diabetes": 10.9,
+      "hypertension": 30.3,
+      "obesity": 33.2,
+      "asthma": 9.0,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.01,
+          "se": 2.46
+        },
+        "1-4": {
+          "ex": 80.28,
+          "se": 2.45
+        },
+        "5-14": {
+          "ex": 76.44,
+          "se": 2.45
+        },
+        "15-24": {
+          "ex": 66.51,
+          "se": 2.46
+        },
+        "25-34": {
+          "ex": 56.87,
+          "se": 2.46
+        },
+        "35-44": {
+          "ex": 47.27,
+          "se": 2.47
+        },
+        "45-54": {
+          "ex": 37.7,
+          "se": 2.49
+        },
+        "55-64": {
+          "ex": 28.47,
+          "se": 2.53
+        },
+        "65-74": {
+          "ex": 19.82,
+          "se": 2.65
+        },
+        "75-84": {
+          "ex": 12.18,
+          "se": 2.97
+        },
+        "85 and older": {
+          "ex": 7.54,
+          "se": 4.07
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77096": {
+      "lifeExpectancy": 80.69,
+      "lifeExpectancySE": 1.74,
+      "povertyRate": 14.4,
+      "uninsuredRate": 16.1,
+      "diabetes": 12.4,
+      "hypertension": 33.3,
+      "obesity": 34.7,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.69,
+          "se": 1.74
+        },
+        "1-4": {
+          "ex": 80.39,
+          "se": 1.69
+        },
+        "5-14": {
+          "ex": 76.46,
+          "se": 1.7
+        },
+        "15-24": {
+          "ex": 66.58,
+          "se": 1.7
+        },
+        "25-34": {
+          "ex": 57.16,
+          "se": 1.66
+        },
+        "35-44": {
+          "ex": 47.72,
+          "se": 1.62
+        },
+        "45-54": {
+          "ex": 38.08,
+          "se": 1.62
+        },
+        "55-64": {
+          "ex": 29.2,
+          "se": 1.64
+        },
+        "65-74": {
+          "ex": 21.06,
+          "se": 1.7
+        },
+        "75-84": {
+          "ex": 13.66,
+          "se": 1.83
+        },
+        "85 and older": {
+          "ex": 7.05,
+          "se": 2.29
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77098": {
+      "lifeExpectancy": 81.42,
+      "lifeExpectancySE": 2.35,
+      "povertyRate": 6.5,
+      "uninsuredRate": 8.6,
+      "diabetes": 6.8,
+      "hypertension": 23.6,
+      "obesity": 27.9,
+      "asthma": 8.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.42,
+          "se": 2.35
+        },
+        "1-4": {
+          "ex": 80.87,
+          "se": 2.28
+        },
+        "5-14": {
+          "ex": 76.98,
+          "se": 2.28
+        },
+        "15-24": {
+          "ex": 67.04,
+          "se": 2.28
+        },
+        "25-34": {
+          "ex": 57.41,
+          "se": 2.28
+        },
+        "35-44": {
+          "ex": 47.78,
+          "se": 2.29
+        },
+        "45-54": {
+          "ex": 38.25,
+          "se": 2.31
+        },
+        "55-64": {
+          "ex": 29.25,
+          "se": 2.34
+        },
+        "65-74": {
+          "ex": 20.48,
+          "se": 2.43
+        },
+        "75-84": {
+          "ex": 11.91,
+          "se": 2.6
+        },
+        "85 and older": {
+          "ex": 6.54,
+          "se": 3.83
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77099": {
+      "lifeExpectancy": 77.35,
+      "lifeExpectancySE": 2.07,
+      "povertyRate": 26.1,
+      "uninsuredRate": 35.9,
+      "diabetes": 17.6,
+      "hypertension": 36.7,
+      "obesity": 40.3,
+      "asthma": 9.6,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.35,
+          "se": 2.07
+        },
+        "1-4": {
+          "ex": 76.91,
+          "se": 1.96
+        },
+        "5-14": {
+          "ex": 73.02,
+          "se": 1.96
+        },
+        "15-24": {
+          "ex": 63.13,
+          "se": 1.96
+        },
+        "25-34": {
+          "ex": 53.6,
+          "se": 1.97
+        },
+        "35-44": {
+          "ex": 44.17,
+          "se": 1.99
+        },
+        "45-54": {
+          "ex": 34.95,
+          "se": 2.02
+        },
+        "55-64": {
+          "ex": 26.32,
+          "se": 2.09
+        },
+        "65-74": {
+          "ex": 18.92,
+          "se": 2.27
+        },
+        "75-84": {
+          "ex": 12.23,
+          "se": 2.65
+        },
+        "85 and older": {
+          "ex": 6.85,
+          "se": 3.75
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77336": {
+      "lifeExpectancy": 76.09,
+      "lifeExpectancySE": 1.62,
+      "povertyRate": 15.7,
+      "uninsuredRate": 13.6,
+      "diabetes": 12.8,
+      "hypertension": 35.0,
+      "obesity": 37.3,
+      "asthma": 10.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.09,
+          "se": 1.62
+        },
+        "1-4": {
+          "ex": 75.34,
+          "se": 1.62
+        },
+        "5-14": {
+          "ex": 71.54,
+          "se": 1.61
+        },
+        "15-24": {
+          "ex": 61.64,
+          "se": 1.61
+        },
+        "25-34": {
+          "ex": 52.09,
+          "se": 1.61
+        },
+        "35-44": {
+          "ex": 42.99,
+          "se": 1.58
+        },
+        "45-54": {
+          "ex": 33.54,
+          "se": 1.6
+        },
+        "55-64": {
+          "ex": 24.93,
+          "se": 1.64
+        },
+        "65-74": {
+          "ex": 17.18,
+          "se": 1.78
+        },
+        "75-84": {
+          "ex": 11.37,
+          "se": 2.17
+        },
+        "85 and older": {
+          "ex": 6.55,
+          "se": 3.48
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77338": {
+      "lifeExpectancy": 78.73,
+      "lifeExpectancySE": 2.24,
+      "povertyRate": 15.9,
+      "uninsuredRate": 21.4,
+      "diabetes": 13.3,
+      "hypertension": 33.8,
+      "obesity": 40.4,
+      "asthma": 10.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.73,
+          "se": 2.24
+        },
+        "1-4": {
+          "ex": 78.16,
+          "se": 2.24
+        },
+        "5-14": {
+          "ex": 74.23,
+          "se": 2.24
+        },
+        "15-24": {
+          "ex": 64.38,
+          "se": 2.25
+        },
+        "25-34": {
+          "ex": 54.75,
+          "se": 2.25
+        },
+        "35-44": {
+          "ex": 45.28,
+          "se": 2.27
+        },
+        "45-54": {
+          "ex": 35.94,
+          "se": 2.3
+        },
+        "55-64": {
+          "ex": 27.37,
+          "se": 2.39
+        },
+        "65-74": {
+          "ex": 20.05,
+          "se": 2.62
+        },
+        "75-84": {
+          "ex": 13.66,
+          "se": 3.11
+        },
+        "85 and older": {
+          "ex": 8.76,
+          "se": 4.49
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77339": {
+      "lifeExpectancy": 79.57,
+      "lifeExpectancySE": 1.94,
+      "povertyRate": 10.5,
+      "uninsuredRate": 9.3,
+      "diabetes": 10.7,
+      "hypertension": 32.1,
+      "obesity": 32.4,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.57,
+          "se": 1.94
+        },
+        "1-4": {
+          "ex": 79.0,
+          "se": 1.92
+        },
+        "5-14": {
+          "ex": 75.07,
+          "se": 1.92
+        },
+        "15-24": {
+          "ex": 65.21,
+          "se": 1.92
+        },
+        "25-34": {
+          "ex": 55.68,
+          "se": 1.91
+        },
+        "35-44": {
+          "ex": 46.27,
+          "se": 1.9
+        },
+        "45-54": {
+          "ex": 36.98,
+          "se": 1.91
+        },
+        "55-64": {
+          "ex": 28.2,
+          "se": 1.95
+        },
+        "65-74": {
+          "ex": 19.61,
+          "se": 2.02
+        },
+        "75-84": {
+          "ex": 11.76,
+          "se": 2.2
+        },
+        "85 and older": {
+          "ex": 4.87,
+          "se": 3.06
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77345": {
+      "lifeExpectancy": 81.5,
+      "lifeExpectancySE": 2.2,
+      "povertyRate": 2.5,
+      "uninsuredRate": 3.2,
+      "diabetes": 9.2,
+      "hypertension": 30.3,
+      "obesity": 29.7,
+      "asthma": 8.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 81.5,
+          "se": 2.2
+        },
+        "1-4": {
+          "ex": 80.8,
+          "se": 2.19
+        },
+        "5-14": {
+          "ex": 76.92,
+          "se": 2.19
+        },
+        "15-24": {
+          "ex": 66.95,
+          "se": 2.19
+        },
+        "25-34": {
+          "ex": 57.39,
+          "se": 2.19
+        },
+        "35-44": {
+          "ex": 47.91,
+          "se": 2.18
+        },
+        "45-54": {
+          "ex": 38.37,
+          "se": 2.19
+        },
+        "55-64": {
+          "ex": 28.87,
+          "se": 2.21
+        },
+        "65-74": {
+          "ex": 19.84,
+          "se": 2.29
+        },
+        "75-84": {
+          "ex": 11.76,
+          "se": 2.52
+        },
+        "85 and older": {
+          "ex": 4.51,
+          "se": 3.56
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77346": {
+      "lifeExpectancy": 78.75,
+      "lifeExpectancySE": 1.71,
+      "povertyRate": 5.2,
+      "uninsuredRate": 7.5,
+      "diabetes": 10.4,
+      "hypertension": 30.4,
+      "obesity": 34.8,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.75,
+          "se": 1.71
+        },
+        "1-4": {
+          "ex": 78.35,
+          "se": 1.69
+        },
+        "5-14": {
+          "ex": 74.43,
+          "se": 1.69
+        },
+        "15-24": {
+          "ex": 64.51,
+          "se": 1.69
+        },
+        "25-34": {
+          "ex": 54.83,
+          "se": 1.69
+        },
+        "35-44": {
+          "ex": 45.26,
+          "se": 1.69
+        },
+        "45-54": {
+          "ex": 35.77,
+          "se": 1.7
+        },
+        "55-64": {
+          "ex": 26.73,
+          "se": 1.73
+        },
+        "65-74": {
+          "ex": 17.96,
+          "se": 1.81
+        },
+        "75-84": {
+          "ex": 10.03,
+          "se": 2.04
+        },
+        "85 and older": {
+          "ex": 4.6,
+          "se": 2.98
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77373": {
+      "lifeExpectancy": 78.3,
+      "lifeExpectancySE": 2.15,
+      "povertyRate": 9.5,
+      "uninsuredRate": 16.9,
+      "diabetes": 11.6,
+      "hypertension": 31.3,
+      "obesity": 37.3,
+      "asthma": 9.6,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.3,
+          "se": 2.15
+        },
+        "1-4": {
+          "ex": 77.83,
+          "se": 2.12
+        },
+        "5-14": {
+          "ex": 73.92,
+          "se": 2.12
+        },
+        "15-24": {
+          "ex": 64.0,
+          "se": 2.12
+        },
+        "25-34": {
+          "ex": 54.55,
+          "se": 2.13
+        },
+        "35-44": {
+          "ex": 45.05,
+          "se": 2.14
+        },
+        "45-54": {
+          "ex": 35.63,
+          "se": 2.16
+        },
+        "55-64": {
+          "ex": 26.92,
+          "se": 2.24
+        },
+        "65-74": {
+          "ex": 18.68,
+          "se": 2.4
+        },
+        "75-84": {
+          "ex": 11.98,
+          "se": 2.83
+        },
+        "85 and older": {
+          "ex": 6.43,
+          "se": 4.0
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77375": {
+      "lifeExpectancy": 77.14,
+      "lifeExpectancySE": 1.84,
+      "povertyRate": 9.3,
+      "uninsuredRate": 10.5,
+      "diabetes": 10.0,
+      "hypertension": 29.1,
+      "obesity": 33.6,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.14,
+          "se": 1.84
+        },
+        "1-4": {
+          "ex": 76.86,
+          "se": 1.8
+        },
+        "5-14": {
+          "ex": 72.96,
+          "se": 1.8
+        },
+        "15-24": {
+          "ex": 63.06,
+          "se": 1.8
+        },
+        "25-34": {
+          "ex": 53.68,
+          "se": 1.78
+        },
+        "35-44": {
+          "ex": 44.22,
+          "se": 1.77
+        },
+        "45-54": {
+          "ex": 34.91,
+          "se": 1.77
+        },
+        "55-64": {
+          "ex": 26.16,
+          "se": 1.78
+        },
+        "65-74": {
+          "ex": 17.91,
+          "se": 1.87
+        },
+        "75-84": {
+          "ex": 11.72,
+          "se": 2.13
+        },
+        "85 and older": {
+          "ex": 6.63,
+          "se": 3.08
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77377": {
+      "lifeExpectancy": 79.03,
+      "lifeExpectancySE": 1.52,
+      "povertyRate": 5.3,
+      "uninsuredRate": 8.2,
+      "diabetes": 9.8,
+      "hypertension": 29.5,
+      "obesity": 31.5,
+      "asthma": 8.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.03,
+          "se": 1.52
+        },
+        "1-4": {
+          "ex": 78.75,
+          "se": 1.47
+        },
+        "5-14": {
+          "ex": 74.9,
+          "se": 1.47
+        },
+        "15-24": {
+          "ex": 65.01,
+          "se": 1.46
+        },
+        "25-34": {
+          "ex": 55.55,
+          "se": 1.45
+        },
+        "35-44": {
+          "ex": 46.05,
+          "se": 1.42
+        },
+        "45-54": {
+          "ex": 36.46,
+          "se": 1.42
+        },
+        "55-64": {
+          "ex": 27.28,
+          "se": 1.44
+        },
+        "65-74": {
+          "ex": 18.59,
+          "se": 1.49
+        },
+        "75-84": {
+          "ex": 10.64,
+          "se": 1.64
+        },
+        "85 and older": {
+          "ex": 4.78,
+          "se": 2.26
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77379": {
+      "lifeExpectancy": 79.26,
+      "lifeExpectancySE": 1.88,
+      "povertyRate": 8.0,
+      "uninsuredRate": 8.7,
+      "diabetes": 10.4,
+      "hypertension": 30.7,
+      "obesity": 31.8,
+      "asthma": 8.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.26,
+          "se": 1.88
+        },
+        "1-4": {
+          "ex": 78.94,
+          "se": 1.79
+        },
+        "5-14": {
+          "ex": 75.03,
+          "se": 1.79
+        },
+        "15-24": {
+          "ex": 65.12,
+          "se": 1.79
+        },
+        "25-34": {
+          "ex": 55.66,
+          "se": 1.79
+        },
+        "35-44": {
+          "ex": 46.56,
+          "se": 1.75
+        },
+        "45-54": {
+          "ex": 36.96,
+          "se": 1.75
+        },
+        "55-64": {
+          "ex": 27.72,
+          "se": 1.78
+        },
+        "65-74": {
+          "ex": 18.9,
+          "se": 1.84
+        },
+        "75-84": {
+          "ex": 11.51,
+          "se": 2.06
+        },
+        "85 and older": {
+          "ex": 5.45,
+          "se": 2.72
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77388": {
+      "lifeExpectancy": 79.22,
+      "lifeExpectancySE": 1.48,
+      "povertyRate": 9.5,
+      "uninsuredRate": 15.9,
+      "diabetes": 11.0,
+      "hypertension": 30.9,
+      "obesity": 33.9,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.22,
+          "se": 1.48
+        },
+        "1-4": {
+          "ex": 78.6,
+          "se": 1.46
+        },
+        "5-14": {
+          "ex": 74.69,
+          "se": 1.46
+        },
+        "15-24": {
+          "ex": 64.88,
+          "se": 1.45
+        },
+        "25-34": {
+          "ex": 55.32,
+          "se": 1.45
+        },
+        "35-44": {
+          "ex": 45.81,
+          "se": 1.45
+        },
+        "45-54": {
+          "ex": 36.22,
+          "se": 1.45
+        },
+        "55-64": {
+          "ex": 27.16,
+          "se": 1.48
+        },
+        "65-74": {
+          "ex": 18.43,
+          "se": 1.55
+        },
+        "75-84": {
+          "ex": 10.41,
+          "se": 1.72
+        },
+        "85 and older": {
+          "ex": 4.16,
+          "se": 2.32
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77389": {
+      "lifeExpectancy": 78.97,
+      "lifeExpectancySE": 1.7,
+      "povertyRate": 7.8,
+      "uninsuredRate": 12.1,
+      "diabetes": 9.4,
+      "hypertension": 28.6,
+      "obesity": 32.1,
+      "asthma": 8.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.97,
+          "se": 1.7
+        },
+        "1-4": {
+          "ex": 78.92,
+          "se": 1.58
+        },
+        "5-14": {
+          "ex": 75.04,
+          "se": 1.58
+        },
+        "15-24": {
+          "ex": 65.19,
+          "se": 1.58
+        },
+        "25-34": {
+          "ex": 55.51,
+          "se": 1.58
+        },
+        "35-44": {
+          "ex": 46.03,
+          "se": 1.59
+        },
+        "45-54": {
+          "ex": 36.58,
+          "se": 1.6
+        },
+        "55-64": {
+          "ex": 27.33,
+          "se": 1.63
+        },
+        "65-74": {
+          "ex": 18.95,
+          "se": 1.71
+        },
+        "75-84": {
+          "ex": 11.04,
+          "se": 1.91
+        },
+        "85 and older": {
+          "ex": 4.47,
+          "se": 2.69
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77396": {
+      "lifeExpectancy": 76.91,
+      "lifeExpectancySE": 1.82,
+      "povertyRate": 12.0,
+      "uninsuredRate": 24.9,
+      "diabetes": 11.2,
+      "hypertension": 29.9,
+      "obesity": 38.3,
+      "asthma": 9.6,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.91,
+          "se": 1.82
+        },
+        "1-4": {
+          "ex": 76.59,
+          "se": 1.81
+        },
+        "5-14": {
+          "ex": 72.65,
+          "se": 1.81
+        },
+        "15-24": {
+          "ex": 62.75,
+          "se": 1.81
+        },
+        "25-34": {
+          "ex": 53.3,
+          "se": 1.82
+        },
+        "35-44": {
+          "ex": 43.72,
+          "se": 1.83
+        },
+        "45-54": {
+          "ex": 34.26,
+          "se": 1.85
+        },
+        "55-64": {
+          "ex": 25.32,
+          "se": 1.91
+        },
+        "65-74": {
+          "ex": 17.36,
+          "se": 2.05
+        },
+        "75-84": {
+          "ex": 10.84,
+          "se": 2.37
+        },
+        "85 and older": {
+          "ex": 5.13,
+          "se": 3.25
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77401": {
+      "lifeExpectancy": 85.17,
+      "lifeExpectancySE": 2.49,
+      "povertyRate": 2.2,
+      "uninsuredRate": 2.2,
+      "diabetes": 9.5,
+      "hypertension": 29.9,
+      "obesity": 25.9,
+      "asthma": 7.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 85.17,
+          "se": 2.49
+        },
+        "1-4": {
+          "ex": 84.7,
+          "se": 2.48
+        },
+        "5-14": {
+          "ex": 80.73,
+          "se": 2.49
+        },
+        "15-24": {
+          "ex": 70.87,
+          "se": 2.49
+        },
+        "25-34": {
+          "ex": 61.27,
+          "se": 2.49
+        },
+        "35-44": {
+          "ex": 51.77,
+          "se": 2.47
+        },
+        "45-54": {
+          "ex": 42.1,
+          "se": 2.49
+        },
+        "55-64": {
+          "ex": 32.6,
+          "se": 2.52
+        },
+        "65-74": {
+          "ex": 23.2,
+          "se": 2.55
+        },
+        "75-84": {
+          "ex": 15.03,
+          "se": 2.77
+        },
+        "85 and older": {
+          "ex": 8.8,
+          "se": 3.61
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77429": {
+      "lifeExpectancy": 79.82,
+      "lifeExpectancySE": 1.96,
+      "povertyRate": 3.8,
+      "uninsuredRate": 6.6,
+      "diabetes": 9.4,
+      "hypertension": 28.5,
+      "obesity": 31.6,
+      "asthma": 8.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.82,
+          "se": 1.96
+        },
+        "1-4": {
+          "ex": 79.33,
+          "se": 1.95
+        },
+        "5-14": {
+          "ex": 75.41,
+          "se": 1.95
+        },
+        "15-24": {
+          "ex": 65.49,
+          "se": 1.95
+        },
+        "25-34": {
+          "ex": 55.97,
+          "se": 1.95
+        },
+        "35-44": {
+          "ex": 46.41,
+          "se": 1.96
+        },
+        "45-54": {
+          "ex": 36.88,
+          "se": 1.98
+        },
+        "55-64": {
+          "ex": 27.74,
+          "se": 2.02
+        },
+        "65-74": {
+          "ex": 19.17,
+          "se": 2.13
+        },
+        "75-84": {
+          "ex": 11.43,
+          "se": 2.42
+        },
+        "85 and older": {
+          "ex": 5.14,
+          "se": 3.21
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77433": {
+      "lifeExpectancy": 79.72,
+      "lifeExpectancySE": 1.77,
+      "povertyRate": 6.8,
+      "uninsuredRate": 10.0,
+      "diabetes": 9.4,
+      "hypertension": 27.5,
+      "obesity": 32.2,
+      "asthma": 8.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.72,
+          "se": 1.77
+        },
+        "1-4": {
+          "ex": 79.14,
+          "se": 1.77
+        },
+        "5-14": {
+          "ex": 75.2,
+          "se": 1.77
+        },
+        "15-24": {
+          "ex": 65.27,
+          "se": 1.77
+        },
+        "25-34": {
+          "ex": 55.6,
+          "se": 1.77
+        },
+        "35-44": {
+          "ex": 45.99,
+          "se": 1.78
+        },
+        "45-54": {
+          "ex": 36.39,
+          "se": 1.79
+        },
+        "55-64": {
+          "ex": 27.14,
+          "se": 1.83
+        },
+        "65-74": {
+          "ex": 18.63,
+          "se": 1.94
+        },
+        "75-84": {
+          "ex": 10.79,
+          "se": 2.15
+        },
+        "85 and older": {
+          "ex": 4.27,
+          "se": 3.04
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77447": {
+      "lifeExpectancy": 79.83,
+      "lifeExpectancySE": 2.43,
+      "povertyRate": 9.7,
+      "uninsuredRate": 18.2,
+      "diabetes": 11.0,
+      "hypertension": 30.8,
+      "obesity": 36.2,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.83,
+          "se": 2.43
+        },
+        "1-4": {
+          "ex": 79.25,
+          "se": 2.42
+        },
+        "5-14": {
+          "ex": 75.37,
+          "se": 2.43
+        },
+        "15-24": {
+          "ex": 65.46,
+          "se": 2.43
+        },
+        "25-34": {
+          "ex": 56.01,
+          "se": 2.44
+        },
+        "35-44": {
+          "ex": 46.58,
+          "se": 2.45
+        },
+        "45-54": {
+          "ex": 37.47,
+          "se": 2.49
+        },
+        "55-64": {
+          "ex": 28.44,
+          "se": 2.54
+        },
+        "65-74": {
+          "ex": 20.66,
+          "se": 2.73
+        },
+        "75-84": {
+          "ex": 13.32,
+          "se": 3.08
+        },
+        "85 and older": {
+          "ex": 6.85,
+          "se": 3.87
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77449": {
+      "lifeExpectancy": 79.33,
+      "lifeExpectancySE": 2.01,
+      "povertyRate": 10.7,
+      "uninsuredRate": 20.7,
+      "diabetes": 11.4,
+      "hypertension": 29.2,
+      "obesity": 36.8,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.33,
+          "se": 2.01
+        },
+        "1-4": {
+          "ex": 78.75,
+          "se": 2.02
+        },
+        "5-14": {
+          "ex": 74.83,
+          "se": 2.02
+        },
+        "15-24": {
+          "ex": 64.92,
+          "se": 2.02
+        },
+        "25-34": {
+          "ex": 55.24,
+          "se": 2.02
+        },
+        "35-44": {
+          "ex": 45.7,
+          "se": 2.03
+        },
+        "45-54": {
+          "ex": 36.15,
+          "se": 2.04
+        },
+        "55-64": {
+          "ex": 27.0,
+          "se": 2.09
+        },
+        "65-74": {
+          "ex": 18.63,
+          "se": 2.22
+        },
+        "75-84": {
+          "ex": 11.47,
+          "se": 2.54
+        },
+        "85 and older": {
+          "ex": 6.22,
+          "se": 3.42
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77450": {
+      "lifeExpectancy": 79.99,
+      "lifeExpectancySE": 2.21,
+      "povertyRate": 7.3,
+      "uninsuredRate": 12.7,
+      "diabetes": 10.3,
+      "hypertension": 29.8,
+      "obesity": 30.7,
+      "asthma": 8.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.99,
+          "se": 2.21
+        },
+        "1-4": {
+          "ex": 79.55,
+          "se": 2.05
+        },
+        "5-14": {
+          "ex": 75.68,
+          "se": 2.04
+        },
+        "15-24": {
+          "ex": 65.77,
+          "se": 2.04
+        },
+        "25-34": {
+          "ex": 56.13,
+          "se": 2.04
+        },
+        "35-44": {
+          "ex": 46.59,
+          "se": 2.04
+        },
+        "45-54": {
+          "ex": 37.0,
+          "se": 2.04
+        },
+        "55-64": {
+          "ex": 27.79,
+          "se": 2.08
+        },
+        "65-74": {
+          "ex": 19.08,
+          "se": 2.17
+        },
+        "75-84": {
+          "ex": 11.11,
+          "se": 2.42
+        },
+        "85 and older": {
+          "ex": 5.05,
+          "se": 3.23
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77493": {
+      "lifeExpectancy": 79.29,
+      "lifeExpectancySE": 1.63,
+      "povertyRate": 9.7,
+      "uninsuredRate": 12.6,
+      "diabetes": 10.2,
+      "hypertension": 28.8,
+      "obesity": 34.7,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 79.29,
+          "se": 1.63
+        },
+        "1-4": {
+          "ex": 78.66,
+          "se": 1.63
+        },
+        "5-14": {
+          "ex": 74.81,
+          "se": 1.62
+        },
+        "15-24": {
+          "ex": 64.93,
+          "se": 1.62
+        },
+        "25-34": {
+          "ex": 55.48,
+          "se": 1.6
+        },
+        "35-44": {
+          "ex": 45.98,
+          "se": 1.6
+        },
+        "45-54": {
+          "ex": 36.49,
+          "se": 1.6
+        },
+        "55-64": {
+          "ex": 27.51,
+          "se": 1.63
+        },
+        "65-74": {
+          "ex": 19.24,
+          "se": 1.71
+        },
+        "75-84": {
+          "ex": 11.34,
+          "se": 1.87
+        },
+        "85 and older": {
+          "ex": 5.78,
+          "se": 2.53
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77502": {
+      "lifeExpectancy": 76.64,
+      "lifeExpectancySE": 1.59,
+      "povertyRate": 23.5,
+      "uninsuredRate": 27.6,
+      "diabetes": 16.0,
+      "hypertension": 32.9,
+      "obesity": 41.4,
+      "asthma": 9.1,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.64,
+          "se": 1.59
+        },
+        "1-4": {
+          "ex": 76.0,
+          "se": 1.59
+        },
+        "5-14": {
+          "ex": 72.11,
+          "se": 1.59
+        },
+        "15-24": {
+          "ex": 62.16,
+          "se": 1.59
+        },
+        "25-34": {
+          "ex": 52.52,
+          "se": 1.59
+        },
+        "35-44": {
+          "ex": 43.08,
+          "se": 1.59
+        },
+        "45-54": {
+          "ex": 33.58,
+          "se": 1.6
+        },
+        "55-64": {
+          "ex": 25.03,
+          "se": 1.64
+        },
+        "65-74": {
+          "ex": 17.43,
+          "se": 1.74
+        },
+        "75-84": {
+          "ex": 11.23,
+          "se": 1.91
+        },
+        "85 and older": {
+          "ex": 5.77,
+          "se": 2.85
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77503": {
+      "lifeExpectancy": 75.82,
+      "lifeExpectancySE": 1.62,
+      "povertyRate": 16.5,
+      "uninsuredRate": 25.8,
+      "diabetes": 14.3,
+      "hypertension": 32.0,
+      "obesity": 38.9,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.82,
+          "se": 1.62
+        },
+        "1-4": {
+          "ex": 75.17,
+          "se": 1.62
+        },
+        "5-14": {
+          "ex": 71.29,
+          "se": 1.62
+        },
+        "15-24": {
+          "ex": 61.35,
+          "se": 1.62
+        },
+        "25-34": {
+          "ex": 51.77,
+          "se": 1.62
+        },
+        "35-44": {
+          "ex": 42.15,
+          "se": 1.61
+        },
+        "45-54": {
+          "ex": 32.78,
+          "se": 1.61
+        },
+        "55-64": {
+          "ex": 24.22,
+          "se": 1.64
+        },
+        "65-74": {
+          "ex": 16.93,
+          "se": 1.75
+        },
+        "75-84": {
+          "ex": 10.52,
+          "se": 1.95
+        },
+        "85 and older": {
+          "ex": 4.79,
+          "se": 2.97
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77504": {
+      "lifeExpectancy": 76.42,
+      "lifeExpectancySE": 1.87,
+      "povertyRate": 20.3,
+      "uninsuredRate": 23.8,
+      "diabetes": 14.6,
+      "hypertension": 33.1,
+      "obesity": 39.2,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.42,
+          "se": 1.87
+        },
+        "1-4": {
+          "ex": 76.24,
+          "se": 1.79
+        },
+        "5-14": {
+          "ex": 72.35,
+          "se": 1.79
+        },
+        "15-24": {
+          "ex": 62.44,
+          "se": 1.79
+        },
+        "25-34": {
+          "ex": 52.81,
+          "se": 1.79
+        },
+        "35-44": {
+          "ex": 43.35,
+          "se": 1.79
+        },
+        "45-54": {
+          "ex": 34.09,
+          "se": 1.8
+        },
+        "55-64": {
+          "ex": 25.48,
+          "se": 1.85
+        },
+        "65-74": {
+          "ex": 17.83,
+          "se": 1.98
+        },
+        "75-84": {
+          "ex": 11.81,
+          "se": 2.32
+        },
+        "85 and older": {
+          "ex": 7.21,
+          "se": 3.19
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77505": {
+      "lifeExpectancy": 75.61,
+      "lifeExpectancySE": 1.61,
+      "povertyRate": 9.5,
+      "uninsuredRate": 16.0,
+      "diabetes": 11.6,
+      "hypertension": 31.1,
+      "obesity": 34.6,
+      "asthma": 8.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.61,
+          "se": 1.61
+        },
+        "1-4": {
+          "ex": 75.91,
+          "se": 1.33
+        },
+        "5-14": {
+          "ex": 72.02,
+          "se": 1.32
+        },
+        "15-24": {
+          "ex": 62.15,
+          "se": 1.32
+        },
+        "25-34": {
+          "ex": 52.72,
+          "se": 1.29
+        },
+        "35-44": {
+          "ex": 43.16,
+          "se": 1.27
+        },
+        "45-54": {
+          "ex": 33.93,
+          "se": 1.26
+        },
+        "55-64": {
+          "ex": 25.07,
+          "se": 1.26
+        },
+        "65-74": {
+          "ex": 16.72,
+          "se": 1.3
+        },
+        "75-84": {
+          "ex": 9.46,
+          "se": 1.42
+        },
+        "85 and older": {
+          "ex": 3.75,
+          "se": 1.88
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77506": {
+      "lifeExpectancy": 76.06,
+      "lifeExpectancySE": 1.9,
+      "povertyRate": 21.7,
+      "uninsuredRate": 39.0,
+      "diabetes": 17.1,
+      "hypertension": 33.2,
+      "obesity": 43.2,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.06,
+          "se": 1.9
+        },
+        "1-4": {
+          "ex": 75.77,
+          "se": 1.86
+        },
+        "5-14": {
+          "ex": 71.86,
+          "se": 1.86
+        },
+        "15-24": {
+          "ex": 61.99,
+          "se": 1.86
+        },
+        "25-34": {
+          "ex": 52.36,
+          "se": 1.86
+        },
+        "35-44": {
+          "ex": 42.85,
+          "se": 1.87
+        },
+        "45-54": {
+          "ex": 33.56,
+          "se": 1.89
+        },
+        "55-64": {
+          "ex": 24.95,
+          "se": 1.95
+        },
+        "65-74": {
+          "ex": 17.67,
+          "se": 2.15
+        },
+        "75-84": {
+          "ex": 11.2,
+          "se": 2.49
+        },
+        "85 and older": {
+          "ex": 6.19,
+          "se": 3.66
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77520": {
+      "lifeExpectancy": 77.35,
+      "lifeExpectancySE": 2.11,
+      "povertyRate": 20.2,
+      "uninsuredRate": 26.6,
+      "diabetes": 15.7,
+      "hypertension": 35.4,
+      "obesity": 41.2,
+      "asthma": 9.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.35,
+          "se": 2.11
+        },
+        "1-4": {
+          "ex": 76.89,
+          "se": 2.09
+        },
+        "5-14": {
+          "ex": 73.02,
+          "se": 2.09
+        },
+        "15-24": {
+          "ex": 63.12,
+          "se": 2.1
+        },
+        "25-34": {
+          "ex": 53.84,
+          "se": 2.09
+        },
+        "35-44": {
+          "ex": 44.51,
+          "se": 2.08
+        },
+        "45-54": {
+          "ex": 35.38,
+          "se": 2.09
+        },
+        "55-64": {
+          "ex": 26.81,
+          "se": 2.13
+        },
+        "65-74": {
+          "ex": 19.41,
+          "se": 2.27
+        },
+        "75-84": {
+          "ex": 13.39,
+          "se": 2.5
+        },
+        "85 and older": {
+          "ex": 8.13,
+          "se": 3.43
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77521": {
+      "lifeExpectancy": 76.71,
+      "lifeExpectancySE": 1.86,
+      "povertyRate": 13.9,
+      "uninsuredRate": 24.6,
+      "diabetes": 12.5,
+      "hypertension": 32.0,
+      "obesity": 38.0,
+      "asthma": 9.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.71,
+          "se": 1.86
+        },
+        "1-4": {
+          "ex": 76.53,
+          "se": 1.78
+        },
+        "5-14": {
+          "ex": 72.63,
+          "se": 1.78
+        },
+        "15-24": {
+          "ex": 62.76,
+          "se": 1.78
+        },
+        "25-34": {
+          "ex": 53.19,
+          "se": 1.78
+        },
+        "35-44": {
+          "ex": 43.71,
+          "se": 1.78
+        },
+        "45-54": {
+          "ex": 34.34,
+          "se": 1.79
+        },
+        "55-64": {
+          "ex": 25.84,
+          "se": 1.83
+        },
+        "65-74": {
+          "ex": 18.25,
+          "se": 1.93
+        },
+        "75-84": {
+          "ex": 12.25,
+          "se": 2.25
+        },
+        "85 and older": {
+          "ex": 7.1,
+          "se": 3.08
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77530": {
+      "lifeExpectancy": 74.85,
+      "lifeExpectancySE": 2.4,
+      "povertyRate": 19.4,
+      "uninsuredRate": 28.0,
+      "diabetes": 14.5,
+      "hypertension": 32.0,
+      "obesity": 40.8,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 74.85,
+          "se": 2.4
+        },
+        "1-4": {
+          "ex": 74.82,
+          "se": 2.36
+        },
+        "5-14": {
+          "ex": 70.92,
+          "se": 2.36
+        },
+        "15-24": {
+          "ex": 61.07,
+          "se": 2.36
+        },
+        "25-34": {
+          "ex": 51.69,
+          "se": 2.37
+        },
+        "35-44": {
+          "ex": 42.34,
+          "se": 2.39
+        },
+        "45-54": {
+          "ex": 33.08,
+          "se": 2.4
+        },
+        "55-64": {
+          "ex": 24.46,
+          "se": 2.5
+        },
+        "65-74": {
+          "ex": 18.12,
+          "se": 2.82
+        },
+        "75-84": {
+          "ex": 11.7,
+          "se": 3.42
+        },
+        "85 and older": {
+          "ex": 7.1,
+          "se": 4.79
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77532": {
+      "lifeExpectancy": 75.64,
+      "lifeExpectancySE": 1.65,
+      "povertyRate": 6.2,
+      "uninsuredRate": 14.8,
+      "diabetes": 12.0,
+      "hypertension": 33.0,
+      "obesity": 36.8,
+      "asthma": 9.8,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 75.64,
+          "se": 1.65
+        },
+        "1-4": {
+          "ex": 75.09,
+          "se": 1.63
+        },
+        "5-14": {
+          "ex": 71.19,
+          "se": 1.63
+        },
+        "15-24": {
+          "ex": 61.31,
+          "se": 1.63
+        },
+        "25-34": {
+          "ex": 52.09,
+          "se": 1.59
+        },
+        "35-44": {
+          "ex": 42.75,
+          "se": 1.59
+        },
+        "45-54": {
+          "ex": 33.52,
+          "se": 1.6
+        },
+        "55-64": {
+          "ex": 24.76,
+          "se": 1.63
+        },
+        "65-74": {
+          "ex": 16.9,
+          "se": 1.74
+        },
+        "75-84": {
+          "ex": 11.16,
+          "se": 2.07
+        },
+        "85 and older": {
+          "ex": 5.83,
+          "se": 3.1
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77536": {
+      "lifeExpectancy": 77.66,
+      "lifeExpectancySE": 1.28,
+      "povertyRate": 6.6,
+      "uninsuredRate": 15.8,
+      "diabetes": 11.1,
+      "hypertension": 31.3,
+      "obesity": 34.5,
+      "asthma": 9.2,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.66,
+          "se": 1.28
+        },
+        "1-4": {
+          "ex": 77.05,
+          "se": 1.26
+        },
+        "5-14": {
+          "ex": 73.22,
+          "se": 1.25
+        },
+        "15-24": {
+          "ex": 63.32,
+          "se": 1.25
+        },
+        "25-34": {
+          "ex": 53.59,
+          "se": 1.25
+        },
+        "35-44": {
+          "ex": 44.18,
+          "se": 1.23
+        },
+        "45-54": {
+          "ex": 34.64,
+          "se": 1.24
+        },
+        "55-64": {
+          "ex": 25.72,
+          "se": 1.25
+        },
+        "65-74": {
+          "ex": 17.5,
+          "se": 1.3
+        },
+        "75-84": {
+          "ex": 10.35,
+          "se": 1.46
+        },
+        "85 and older": {
+          "ex": 5.25,
+          "se": 2.07
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77547": {
+      "lifeExpectancy": 76.01,
+      "lifeExpectancySE": 2.74,
+      "povertyRate": 32.7,
+      "uninsuredRate": 31.3,
+      "diabetes": 16.0,
+      "hypertension": 32.9,
+      "obesity": 41.0,
+      "asthma": 8.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.01,
+          "se": 2.74
+        },
+        "1-4": {
+          "ex": 76.34,
+          "se": 2.21
+        },
+        "5-14": {
+          "ex": 72.38,
+          "se": 2.21
+        },
+        "15-24": {
+          "ex": 62.53,
+          "se": 2.21
+        },
+        "25-34": {
+          "ex": 53.14,
+          "se": 2.21
+        },
+        "35-44": {
+          "ex": 43.56,
+          "se": 2.22
+        },
+        "45-54": {
+          "ex": 34.04,
+          "se": 2.23
+        },
+        "55-64": {
+          "ex": 25.23,
+          "se": 2.28
+        },
+        "65-74": {
+          "ex": 17.19,
+          "se": 2.41
+        },
+        "75-84": {
+          "ex": 12.61,
+          "se": 2.68
+        },
+        "85 and older": {
+          "ex": 9.01,
+          "se": 4.01
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77562": {
+      "lifeExpectancy": 72.39,
+      "lifeExpectancySE": 1.84,
+      "povertyRate": 13.8,
+      "uninsuredRate": 21.5,
+      "diabetes": 14.0,
+      "hypertension": 35.4,
+      "obesity": 38.8,
+      "asthma": 9.9,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 72.39,
+          "se": 1.84
+        },
+        "1-4": {
+          "ex": 73.03,
+          "se": 1.53
+        },
+        "5-14": {
+          "ex": 69.2,
+          "se": 1.52
+        },
+        "15-24": {
+          "ex": 59.46,
+          "se": 1.52
+        },
+        "25-34": {
+          "ex": 50.19,
+          "se": 1.51
+        },
+        "35-44": {
+          "ex": 40.94,
+          "se": 1.51
+        },
+        "45-54": {
+          "ex": 32.0,
+          "se": 1.52
+        },
+        "55-64": {
+          "ex": 23.91,
+          "se": 1.58
+        },
+        "65-74": {
+          "ex": 17.11,
+          "se": 1.75
+        },
+        "75-84": {
+          "ex": 10.87,
+          "se": 2.07
+        },
+        "85 and older": {
+          "ex": 7.64,
+          "se": 3.48
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77571": {
+      "lifeExpectancy": 77.32,
+      "lifeExpectancySE": 1.92,
+      "povertyRate": 11.6,
+      "uninsuredRate": 15.8,
+      "diabetes": 12.4,
+      "hypertension": 33.1,
+      "obesity": 36.4,
+      "asthma": 9.5,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 77.32,
+          "se": 1.92
+        },
+        "1-4": {
+          "ex": 76.82,
+          "se": 1.87
+        },
+        "5-14": {
+          "ex": 72.96,
+          "se": 1.86
+        },
+        "15-24": {
+          "ex": 63.09,
+          "se": 1.86
+        },
+        "25-34": {
+          "ex": 53.54,
+          "se": 1.85
+        },
+        "35-44": {
+          "ex": 44.19,
+          "se": 1.83
+        },
+        "45-54": {
+          "ex": 34.95,
+          "se": 1.83
+        },
+        "55-64": {
+          "ex": 26.16,
+          "se": 1.86
+        },
+        "65-74": {
+          "ex": 18.24,
+          "se": 1.96
+        },
+        "75-84": {
+          "ex": 11.67,
+          "se": 2.24
+        },
+        "85 and older": {
+          "ex": 6.44,
+          "se": 3.23
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77586": {
+      "lifeExpectancy": 80.47,
+      "lifeExpectancySE": 2.11,
+      "povertyRate": 5.8,
+      "uninsuredRate": 10.9,
+      "diabetes": 10.1,
+      "hypertension": 31.1,
+      "obesity": 32.2,
+      "asthma": 9.3,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 80.47,
+          "se": 2.11
+        },
+        "1-4": {
+          "ex": 79.78,
+          "se": 2.11
+        },
+        "5-14": {
+          "ex": 75.9,
+          "se": 2.11
+        },
+        "15-24": {
+          "ex": 66.05,
+          "se": 2.11
+        },
+        "25-34": {
+          "ex": 56.38,
+          "se": 2.11
+        },
+        "35-44": {
+          "ex": 47.25,
+          "se": 2.1
+        },
+        "45-54": {
+          "ex": 37.88,
+          "se": 2.11
+        },
+        "55-64": {
+          "ex": 28.98,
+          "se": 2.16
+        },
+        "65-74": {
+          "ex": 20.6,
+          "se": 2.28
+        },
+        "75-84": {
+          "ex": 12.9,
+          "se": 2.56
+        },
+        "85 and older": {
+          "ex": 8.48,
+          "se": 3.56
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77587": {
+      "lifeExpectancy": 76.61,
+      "lifeExpectancySE": 1.8,
+      "povertyRate": 23.0,
+      "uninsuredRate": 30.7,
+      "diabetes": 16.9,
+      "hypertension": 33.0,
+      "obesity": 41.5,
+      "asthma": 8.7,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 76.61,
+          "se": 1.8
+        },
+        "1-4": {
+          "ex": 76.0,
+          "se": 1.78
+        },
+        "5-14": {
+          "ex": 72.28,
+          "se": 1.77
+        },
+        "15-24": {
+          "ex": 62.41,
+          "se": 1.77
+        },
+        "25-34": {
+          "ex": 52.76,
+          "se": 1.77
+        },
+        "35-44": {
+          "ex": 43.26,
+          "se": 1.77
+        },
+        "45-54": {
+          "ex": 34.0,
+          "se": 1.79
+        },
+        "55-64": {
+          "ex": 25.29,
+          "se": 1.84
+        },
+        "65-74": {
+          "ex": 17.52,
+          "se": 1.96
+        },
+        "75-84": {
+          "ex": 10.5,
+          "se": 2.25
+        },
+        "85 and older": {
+          "ex": 5.22,
+          "se": 3.39
+        }
+      },
+      "dataQuality": "complete"
+    },
+    "77598": {
+      "lifeExpectancy": 78.2,
+      "lifeExpectancySE": 2.32,
+      "povertyRate": 13.5,
+      "uninsuredRate": 18.3,
+      "diabetes": 10.0,
+      "hypertension": 28.1,
+      "obesity": 35.1,
+      "asthma": 9.4,
+      "violentCrimeRate": null,
+      "ageSpecific": {
+        "Under 1": {
+          "ex": 78.2,
+          "se": 2.32
+        },
+        "1-4": {
+          "ex": 77.71,
+          "se": 2.32
+        },
+        "5-14": {
+          "ex": 73.87,
+          "se": 2.32
+        },
+        "15-24": {
+          "ex": 63.98,
+          "se": 2.32
+        },
+        "25-34": {
+          "ex": 54.29,
+          "se": 2.33
+        },
+        "35-44": {
+          "ex": 44.58,
+          "se": 2.34
+        },
+        "45-54": {
+          "ex": 35.06,
+          "se": 2.36
+        },
+        "55-64": {
+          "ex": 26.46,
+          "se": 2.44
+        },
+        "65-74": {
+          "ex": 18.56,
+          "se": 2.64
+        },
+        "75-84": {
+          "ex": 12.07,
+          "se": 3.09
+        },
+        "85 and older": {
+          "ex": 7.87,
+          "se": 4.3
+        }
+      },
+      "dataQuality": "complete"
+    }
+  }
+}

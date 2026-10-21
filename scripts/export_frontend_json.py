@@ -1,20 +1,23 @@
 """
-Export Frontend JSON Data for Austin Health Pulse
-==================================================
-Reads local USALEEP data (data/raw/TX_A.CSV, data/raw/TX_B.CSV), downloads
-Census ZCTA-tract crosswalks plus ACS, CDC PLACES, and APD crime data,
-aggregates everything to ZCTA level, and exports
-frontend-ready JSON files.
+Export Frontend JSON Data for a City Preset
+===========================================
+Driven by a city preset (config/presets/*.json; default config/city.config.json).
+Reads local USALEEP tract data for the preset's state (data/raw/<ST>_A.CSV,
+data/raw/<ST>_B.CSV), downloads Census ZCTA-tract crosswalks plus ACS, CDC
+PLACES, and (when the preset names a crime source) violent-crime data,
+aggregates everything to ZCTA level, and exports frontend-ready JSON.
 
 Requirements:
-    pip install requests pandas openpyxl numpy
+    pip install requests pandas numpy openpyxl scipy
 
-Output files:
-    app/public/data/zcta_health_data.json   -- per-ZCTA health indicators
-    app/public/data/county_summary.json     -- summary statistics
+Output files (paths from the preset's `data` block, relative to config/):
+    data.indicators  -- per-ZCTA health indicators (zip-indicators.json)
+    data.summary     -- summary statistics + scenarioModel (county-summary.json)
 
 Usage:
-    python scripts/export_frontend_json.py
+    python scripts/export_frontend_json.py [--preset config/presets/<id>.json]
+    python scripts/export_frontend_json.py --preset ... --model-only
+        (recompute only scenarioModel from the existing indicators file)
 """
 
 import os
@@ -26,18 +29,49 @@ import requests
 import numpy as np
 import pandas as pd
 
+from pipeline_preset import PROJECT_ROOT, load_preset, parse_preset_arg, resolve_zctas
+from scenario_model import build_scenario_model
+from acs_summary_file import acs_rates_from_summary_files
+
 # ── CONFIG ────────────────────────────────────────────────────────────────────
-
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(PROJECT_ROOT, "app", "public", "data")
-
-TX_A_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "TX_A.CSV")
-TX_B_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "TX_B.CSV")
 
 CENSUS_API_KEY = os.environ.get("CENSUS_API_KEY", "")
 
-STATE_FIPS = "48"  # Texas
-TRAVIS_COUNTY_FIPS = "48453"
+# USALEEP ships one A (e(0)) and one B (life table) file per state, named by
+# USPS abbreviation. Only files present in data/raw/ can be used.
+STATE_FIPS_TO_USPS = {
+    "01": "AL", "02": "AK", "04": "AZ", "05": "AR", "06": "CA", "08": "CO",
+    "09": "CT", "10": "DE", "11": "DC", "12": "FL", "13": "GA", "15": "HI",
+    "16": "ID", "17": "IL", "18": "IN", "19": "IA", "20": "KS", "21": "KY",
+    "22": "LA", "23": "ME", "24": "MD", "25": "MA", "26": "MI", "27": "MN",
+    "28": "MS", "29": "MO", "30": "MT", "31": "NE", "32": "NV", "33": "NH",
+    "34": "NJ", "35": "NM", "36": "NY", "37": "NC", "38": "ND", "39": "OH",
+    "40": "OK", "41": "OR", "42": "PA", "44": "RI", "45": "SC", "46": "SD",
+    "47": "TN", "48": "TX", "49": "UT", "50": "VT", "51": "VA", "53": "WA",
+    "54": "WV", "55": "WI", "56": "WY",
+}
+
+
+def usaleep_paths(state_fips):
+    """Return (A path, B path) for the state's USALEEP CSVs, or exit naming them."""
+    usps = STATE_FIPS_TO_USPS.get(state_fips)
+    if usps is None:
+        sys.exit(f"ERROR: unknown pipeline.stateFips {state_fips!r}.")
+    paths = tuple(
+        os.path.join(PROJECT_ROOT, "data", "raw", f"{usps}_{part}.CSV")
+        for part in ("A", "B")
+    )
+    missing = [p for p in paths if not os.path.exists(p)]
+    if missing:
+        names = ", ".join(os.path.relpath(p, PROJECT_ROOT) for p in missing)
+        sys.exit(
+            f"ERROR: USALEEP life-expectancy files for {usps} not found: {names}. "
+            f"Download the {usps} A and B files from "
+            "https://www.cdc.gov/nchs/nvss/usaleep/usaleep.html and save them "
+            "as CSV under data/raw/."
+        )
+    return paths
+
 
 # Sentinel values for missing/suppressed data
 SENTINEL_MISSING = 88888
@@ -48,7 +82,7 @@ SENTINEL_SUPPRESSED = 99999
 # let one outlier dominate the choropleth color scale.
 MIN_POP_FOR_RATE = 1000
 
-# Age groups in TX_B.CSV (11 groups, ordered)
+# Age groups in the USALEEP B file (11 groups, ordered)
 AGE_GROUPS = [
     "Under 1",
     "1-4",
@@ -61,73 +95,6 @@ AGE_GROUPS = [
     "65-74",
     "75-84",
     "85 and older",
-]
-
-# Travis County ZCTAs
-TRAVIS_COUNTY_ZCTAS = [
-    "78610",
-    "78613",
-    "78617",
-    "78620",
-    "78621",
-    "78634",
-    "78640",
-    "78641",
-    "78642",
-    "78644",
-    "78645",
-    "78646",
-    "78652",
-    "78653",
-    "78660",
-    "78664",
-    "78669",
-    "78676",
-    "78681",
-    "78701",
-    "78702",
-    "78703",
-    "78704",
-    "78705",
-    "78712",
-    "78717",
-    "78719",
-    "78721",
-    "78722",
-    "78723",
-    "78724",
-    "78725",
-    "78726",
-    "78727",
-    "78728",
-    "78729",
-    "78730",
-    "78731",
-    "78732",
-    "78733",
-    "78734",
-    "78735",
-    "78736",
-    "78737",
-    "78738",
-    "78739",
-    "78741",
-    "78742",
-    "78744",
-    "78745",
-    "78746",
-    "78747",
-    "78748",
-    "78749",
-    "78750",
-    "78751",
-    "78752",
-    "78753",
-    "78754",
-    "78756",
-    "78757",
-    "78758",
-    "78759",
 ]
 
 CENSUS_ZCTA_TRACT_2010_URL = (
@@ -146,7 +113,7 @@ CENSUS_ZCTA_TRACT_2020_URL = (
 # ── STEP 1: Load Census 2010 ZCTA-to-Tract Crosswalk ────────────────────────
 
 
-def load_crosswalk():
+def load_crosswalk(zctas):
     """
     Download the Census Bureau 2010 ZCTA-to-Tract relationship file and return
     a DataFrame with columns: GEOID_TRACT, ZCTA, res_ratio.
@@ -183,8 +150,8 @@ def load_crosswalk():
     xwalk["POPPT"] = pd.to_numeric(xwalk["POPPT"], errors="coerce").fillna(0)
     xwalk["TRPOP"] = pd.to_numeric(xwalk["TRPOP"], errors="coerce").fillna(0)
 
-    # Filter to Travis County ZCTAs
-    xwalk = xwalk[xwalk["ZCTA"].isin(TRAVIS_COUNTY_ZCTAS)]
+    # Filter to the preset's ZCTAs
+    xwalk = xwalk[xwalk["ZCTA"].isin(zctas)]
 
     # Compute res_ratio as fraction of tract population in this ZCTA
     xwalk["res_ratio"] = xwalk.apply(
@@ -194,12 +161,12 @@ def load_crosswalk():
 
     xwalk = xwalk[xwalk["res_ratio"] > 0]
     print(
-        f"      Filtered crosswalk: {len(xwalk)} tract-ZCTA mappings for Travis County."
+        f"      Filtered crosswalk: {len(xwalk)} tract-ZCTA mappings for the preset ZCTAs."
     )
     return xwalk[["GEOID_TRACT", "ZCTA", "res_ratio"]]
 
 
-def load_crosswalk_2020():
+def load_crosswalk_2020(zctas):
     """
     Download the Census 2020 ZCTA-to-Tract relationship file. Used for
     aggregating datasets geocoded to 2020 tract boundaries (e.g. APD crime).
@@ -237,7 +204,7 @@ def load_crosswalk_2020():
         xwalk.get("AREALAND_TRACT_20"), errors="coerce"
     ).fillna(0)
 
-    xwalk = xwalk[xwalk["ZCTA"].isin(TRAVIS_COUNTY_ZCTAS)]
+    xwalk = xwalk[xwalk["ZCTA"].isin(zctas)]
 
     xwalk["res_ratio"] = xwalk.apply(
         lambda row: (
@@ -249,28 +216,24 @@ def load_crosswalk_2020():
     )
     xwalk = xwalk[xwalk["res_ratio"] > 0]
     print(
-        f"       Filtered 2020 crosswalk: {len(xwalk)} tract-ZCTA mappings for Travis County."
+        f"       Filtered 2020 crosswalk: {len(xwalk)} tract-ZCTA mappings for the preset ZCTAs."
     )
     return xwalk[["GEOID_TRACT", "ZCTA", "res_ratio"]]
 
 
-# ── STEP 2: Life Expectancy from TX_A.CSV ────────────────────────────────────
+# ── STEP 2: Life Expectancy from the USALEEP A file ─────────────────────────
 
 
-def load_life_expectancy(xwalk):
+def load_life_expectancy(xwalk, a_path):
     """
-    Read TX_A.CSV (life expectancy at birth per tract), merge with HUD
+    Read the USALEEP A file (life expectancy at birth per tract), merge with HUD
     crosswalk, and compute population-weighted average per ZCTA.
 
     Returns DataFrame with columns: ZCTA, lifeExpectancy, lifeExpectancySE
     """
-    print("[2/5] Loading life expectancy from TX_A.CSV...")
+    print(f"[2/5] Loading life expectancy from {os.path.basename(a_path)}...")
 
-    if not os.path.exists(TX_A_PATH):
-        print(f"      ERROR: TX_A.CSV not found at {TX_A_PATH}")
-        sys.exit(1)
-
-    df = pd.read_csv(TX_A_PATH, dtype={"Tract ID": str})
+    df = pd.read_csv(a_path, dtype={"Tract ID": str})
     df = df.rename(
         columns={"Tract ID": "GEOID_TRACT", "e(0)": "e0", "se(e(0))": "se_e0"}
     )
@@ -278,7 +241,7 @@ def load_life_expectancy(xwalk):
     df["e0"] = pd.to_numeric(df["e0"], errors="coerce")
     df["se_e0"] = pd.to_numeric(df["se_e0"], errors="coerce")
 
-    print(f"      Loaded {len(df)} tracts from TX_A.CSV.")
+    print(f"      Loaded {len(df)} tracts from {os.path.basename(a_path)}.")
 
     # Merge with crosswalk
     merged = xwalk.merge(
@@ -311,24 +274,20 @@ def load_life_expectancy(xwalk):
     return result
 
 
-# ── STEP 3: Age-Specific Life Tables from TX_B.CSV ──────────────────────────
+# ── STEP 3: Age-Specific Life Tables from the USALEEP B file ────────────────
 
 
-def load_age_specific(xwalk):
+def load_age_specific(xwalk, b_path):
     """
-    Read TX_B.CSV (full life tables per tract), merge with HUD crosswalk,
+    Read the USALEEP B file (full life tables per tract), merge with HUD crosswalk,
     and compute population-weighted average e(x) and se(e(x)) per ZCTA
     for each age group.
 
     Returns dict: { ZCTA: { age_group: { "ex": float, "se": float }, ... }, ... }
     """
-    print("[3/5] Loading age-specific life tables from TX_B.CSV...")
+    print(f"[3/5] Loading age-specific life tables from {os.path.basename(b_path)}...")
 
-    if not os.path.exists(TX_B_PATH):
-        print(f"      ERROR: TX_B.CSV not found at {TX_B_PATH}")
-        sys.exit(1)
-
-    df = pd.read_csv(TX_B_PATH, dtype={"Tract ID": str})
+    df = pd.read_csv(b_path, dtype={"Tract ID": str})
     df = df.rename(
         columns={
             "Tract ID": "GEOID_TRACT",
@@ -341,7 +300,7 @@ def load_age_specific(xwalk):
     df["ex"] = pd.to_numeric(df["ex"], errors="coerce")
     df["se_ex"] = pd.to_numeric(df["se_ex"], errors="coerce")
 
-    print(f"      Loaded {len(df)} tract-age records from TX_B.CSV.")
+    print(f"      Loaded {len(df)} tract-age records from {os.path.basename(b_path)}.")
 
     # Merge with crosswalk
     merged = xwalk.merge(
@@ -388,14 +347,21 @@ def load_age_specific(xwalk):
 # ── STEP 4: ACS Data (Poverty + Uninsured) ───────────────────────────────────
 
 
-def pull_acs():
+def pull_acs(zctas):
     """
-    Pull ACS 5-Year 2022 subject table data for Travis County ZCTAs.
+    Pull ACS 5-Year 2022 subject table data for the preset's ZCTAs.
     ZCTAs are queried directly without state nesting.
 
     Returns DataFrame with columns: ZCTA, povertyRate, uninsuredRate
     """
     print("[4/5] Pulling ACS 5-Year 2022 data (poverty + uninsured)...")
+
+    if not CENSUS_API_KEY:
+        print(
+            "      CENSUS_API_KEY unset (the Census API rejects keyless requests); "
+            "using the ACS table-based summary files instead."
+        )
+        return suppress_low_population(acs_rates_from_summary_files(zctas))
 
     base_url = "https://api.census.gov/data/2022/acs/acs5/subject"
 
@@ -409,8 +375,8 @@ def pull_acs():
         """Run a paged ZCTA query against an ACS endpoint, return rows + header."""
         rows: list[list[str]] = []
         header_out: list[str] = []
-        for i in range(0, len(TRAVIS_COUNTY_ZCTAS), 25):
-            batch = TRAVIS_COUNTY_ZCTAS[i : i + 25]
+        for i in range(0, len(zctas), 25):
+            batch = zctas[i : i + 25]
             zcta_list = ",".join(batch)
             params = {
                 "get": get_vars,
@@ -439,7 +405,7 @@ def pull_acs():
         print("      ERROR: All ACS subject-table requests failed.")
         return pd.DataFrame(
             {
-                "ZCTA": TRAVIS_COUNTY_ZCTAS,
+                "ZCTA": zctas,
                 "povertyRate": np.nan,
                 "uninsuredRate": np.nan,
                 "population": np.nan,
@@ -455,7 +421,7 @@ def pull_acs():
         }
     )
     df["ZCTA"] = df["ZCTA"].astype(str).str.zfill(5)
-    df = df[df["ZCTA"].isin(TRAVIS_COUNTY_ZCTAS)][
+    df = df[df["ZCTA"].isin(zctas)][
         ["ZCTA", "povertyRate", "uninsuredRate"]
     ]
 
@@ -479,9 +445,13 @@ def pull_acs():
         print("      WARNING: ACS population query failed; crime rates will be null.")
         df["population"] = np.nan
 
+    return suppress_low_population(df)
+
+
+def suppress_low_population(df):
+    """Null ACS rates for ZCTAs below MIN_POP_FOR_RATE residents."""
     low_pop = df["population"].isna() | (df["population"] < MIN_POP_FOR_RATE)
     df.loc[low_pop, ["povertyRate", "uninsuredRate"]] = np.nan
-
     print(f"      ACS data retrieved for {len(df)} ZCTAs.")
     return df
 
@@ -489,7 +459,7 @@ def pull_acs():
 # ── STEP 5: CDC PLACES (Diabetes, Hypertension, Obesity) ────────────────────
 
 
-def pull_places():
+def pull_places(zctas):
     """
     Pull CDC PLACES ZCTA-level health outcome data via Socrata API.
     Uses the generic column format (measureid, data_value) and pivots to wide format.
@@ -502,7 +472,7 @@ def pull_places():
     measures = ("DIABETES", "BPHIGH", "OBESITY", "CASTHMA")
 
     # Build ZCTA filter for SoQL
-    zcta_list = ",".join(f"'{z}'" for z in TRAVIS_COUNTY_ZCTAS)
+    zcta_list = ",".join(f"'{z}'" for z in zctas)
     measure_list = ",".join(f"'{m}'" for m in measures)
     params = {
         "$where": (
@@ -516,7 +486,7 @@ def pull_places():
 
     empty = pd.DataFrame(
         {
-            "ZCTA": TRAVIS_COUNTY_ZCTAS,
+            "ZCTA": zctas,
             "diabetes": np.nan,
             "hypertension": np.nan,
             "obesity": np.nan,
@@ -581,7 +551,7 @@ JURISDICTION_LOOKBACK_YEARS = 2
 JURISDICTION_COVERAGE_THRESHOLD = 0.5
 
 
-def fetch_apd_jurisdiction_tracts(today: datetime.date) -> set[str]:
+def fetch_apd_jurisdiction_tracts(today: datetime.date, county_geoid: str) -> set[str]:
     """
     Approximate APD's jurisdiction footprint by collecting every 2020 tract
     where APD has reported *any* incident over the last few years. This
@@ -615,12 +585,12 @@ def fetch_apd_jurisdiction_tracts(today: datetime.date) -> set[str]:
         s = str(bg)
         full = s if (s.startswith("48") and len(s) >= 12) else "48" + s.zfill(10)
         tract = full[:11]
-        if tract.startswith("48453"):
+        if tract.startswith(county_geoid):
             tracts.add(tract)
     return tracts
 
 
-def pull_violent_crime(xwalk_2020, acs_df):
+def pull_violent_crime(xwalk_2020, acs_df, zctas, county_geoid):
     """
     Pull APD Crime Reports (Socrata fdj4-gpfu), filter to UCR Part 1 violent
     offenses over the most recent 12-month window, derive census tract from
@@ -643,7 +613,7 @@ def pull_violent_crime(xwalk_2020, acs_df):
 
     # Build APD's jurisdiction footprint up-front so we can null out ZCTAs
     # that fall mostly outside it (e.g. Cedar Park, Round Rock, Lakeway).
-    served_tracts = fetch_apd_jurisdiction_tracts(today)
+    served_tracts = fetch_apd_jurisdiction_tracts(today, county_geoid)
     print(
         f"      APD jurisdiction footprint: {len(served_tracts)} tracts "
         f"(any incident in last {JURISDICTION_LOOKBACK_YEARS}y)."
@@ -660,9 +630,7 @@ def pull_violent_crime(xwalk_2020, acs_df):
         "$limit": 50000,
     }
 
-    empty = pd.DataFrame(
-        {"ZCTA": TRAVIS_COUNTY_ZCTAS, "violentCrimeRate": np.nan}
-    )
+    empty = pd.DataFrame({"ZCTA": zctas, "violentCrimeRate": np.nan})
 
     try:
         r = requests.get(url, params=params, timeout=120)
@@ -684,7 +652,7 @@ def pull_violent_crime(xwalk_2020, acs_df):
     # APD strips the 2-char state FIPS — values are typically 10 chars
     # (county+tract+BG). Reconstruct the 12-char GEOID by prepending TX state
     # FIPS, then take the first 11 chars to get the tract GEOID. Filter out
-    # any rows that don't resolve to Travis County (some are geocoder noise
+    # any rows that don't resolve to the preset county (some are geocoder noise
     # like "4910204062" pointing at Utah).
     def to_tract(s: str) -> str:
         s = str(s)
@@ -695,7 +663,7 @@ def pull_violent_crime(xwalk_2020, acs_df):
         return full[:11]
 
     df["GEOID_TRACT"] = df["census_block_group"].apply(to_tract)
-    df = df[df["GEOID_TRACT"].str.startswith("48453")]
+    df = df[df["GEOID_TRACT"].str.startswith(county_geoid)]
 
     # Count incidents per tract
     tract_counts = (
@@ -757,7 +725,7 @@ def pull_violent_crime(xwalk_2020, acs_df):
         lambda r: rate_for(r["ZCTA"], r["incidents"], r["coverage"]), axis=1
     )
 
-    result = pd.DataFrame({"ZCTA": TRAVIS_COUNTY_ZCTAS}).merge(
+    result = pd.DataFrame({"ZCTA": zctas}).merge(
         by_zcta[["ZCTA", "violentCrimeRate"]], on="ZCTA", how="left"
     )
     print(
@@ -791,11 +759,11 @@ DATA_QUALITY_KEYS = [
 ]
 
 
-def compute_data_quality(record):
+def compute_data_quality(record, keys):
     """Determine data quality based on presence of all main indicators."""
-    values = [record.get(k) for k in DATA_QUALITY_KEYS]
+    values = [record.get(k) for k in keys]
     non_null = sum(1 for v in values if v is not None)
-    if non_null == len(DATA_QUALITY_KEYS):
+    if non_null == len(keys):
         return "complete"
     elif non_null == 0:
         return "missing"
@@ -829,47 +797,96 @@ def compute_summary_stats(values):
 # ── MAIN EXPORT ──────────────────────────────────────────────────────────────
 
 
+def write_json(path, payload):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(payload, f, indent=2, allow_nan=False, default=str)
+    print(f"      Wrote {path} ({os.path.getsize(path) / 1024:.1f} KB)")
+
+
+def refresh_scenario_model(preset):
+    """Recompute only scenarioModel from the existing indicators file."""
+    paths = preset["output_paths"]
+    with open(paths["indicators"]) as f:
+        zctas_dict = json.load(f)["zctas"]
+    with open(paths["summary"]) as f:
+        county_summary = json.load(f)
+    county_summary["scenarioModel"] = build_scenario_model(
+        zctas_dict, preset.get("dataQualityNotes")
+    )
+    write_json(paths["summary"], county_summary)
+
+
 def main():
+    parser = parse_preset_arg(__doc__.strip().splitlines()[0])
+    parser.add_argument(
+        "--model-only",
+        action="store_true",
+        help="Recompute scenarioModel from the existing indicators file; no fetches.",
+    )
+    args = parser.parse_args()
+    preset = load_preset(args.preset)
+    pipeline = preset["pipeline"]
+    county_geoid = preset["county_geoid"]
+    crime_source = pipeline.get("crimeSource")
+
     print("=" * 60)
-    print("Export Frontend JSON Data for Austin Health Pulse")
+    print(f"Export Frontend JSON Data for preset {preset['id']}")
     print("=" * 60)
     print()
 
+    if args.model_only:
+        refresh_scenario_model(preset)
+        print("Done.")
+        return
+
+    a_path, b_path = usaleep_paths(pipeline["stateFips"])
+    zctas = resolve_zctas(preset)
+
+    # Without a crime source, violentCrimeRate is null everywhere and is not
+    # counted toward a ZIP's "complete" data quality.
+    quality_keys = [
+        k for k in DATA_QUALITY_KEYS if crime_source or k != "violentCrimeRate"
+    ]
+
     # Load Census crosswalks. 2010 vintage for USALEEP (uses 2010 tracts);
     # 2020 vintage for APD crime data (geocoded to 2020 tracts).
-    xwalk = load_crosswalk()
-    xwalk_2020 = load_crosswalk_2020()
+    xwalk = load_crosswalk(zctas)
 
     # Load life expectancy data
-    le_df = load_life_expectancy(xwalk)
+    le_df = load_life_expectancy(xwalk, a_path)
 
     # Load age-specific life table data
-    age_specific = load_age_specific(xwalk)
+    age_specific = load_age_specific(xwalk, b_path)
 
     # Pull ACS and CDC PLACES data
-    acs_df = pull_acs()
-    places_df = pull_places()
+    acs_df = pull_acs(zctas)
+    places_df = pull_places(zctas)
 
-    # Pull APD violent crime (uses 2020 crosswalk + ACS population)
-    if xwalk_2020 is not None:
-        crime_df = pull_violent_crime(xwalk_2020, acs_df)
+    # Pull violent crime (uses 2020 crosswalk + ACS population)
+    no_crime = pd.DataFrame({"ZCTA": zctas, "violentCrimeRate": np.nan})
+    if crime_source == "apd-austin":
+        xwalk_2020 = load_crosswalk_2020(zctas)
+        if xwalk_2020 is not None:
+            crime_df = pull_violent_crime(xwalk_2020, acs_df, zctas, county_geoid)
+        else:
+            print("[6/7] SKIP: 2020 crosswalk unavailable; violent crime will be null.")
+            crime_df = no_crime
     else:
-        print("[6/7] SKIP: 2020 crosswalk unavailable; violent crime will be null.")
-        crime_df = pd.DataFrame(
-            {"ZCTA": TRAVIS_COUNTY_ZCTAS, "violentCrimeRate": np.nan}
-        )
+        print("[6/7] SKIP: preset has no crime source; violent crime will be null.")
+        crime_df = no_crime
 
     print()
     print("[7/7] Building JSON output...")
 
     # Merge all data into a single DataFrame (for county-level stats)
-    base = pd.DataFrame({"ZCTA": TRAVIS_COUNTY_ZCTAS})
+    base = pd.DataFrame({"ZCTA": zctas})
     merged = base.merge(le_df, on="ZCTA", how="left")
     merged = merged.merge(acs_df, on="ZCTA", how="left")
     merged = merged.merge(places_df, on="ZCTA", how="left")
     merged = merged.merge(crime_df, on="ZCTA", how="left")
 
-    # ── Build zcta_health_data.json ──
+    # ── Build zip-indicators.json ──
 
     zctas_dict = {}
     for _, row in merged.iterrows():
@@ -900,7 +917,7 @@ def main():
         else:
             record["ageSpecific"] = {ag: {"ex": None, "se": None} for ag in AGE_GROUPS}
 
-        record["dataQuality"] = compute_data_quality(record)
+        record["dataQuality"] = compute_data_quality(record, quality_keys)
         zctas_dict[zcta] = record
 
     # Compute county averages (mean of non-null values)
@@ -911,29 +928,39 @@ def main():
         ]
         county_avg[key] = round(float(np.mean(values)), 2) if values else None
 
+    sources = {
+        "lifeExpectancy": "CDC USALEEP (tract-level, pop-weighted to ZCTA)",
+        "povertyRate": "ACS 5-Year 2022, Table S1701",
+        "uninsuredRate": "ACS 5-Year 2022, Table S2701",
+        "diabetes": "CDC PLACES 2023 (BRFSS model-based)",
+        "hypertension": "CDC PLACES 2023 (BRFSS model-based)",
+        "obesity": "CDC PLACES 2023 (BRFSS model-based)",
+        "asthma": "CDC PLACES 2023 (current asthma, BRFSS model-based)",
+    }
+    if not CENSUS_API_KEY:
+        sources["povertyRate"] = (
+            "ACS 5-Year 2022, Table B17001 summary file (= S1701 poverty rate)"
+        )
+        sources["uninsuredRate"] = (
+            "ACS 5-Year 2022, Table B27001 summary file (= S2701 uninsured rate)"
+        )
+    if crime_source == "apd-austin":
+        sources["violentCrimeRate"] = (
+            "City of Austin Open Data Portal — APD Crime Reports "
+            "(UCR Part 1 violent, rolling 12-month window, "
+            "tract-aggregated, per 1,000 residents)"
+        )
+
     health_data = {
         "meta": {
             "generated": datetime.date.today().isoformat(),
-            "sources": {
-                "lifeExpectancy": "CDC USALEEP (tract-level, pop-weighted to ZCTA)",
-                "povertyRate": "ACS 5-Year 2022, Table S1701",
-                "uninsuredRate": "ACS 5-Year 2022, Table S2701",
-                "diabetes": "CDC PLACES 2023 (BRFSS model-based)",
-                "hypertension": "CDC PLACES 2023 (BRFSS model-based)",
-                "obesity": "CDC PLACES 2023 (BRFSS model-based)",
-                "asthma": "CDC PLACES 2023 (current asthma, BRFSS model-based)",
-                "violentCrimeRate": (
-                    "City of Austin Open Data Portal — APD Crime Reports "
-                    "(UCR Part 1 violent, rolling 12-month window, "
-                    "tract-aggregated, per 1,000 residents)"
-                ),
-            },
+            "sources": sources,
             "countyAverage": county_avg,
         },
         "zctas": zctas_dict,
     }
 
-    # ── Build county_summary.json ──
+    # ── Build county-summary.json ──
 
     indicators = {}
 
@@ -949,6 +976,9 @@ def main():
     }
 
     for key, config in indicator_config.items():
+        if key == "violentCrimeRate" and not crime_source:
+            indicators[key] = None
+            continue
         values = [zctas_dict[z][key] for z in zctas_dict]
         stats = compute_summary_stats(values)
         stats["unit"] = config["unit"]
@@ -961,27 +991,17 @@ def main():
 
     county_summary = {
         "indicators": indicators,
-        "totalZctas": len(TRAVIS_COUNTY_ZCTAS),
+        "totalZctas": len(zctas),
         "zctasWithCompleteData": complete_count,
+        "scenarioModel": build_scenario_model(
+            zctas_dict, preset.get("dataQualityNotes")
+        ),
     }
 
     # ── Write output files ──
 
-    os.makedirs(DATA_DIR, exist_ok=True)
-
-    health_data_path = os.path.join(DATA_DIR, "zcta_health_data.json")
-    with open(health_data_path, "w") as f:
-        json.dump(health_data, f, indent=2, allow_nan=False, default=str)
-    print(f"      Wrote {health_data_path}")
-    print(
-        f"      ({len(zctas_dict)} ZCTAs, {os.path.getsize(health_data_path) / 1024:.1f} KB)"
-    )
-
-    county_summary_path = os.path.join(DATA_DIR, "county_summary.json")
-    with open(county_summary_path, "w") as f:
-        json.dump(county_summary, f, indent=2, allow_nan=False, default=str)
-    print(f"      Wrote {county_summary_path}")
-    print(f"      ({os.path.getsize(county_summary_path) / 1024:.1f} KB)")
+    write_json(preset["output_paths"]["indicators"], health_data)
+    write_json(preset["output_paths"]["summary"], county_summary)
 
     # ── Print summary ──
 
@@ -989,7 +1009,7 @@ def main():
     print("=" * 60)
     print("Summary")
     print("=" * 60)
-    print(f"  Total ZCTAs:          {len(TRAVIS_COUNTY_ZCTAS)}")
+    print(f"  Total ZCTAs:          {len(zctas)}")
     print(f"  Complete data:        {complete_count}")
     partial_count = sum(
         1 for z in zctas_dict if zctas_dict[z]["dataQuality"] == "partial"

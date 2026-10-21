@@ -12,7 +12,7 @@ npm ci
 npm run dev   # http://localhost:5173/austin-health-pulse/
 ```
 
-To refresh the data in `app/public/data/`, see [`data/README.md`](data/README.md).
+To refresh the data in `config/data/<id>/`, see [`data/README.md`](data/README.md).
 
 ## Gates
 

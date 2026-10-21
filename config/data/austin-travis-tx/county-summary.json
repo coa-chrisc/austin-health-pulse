@@ -1,0 +1,171 @@
+{
+  "indicators": {
+    "lifeExpectancy": {
+      "min": 75.26,
+      "max": 86.85,
+      "avg": 79.86,
+      "median": 79.87,
+      "p25": 78.15,
+      "p75": 81.7,
+      "unit": "years",
+      "higherIsBetter": true
+    },
+    "povertyRate": {
+      "min": 1.8,
+      "max": 55.4,
+      "avg": 10.18,
+      "median": 8.6,
+      "p25": 5.1,
+      "p75": 12.7,
+      "unit": "%",
+      "higherIsBetter": false
+    },
+    "uninsuredRate": {
+      "min": 0.4,
+      "max": 27.5,
+      "avg": 11.91,
+      "median": 10.5,
+      "p25": 6.8,
+      "p75": 16.0,
+      "unit": "%",
+      "higherIsBetter": false
+    },
+    "diabetes": {
+      "min": 3.6,
+      "max": 16.2,
+      "avg": 9.2,
+      "median": 9.05,
+      "p25": 7.8,
+      "p75": 10.0,
+      "unit": "%",
+      "higherIsBetter": false
+    },
+    "hypertension": {
+      "min": 15.0,
+      "max": 39.7,
+      "avg": 27.13,
+      "median": 26.65,
+      "p25": 25.12,
+      "p75": 28.5,
+      "unit": "%",
+      "higherIsBetter": false
+    },
+    "obesity": {
+      "min": 25.4,
+      "max": 42.0,
+      "avg": 31.25,
+      "median": 31.15,
+      "p25": 27.95,
+      "p75": 33.98,
+      "unit": "%",
+      "higherIsBetter": false
+    },
+    "asthma": {
+      "min": 8.4,
+      "max": 10.7,
+      "avg": 9.36,
+      "median": 9.4,
+      "p25": 9.1,
+      "p75": 9.6,
+      "unit": "%",
+      "higherIsBetter": false
+    },
+    "violentCrimeRate": {
+      "min": 0.0,
+      "max": 23.36,
+      "avg": 3.19,
+      "median": 1.79,
+      "p25": 0.71,
+      "p75": 4.65,
+      "unit": "per1k",
+      "higherIsBetter": false
+    }
+  },
+  "totalZctas": 63,
+  "zctasWithCompleteData": 44,
+  "scenarioModel": {
+    "method": "bivariate-ols",
+    "outcome": "lifeExpectancy",
+    "levers": [
+      {
+        "indicator": "uninsuredRate",
+        "slope": -0.1911,
+        "slopeSE": 0.0388,
+        "slopeCI95": [
+          -0.2686,
+          -0.1135
+        ],
+        "intercept": 82.136,
+        "r2": 0.292,
+        "n": 61,
+        "observedMin": 0.4,
+        "observedMax": 27.5,
+        "bestZip": "78730"
+      },
+      {
+        "indicator": "diabetes",
+        "slope": -0.3946,
+        "slopeSE": 0.1283,
+        "slopeCI95": [
+          -0.6512,
+          -0.1379
+        ],
+        "intercept": 83.471,
+        "r2": 0.138,
+        "n": 61,
+        "observedMin": 3.6,
+        "observedMax": 16.2,
+        "bestZip": "78705"
+      },
+      {
+        "indicator": "obesity",
+        "slope": -0.3571,
+        "slopeSE": 0.0567,
+        "slopeCI95": [
+          -0.4706,
+          -0.2436
+        ],
+        "intercept": 91.005,
+        "r2": 0.402,
+        "n": 61,
+        "observedMin": 25.4,
+        "observedMax": 42.0,
+        "bestZip": "78746"
+      }
+    ],
+    "excluded": [
+      {
+        "indicator": "povertyRate",
+        "slope": -0.0673,
+        "slopeSE": 0.0371,
+        "slopeCI95": [
+          -0.1415,
+          0.0069
+        ],
+        "intercept": 80.546,
+        "r2": 0.053,
+        "n": 61,
+        "observedMin": 1.8,
+        "observedMax": 55.4,
+        "bestZip": "78733",
+        "reason": "95% CI includes zero"
+      },
+      {
+        "indicator": "hypertension",
+        "slope": -0.0692,
+        "slopeSE": 0.075,
+        "slopeCI95": [
+          -0.2193,
+          0.0809
+        ],
+        "intercept": 81.738,
+        "r2": 0.014,
+        "n": 61,
+        "observedMin": 15.0,
+        "observedMax": 39.7,
+        "bestZip": "78705",
+        "reason": "95% CI includes zero"
+      }
+    ]
+  }
+}

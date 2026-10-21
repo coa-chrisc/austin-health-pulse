@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "indicators.schema.json",
+  "title": "ZIP-level health indicators (zip-indicators.json)",
+  "description": "Per-ZCTA life expectancy and social-determinant indicators. Every value is an aggregate, de-identified public estimate; null means suppressed or unavailable. Every key under `zctas` must match a feature in boundaries.geojson.",
+  "type": "object",
+  "required": ["zctas", "meta"],
+  "additionalProperties": false,
+  "$defs": {
+    "rate": { "type": ["number", "null"], "minimum": 0, "maximum": 100, "description": "Percent of residents (0-100)." },
+    "years": { "type": ["number", "null"], "minimum": 0, "maximum": 120 },
+    "ageEntry": {
+      "type": "object",
+      "required": ["ex", "se"],
+      "additionalProperties": false,
+      "properties": {
+        "ex": { "$ref": "#/$defs/years" },
+        "se": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "zcta": {
+      "type": "object",
+      "required": ["lifeExpectancy", "lifeExpectancySE", "povertyRate", "uninsuredRate", "diabetes", "hypertension", "obesity", "asthma", "violentCrimeRate", "ageSpecific", "dataQuality"],
+      "additionalProperties": false,
+      "properties": {
+        "lifeExpectancy": { "$ref": "#/$defs/years", "description": "Life expectancy at birth, years." },
+        "lifeExpectancySE": { "type": ["number", "null"], "minimum": 0 },
+        "povertyRate": { "$ref": "#/$defs/rate" },
+        "uninsuredRate": { "$ref": "#/$defs/rate" },
+        "diabetes": { "$ref": "#/$defs/rate" },
+        "hypertension": { "$ref": "#/$defs/rate" },
+        "obesity": { "$ref": "#/$defs/rate" },
+        "asthma": { "$ref": "#/$defs/rate" },
+        "violentCrimeRate": { "type": ["number", "null"], "minimum": 0, "description": "Violent offenses per 1,000 residents." },
+        "ageSpecific": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "required": ["Under 1", "1-4", "5-14", "15-24", "25-34", "35-44", "45-54", "55-64", "65-74", "75-84", "85 and older"],
+              "additionalProperties": false,
+              "properties": {
+                "Under 1": { "$ref": "#/$defs/ageEntry" },
+                "1-4": { "$ref": "#/$defs/ageEntry" },
+                "5-14": { "$ref": "#/$defs/ageEntry" },
+                "15-24": { "$ref": "#/$defs/ageEntry" },
+                "25-34": { "$ref": "#/$defs/ageEntry" },
+                "35-44": { "$ref": "#/$defs/ageEntry" },
+                "45-54": { "$ref": "#/$defs/ageEntry" },
+                "55-64": { "$ref": "#/$defs/ageEntry" },
+                "65-74": { "$ref": "#/$defs/ageEntry" },
+                "75-84": { "$ref": "#/$defs/ageEntry" },
+                "85 and older": { "$ref": "#/$defs/ageEntry" }
+              }
+            }
+          ]
+        },
+        "dataQuality": { "enum": ["complete", "partial", "missing"] }
+      }
+    }
+  },
+  "properties": {
+    "zctas": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^\\d{5}$" },
+      "additionalProperties": { "$ref": "#/$defs/zcta" }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["generated", "sources", "countyAverage"],
+      "additionalProperties": false,
+      "properties": {
+        "generated": { "type": "string", "format": "date" },
+        "sources": { "type": "object", "additionalProperties": { "type": "string" } },
+        "countyAverage": {
+          "type": "object",
+          "required": ["lifeExpectancy", "povertyRate", "uninsuredRate", "diabetes", "hypertension", "obesity", "asthma", "violentCrimeRate"],
+          "additionalProperties": false,
+          "properties": {
+            "lifeExpectancy": { "type": "number" },
+            "povertyRate": { "type": "number" },
+            "uninsuredRate": { "type": "number" },
+            "diabetes": { "type": "number" },
+            "hypertension": { "type": "number" },
+            "obesity": { "type": "number" },
+            "asthma": { "type": "number" },
+            "violentCrimeRate": { "type": ["number", "null"], "description": "null when the preset has no crime source." }
+          }
+        }
+      }
+    }
+  }
+}

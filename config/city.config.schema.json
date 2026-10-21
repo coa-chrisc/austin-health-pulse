@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "city.config.schema.json",
+  "title": "Health Pulse city configuration",
+  "description": "One deployment = one city config. Paths under `data` are relative to the config/ directory. The `pipeline` block is read only by the Python data pipeline and is stripped before the config reaches the browser.",
+  "type": "object",
+  "required": ["id", "appName", "agency", "region", "brand", "map", "featuredZips", "dataQualityNotes", "serviceGuideUrl", "data", "dataSources", "dataAsOf", "pipeline"],
+  "additionalProperties": false,
+  "$defs": {
+    "hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+    "zip": { "type": "string", "pattern": "^\\d{5}$" },
+    "relPath": { "type": "string", "pattern": "^data/[A-Za-z0-9._/-]+$" }
+  },
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "Preset id; also the config/data/<id>/ directory name." },
+    "appName": { "type": "string", "minLength": 1 },
+    "agency": {
+      "type": "object",
+      "required": ["name", "shortName", "parent"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "shortName": { "type": "string", "minLength": 1 },
+        "parent": { "type": "string", "minLength": 1, "description": "Parent government, e.g. 'City of Austin'." }
+      }
+    },
+    "region": {
+      "type": "object",
+      "required": ["name", "cityName", "state"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "description": "Geography the data covers, e.g. 'Travis County'." },
+        "cityName": { "type": "string", "minLength": 1 },
+        "state": { "type": "string", "pattern": "^[A-Z]{2}$" }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "required": ["logoUrl", "colors"],
+      "additionalProperties": false,
+      "properties": {
+        "logoUrl": { "type": ["string", "null"] },
+        "colors": {
+          "type": "object",
+          "description": "Palette roles. Key names are historical (Austin Public Health): blue = primary, green = secondary, darkBlue = text/ink. They feed APH_COLORS and the --color-aph-* CSS variables.",
+          "required": ["blue", "green", "white", "darkBlue", "darkGreen", "complaintGreen", "lightBlue", "lightGreen", "red", "orange", "yellow", "cyan", "purple", "brown", "lightGray", "darkGray"],
+          "additionalProperties": false,
+          "properties": {
+            "blue": { "$ref": "#/$defs/hex" },
+            "green": { "$ref": "#/$defs/hex" },
+            "white": { "$ref": "#/$defs/hex" },
+            "darkBlue": { "$ref": "#/$defs/hex" },
+            "darkGreen": { "$ref": "#/$defs/hex" },
+            "complaintGreen": { "$ref": "#/$defs/hex" },
+            "lightBlue": { "$ref": "#/$defs/hex" },
+            "lightGreen": { "$ref": "#/$defs/hex" },
+            "red": { "$ref": "#/$defs/hex" },
+            "orange": { "$ref": "#/$defs/hex" },
+            "yellow": { "$ref": "#/$defs/hex" },
+            "cyan": { "$ref": "#/$defs/hex" },
+            "purple": { "$ref": "#/$defs/hex" },
+            "brown": { "$ref": "#/$defs/hex" },
+            "lightGray": { "$ref": "#/$defs/hex" },
+            "darkGray": { "$ref": "#/$defs/hex" }
+          }
+        }
+      }
+    },
+    "map": {
+      "type": "object",
+      "required": ["center", "zoom", "minZoom", "maxZoom"],
+      "additionalProperties": false,
+      "properties": {
+        "center": {
+          "type": "array",
+          "description": "[lat, lng]",
+          "prefixItems": [
+            { "type": "number", "minimum": -90, "maximum": 90 },
+            { "type": "number", "minimum": -180, "maximum": 180 }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "zoom": { "type": "integer", "minimum": 1, "maximum": 19 },
+        "minZoom": { "type": "integer", "minimum": 1, "maximum": 19 },
+        "maxZoom": { "type": "integer", "minimum": 1, "maximum": 19 }
+      }
+    },
+    "featuredZips": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["label", "zip"],
+        "additionalProperties": false,
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "zip": { "$ref": "#/$defs/zip" }
+        }
+      }
+    },
+    "dataQualityNotes": {
+      "type": "object",
+      "description": "ZIPs whose residential population is too small/institutional for ACS rates; value is the note shown in the UI. ACS rates for these ZIPs are dropped by the app and excluded from scenario-model fits.",
+      "propertyNames": { "pattern": "^\\d{5}$" },
+      "additionalProperties": { "type": "string" }
+    },
+    "serviceGuideUrl": {
+      "type": ["string", "null"],
+      "pattern": "^https?://",
+      "description": "Base URL of the city's service guide. The ZIP card links to <url>/services?zip=<ZIP>. VITE_SERVICE_GUIDE_URL at build time overrides this."
+    },
+    "data": {
+      "type": "object",
+      "required": ["indicators", "boundaries", "summary"],
+      "additionalProperties": false,
+      "properties": {
+        "indicators": { "$ref": "#/$defs/relPath" },
+        "boundaries": { "$ref": "#/$defs/relPath" },
+        "summary": { "$ref": "#/$defs/relPath" }
+      }
+    },
+    "dataSources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["label", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "dataAsOf": { "type": "string", "minLength": 1 },
+    "pipeline": {
+      "type": "object",
+      "required": ["stateFips", "countyFips", "zctas", "crimeSource"],
+      "additionalProperties": false,
+      "properties": {
+        "stateFips": { "type": "string", "pattern": "^\\d{2}$" },
+        "countyFips": { "type": "string", "pattern": "^\\d{3}$" },
+        "zctas": {
+          "description": "Explicit ZCTA list, or null to derive it from the Census ZCTA-county relationship file.",
+          "oneOf": [
+            { "type": "null" },
+            { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/zip" } }
+          ]
+        },
+        "crimeSource": { "enum": ["apd-austin", null], "description": "Local crime feed, or null to leave violentCrimeRate empty." }
+      }
+    }
+  }
+}
