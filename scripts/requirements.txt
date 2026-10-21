@@ -1,0 +1,8 @@
+# Data pipeline dependencies (Python 3.10+). Install with:
+#   pip install -r scripts/requirements.txt
+# Tested with Python 3.12, pandas 3.0, numpy 2.5, scipy 1.18, geopandas 1.2.
+requests>=2.31
+pandas>=2.2
+numpy>=1.26
+scipy>=1.11
+geopandas>=1.0  # installs pyogrio, used by prepare_geojson.py
