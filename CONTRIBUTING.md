@@ -16,7 +16,7 @@ To refresh the data in `config/data/<id>/`, see [`data/README.md`](data/README.m
 
 ## Gates
 
-Run these from `app/` before opening a PR. CI runs the same steps, plus `npm run validate:data -- --all`, and blocks deploys on failure.
+Run these from `app/` before opening a PR. CI runs the same steps, plus `npm run validate:data -- --all` and a partner-city build, on every pull request (`.github/workflows/ci.yml`). The deploy workflow repeats the checks and blocks deploys on failure.
 
 ```bash
 npm run lint

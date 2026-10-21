@@ -23,7 +23,7 @@ npm run validate:data    # schema + data checks (-- --all for every preset)
 npm run preview          # serve the production build locally
 ```
 
-CI runs `npm ci`, `npm run lint`, `npm test`, `npm run validate:data -- --all`, then `npm run build` on Node 22 (see `.github/workflows/deploy.yml`). The build reads `VITE_SERVICE_GUIDE_URL` (repo variable `SERVICE_GUIDE_URL`; see `app/.env.example`); when unset (and no `serviceGuideUrl` in the config), production hides the service guide links.
+CI runs `npm ci`, `npm run lint`, `npm test`, `npm run validate:data -- --all`, then `npm run build` on Node 22 on every pull request (`.github/workflows/ci.yml`, which also builds the partner-city preset) and before each Pages deploy (`.github/workflows/deploy.yml`). The build reads `VITE_SERVICE_GUIDE_URL` (repo variable `SERVICE_GUIDE_URL`; see `app/.env.example`); when unset (and no `serviceGuideUrl` in the config), production hides the service guide links.
 
 Build selectors: `CITY_CONFIG=presets/<name>.json` (relative to `config/`), `BASE_PATH` (default `/austin-health-pulse/`), and `VITE_ENABLE_PERSONAL_CALCULATOR=true` (individual lifespan estimator). The estimator is off by default in code and in Docker builds. The GitHub Pages workflow defaults it to on for the live demo; set the repository variable `ENABLE_PERSONAL_CALCULATOR=false` to turn it off. Container: `docker compose up --build` (see `deploy/README.md`).
 
@@ -58,7 +58,7 @@ The export script reads `data/raw/TX_A.CSV`/`TX_B.CSV` locally and fetches Censu
 
 - Base path comes from `BASE_PATH` (default `/austin-health-pulse/`, `vite.config.ts`). New data files must be added through the config `data` block (imported via `virtual:city-config`), not fetched by string path.
 - `HashRouter` is required by Pages deployment — do not switch to `BrowserRouter` without changing the deploy strategy.
-- There is no hardcoded ZIP list in the frontend (`TRAVIS_COUNTY_ZCTAS` is gone): the ZIP set is the keys of the loaded indicators data. The pipeline's list is `pipeline.zctas` in the preset (or derived from the county FIPS when omitted).
+- There is no hardcoded ZIP list in the frontend: the ZIP set is the keys of the loaded indicators data. The pipeline's list is `pipeline.zctas` in the preset (or derived from the county FIPS when it is `null`).
 - The `pipeline` block is stripped from the browser bundle; configs are schema-validated (`config/city.config.schema.json`) at build time and by `validate:data`.
 - Indicator metadata (`IndicatorKey`, `INDICATOR_LABELS`, `INDICATOR_UNITS`, `INDICATOR_HIGHER_IS_BETTER`) lives in `src/types/health.ts`. Adding a new indicator requires updating the Python export (and `config/indicators.schema.json`), the `ZctaHealthData` / `CountySummary` types, and these three lookup maps.
 - Brand colors come from the config's `brand.colors`, exposed as `APH_COLORS` (`src/lib/constants.ts`) and applied to the `--color-aph-*` CSS variables at startup (`src/lib/applyBrand.ts`). Use these (or the Tailwind `aph-*` utilities) instead of arbitrary hex values; the Austin palette is in `config/city.config.json`.

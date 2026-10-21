@@ -4,19 +4,19 @@
 
 | File        | Contents                                                                 | Source                                                                                         |
 | ----------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| `TX_A.CSV`  | Life expectancy at birth, e(0) and its standard error, per 2010 census tract (Texas) | [CDC NCHS USALEEP](https://www.cdc.gov/nchs/nvss/usaleep/usaleep.html), 2010-2015 estimates |
+| `TX_A.CSV`  | Life expectancy at birth, e(0) and its standard error, per 2010 census tract (Texas) | [CDC NCHS USALEEP](https://www.cdc.gov/nchs/nvss/usaleep/usaleep.html), 2010–2015 estimates |
 | `TX_B.CSV`  | Abridged life tables (remaining years e(x) by age group) per 2010 census tract (Texas) | Same as above                                                                                  |
 
 These are the CSV exports of the Texas files on the USALEEP download page. They are committed because the export script reads them from disk. The `.XLSX` originals are gitignored.
 
 ## Fetched at run time
 
-`scripts/export_frontend_json.py` downloads the rest over HTTP. It caches nothing:
+`scripts/export_frontend_json.py` downloads the rest over HTTP (`prepare_geojson.py` also downloads the relationship files when it derives the ZCTA list). It caches nothing:
 
 - Census ZCTA-to-tract relationship files (2010 for USALEEP tracts, 2020 for crime data)
 - Census ZCTA-to-county relationship files (2010 and 2020), only when a preset derives its ZCTA list
-- ACS 5-Year 2022: poverty (S1701), uninsured (S2701), total population (B01003). With `CENSUS_API_KEY` set these come from the Census Data API. The API rejects keyless requests, so without a key the script streams the ACS table-based summary files instead and rebuilds the same rates: poverty = B17001_002 / B17001_001, uninsured = the B27001 "no health insurance coverage" cells / B27001_001, both rounded to one decimal as S1701/S2701 publish them. For the 62 Austin ZCTAs with data, the two paths give identical values.
-- CDC PLACES 2023: diabetes, hypertension, obesity, current asthma
+- ACS 5-Year 2022: poverty (S1701), uninsured (S2701), total population (B01003). With `CENSUS_API_KEY` set these come from the Census Data API. The API rejects keyless requests, so without a key the script streams the ACS table-based summary files instead and rebuilds the same rates: poverty = B17001_002 / B17001_001, uninsured = the B27001 "no health insurance coverage" cells / B27001_001, both rounded to one decimal as S1701/S2701 publish them. For the 61 Austin ZCTAs with published poverty and uninsured rates, the two paths give identical values.
+- CDC PLACES 2025 release (2023 BRFSS data): diabetes, hypertension, obesity, current asthma. The pipeline's PLACES dataset id (`qnzd-25i4`) always serves CDC's latest release, so rerunning the export can pull newer values, and this label should then be updated.
 - Violent crime, only for presets with `pipeline.crimeSource: "apd-austin"`: City of Austin Open Data Portal, APD Crime Reports (`fdj4-gpfu`), UCR Part 1 violent offenses, rolling 12 months
 
 `scripts/prepare_geojson.py` downloads the Census 2020 cartographic boundary ZCTA shapefile (`cb_2020_us_zcta520_500k`).
@@ -44,12 +44,12 @@ Keep the key private. Do not commit it, and do not put it in `config/` or in any
 
 ## Pipeline
 
-The pipeline is driven by a city preset (`config/presets/*.json`, schema `config/city.config.schema.json`). Each script reads the preset's `pipeline` block, its `dataQualityNotes`, and its `data` output paths (relative to `config/`), and writes to `config/data/<presetId>/`. Without `--preset` the scripts use `config/city.config.json`, the active preset.
+The pipeline is driven by a city preset (`config/presets/*.json`, schema `config/city.config.schema.json`). Both scripts read the preset's `pipeline` block and its `data` output paths (relative to `config/`); only the export reads `dataQualityNotes`. Either script downloads the ZCTA-county relationship files when it derives the ZCTA list (`zctas` is `null`). They write to `config/data/<presetId>/`. Without `--preset` the scripts use `config/city.config.json`, the active preset.
 
-Run from the repo root:
+Run from the repo root (Python 3.10 or later):
 
 ```bash
-pip install requests pandas numpy openpyxl geopandas scipy
+pip install -r scripts/requirements.txt
 python scripts/export_frontend_json.py --preset config/presets/austin-travis-tx.json   # -> zip-indicators.json, county-summary.json
 python scripts/prepare_geojson.py      --preset config/presets/austin-travis-tx.json   # -> boundaries.geojson
 python scripts/export_frontend_json.py --preset config/presets/partner-city-demo.json  # Harris County, TX
@@ -58,7 +58,7 @@ python scripts/prepare_geojson.py      --preset config/presets/partner-city-demo
 
 `python scripts/export_frontend_json.py --preset <preset> --model-only` recomputes only the `scenarioModel` block of `county-summary.json` from the existing `zip-indicators.json`. It makes no network requests.
 
-The two scripts are independent, so you can run them in either order. Get a Census API key first ([steps below](#census-api-key)), or the export downloads about 260 MB of ACS summary files instead.
+The two scripts are independent, so you can run them in either order. Get a Census API key first ([steps above](#census-api-key)), or the export downloads about 260 MB of ACS summary files instead.
 
 `scripts/travis_county_health_data_pull.py` is the original standalone pull that produced an ArcGIS-ready CSV. The web app does not use it.
 
@@ -79,7 +79,7 @@ The Austin preset keeps its original hand-curated 63-ZCTA list, labeled "Greater
 
 ## Scenario model (`county-summary.json` → `scenarioModel`)
 
-For each candidate lever (poverty, uninsured, diabetes, hypertension, obesity) the export fits one bivariate ordinary least squares regression, `lifeExpectancy ~ indicator`, across the region's ZIPs. A fit uses every ZIP that has both values. ZIPs in `dataQualityNotes` are left out of the poverty and uninsured fits. Each fit reports its slope (years of life expectancy per percentage point), standard error, 95% confidence interval (t distribution, n - 2 degrees of freedom), intercept, r², n, the observed range, and the ZIP with the lowest value.
+For each candidate lever (poverty, uninsured, diabetes, hypertension, obesity) the export fits one bivariate ordinary least squares regression, `lifeExpectancy ~ indicator`, across the region's ZIPs. A fit uses every ZIP that has both values. ZIPs in `dataQualityNotes` are left out of the poverty and uninsured fits. Each fit reports its slope (years of life expectancy per percentage point), standard error, 95% confidence interval (t distribution, n - 2 degrees of freedom), intercept, R², n, the observed range, and the ZIP with the lowest value.
 
 A fit is listed under `levers` only if its slope is negative and the whole 95% CI is below zero. Every other fit is listed under `excluded`, with the reason "slope is not negative" or "95% CI includes zero".
 

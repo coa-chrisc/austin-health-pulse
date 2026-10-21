@@ -44,7 +44,7 @@
         "colors": {
           "type": "object",
           "description": "Palette roles. Key names are historical (Austin Public Health): blue = primary, green = secondary, darkBlue = text/ink. They feed APH_COLORS and the --color-aph-* CSS variables.",
-          "required": ["blue", "green", "white", "darkBlue", "darkGreen", "complaintGreen", "lightBlue", "lightGreen", "red", "orange", "yellow", "cyan", "purple", "brown", "lightGray", "darkGray"],
+          "required": ["blue", "green", "white", "darkBlue", "darkGreen", "compliantGreen", "lightBlue", "lightGreen", "red", "orange", "yellow", "cyan", "purple", "brown", "lightGray", "darkGray"],
           "additionalProperties": false,
           "properties": {
             "blue": { "$ref": "#/$defs/hex" },
@@ -52,7 +52,7 @@
             "white": { "$ref": "#/$defs/hex" },
             "darkBlue": { "$ref": "#/$defs/hex" },
             "darkGreen": { "$ref": "#/$defs/hex" },
-            "complaintGreen": { "$ref": "#/$defs/hex" },
+            "compliantGreen": { "$ref": "#/$defs/hex" },
             "lightBlue": { "$ref": "#/$defs/hex" },
             "lightGreen": { "$ref": "#/$defs/hex" },
             "red": { "$ref": "#/$defs/hex" },

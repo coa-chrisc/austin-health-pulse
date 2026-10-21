@@ -7,7 +7,7 @@ export interface BrandColors {
   white: string;
   darkBlue: string;
   darkGreen: string;
-  complaintGreen: string;
+  compliantGreen: string;
   lightBlue: string;
   lightGreen: string;
   red: string;

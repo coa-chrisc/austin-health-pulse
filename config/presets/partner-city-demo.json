@@ -20,7 +20,7 @@
       "white": "#f7f6f5",
       "darkBlue": "#0F2740",
       "darkGreen": "#1B5E3A",
-      "complaintGreen": "#237A4B",
+      "compliantGreen": "#237A4B",
       "lightBlue": "#E3EEF8",
       "lightGreen": "#E2F2E8",
       "red": "#F83125",
@@ -88,11 +88,11 @@
     },
     {
       "label": "Chronic Disease",
-      "source": "CDC PLACES (2023)"
+      "source": "CDC PLACES (2025 release, 2023 BRFSS data)"
     },
     {
       "label": "Asthma",
-      "source": "CDC PLACES (2023)"
+      "source": "CDC PLACES (2025 release, 2023 BRFSS data)"
     }
   ],
   "dataAsOf": "October 2026",

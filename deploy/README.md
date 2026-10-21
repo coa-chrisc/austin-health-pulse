@@ -1,6 +1,6 @@
 # Container and cloud deploy blueprints
 
-These are **starter templates** for running one isolated, single-tenant instance of the app. The app is a static site, so a container is optional: GitHub Pages, S3 + CloudFront, or Azure Static Web Apps also work and cost less. Review IAM, networking, TLS and logging against your own policies before use.
+These are **starter templates** for running one isolated, single-tenant instance of the app. The app is a static site, so a container is optional: GitHub Pages, S3 + CloudFront, or Azure Static Web Apps also work and cost less. Review IAM, networking, TLS, and logging against your own policies before use.
 
 ## Build the image
 
@@ -74,9 +74,8 @@ Verify: `curl -i $(gcloud run services describe health-pulse --region us-central
 
 | Item | Status |
 |---|---|
-| `deploy/nginx.conf` + runtime image (headers, caching, non-root UID 101, healthcheck, read-only rootfs with tmpfs /tmp) | Run locally against a stub `dist/`, not the real build |
-| Full `docker build` of the app | Not yet validated end to end; it depends on `npm run validate:data` and the `BASE_PATH`/`CITY_CONFIG` support in `app/` |
+| Full `docker build` and `docker compose up` (CSP and security headers, non-root UID 101, `/healthz`, read-only root filesystem with tmpfs) | Built and run locally; container reported healthy; page rendered in headless Chrome with no CSP or console errors |
 | `docker compose config` | Passed |
 | `deploy/azure/container-app.bicep` | Compiled with `az bicep build`; not deployed |
 | `deploy/gcp/cloud-run.yaml` | YAML parses; not checked with gcloud, not deployed |
-| `deploy/aws/ecs-fargate.tf` | Not validated (terraform not installed); not applied |
+| `deploy/aws/ecs-fargate.tf` | Not validated (Terraform not installed); not applied |

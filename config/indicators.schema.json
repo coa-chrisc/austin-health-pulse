@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "indicators.schema.json",
   "title": "ZIP-level health indicators (zip-indicators.json)",
-  "description": "Per-ZCTA life expectancy and social-determinant indicators. Every value is an aggregate, de-identified public estimate; null means suppressed or unavailable. Every key under `zctas` must match a feature in boundaries.geojson.",
+  "description": "Per-ZCTA life expectancy and social-determinant indicators. Every value is an aggregate, de-identified public estimate; null means suppressed or unavailable. Every key under `zctas` with any data must match a feature in boundaries.geojson; all-null records (`dataQuality: \"missing\"`) may lack one.",
   "type": "object",
   "required": ["zctas", "meta"],
   "additionalProperties": false,

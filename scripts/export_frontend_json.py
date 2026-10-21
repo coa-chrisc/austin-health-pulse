@@ -8,7 +8,7 @@ PLACES, and (when the preset names a crime source) violent-crime data,
 aggregates everything to ZCTA level, and exports frontend-ready JSON.
 
 Requirements:
-    pip install requests pandas numpy openpyxl scipy
+    pip install -r scripts/requirements.txt
 
 Output files (paths from the preset's `data` block, relative to config/):
     data.indicators  -- per-ZCTA health indicators (zip-indicators.json)
@@ -932,10 +932,10 @@ def main():
         "lifeExpectancy": "CDC USALEEP (tract-level, pop-weighted to ZCTA)",
         "povertyRate": "ACS 5-Year 2022, Table S1701",
         "uninsuredRate": "ACS 5-Year 2022, Table S2701",
-        "diabetes": "CDC PLACES 2023 (BRFSS model-based)",
-        "hypertension": "CDC PLACES 2023 (BRFSS model-based)",
-        "obesity": "CDC PLACES 2023 (BRFSS model-based)",
-        "asthma": "CDC PLACES 2023 (current asthma, BRFSS model-based)",
+        "diabetes": "CDC PLACES 2025 release (2023 BRFSS, model-based)",
+        "hypertension": "CDC PLACES 2025 release (2023 BRFSS, model-based)",
+        "obesity": "CDC PLACES 2025 release (2023 BRFSS, model-based)",
+        "asthma": "CDC PLACES 2025 release (2023 BRFSS, current asthma, model-based)",
     }
     if not CENSUS_API_KEY:
         sources["povertyRate"] = (

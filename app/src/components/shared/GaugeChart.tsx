@@ -9,11 +9,11 @@ const INDICATOR_DESCRIPTIONS: Record<string, string> = {
   "Uninsured Rate":
     "Percentage of civilian population without health insurance (ACS 2022)",
   "Diabetes Prevalence":
-    "Estimated percentage of adults aged 18+ diagnosed with diabetes (CDC PLACES 2023)",
+    "Estimated percentage of adults aged 18+ diagnosed with diabetes (CDC PLACES 2025 release, 2023 BRFSS data)",
   "Hypertension Prevalence":
-    "Estimated percentage of adults aged 18+ with high blood pressure (CDC PLACES 2023)",
+    "Estimated percentage of adults aged 18+ with high blood pressure (CDC PLACES 2025 release, 2023 BRFSS data)",
   "Obesity Prevalence":
-    "Estimated percentage of adults aged 18+ with BMI \u2265 30 (CDC PLACES 2023)",
+    "Estimated percentage of adults aged 18+ with BMI \u2265 30 (CDC PLACES 2025 release, 2023 BRFSS data)",
 };
 
 interface GaugeChartProps {

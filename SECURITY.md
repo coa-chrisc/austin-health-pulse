@@ -11,7 +11,7 @@ The neighborhood figures come only from aggregate, de-identified public data. Th
 **What the app does with visitor input**
 
 - Nothing a visitor enters leaves the browser or is stored. This covers the ZIP code, "Use my location" coordinates, age, and estimator answers.
-- The app is a static site. It has no backend, database, or API. It has no cookies, accounts, or analytics or tracking code.
+- The app is a static site. It has no backend, database, or API. It has no cookies, no accounts, and no analytics or tracking code.
 - The only browser storage is a localStorage flag recording that the guided tour was seen.
 - ZIP lookup is a text field. "Use my location", if clicked, asks the browser for coordinates and matches them to a ZIP against the boundary file in the browser (`NeighborhoodMode.tsx`). The coordinates are not sent anywhere.
 - ZIP views can link out to the Service Guide (`<serviceGuideUrl>/services?zip=<ZIP>`). The ZIP in the link is sent only if the user follows it. The links are hidden when no guide URL is configured in a production build.
@@ -30,7 +30,7 @@ The neighborhood figures come only from aggregate, de-identified public data. Th
 | --- | --- |
 | `tile.openstreetmap.org` | Map tiles (Explore mode) |
 
-Fonts (Geist and Material Symbols) are bundled with the app through `@fontsource` packages, so the browser does not contact Google Fonts. OpenStreetMap sees the visitor's IP address and request metadata when the map loads. Data files are served from the same origin. In the container, the Content-Security-Policy in [`deploy/nginx.conf`](deploy/nginx.conf) allows images only from the same origin and `tile.openstreetmap.org`, and fonts only from the same origin (`font-src 'self'`).
+Fonts (Geist and Material Symbols) are bundled with the app through `@fontsource` packages, so the browser does not contact Google Fonts. OpenStreetMap sees the visitor's IP address and request metadata when the map loads. Data files are served from the same origin. In the container, the Content-Security-Policy in [`deploy/nginx.conf`](deploy/nginx.conf) allows images only from the same origin, `data:` URIs (Leaflet icons), and `tile.openstreetmap.org`, and fonts only from the same origin (`font-src 'self'`).
 
 ## Container hardening
 
@@ -47,7 +47,7 @@ See [`Dockerfile`](Dockerfile), [`docker-compose.yml`](docker-compose.yml), and 
 ## Supply chain
 
 - Dependencies are installed with `npm ci` against the committed `app/package-lock.json` (CI and Docker build).
-- CI ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) runs lint, tests, `validate:data -- --all`, and a type-checked build before anything is published. The workflow has read-only repository permissions plus the Pages deploy permissions.
+- CI runs lint, tests, `validate:data -- --all`, and a type-checked build on every pull request ([`.github/workflows/ci.yml`](.github/workflows/ci.yml), read-only permissions) and again before anything is published ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). Only the deploy job holds the Pages write permissions.
 - City configs are validated against JSON Schema at build time; data files are validated by `npm run validate:data`.
 - Maintainers run the Python pipeline, never the browser. Its output is committed and reviewed as data.
 

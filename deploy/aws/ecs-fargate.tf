@@ -1,4 +1,4 @@
-# STARTER TEMPLATE, not validated (terraform was not available when written).
+# STARTER TEMPLATE, not validated (Terraform was not available when written).
 # Note: for a purely static site, S3 + CloudFront is cheaper and simpler than running a container.
 # Creates: ECS cluster, Fargate service, ALB (HTTP only: add an ACM cert + HTTPS listener for real use),
 # log group. Does NOT create the VPC, subnets, or ECR repo.

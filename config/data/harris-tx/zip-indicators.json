@@ -5,10 +5,10 @@
       "lifeExpectancy": "CDC USALEEP (tract-level, pop-weighted to ZCTA)",
       "povertyRate": "ACS 5-Year 2022, Table B17001 summary file (= S1701 poverty rate)",
       "uninsuredRate": "ACS 5-Year 2022, Table B27001 summary file (= S2701 uninsured rate)",
-      "diabetes": "CDC PLACES 2023 (BRFSS model-based)",
-      "hypertension": "CDC PLACES 2023 (BRFSS model-based)",
-      "obesity": "CDC PLACES 2023 (BRFSS model-based)",
-      "asthma": "CDC PLACES 2023 (current asthma, BRFSS model-based)"
+      "diabetes": "CDC PLACES 2025 release (2023 BRFSS, model-based)",
+      "hypertension": "CDC PLACES 2025 release (2023 BRFSS, model-based)",
+      "obesity": "CDC PLACES 2025 release (2023 BRFSS, model-based)",
+      "asthma": "CDC PLACES 2025 release (2023 BRFSS, current asthma, model-based)"
     },
     "countyAverage": {
       "lifeExpectancy": 78.05,

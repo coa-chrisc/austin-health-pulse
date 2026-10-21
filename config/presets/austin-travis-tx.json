@@ -20,7 +20,7 @@
       "white": "#f7f6f5",
       "darkBlue": "#22254E",
       "darkGreen": "#005027",
-      "complaintGreen": "#008743",
+      "compliantGreen": "#008743",
       "lightBlue": "#dcf2fd",
       "lightGreen": "#dff0e3",
       "red": "#F83125",
@@ -88,11 +88,11 @@
     },
     {
       "label": "Chronic Disease",
-      "source": "CDC PLACES (2023)"
+      "source": "CDC PLACES (2025 release, 2023 BRFSS data)"
     },
     {
       "label": "Asthma",
-      "source": "CDC PLACES (2023)"
+      "source": "CDC PLACES (2025 release, 2023 BRFSS data)"
     },
     {
       "label": "Violent Crime",
