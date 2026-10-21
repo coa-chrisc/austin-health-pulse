@@ -323,7 +323,7 @@ Sources, pipeline order, and known data gaps are in [`data/README.md`](data/READ
 
 ## Contributing & License
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). To report a vulnerability, see [SECURITY.md](SECURITY.md). Licensed under the [Apache License 2.0](LICENSE).
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md). To report a vulnerability, see [SECURITY.md](SECURITY.md). Licensed under the [Apache License 2.0](LICENSE).
 
 ---
 

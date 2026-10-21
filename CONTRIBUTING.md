@@ -1,6 +1,6 @@
 # Contributing
 
-Issues and pull requests are welcome.
+Issues and pull requests are welcome. Everyone taking part is expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Run it locally
 
@@ -32,6 +32,6 @@ npm run build
 - Changes to the lifespan model math (`app/src/lib/lifespanModel.ts`) need a Vitest case and a citation for any new effect size.
 - Add new data files through the `data` block of the city config, not by fetching a hardcoded path. Keep `HashRouter`, which GitHub Pages requires.
 - Use the theme tokens (role utilities such as `bg-primary`, `text-muted`, `rounded-card`, `text-2xs`, or `THEME`/`fontSize()`/`FONT_FAMILY` from `src/lib/theme.ts`, all filled from the city config's `theme` block) rather than hex values, Tailwind palette colors, or literal font sizes, so other agencies can restyle from config alone. `themeGuard.test.ts` enforces this; add a `theme-exempt: <reason>` comment for a rare exception. See [`docs/CUSTOMIZING.md`](docs/CUSTOMIZING.md).
-- If you change the UI, regenerate the README screenshots with `npm run screenshots` from `app/`.
+- If you change the UI, regenerate the README screenshots with `npm run screenshots` from `app/`. If you have [`pngquant`](https://pngquant.org/), shrink them before committing: `pngquant --quality=80-95 --force --ext .png docs/screenshots/*.png`.
 
 By contributing, you agree that your contributions are licensed under the [Apache License 2.0](LICENSE).

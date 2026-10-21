@@ -4,6 +4,8 @@
 
 Use GitHub private vulnerability reporting: on the repository, open **Security > Advisories > Report a vulnerability**. Do not open a public issue for a suspected vulnerability.
 
+If that option isn't available, open an issue that asks for a private contact and mentions @coa-chrisc. Don't include any details of the vulnerability in it; the maintainer will follow up privately.
+
 ## Data handling
 
 The neighborhood figures come only from aggregate, de-identified public data. The optional individual lifespan estimator asks about the individual (age, sex, and habits), but it runs entirely in the browser and sends and stores nothing.
