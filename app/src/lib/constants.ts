@@ -1,31 +1,18 @@
-export const APH_COLORS = {
-  blue: "#44499C",
-  green: "#009F4D",
-  white: "#f7f6f5",
-  darkBlue: "#22254E",
-  darkGreen: "#005027",
-  complaintGreen: "#008743",
-  lightBlue: "#dcf2fd",
-  lightGreen: "#dff0e3",
-  red: "#F83125",
-  orange: "#FF8F00",
-  yellow: "#FFC600",
-  cyan: "#009CDE",
-  purple: "#9F3CC9",
-  brown: "#8F5201",
-  lightGray: "#C6C5C4",
-  darkGray: "#636262",
-} as const;
+import { cityConfig } from "./cityConfig";
+import type { BrandColors } from "../types/cityConfig";
+
+/** Brand palette from the active city config (also mirrored to --color-aph-* CSS vars at startup). */
+export const APH_COLORS: Readonly<BrandColors> = cityConfig.brand.colors;
 
 export const MAP_CONFIG = {
-  center: [30.2672, -97.7431] as [number, number],
-  zoom: 11,
-  minZoom: 9,
-  maxZoom: 16,
+  center: cityConfig.map.center,
+  zoom: cityConfig.map.zoom,
+  minZoom: cityConfig.map.minZoom,
+  maxZoom: cityConfig.map.maxZoom,
   tileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   tileAttribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-} as const;
+};
 
 export const AGE_GROUP_RANGES: Array<{
   key: string;
@@ -47,83 +34,25 @@ export const AGE_GROUP_RANGES: Array<{
 ];
 
 /**
- * Base URL for the Austin Service Guide intake page. The lifespan calculator
- * deep-links into the service guide with `?event=healthspan&focus=<factors>`
- * so improvement opportunities flow into the resident services intake.
- * Set `VITE_SERVICE_GUIDE_URL` at build time (see app/.env.example). Dev
- * builds fall back to a local guide; production builds without it get `null`
- * and the handoff link is hidden rather than pointing at localhost.
+ * Base URL of the city's Service Guide (companion app). The ZIP detail views
+ * link to `<url>/services?zip=<zip>` and the optional lifespan calculator
+ * deep-links into `<url>/intake`. `VITE_SERVICE_GUIDE_URL` (see
+ * app/.env.example) overrides `serviceGuideUrl` in the city config. Dev builds
+ * fall back to a local guide; production builds without either get `null` and
+ * the links are hidden rather than pointing at localhost.
  */
 export const SERVICE_GUIDE_URL: string | null =
   import.meta.env.VITE_SERVICE_GUIDE_URL ||
+  cityConfig.serviceGuideUrl ||
   (import.meta.env.DEV ? "http://localhost:5173" : null);
+
+/**
+ * The individual lifespan calculator is opt-in. The default build uses only
+ * aggregate public data; set `VITE_ENABLE_PERSONAL_CALCULATOR=true` to enable.
+ */
+export const ENABLE_PERSONAL_CALCULATOR: boolean =
+  import.meta.env.VITE_ENABLE_PERSONAL_CALCULATOR === "true";
 
 export const IDLE_TIMEOUT_MS = 300_000; // 5 min — conference booth kiosk mode
 export const IDLE_DISABLE_MOBILE_BREAKPOINT_PX = 768; // skip kiosk overlay on phones
 export const IDLE_DISABLE_QUERY_FLAG = "kiosk=off"; // ?kiosk=off disables overlay (live demo escape hatch)
-
-export const TRAVIS_COUNTY_ZCTAS = [
-  "78610",
-  "78613",
-  "78617",
-  "78620",
-  "78621",
-  "78634",
-  "78640",
-  "78641",
-  "78642",
-  "78644",
-  "78645",
-  "78646",
-  "78652",
-  "78653",
-  "78660",
-  "78664",
-  "78669",
-  "78676",
-  "78681",
-  "78701",
-  "78702",
-  "78703",
-  "78704",
-  "78705",
-  "78712",
-  "78717",
-  "78719",
-  "78721",
-  "78722",
-  "78723",
-  "78724",
-  "78725",
-  "78726",
-  "78727",
-  "78728",
-  "78729",
-  "78730",
-  "78731",
-  "78732",
-  "78733",
-  "78734",
-  "78735",
-  "78736",
-  "78737",
-  "78738",
-  "78739",
-  "78741",
-  "78742",
-  "78744",
-  "78745",
-  "78746",
-  "78747",
-  "78748",
-  "78749",
-  "78750",
-  "78751",
-  "78752",
-  "78753",
-  "78754",
-  "78756",
-  "78757",
-  "78758",
-  "78759",
-];

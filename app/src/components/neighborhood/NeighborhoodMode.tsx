@@ -1,9 +1,18 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import {
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+  lazy,
+  Suspense,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import type { Feature, Geometry, Position } from "geojson";
 import { useHealthData } from "../../hooks/useHealthData";
 import { useAnimatedNumber } from "../../hooks/useAnimatedNumber";
-import { TRAVIS_COUNTY_ZCTAS, APH_COLORS } from "../../lib/constants";
+import { APH_COLORS, ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
+import { cityConfig } from "../../lib/cityConfig";
+import { listZips } from "../../lib/zips";
 import { getAgeGroup, getAgeGroupLabel } from "../../lib/ageGroupMapper";
 import { getComparisonColor } from "../../lib/colorScales";
 import { formatDifference } from "../../lib/formatters";
@@ -20,25 +29,22 @@ import type {
   CountyAverage,
 } from "../../types/health";
 import GaugeChart from "../shared/GaugeChart";
-import LifespanCalculator from "../lifespan/LifespanCalculator";
+import EquityScenarioSimulator from "../scenario/EquityScenarioSimulator";
+import ServiceGuideZipLink from "../shared/ServiceGuideZipLink";
 import ParentsCompare from "./ParentsCompare";
 import DisparityStrip from "./DisparityStrip";
 
-const GAUGE_INDICATORS: IndicatorKey[] = [
+// Opt-in (VITE_ENABLE_PERSONAL_CALCULATOR): kept out of the main chunk.
+const PersonalFactorsSection = lazy(
+  () => import("../lifespan/PersonalFactorsSection"),
+);
+
+const GAUGE_INDICATORS: Exclude<IndicatorKey, "violentCrimeRate">[] = [
   "povertyRate",
   "uninsuredRate",
   "diabetes",
   "hypertension",
   "obesity",
-];
-
-const FEATURED_ZIPS: { label: string; zip: string }[] = [
-  { label: "Downtown", zip: "78701" },
-  { label: "East Austin", zip: "78702" },
-  { label: "South Austin", zip: "78704" },
-  { label: "West Lake", zip: "78746" },
-  { label: "Pflugerville", zip: "78660" },
-  { label: "North Austin", zip: "78758" },
 ];
 
 /** Build a plain-English narrative from the ZCTA data and county average. */
@@ -55,15 +61,15 @@ function generateNarrative(
     const absDiff = Math.abs(diff);
     if (absDiff < 0.3) {
       parts.push(
-        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 right around the Travis County average.`,
+        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 right around the ${cityConfig.region.name} average.`,
       );
     } else if (diff > 0) {
       parts.push(
-        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 about ${absDiff.toFixed(1)} years longer than the Travis County average.`,
+        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 about ${absDiff.toFixed(1)} years longer than the ${cityConfig.region.name} average.`,
       );
     } else {
       parts.push(
-        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 about ${absDiff.toFixed(1)} years shorter than the Travis County average.`,
+        `Residents of ${zcta} can expect to live to ${data.lifeExpectancy.toFixed(1)} \u2014 about ${absDiff.toFixed(1)} years shorter than the ${cityConfig.region.name} average.`,
       );
     }
   }
@@ -209,8 +215,10 @@ export default function NeighborhoodMode({
   const nearbySuggestions = useMemo(() => {
     if (!notFound || !zipInput) return [];
     const prefix = zipInput.slice(0, 3);
-    return TRAVIS_COUNTY_ZCTAS.filter((z) => z.startsWith(prefix)).slice(0, 5);
-  }, [notFound, zipInput]);
+    return listZips(healthData)
+      .filter((z) => z.startsWith(prefix))
+      .slice(0, 5);
+  }, [notFound, zipInput, healthData]);
 
   const handleExplore = useCallback(
     function handleExplore(overrideZip?: string) {
@@ -295,7 +303,7 @@ export default function NeighborhoodMode({
           setTimeout(() => handleExplore(foundZip), 0);
         } else {
           setGeoStatus("error");
-          setGeoError("Not in Travis County");
+          setGeoError(`Not in ${cityConfig.region.name}`);
           geoTimeoutRef.current = setTimeout(() => setGeoStatus("idle"), 3000);
         }
       },
@@ -357,7 +365,7 @@ export default function NeighborhoodMode({
       ? generateNarrative(submittedZip, zctaData, countyAvg)
       : null;
 
-  // County range — longest- and shortest-LE ZIPs in Travis County
+  // County range — longest- and shortest-LE ZIPs in the region
   const countyRange = useMemo(() => {
     if (!healthData) return null;
     let longest: { zip: string; le: number } | null = null;
@@ -389,8 +397,8 @@ export default function NeighborhoodMode({
           Check Your Neighborhood
         </h2>
         <p className="text-aph-dark-gray text-lg max-w-2xl mx-auto">
-          Enter a zip code to explore health data for your community in Travis
-          County. See how life expectancy and health indicators compare to the
+          Enter a zip code to explore health data for your community in{" "}
+          {cityConfig.region.name}. See how life expectancy and health indicators compare to the
           county average.
         </p>
         <button
@@ -403,7 +411,7 @@ export default function NeighborhoodMode({
           >
             auto_awesome
           </span>
-          <span>Built by APH for the community</span>
+          <span>Built by {cityConfig.agency.shortName} for the community</span>
           <span className="text-aph-blue/40">·</span>
           <span className="text-aph-blue group-hover:underline">See how</span>
           <span
@@ -493,7 +501,7 @@ export default function NeighborhoodMode({
       <section className="flex flex-col items-center mb-10">
         <p className="text-xs text-aph-dark-gray mb-2">Try a neighborhood:</p>
         <div className="flex flex-wrap justify-center gap-2">
-          {FEATURED_ZIPS.map(({ label, zip }) => (
+          {cityConfig.featuredZips.map(({ label, zip }) => (
             <button
               key={zip}
               onClick={() => handleFeaturedClick(zip)}
@@ -515,7 +523,7 @@ export default function NeighborhoodMode({
             Zip code {zipInput} not found
           </p>
           <p className="text-aph-dark-gray text-sm mb-3">
-            We only have data for Travis County zip codes. Try one of these
+            We only have data for {cityConfig.region.name} zip codes. Try one of these
             nearby areas:
           </p>
           {nearbySuggestions.length > 0 ? (
@@ -532,7 +540,7 @@ export default function NeighborhoodMode({
             </div>
           ) : (
             <div className="flex flex-wrap justify-center gap-2">
-              {TRAVIS_COUNTY_ZCTAS.slice(0, 5).map((z) => (
+              {listZips(healthData).slice(0, 5).map((z) => (
                 <button
                   key={z}
                   onClick={() => handleSuggestionClick(z)}
@@ -729,7 +737,7 @@ export default function NeighborhoodMode({
                         social_distance
                       </span>
                       <h4 className="text-xs font-semibold uppercase tracking-wider text-aph-dark-blue/75">
-                        The Travis County gap
+                        The {cityConfig.region.name} gap
                       </h4>
                     </div>
                     <div className="flex flex-col md:flex-row md:items-end gap-6">
@@ -743,7 +751,7 @@ export default function NeighborhoodMode({
                           ).toFixed(1)}
                         </p>
                         <p className="text-aph-dark-blue/80 text-sm mt-1">
-                          years between Travis County&rsquo;s longest- and
+                          years between {cityConfig.region.name}&rsquo;s longest- and
                           shortest-living ZIPs
                         </p>
                       </div>
@@ -883,23 +891,24 @@ export default function NeighborhoodMode({
                   View on Map
                 </button>
               </div>
+              {submittedZip && (
+                <div className="mt-3 flex justify-center">
+                  <ServiceGuideZipLink zip={submittedZip} />
+                </div>
+              )}
             </>
           )}
         </div>
       )}
 
-      {/* Personal Factors — always visible, independent of ZIP submission */}
+      {/* Scenario simulator — aggregate data only, independent of ZIP submission */}
+      <EquityScenarioSimulator initialZip={submittedZip} />
+      {ENABLE_PERSONAL_CALCULATOR && (
+        <Suspense fallback={null}>
+          <PersonalFactorsSection />
+        </Suspense>
+      )}
       <section className="mt-12">
-        <div className="text-center mb-6">
-          <h3 className="text-2xl font-bold text-aph-dark-blue mb-2">
-            How do personal factors affect life expectancy?
-          </h3>
-          <p className="text-sm text-aph-dark-gray max-w-2xl mx-auto">
-            Neighborhood is one factor — personal choices and exposures matter
-            too. Try these tools to see how.
-          </p>
-        </div>
-        <LifespanCalculator />
         <div className="mt-6">
           <ParentsCompare />
         </div>

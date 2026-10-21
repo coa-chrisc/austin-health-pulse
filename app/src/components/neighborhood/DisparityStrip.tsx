@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useHealthData } from "../../hooks/useHealthData";
 import { APH_COLORS } from "../../lib/constants";
+import { cityConfig } from "../../lib/cityConfig";
 
 interface DisparityStripProps {
   highlightZip: string;
@@ -79,7 +80,7 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
           equalizer
         </span>
         <h4 className="text-sm font-semibold uppercase tracking-wide text-aph-dark-gray">
-          Where {highlightZip} ranks among Travis County ZIPs
+          Where {highlightZip} ranks among {cityConfig.region.name} ZIPs
         </h4>
       </div>
 
@@ -142,7 +143,7 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
             shortest
           </span>
           <span className="hidden sm:inline">
-            {bars.length} Travis County ZIPs
+            {bars.length} {cityConfig.region.name} ZIPs
           </span>
           <span className="text-right">
             longest{" "}

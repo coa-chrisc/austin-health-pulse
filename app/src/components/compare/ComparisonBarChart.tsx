@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { useHealthData } from "../../hooks/useHealthData";
 import { APH_COLORS } from "../../lib/constants";
+import { isIndicatorAvailable } from "../../lib/indicators";
 import type { IndicatorKey } from "../../types/health";
 import { INDICATOR_LABELS, INDICATOR_UNITS } from "../../types/health";
 import { formatValue } from "../../lib/formatters";
@@ -35,11 +36,14 @@ export default function ComparisonBarChart({
   zctas,
   colors,
 }: ComparisonBarChartProps) {
-  const { healthData } = useHealthData();
+  const { healthData, summary } = useHealthData();
 
   if (!healthData || zctas.length === 0) return null;
 
   const countyAvg = healthData.meta.countyAverage;
+  const indicators = INDICATORS.filter((key) =>
+    isIndicatorAvailable(summary, key),
+  );
 
   return (
     <div className="w-full bg-white rounded-xl shadow-sm p-6">
@@ -50,7 +54,7 @@ export default function ComparisonBarChart({
         Grouped bars per indicator with county average reference line.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {INDICATORS.map((key) => {
+        {indicators.map((key) => {
           const unit = INDICATOR_UNITS[key];
           const label = INDICATOR_LABELS[key];
           const avg = countyAvg[key];
@@ -127,22 +131,24 @@ export default function ComparisonBarChart({
                       maxBarSize={60}
                     />
                   ))}
-                  <ReferenceLine
-                    y={avg}
-                    stroke={APH_COLORS.darkBlue}
-                    strokeDasharray="6 3"
-                    strokeWidth={2}
-                    label={{
-                      value: `Avg: ${formatValue(avg, unit)}`,
-                      position: "insideTopRight",
-                      style: {
-                        fontSize: 10,
-                        fill: APH_COLORS.darkBlue,
-                        fontFamily: "Geist, sans-serif",
-                        fontWeight: 600,
-                      },
-                    }}
-                  />
+                  {avg !== null && (
+                    <ReferenceLine
+                      y={avg}
+                      stroke={APH_COLORS.darkBlue}
+                      strokeDasharray="6 3"
+                      strokeWidth={2}
+                      label={{
+                        value: `Avg: ${formatValue(avg, unit)}`,
+                        position: "insideTopRight",
+                        style: {
+                          fontSize: 10,
+                          fill: APH_COLORS.darkBlue,
+                          fontFamily: "Geist, sans-serif",
+                          fontWeight: 600,
+                        },
+                      }}
+                    />
+                  )}
                 </BarChart>
               </ResponsiveContainer>
             </div>

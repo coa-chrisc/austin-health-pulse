@@ -1,13 +1,12 @@
 import type { HealthDataStore, IndicatorKey } from "../types/health";
+import { cityConfig } from "./cityConfig";
 
 /**
  * ZCTAs whose residential population is too small (or institutional) for
  * reliable survey estimates. Keyed by ZCTA, value is the note shown in the UI.
  */
-export const LOW_POPULATION_ZCTAS: Record<string, string> = {
-  "78712":
-    "Campus ZIP — small residential population; estimates unreliable.",
-};
+export const LOW_POPULATION_ZCTAS: Record<string, string> =
+  cityConfig.dataQualityNotes;
 
 /** ACS-derived rates that are meaningless for low-population ZCTAs. */
 const ACS_RATE_KEYS: IndicatorKey[] = ["povertyRate", "uninsuredRate"];

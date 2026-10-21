@@ -1,20 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { TRAVIS_COUNTY_ZCTAS, APH_COLORS } from "../../lib/constants";
+import { APH_COLORS } from "../../lib/constants";
+import { cityConfig } from "../../lib/cityConfig";
+import { listZips } from "../../lib/zips";
 import { useHealthData } from "../../hooks/useHealthData";
 import { formatValue } from "../../lib/formatters";
 
 const ZCTA_COLORS = [APH_COLORS.blue, APH_COLORS.green, APH_COLORS.orange];
 
-const POPULAR_ZIPS: { label: string; zip: string }[] = [
-  { label: "Downtown", zip: "78701" },
-  { label: "East Austin", zip: "78702" },
-  { label: "South Austin", zip: "78704" },
-  { label: "West Lake", zip: "78746" },
-  { label: "Pflugerville", zip: "78660" },
-  { label: "North Austin", zip: "78758" },
-  { label: "Round Rock", zip: "78681" },
-  { label: "Manor", zip: "78653" },
-];
+const POPULAR_ZIPS = cityConfig.featuredZips;
 
 interface ZctaPickerProps {
   selectedZctas: string[];
@@ -37,7 +30,7 @@ export default function ZctaPicker({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const filtered = query.trim()
-    ? TRAVIS_COUNTY_ZCTAS.filter(
+    ? listZips(healthData).filter(
         (z) => z.includes(query.trim()) && !selectedZctas.includes(z),
       )
     : [];
@@ -210,7 +203,7 @@ export default function ZctaPicker({
             onKeyDown={handleKeyDown}
             placeholder={
               selectedZctas.length === 0
-                ? "Enter a 5-digit zip code (e.g. 78701)"
+                ? `Enter a 5-digit zip code (e.g. ${POPULAR_ZIPS[0].zip})`
                 : `Add ${remaining > 0 ? "another" : "a 3rd"} zip code...`
             }
             className="w-full max-w-md pl-10 pr-4 py-3 rounded-lg border-2 border-aph-blue/30
@@ -267,7 +260,7 @@ export default function ZctaPicker({
               <p className="text-sm text-aph-dark-gray text-center">
                 {selectedZctas.includes(query)
                   ? "This zip code is already selected"
-                  : "No matching zip codes in Travis County"}
+                  : `No matching zip codes in ${cityConfig.region.name}`}
               </p>
             </div>
           )}

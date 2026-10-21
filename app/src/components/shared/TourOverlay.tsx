@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { cityConfig } from "../../lib/cityConfig";
+import { ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
 
 interface TourStep {
   icon: string;
@@ -10,23 +12,29 @@ const STEPS: TourStep[] = [
   {
     icon: "location_on",
     title: "Start with your ZIP code",
-    body: "Enter a Travis County ZIP — or tap the location pin to use your current location. Try one of the featured neighborhood pills if you're just exploring.",
+    body: `Enter a ${cityConfig.region.name} ZIP — or tap the location pin to use your current location. Try one of the featured neighborhood pills if you're just exploring.`,
   },
   {
     icon: "monitoring",
     title: "See how your ZIP compares",
-    body: "Life expectancy, poverty, uninsured rates, and chronic-disease prevalence are shown alongside the county average — green means better than average, red means worse.",
+    body: "Life expectancy, poverty, uninsured rates, and chronic-disease prevalence are shown alongside the regional average — green means better than average, red means worse.",
   },
   {
     icon: "social_distance",
     title: "Look at the gap",
-    body: "Travis County's longest- and shortest-living ZIP codes can differ by years. The bar strip below shows where your ZIP ranks among all 60+ ZIPs in the county.",
+    body: `${cityConfig.region.name}'s longest- and shortest-living ZIP codes can differ by years. The bar strip below shows where your ZIP ranks among all ZIPs in the region.`,
   },
-  {
-    icon: "calculate",
-    title: "Try the personal-factors calculators",
-    body: "Scroll down to see how personal factors like smoking, exercise, diet, and sleep, plus generational change, shift life expectancy. These are population-level estimates from peer-reviewed sources.",
-  },
+  ENABLE_PERSONAL_CALCULATOR
+    ? {
+        icon: "calculate",
+        title: "Try the personal-factors calculators",
+        body: "Scroll down to see how personal factors like smoking, exercise, diet, and sleep, plus generational change, shift life expectancy. These are population-level estimates from peer-reviewed sources.",
+      }
+    : {
+        icon: "tune",
+        title: "Explore a neighborhood equity scenario",
+        body: "Scroll down to the scenario simulator to see how population-level improvements in a ZIP's poverty, insurance coverage, or chronic-disease rates are associated with life-expectancy differences across the region.",
+      },
 ];
 
 interface TourOverlayProps {

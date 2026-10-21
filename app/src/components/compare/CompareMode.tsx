@@ -4,6 +4,7 @@ import ZctaPicker from "./ZctaPicker";
 import RadarChart from "./RadarChart";
 import ComparisonBarChart from "./ComparisonBarChart";
 import ComparisonTable from "./ComparisonTable";
+import { cityConfig } from "../../lib/cityConfig";
 
 const COMPARISON_COLORS = [
   APH_COLORS.blue,
@@ -37,7 +38,7 @@ export default function CompareMode() {
           Compare Zip Codes
         </h1>
         <p className="text-aph-dark-gray mt-2 text-sm sm:text-base max-w-2xl">
-          How do health outcomes differ across Travis County neighborhoods?
+          How do health outcomes differ across {cityConfig.region.name} neighborhoods?
           Select 2 or 3 zip codes below to see a side-by-side comparison of life
           expectancy, chronic disease, and socioeconomic indicators.
         </p>

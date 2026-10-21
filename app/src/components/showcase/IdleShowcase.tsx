@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useHealthData } from "../../hooks/useHealthData";
+import { cityConfig } from "../../lib/cityConfig";
+import { APH_COLORS, ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
 
 const SLIDE_INTERVAL_MS = 8_000;
 const TOTAL_SLIDES = 4;
@@ -125,7 +127,7 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
     if (pHigh && pHigh.v > countyPoverty * 1.5) {
       items.push({
         headline: `${pHigh.zip} has ${pHigh.v.toFixed(1)}% poverty`,
-        detail: `That's ${(pHigh.v / countyPoverty).toFixed(1)}× the Travis County average of ${countyPoverty.toFixed(1)}%.`,
+        detail: `That's ${(pHigh.v / countyPoverty).toFixed(1)}× the ${cityConfig.region.name} average of ${countyPoverty.toFixed(1)}%.`,
       });
     }
 
@@ -140,7 +142,7 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
     if (uHigh && uHigh.v >= 20) {
       items.push({
         headline: `1 in ${Math.round(100 / uHigh.v)} adults in ${uHigh.zip} is uninsured`,
-        detail: `${uHigh.v.toFixed(1)}% lack health coverage — the highest rate in Travis County.`,
+        detail: `${uHigh.v.toFixed(1)}% lack health coverage — the highest rate in ${cityConfig.region.name}.`,
       });
     }
 
@@ -165,7 +167,7 @@ export default function IdleShowcase({ onDismiss }: IdleShowcaseProps) {
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(135deg, #22254E 0%, #44499C 40%, #009F4D 100%)`,
+          background: `linear-gradient(135deg, ${APH_COLORS.darkBlue} 0%, ${APH_COLORS.blue} 40%, ${APH_COLORS.green} 100%)`,
           animation: "showcaseGradient 12s ease-in-out infinite alternate",
         }}
       />
@@ -246,12 +248,12 @@ function SlideTitle() {
         </span>
       </div>
       <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
-        Austin Health Pulse
+        {cityConfig.appName}
       </h1>
       <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
         Explore life expectancy and health data
         <br />
-        across Travis County
+        across {cityConfig.region.name}
       </p>
     </div>
   );
@@ -349,8 +351,10 @@ function SlideCTA() {
         Explore your neighborhood.
       </h2>
       <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-xl mx-auto mb-8">
-        Look up any Travis County ZIP, compare neighborhoods side by side, or
-        see how modifiable factors shape lifespan.
+        Look up any {cityConfig.region.name} ZIP, compare neighborhoods side by
+        side, or {ENABLE_PERSONAL_CALCULATOR
+          ? "see how modifiable factors shape lifespan."
+          : "explore how population-level changes relate to life expectancy."}
       </p>
       <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20">
         <span className="material-symbols-outlined text-aph-green text-base">

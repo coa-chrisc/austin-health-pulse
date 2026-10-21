@@ -12,6 +12,7 @@ import {
   type StressScore,
 } from "../../lib/lifespanModel";
 import type { SmokingStatus } from "../../lib/smokingDeltas";
+import Slider from "../shared/Slider";
 import FactorWaterfall from "./FactorWaterfall";
 import ServiceMatchCTA from "./ServiceMatchCTA";
 
@@ -91,49 +92,6 @@ function Segmented<T extends string>({
           {opt.label}
         </button>
       ))}
-    </div>
-  );
-}
-
-interface SliderProps {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  step?: number;
-  display: string;
-  onChange: (v: number) => void;
-}
-function Slider({
-  label,
-  value,
-  min,
-  max,
-  step = 1,
-  display,
-  onChange,
-}: SliderProps) {
-  const id = useId();
-  return (
-    <div>
-      <div className="flex items-baseline justify-between mb-1">
-        <label htmlFor={id} className="text-sm text-aph-dark-blue font-medium">
-          {label}
-        </label>
-        <span className="text-aph-dark-blue font-bold text-base tabular-nums">
-          {display}
-        </span>
-      </div>
-      <input
-        id={id}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-aph-blue"
-      />
     </div>
   );
 }

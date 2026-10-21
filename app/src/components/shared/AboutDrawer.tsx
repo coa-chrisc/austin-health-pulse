@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { cityConfig } from "../../lib/cityConfig";
 
 interface AboutDrawerProps {
   isOpen: boolean;
@@ -95,7 +96,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
           ref={drawerRef}
           role="dialog"
           aria-modal="true"
-          aria-label="About Austin Health Pulse"
+          aria-label={`About ${cityConfig.appName}`}
           className={`bg-white shadow-2xl flex flex-col w-full md:max-w-2xl h-[92vh] md:h-auto md:max-h-[85vh] rounded-t-2xl md:rounded-2xl overflow-hidden transition-all duration-300 ease-out ${
             isOpen
               ? "pointer-events-auto translate-y-0 md:scale-100 opacity-100"
@@ -127,11 +128,12 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
           {/* Content */}
           <div className="overflow-y-auto flex-1 px-5 md:px-6 py-6 overscroll-contain">
             {/* About */}
-            <Section title="About Austin Health Pulse">
+            <Section title={`About ${cityConfig.appName}`}>
               <p>
-                Austin Health Pulse is an interactive data tool that allows
-                residents and policymakers to explore health indicators across
-                Travis County neighborhoods. Built by Austin Public Health, it
+                {cityConfig.appName} is an interactive data tool that allows
+                residents and policymakers to explore health indicators across{" "}
+                {cityConfig.region.name} neighborhoods. Built by{" "}
+                {cityConfig.agency.name}, it
                 combines life expectancy, chronic disease, and socioeconomic
                 data to reveal health patterns at the ZIP code level.
               </p>
@@ -139,31 +141,10 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
 
             {/* Data Sources */}
             <Section title="Data Sources">
-              <DataSourceItem
-                label="Life Expectancy"
-                source="CDC U.S. Small-Area Life Expectancy Estimates Project (USALEEP)"
-                period="2010-2015"
-              />
-              <DataSourceItem
-                label="Poverty & Insurance"
-                source="U.S. Census Bureau, American Community Survey 5-Year Estimates"
-                period="2022"
-              />
-              <DataSourceItem
-                label="Chronic Disease"
-                source="CDC PLACES: Local Data for Better Health"
-                period="2023"
-              />
-              <DataSourceItem
-                label="Asthma"
-                source="CDC PLACES: Local Data for Better Health (current asthma)"
-                period="2023"
-              />
-              <DataSourceItem
-                label="Violent Crime"
-                source="City of Austin Open Data Portal, APD Crime Reports (UCR Part 1 violent offenses)"
-                period="Rolling 12 months"
-              />
+              {cityConfig.dataSources.map((d) => (
+                <DataSourceItem key={d.label} label={d.label} source={d.source} />
+              ))}
+              <p className="text-xs">Data current as of {cityConfig.dataAsOf}.</p>
             </Section>
 
             {/* Methodology */}
@@ -184,6 +165,12 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 Socioeconomic indicators (poverty rate, uninsured rate) come
                 from the American Community Survey and represent 5-year period
                 estimates at the ZCTA level.
+              </MethodologyItem>
+              <MethodologyItem>
+                The Neighborhood Equity Scenario Simulator uses one-variable
+                linear fits of ZIP-level life expectancy against a single
+                indicator across {cityConfig.region.name}. Results describe
+                associations across ZIPs, not the effect of any intervention.
               </MethodologyItem>
             </Section>
 
@@ -316,10 +303,10 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 </div>
                 <div>
                   <p className="font-semibold text-aph-dark-blue">
-                    Austin Public Health
+                    {cityConfig.agency.name}
                   </p>
                   <p className="text-sm text-aph-dark-gray">
-                    City of Austin, Texas
+                    {cityConfig.agency.parent}
                   </p>
                 </div>
               </div>
@@ -357,17 +344,14 @@ function Section({
 function DataSourceItem({
   label,
   source,
-  period,
 }: {
   label: string;
   source: string;
-  period: string;
 }) {
   return (
     <div className="bg-aph-white rounded-lg p-3 border border-aph-light-gray/30">
       <p className="font-semibold text-aph-dark-blue text-sm">{label}</p>
       <p className="text-xs text-aph-dark-gray mt-1">{source}</p>
-      <p className="text-xs text-aph-blue mt-0.5">Data period: {period}</p>
     </div>
   );
 }

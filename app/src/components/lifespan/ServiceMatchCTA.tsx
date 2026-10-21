@@ -1,4 +1,5 @@
 import { APH_COLORS, SERVICE_GUIDE_URL } from "../../lib/constants";
+import { cityConfig } from "../../lib/cityConfig";
 import {
   FACTOR_ICONS,
   type ImprovementOpportunity,
@@ -64,7 +65,7 @@ export default function ServiceMatchCTA({
             <p className="text-white/85 text-sm mt-1">
               Keep doing what you're doing.
               {SERVICE_GUIDE_URL &&
-                " If anything changes, the Austin Service Guide can help match you to local resources."}
+                ` If anything changes, the ${cityConfig.region.cityName} Service Guide can help match you to local resources.`}
             </p>
           </div>
         </div>
@@ -75,7 +76,7 @@ export default function ServiceMatchCTA({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 mt-4 px-4 py-2 rounded-lg bg-white text-aph-dark-green font-semibold text-sm hover:bg-white/90 transition"
           >
-            Browse Austin services
+            Browse {cityConfig.region.cityName} services
             <span className="material-symbols-outlined text-base">
               open_in_new
             </span>
@@ -116,7 +117,7 @@ export default function ServiceMatchCTA({
             Based on your inputs, these are the factors with the most years
             recoverable.
             {url &&
-              " Austin Public Health partners with services that can help."}
+              ` ${cityConfig.agency.name} partners with services that can help.`}
           </p>
         </div>
       </div>
@@ -157,13 +158,13 @@ export default function ServiceMatchCTA({
             <span className="material-symbols-outlined text-base">
               handshake
             </span>
-            Find Austin services that can help
+            Find {cityConfig.region.cityName} services that can help
             <span className="material-symbols-outlined text-base">
               arrow_forward
             </span>
           </a>
           <p className="text-xs text-aph-dark-gray mt-3">
-            Opens the Austin Service Guide. Your responses on this page are not
+            Opens the {cityConfig.region.cityName} Service Guide. Your responses on this page are not
             sent — only the factor categories are shared.
           </p>
         </>

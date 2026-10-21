@@ -49,8 +49,9 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
   if (!healthData || !summary || zctas.length === 0) return null;
 
   // Build data points for each indicator
-  const data = RADAR_INDICATORS.map(({ key, shortLabel }) => {
+  const data = RADAR_INDICATORS.flatMap(({ key, shortLabel }) => {
     const ind = summary.indicators[key];
+    if (ind === null) return []; // region has no source for this indicator
     const entry: Record<string, string | number | null> = {
       indicator: shortLabel,
       fullMark: 100,
@@ -67,7 +68,7 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
       );
     }
 
-    return entry;
+    return [entry];
   });
 
   return (

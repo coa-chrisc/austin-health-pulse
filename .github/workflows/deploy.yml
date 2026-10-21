@@ -38,12 +38,20 @@ jobs:
         working-directory: app
         run: npm test
 
+      - name: Validate city config and data
+        working-directory: app
+        run: npm run validate:data -- --all
+
       - name: Build
         working-directory: app
         env:
           # Optional repo variable (Settings > Secrets and variables > Actions >
-          # Variables). When unset the service-guide handoff link is hidden.
+          # Variables). Overrides serviceGuideUrl in the city config; when both
+          # are unset the Service Guide links are hidden.
           VITE_SERVICE_GUIDE_URL: ${{ vars.SERVICE_GUIDE_URL }}
+          # Opt-in individual lifespan calculator. Only the exact value "true"
+          # enables it; unset/anything else keeps the aggregate-data-only app.
+          VITE_ENABLE_PERSONAL_CALCULATOR: ${{ vars.ENABLE_PERSONAL_CALCULATOR }}
         run: npm run build
 
       - name: Upload artifact
