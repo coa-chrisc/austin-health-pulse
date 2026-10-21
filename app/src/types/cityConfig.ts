@@ -1,23 +1,61 @@
 // Mirrors config/city.config.schema.json. The `pipeline` block is stripped
 // by the Vite plugin before the config reaches the browser.
 
-export interface BrandColors {
-  blue: string;
-  green: string;
-  white: string;
-  darkBlue: string;
-  darkGreen: string;
-  compliantGreen: string;
-  lightBlue: string;
-  lightGreen: string;
-  red: string;
-  orange: string;
-  yellow: string;
-  cyan: string;
-  purple: string;
-  brown: string;
-  lightGray: string;
-  darkGray: string;
+/** Semantic UI colors; each becomes `--color-<kebab-key>` (e.g. `--color-on-brand`). */
+export interface ThemeColors {
+  primary: string;
+  primarySoft: string;
+  accent: string;
+  accentSoft: string;
+  ink: string;
+  onBrand: string;
+  page: string;
+  surface: string;
+  subtle: string;
+  body: string;
+  muted: string;
+  line: string;
+  noData: string;
+  positive: string;
+  positiveFill: string;
+  negative: string;
+  warning: string;
+  scrim: string;
+}
+
+/** Text size steps, smallest to largest (`text-<step>` utilities). */
+export type TextStep =
+  | "3xs"
+  | "2xs"
+  | "xs"
+  | "sm"
+  | "base"
+  | "lg"
+  | "xl"
+  | "2xl"
+  | "3xl"
+  | "4xl"
+  | "5xl"
+  | "6xl"
+  | "7xl";
+
+export interface Theme {
+  colors: ThemeColors;
+  /** Exactly five stops, worst to best. */
+  dataScale: string[];
+  /** Three to eight chart/compare series colors, in order. */
+  series: string[];
+  typography: {
+    /** `@fontsource/<name>` package installed in app/; weights 400-700 are loaded. */
+    fontPackage: string;
+    family: string;
+    fallback: string;
+    /** px on <html>; scales every rem (text and spacing). */
+    baseSize: number;
+    /** rem overrides per step; unset steps use the defaults in lib/theme.ts. */
+    sizes?: Partial<Record<TextStep, number>>;
+  };
+  radius: { chip: string; control: string; card: string; panel: string };
 }
 
 export interface CityConfig {
@@ -25,7 +63,8 @@ export interface CityConfig {
   appName: string;
   agency: { name: string; shortName: string; parent: string };
   region: { name: string; cityName: string; state: string };
-  brand: { logoUrl: string | null; colors: BrandColors };
+  brand: { logoUrl: string | null };
+  theme: Theme;
   /** Show the "How This Was Built" About section (Austin-specific story). */
   showBuildStory?: boolean;
   map: {

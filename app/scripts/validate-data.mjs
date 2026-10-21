@@ -12,6 +12,40 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const configDir = path.resolve(here, "../../config");
 
 const LEVER_KEYS = ["povertyRate", "uninsuredRate", "diabetes", "hypertension", "obesity"];
+const FONT_WEIGHTS = [400, 500, 600, 700];
+
+// [foreground, background, minimum ratio]. 4.5:1 is WCAG AA for body text;
+// 3:1 is the non-text minimum (warning is used for icons only).
+const CONTRAST_PAIRS = [
+  ["body", "page", 4.5],
+  ["body", "surface", 4.5],
+  ["muted", "surface", 4.5],
+  ["muted", "page", 4.5],
+  ["ink", "page", 4.5],
+  ["ink", "primarySoft", 4.5],
+  ["primary", "surface", 4.5],
+  ["onBrand", "primary", 4.5],
+  ["onBrand", "ink", 4.5],
+  ["onBrand", "accent", 4.5],
+  ["onBrand", "positiveFill", 4.5],
+  ["positive", "surface", 4.5],
+  ["negative", "surface", 4.5],
+  ["warning", "surface", 3],
+];
+
+/** WCAG 2 relative luminance of a "#rrggbb" color. */
+function luminance(hex) {
+  const [r, g, b] = [1, 3, 5].map((i) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(a, b) {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
 
 const readJson = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
 const rel = (p) => path.relative(path.resolve(here, "../.."), p);
@@ -44,6 +78,22 @@ function checkConfig(configPath) {
   if (!validateConfig(config)) {
     for (const m of schemaErrors(validateConfig)) fail(`config schema: ${m}`);
     return { errors, warnings };
+  }
+
+  const { fontPackage } = config.theme.typography;
+  for (const w of FONT_WEIGHTS) {
+    const css = path.resolve(here, "../node_modules", fontPackage, `latin-${w}.css`);
+    if (!fs.existsSync(css)) {
+      fail(`theme.typography.fontPackage: ${rel(css)} not found (run \`npm install ${fontPackage}\` in app/)`);
+      break;
+    }
+  }
+  const colors = config.theme.colors;
+  for (const [fg, bg, min] of CONTRAST_PAIRS) {
+    const ratio = contrastRatio(colors[fg], colors[bg]);
+    if (ratio < min) {
+      warnings.push(`theme contrast: ${fg} on ${bg} is ${ratio.toFixed(2)}:1 (WCAG minimum ${min}:1)`);
+    }
   }
 
   if (config.brand.logoUrl) {

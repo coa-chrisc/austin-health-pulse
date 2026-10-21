@@ -4,12 +4,14 @@
   "title": "Health Pulse city configuration",
   "description": "One deployment = one city config. Paths under `data` are relative to the config/ directory. The `pipeline` block is read only by the Python data pipeline and is stripped before the config reaches the browser.",
   "type": "object",
-  "required": ["id", "appName", "agency", "region", "brand", "map", "featuredZips", "dataQualityNotes", "serviceGuideUrl", "data", "dataSources", "dataAsOf", "pipeline"],
+  "required": ["id", "appName", "agency", "region", "brand", "theme", "map", "featuredZips", "dataQualityNotes", "serviceGuideUrl", "data", "dataSources", "dataAsOf", "pipeline"],
   "additionalProperties": false,
   "$defs": {
     "hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
     "zip": { "type": "string", "pattern": "^\\d{5}$" },
-    "relPath": { "type": "string", "pattern": "^data/[A-Za-z0-9._/-]+$" }
+    "relPath": { "type": "string", "pattern": "^data/[A-Za-z0-9._/-]+$" },
+    "rem": { "type": "number", "minimum": 0.5, "maximum": 6 },
+    "length": { "type": "string", "pattern": "^\\d+(\\.\\d+)?(rem|px)$" }
   },
   "properties": {
     "$schema": { "type": "string" },
@@ -42,36 +44,90 @@
     },
     "brand": {
       "type": "object",
-      "required": ["logoUrl", "colors"],
+      "required": ["logoUrl"],
       "additionalProperties": false,
       "properties": {
         "logoUrl": {
           "type": ["string", "null"],
           "pattern": "^brand/(?!.*\\.\\.)[A-Za-z0-9._/-]+\\.(svg|png|webp)$",
           "description": "Path to the logo file, relative to config/ (for example brand/my-city/logo.svg), or null for the default icon. The key name is kept for compatibility; it is a file path, not a URL."
-        },
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "description": "The single place to change colors, font, text sizes and corner radius. Each color becomes a --color-<kebab-key> CSS variable and a Tailwind utility (bg-primary, text-on-brand, border-line, ...).",
+      "required": ["colors", "dataScale", "series", "typography", "radius"],
+      "additionalProperties": false,
+      "properties": {
         "colors": {
           "type": "object",
-          "description": "Palette roles. Key names are historical (Austin Public Health): blue = primary, green = secondary, darkBlue = text/ink. They feed APH_COLORS and the --color-aph-* CSS variables.",
-          "required": ["blue", "green", "white", "darkBlue", "darkGreen", "compliantGreen", "lightBlue", "lightGreen", "red", "orange", "yellow", "cyan", "purple", "brown", "lightGray", "darkGray"],
+          "required": ["primary", "primarySoft", "accent", "accentSoft", "ink", "onBrand", "page", "surface", "subtle", "body", "muted", "line", "noData", "positive", "positiveFill", "negative", "warning", "scrim"],
           "additionalProperties": false,
           "properties": {
-            "blue": { "$ref": "#/$defs/hex" },
-            "green": { "$ref": "#/$defs/hex" },
-            "white": { "$ref": "#/$defs/hex" },
-            "darkBlue": { "$ref": "#/$defs/hex" },
-            "darkGreen": { "$ref": "#/$defs/hex" },
-            "compliantGreen": { "$ref": "#/$defs/hex" },
-            "lightBlue": { "$ref": "#/$defs/hex" },
-            "lightGreen": { "$ref": "#/$defs/hex" },
-            "red": { "$ref": "#/$defs/hex" },
-            "orange": { "$ref": "#/$defs/hex" },
-            "yellow": { "$ref": "#/$defs/hex" },
-            "cyan": { "$ref": "#/$defs/hex" },
-            "purple": { "$ref": "#/$defs/hex" },
-            "brown": { "$ref": "#/$defs/hex" },
-            "lightGray": { "$ref": "#/$defs/hex" },
-            "darkGray": { "$ref": "#/$defs/hex" }
+            "primary": { "$ref": "#/$defs/hex", "description": "Buttons, links, active nav, section headings." },
+            "primarySoft": { "$ref": "#/$defs/hex", "description": "Tinted panels." },
+            "accent": { "$ref": "#/$defs/hex", "description": "Logo tile, Explore button, favicon, highlights." },
+            "accentSoft": { "$ref": "#/$defs/hex", "description": "Soft accent tint." },
+            "ink": { "$ref": "#/$defs/hex", "description": "Header/footer background, headings, big numbers." },
+            "onBrand": { "$ref": "#/$defs/hex", "description": "Text and icons on primary, ink, accent and positiveFill." },
+            "page": { "$ref": "#/$defs/hex", "description": "Page background." },
+            "surface": { "$ref": "#/$defs/hex", "description": "Cards, popovers, tooltips." },
+            "subtle": { "$ref": "#/$defs/hex", "description": "Progress tracks, empty slots." },
+            "body": { "$ref": "#/$defs/hex", "description": "Body text." },
+            "muted": { "$ref": "#/$defs/hex", "description": "Secondary text." },
+            "line": { "$ref": "#/$defs/hex", "description": "Borders and dividers." },
+            "noData": { "$ref": "#/$defs/hex", "description": "Map/chart fill for missing data." },
+            "positive": { "$ref": "#/$defs/hex", "description": "'Better' text and numbers." },
+            "positiveFill": { "$ref": "#/$defs/hex", "description": "'Better' bars and fills." },
+            "negative": { "$ref": "#/$defs/hex", "description": "'Worse' text and fills, errors." },
+            "warning": { "$ref": "#/$defs/hex", "description": "Caution icons." },
+            "scrim": { "$ref": "#/$defs/hex", "description": "Modal/overlay backdrop, used at 20-60% opacity." }
+          }
+        },
+        "dataScale": { "type": "array", "description": "Map/gauge scale, worst to best (--color-scale-1..5).", "items": { "$ref": "#/$defs/hex" }, "minItems": 5, "maxItems": 5 },
+        "series": { "type": "array", "description": "Compare/chart series colors in order (--color-series-1..N).", "items": { "$ref": "#/$defs/hex" }, "minItems": 3, "maxItems": 8 },
+        "typography": {
+          "type": "object",
+          "required": ["fontPackage", "family", "fallback", "baseSize"],
+          "additionalProperties": false,
+          "properties": {
+            "fontPackage": { "type": "string", "pattern": "^@fontsource/[a-z0-9-]+$", "description": "Font package installed in app/ (npm install <pkg>). Weights 400, 500, 600 and 700 are loaded." },
+            "family": { "type": "string", "pattern": "^[A-Za-z0-9 ]+$", "description": "Family name the package registers, e.g. 'Geist'." },
+            "fallback": { "type": "string", "pattern": "^[A-Za-z0-9 ,-]+$", "description": "Fallback stack, e.g. 'Helvetica, Aptos, sans-serif'." },
+            "baseSize": { "type": "number", "minimum": 12, "maximum": 24, "description": "Root font size in px at the browser default of 16; emitted as a percentage so visitor font-size settings still apply. Scales every rem (text and spacing)." },
+            "sizes": {
+              "type": "object",
+              "description": "Optional rem overrides per text step; unset steps keep the defaults.",
+              "additionalProperties": false,
+              "properties": {
+                "3xs": { "$ref": "#/$defs/rem" },
+                "2xs": { "$ref": "#/$defs/rem" },
+                "xs": { "$ref": "#/$defs/rem" },
+                "sm": { "$ref": "#/$defs/rem" },
+                "base": { "$ref": "#/$defs/rem" },
+                "lg": { "$ref": "#/$defs/rem" },
+                "xl": { "$ref": "#/$defs/rem" },
+                "2xl": { "$ref": "#/$defs/rem" },
+                "3xl": { "$ref": "#/$defs/rem" },
+                "4xl": { "$ref": "#/$defs/rem" },
+                "5xl": { "$ref": "#/$defs/rem" },
+                "6xl": { "$ref": "#/$defs/rem" },
+                "7xl": { "$ref": "#/$defs/rem" }
+              }
+            }
+          }
+        },
+        "radius": {
+          "type": "object",
+          "description": "Corner radii for rounded-chip, rounded-control, rounded-card and rounded-panel.",
+          "required": ["chip", "control", "card", "panel"],
+          "additionalProperties": false,
+          "properties": {
+            "chip": { "$ref": "#/$defs/length" },
+            "control": { "$ref": "#/$defs/length" },
+            "card": { "$ref": "#/$defs/length" },
+            "panel": { "$ref": "#/$defs/length" }
           }
         }
       }
