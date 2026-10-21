@@ -394,10 +394,7 @@ export default function LifespanCalculator() {
         {/* ------------------ Result column ------------------ */}
         <div className="space-y-5">
           <div
-            className="rounded-2xl p-6 text-center text-aph-dark-blue border border-aph-blue/20 shadow-sm"
-            style={{
-              background: "linear-gradient(135deg, #eef4fb 0%, #dceaf6 100%)",
-            }}
+            className="rounded-2xl p-6 text-center text-aph-dark-blue border border-aph-blue/20 shadow-sm brand-soft-gradient"
           >
             <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-blue/75">
               Estimated lifespan

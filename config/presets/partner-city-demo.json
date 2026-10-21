@@ -13,7 +13,7 @@
     "state": "TX"
   },
   "brand": {
-    "logoUrl": null,
+    "logoUrl": "brand/partner-city-demo/logo.svg",
     "colors": {
       "blue": "#1F4E79",
       "green": "#2E8B57",

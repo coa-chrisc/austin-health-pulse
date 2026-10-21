@@ -725,11 +725,7 @@ export default function NeighborhoodMode({
                 submittedZip &&
                 zctaData.lifeExpectancy != null && (
                   <section
-                    className="mb-6 rounded-2xl shadow-md p-6 md:p-8 text-aph-dark-blue border border-aph-blue/20 relative overflow-hidden"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #eef4fb 0%, #dceaf6 100%)",
-                    }}
+                    className="mb-6 rounded-2xl shadow-md p-6 md:p-8 text-aph-dark-blue border border-aph-blue/20 relative overflow-hidden brand-soft-gradient"
                   >
                     <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
                       <span
@@ -789,8 +785,10 @@ export default function NeighborhoodMode({
                         <div
                           className="rounded-lg p-3 border"
                           style={{
-                            backgroundColor: "rgba(0, 80, 39, 0.08)",
-                            borderColor: "rgba(0, 80, 39, 0.35)",
+                            backgroundColor:
+                              "color-mix(in srgb, var(--color-aph-dark-green) 8%, transparent)",
+                            borderColor:
+                              "color-mix(in srgb, var(--color-aph-dark-green) 35%, transparent)",
                           }}
                         >
                           <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-gray mb-1">

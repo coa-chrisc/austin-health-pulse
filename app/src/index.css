@@ -24,7 +24,8 @@
   --color-aph-light-gray: #C6C5C4;
   --color-aph-dark-gray: #636262;
 
-  /* Typography */
+  /* Typography. To swap the font: install an @fontsource package, import its
+     weights in src/main.tsx, and change the family name below. */
   --font-geist: 'Geist', 'Helvetica', 'Aptos', sans-serif;
 }
 
@@ -44,6 +45,15 @@
   -webkit-font-feature-settings: "liga";
   font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
+}
+
+/* Soft brand-tinted panel background (light-blue based). */
+.brand-soft-gradient {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-aph-light-blue) 45%, white) 0%,
+    var(--color-aph-light-blue) 100%
+  );
 }
 
 body {

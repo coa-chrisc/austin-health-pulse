@@ -35,12 +35,21 @@
         "state": { "type": "string", "pattern": "^[A-Z]{2}$" }
       }
     },
+    "showBuildStory": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show the 'How This Was Built' section in the About panel. It tells Austin Public Health's own build story, so other agencies should leave it off."
+    },
     "brand": {
       "type": "object",
       "required": ["logoUrl", "colors"],
       "additionalProperties": false,
       "properties": {
-        "logoUrl": { "type": ["string", "null"] },
+        "logoUrl": {
+          "type": ["string", "null"],
+          "pattern": "^brand/(?!.*\\.\\.)[A-Za-z0-9._/-]+\\.(svg|png|webp)$",
+          "description": "Path to the logo file, relative to config/ (for example brand/my-city/logo.svg), or null for the default icon. The key name is kept for compatibility; it is a file path, not a URL."
+        },
         "colors": {
           "type": "object",
           "description": "Palette roles. Key names are historical (Austin Public Health): blue = primary, green = secondary, darkBlue = text/ink. They feed APH_COLORS and the --color-aph-* CSS variables.",

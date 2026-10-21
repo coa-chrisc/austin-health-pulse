@@ -26,6 +26,8 @@ export interface CityConfig {
   agency: { name: string; shortName: string; parent: string };
   region: { name: string; cityName: string; state: string };
   brand: { logoUrl: string | null; colors: BrandColors };
+  /** Show the "How This Was Built" About section (Austin-specific story). */
+  showBuildStory?: boolean;
   map: {
     center: [number, number];
     zoom: number;
@@ -45,3 +47,6 @@ export interface CityDataUrls {
   boundaries: string;
   summary: string;
 }
+
+/** Built URL of the config-relative brand logo, or null when none is set. */
+export type LogoSrc = string | null;

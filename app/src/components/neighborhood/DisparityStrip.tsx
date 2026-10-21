@@ -66,10 +66,10 @@ export default function DisparityStrip({ highlightZip }: DisparityStripProps) {
       return interpolate(APH_COLORS.red, APH_COLORS.orange, t);
     } else if (pct < 0.66) {
       const t = (pct - 0.33) / 0.33;
-      return interpolate(APH_COLORS.orange, "#F2C94C", t);
+      return interpolate(APH_COLORS.orange, APH_COLORS.yellow, t);
     } else {
       const t = (pct - 0.66) / 0.34;
-      return interpolate("#F2C94C", APH_COLORS.green, t);
+      return interpolate(APH_COLORS.yellow, APH_COLORS.green, t);
     }
   };
 

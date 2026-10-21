@@ -93,10 +93,7 @@ export default function ServiceMatchCTA({
 
   return (
     <div
-      className="rounded-2xl shadow-md p-6 md:p-7 text-aph-dark-blue border border-aph-blue/20"
-      style={{
-        background: "linear-gradient(135deg, #eef4fb 0%, #dceaf6 100%)",
-      }}
+      className="rounded-2xl shadow-md p-6 md:p-7 text-aph-dark-blue border border-aph-blue/20 brand-soft-gradient"
     >
       <div className="flex items-start gap-3 mb-1">
         <span

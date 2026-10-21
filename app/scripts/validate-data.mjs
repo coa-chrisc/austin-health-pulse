@@ -46,6 +46,11 @@ function checkConfig(configPath) {
     return { errors, warnings };
   }
 
+  if (config.brand.logoUrl) {
+    const logo = path.resolve(configDir, config.brand.logoUrl);
+    if (!fs.existsSync(logo)) fail(`brand.logoUrl: file not found: ${rel(logo)}`);
+  }
+
   const load = (key) => {
     const file = path.resolve(configDir, config.data[key]);
     try {

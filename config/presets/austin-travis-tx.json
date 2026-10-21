@@ -12,6 +12,7 @@
     "cityName": "Austin",
     "state": "TX"
   },
+  "showBuildStory": true,
   "brand": {
     "logoUrl": null,
     "colors": {

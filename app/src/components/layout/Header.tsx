@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { cityConfig } from "../../lib/cityConfig";
+import { cityConfig, logoSrc } from "../../lib/cityConfig";
 
 const modes = [
   {
@@ -27,9 +27,9 @@ export default function Header({ onInfoClick }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-aph-green rounded-lg flex items-center justify-center">
-            {cityConfig.brand.logoUrl ? (
+            {logoSrc ? (
               <img
-                src={cityConfig.brand.logoUrl}
+                src={logoSrc}
                 alt=""
                 className="w-7 h-7 object-contain"
               />

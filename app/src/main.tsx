@@ -8,9 +8,6 @@ import "@fontsource/geist/latin-700.css";
 import "@fontsource/material-symbols-outlined/latin-400.css";
 import "./index.css";
 import App from "./App";
-import { applyBrand } from "./lib/applyBrand";
-
-applyBrand();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
