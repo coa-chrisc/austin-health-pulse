@@ -1,0 +1,27 @@
+# STARTER TEMPLATE. Knative Service for Cloud Run.
+# Edit IMAGE_URI, then: gcloud run services replace deploy/gcp/cloud-run.yaml --region REGION
+# To allow public access (public site): gcloud run services add-iam-policy-binding health-pulse \
+#   --region REGION --member=allUsers --role=roles/run.invoker
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: health-pulse
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"  # scale to zero; set "1" to avoid cold starts
+        autoscaling.knative.dev/maxScale: "2"
+    spec:
+      containerConcurrency: 80
+      containers:
+        - image: IMAGE_URI  # e.g. REGION-docker.pkg.dev/PROJECT/REPO/health-pulse:1
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: "1"
+              memory: 256Mi
+          startupProbe:
+            httpGet:
+              path: /healthz
