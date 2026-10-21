@@ -11,7 +11,8 @@ import {
 import { useHealthData } from "../../hooks/useHealthData";
 import { getColorForValue } from "../../lib/colorScales";
 import { formatValue } from "../../lib/formatters";
-import { MAP_CONFIG, APH_COLORS } from "../../lib/constants";
+import { MAP_CONFIG } from "../../lib/constants";
+import { THEME, fontSize } from "../../lib/theme";
 
 interface ChoroplethMapProps {
   indicator: IndicatorKey;
@@ -67,10 +68,10 @@ export default function ChoroplethMap({
     (feature: Feature<Geometry> | undefined) => {
       if (!feature) {
         return {
-          fillColor: APH_COLORS.lightGray,
+          fillColor: THEME.colors.noData,
           fillOpacity: 0.3,
           weight: 1,
-          color: APH_COLORS.darkBlue,
+          color: THEME.colors.ink,
           opacity: 0.6,
         };
       }
@@ -81,10 +82,10 @@ export default function ChoroplethMap({
 
       if (value === null || value === undefined) {
         return {
-          fillColor: APH_COLORS.lightGray,
+          fillColor: THEME.colors.noData,
           fillOpacity: 0.3,
           weight: 1,
-          color: APH_COLORS.darkBlue,
+          color: THEME.colors.ink,
           opacity: 0.4,
         };
       }
@@ -95,7 +96,7 @@ export default function ChoroplethMap({
         fillColor: getColorForValue(value, min, max, indicator),
         fillOpacity: 0.7,
         weight: isSelected ? 3 : 1,
-        color: APH_COLORS.darkBlue,
+        color: THEME.colors.ink,
         opacity: isSelected ? 1 : 0.6,
       };
     },
@@ -127,7 +128,7 @@ export default function ChoroplethMap({
 
         const rank = allValues.findIndex((e) => e.zcta === zcta) + 1;
         if (rank > 0) {
-          rankLine = `<span style="color:${APH_COLORS.darkGray};font-size:11px">${toOrdinal(rank)} of ${allValues.length} ZIP codes</span>`;
+          rankLine = `<span style="color:${THEME.colors.muted};font-size:${fontSize("2xs")}">${toOrdinal(rank)} of ${allValues.length} ZIP codes</span>`;
         }
       }
 
@@ -184,8 +185,8 @@ export default function ChoroplethMap({
 
   if (!boundaries) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-aph-white">
-        <p className="text-aph-dark-gray text-sm">
+      <div className="w-full h-full flex items-center justify-center bg-page">
+        <p className="text-muted text-sm">
           No boundary data available.
         </p>
       </div>

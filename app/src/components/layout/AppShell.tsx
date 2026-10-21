@@ -62,10 +62,10 @@ export default function AppShell() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-aph-white">
+      <div className="flex items-center justify-center h-screen bg-page">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-aph-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-aph-dark-blue font-semibold">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-ink font-semibold">
             Loading health data...
           </p>
         </div>
@@ -75,22 +75,22 @@ export default function AppShell() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-screen bg-aph-white">
+      <div className="flex items-center justify-center h-screen bg-page">
         <div className="text-center max-w-md p-8">
-          <span className="material-symbols-outlined text-aph-red text-5xl mb-4 block">
+          <span className="material-symbols-outlined text-negative text-5xl mb-4 block">
             error
           </span>
-          <h2 className="text-xl font-semibold text-aph-dark-blue mb-2">
+          <h2 className="text-xl font-semibold text-ink mb-2">
             Unable to Load Data
           </h2>
-          <p className="text-aph-dark-gray">{error}</p>
+          <p className="text-muted">{error}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-aph-white">
+    <div className="min-h-screen flex flex-col bg-page">
       <Header onInfoClick={() => setAboutOpen(true)} />
       <main className="flex-1">
         <ErrorBoundary key={`${pathname}:${visit}`}>
@@ -98,8 +98,8 @@ export default function AppShell() {
             fallback={
               <div className="flex items-center justify-center h-64">
                 <div className="text-center">
-                  <div className="w-12 h-12 border-4 border-aph-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                  <p className="text-aph-dark-blue font-semibold">Loading...</p>
+                  <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                  <p className="text-ink font-semibold">Loading...</p>
                 </div>
               </div>
             }
@@ -123,8 +123,8 @@ export default function AppShell() {
       {/* Floating tour button — icon-only on mobile, labeled pill on desktop */}
       <button
         onClick={openTour}
-        className={`fixed right-4 sm:right-5 group flex items-center justify-center gap-2 sm:pl-3 sm:pr-4 py-2.5 rounded-full bg-aph-blue text-white shadow-lg hover:brightness-110 active:scale-[0.97] transition w-12 h-12 sm:w-auto sm:h-auto ${
-          !hasSeenTour ? "ring-4 ring-aph-blue/30" : ""
+        className={`fixed right-4 sm:right-5 group flex items-center justify-center gap-2 sm:pl-3 sm:pr-4 py-2.5 rounded-full bg-primary text-on-brand shadow-lg hover:brightness-110 active:scale-[0.97] transition w-12 h-12 sm:w-auto sm:h-auto ${
+          !hasSeenTour ? "ring-4 ring-primary/30" : ""
         }`}
         aria-label="Take a 60-second tour"
         title="Take a 60-second tour"

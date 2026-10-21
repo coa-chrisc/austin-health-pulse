@@ -1,4 +1,4 @@
-import { APH_COLORS } from "../../lib/constants";
+import { THEME, fontSize } from "../../lib/theme";
 import { FACTOR_ICONS, type FactorBreakdown } from "../../lib/lifespanModel";
 
 interface FactorWaterfallProps {
@@ -21,11 +21,11 @@ export default function FactorWaterfall({
   const sorted = [...factors].sort((a, b) => b.delta - a.delta);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-aph-light-gray/30 p-5 md:p-6">
-      <h4 className="text-base font-semibold text-aph-dark-blue mb-1">
+    <div className="bg-surface rounded-panel shadow-sm border border-line/30 p-5 md:p-6">
+      <h4 className="text-base font-semibold text-ink mb-1">
         How each factor changes your estimate
       </h4>
-      <p className="text-xs text-aph-dark-gray mb-4">
+      <p className="text-xs text-muted mb-4">
         Years gained or lost vs. an average person of your age. Bars left of
         center reduce the estimate; bars to the right add to it.
       </p>
@@ -36,17 +36,17 @@ export default function FactorWaterfall({
           const isPositive = f.delta > 0;
           const isZero = Math.abs(f.delta) < 0.05;
           const color = isPositive
-            ? APH_COLORS.green
+            ? THEME.colors.positiveFill
             : isZero
-              ? APH_COLORS.lightGray
-              : APH_COLORS.red;
+              ? THEME.colors.noData
+              : THEME.colors.negative;
           return (
             <div key={f.key}>
               <div className="flex items-center justify-between mb-1">
-                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-aph-dark-blue">
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-ink">
                   <span
-                    className="material-symbols-outlined text-aph-blue"
-                    style={{ fontSize: "18px" }}
+                    className="material-symbols-outlined text-primary"
+                    style={{ fontSize: fontSize("lg") }}
                   >
                     {FACTOR_ICONS[f.key]}
                   </span>
@@ -61,10 +61,10 @@ export default function FactorWaterfall({
                     : `${isPositive ? "+" : "−"}${Math.abs(f.delta).toFixed(1)} yrs`}
                 </span>
               </div>
-              <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div className="relative h-3 bg-subtle rounded-full overflow-hidden">
                 {/* Center axis */}
                 <div
-                  className="absolute top-0 bottom-0 w-px bg-aph-dark-gray/40"
+                  className="absolute top-0 bottom-0 w-px bg-muted/40"
                   style={{ left: "50%" }}
                 />
                 {/* Bar */}
@@ -87,23 +87,23 @@ export default function FactorWaterfall({
         })}
       </div>
 
-      <div className="mt-5 pt-4 border-t border-aph-light-gray/40 grid grid-cols-3 gap-3 text-center">
+      <div className="mt-5 pt-4 border-t border-line/40 grid grid-cols-3 gap-3 text-center">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-aph-dark-gray">
+          <p className="text-3xs font-semibold uppercase tracking-wider text-muted">
             Average for your age
           </p>
-          <p className="text-lg font-bold text-aph-dark-blue tabular-nums">
+          <p className="text-lg font-bold text-ink tabular-nums">
             {baseline.toFixed(1)}
           </p>
         </div>
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-aph-dark-gray">
+          <p className="text-3xs font-semibold uppercase tracking-wider text-muted">
             Net adjustment
           </p>
           <p
             className="text-lg font-bold tabular-nums"
             style={{
-              color: total - baseline >= 0 ? APH_COLORS.green : APH_COLORS.red,
+              color: total - baseline >= 0 ? THEME.colors.positiveFill : THEME.colors.negative,
             }}
           >
             {total - baseline >= 0 ? "+" : "−"}
@@ -111,10 +111,10 @@ export default function FactorWaterfall({
           </p>
         </div>
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-aph-dark-gray">
+          <p className="text-3xs font-semibold uppercase tracking-wider text-muted">
             Your estimate
           </p>
-          <p className="text-lg font-bold text-aph-dark-blue tabular-nums">
+          <p className="text-lg font-bold text-ink tabular-nums">
             {total.toFixed(1)}
           </p>
         </div>

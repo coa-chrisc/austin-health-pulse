@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 import { useHealthData } from "../../hooks/useHealthData";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME, FONT_FAMILY, fontSize } from "../../lib/theme";
 import type { IndicatorKey } from "../../types/health";
 import { INDICATOR_HIGHER_IS_BETTER } from "../../types/health";
 
@@ -72,29 +72,29 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
   });
 
   return (
-    <div className="w-full bg-white rounded-xl shadow-sm p-6">
-      <h3 className="text-lg font-semibold text-aph-dark-blue mb-4">
+    <div className="w-full bg-surface rounded-card shadow-sm p-6">
+      <h3 className="text-lg font-semibold text-ink mb-4">
         Health Profile Comparison
       </h3>
-      <p className="text-sm text-aph-dark-gray mb-4">
+      <p className="text-sm text-muted mb-4">
         Each indicator is scaled from 0 to 100 across all ZIP codes. A higher score always means a better outcome, and a larger shape means better outcomes overall.
       </p>
       <div className="w-full" style={{ height: "min(380px, 60vw)" }}>
         <ResponsiveContainer width="100%" height="100%">
           <RechartsRadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
-            <PolarGrid stroke={APH_COLORS.lightGray} />
+            <PolarGrid stroke={THEME.colors.line} />
             <PolarAngleAxis
               dataKey="indicator"
               tick={{
-                fontSize: 11,
-                fill: APH_COLORS.darkBlue,
-                fontFamily: "Geist, sans-serif",
+                fontSize: fontSize("2xs"),
+                fill: THEME.colors.ink,
+                fontFamily: FONT_FAMILY,
               }}
             />
             <PolarRadiusAxis
               angle={90}
               domain={[0, 100]}
-              tick={{ fontSize: 10, fill: APH_COLORS.darkGray }}
+              tick={{ fontSize: fontSize("3xs"), fill: THEME.colors.muted }}
               tickCount={5}
             />
             {zctas.map((zcta, index) => (
@@ -111,11 +111,11 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
             ))}
             <Tooltip
               contentStyle={{
-                backgroundColor: "white",
-                border: `1px solid ${APH_COLORS.lightGray}`,
+                backgroundColor: THEME.colors.surface,
+                border: `1px solid ${THEME.colors.line}`,
                 borderRadius: "8px",
-                fontFamily: "Geist, sans-serif",
-                fontSize: "13px",
+                fontFamily: FONT_FAMILY,
+                fontSize: fontSize("sm"),
               }}
               formatter={(value: unknown) =>
                 value != null ? `${value}/100` : "N/A"
@@ -123,9 +123,9 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
             />
             <Legend
               wrapperStyle={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "13px",
-                color: APH_COLORS.darkBlue,
+                fontFamily: FONT_FAMILY,
+                fontSize: fontSize("sm"),
+                color: THEME.colors.ink,
               }}
             />
           </RechartsRadarChart>

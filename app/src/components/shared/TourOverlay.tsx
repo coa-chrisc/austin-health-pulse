@@ -67,43 +67,43 @@ export default function TourOverlay({ onClose }: TourOverlayProps) {
       aria-label="60-second tour"
     >
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-scrim/60 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-7">
+      <div className="relative bg-surface rounded-panel shadow-2xl max-w-md w-full p-6 md:p-7">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center hover:bg-aph-light-gray/30 transition"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center hover:bg-line/30 transition"
           aria-label="Close tour"
         >
-          <span className="material-symbols-outlined text-aph-dark-gray text-xl">
+          <span className="material-symbols-outlined text-muted text-xl">
             close
           </span>
         </button>
 
         <div className="flex items-center gap-2 mb-4">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-aph-blue">
+          <span className="text-2xs font-bold uppercase tracking-widest text-primary">
             60-second tour
           </span>
-          <span className="text-[11px] text-aph-dark-gray">·</span>
-          <span className="text-[11px] font-semibold text-aph-dark-gray">
+          <span className="text-2xs text-muted">·</span>
+          <span className="text-2xs font-semibold text-muted">
             Step {step + 1} of {STEPS.length}
           </span>
         </div>
 
         <div className="flex items-start gap-4 mb-5">
-          <div className="w-12 h-12 rounded-xl bg-aph-blue/10 flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-aph-blue text-2xl">
+          <div className="w-12 h-12 rounded-card bg-primary/10 flex items-center justify-center shrink-0">
+            <span className="material-symbols-outlined text-primary text-2xl">
               {current.icon}
             </span>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-bold text-aph-dark-blue leading-tight mb-2">
+            <h3 className="text-lg font-bold text-ink leading-tight mb-2">
               {current.title}
             </h3>
-            <p className="text-sm text-aph-dark-gray leading-relaxed">
+            <p className="text-sm text-muted leading-relaxed">
               {current.body}
             </p>
           </div>
@@ -117,8 +117,8 @@ export default function TourOverlay({ onClose }: TourOverlayProps) {
               onClick={() => setStep(i)}
               className={`h-2 rounded-full transition-all ${
                 i === step
-                  ? "bg-aph-blue w-6"
-                  : "bg-aph-light-gray w-2 hover:bg-aph-blue/40"
+                  ? "bg-primary w-6"
+                  : "bg-line w-2 hover:bg-primary/40"
               }`}
               aria-label={`Go to step ${i + 1}`}
             />
@@ -130,21 +130,21 @@ export default function TourOverlay({ onClose }: TourOverlayProps) {
           <button
             onClick={() => setStep((s) => Math.max(0, s - 1))}
             disabled={step === 0}
-            className="px-4 py-2 text-sm font-semibold text-aph-dark-gray disabled:opacity-30 hover:text-aph-dark-blue transition disabled:cursor-not-allowed"
+            className="px-4 py-2 text-sm font-semibold text-muted disabled:opacity-30 hover:text-ink transition disabled:cursor-not-allowed"
           >
             Back
           </button>
           {isLast ? (
             <button
               onClick={onClose}
-              className="px-5 py-2 rounded-lg bg-aph-green text-white text-sm font-semibold hover:brightness-110 active:scale-[0.97] transition"
+              className="px-5 py-2 rounded-control bg-accent text-on-brand text-sm font-semibold hover:brightness-110 active:scale-[0.97] transition"
             >
               Start exploring
             </button>
           ) : (
             <button
               onClick={() => setStep((s) => Math.min(STEPS.length - 1, s + 1))}
-              className="px-5 py-2 rounded-lg bg-aph-blue text-white text-sm font-semibold hover:brightness-110 active:scale-[0.97] transition flex items-center gap-1"
+              className="px-5 py-2 rounded-control bg-primary text-on-brand text-sm font-semibold hover:brightness-110 active:scale-[0.97] transition flex items-center gap-1"
             >
               Next
               <span className="material-symbols-outlined text-base">

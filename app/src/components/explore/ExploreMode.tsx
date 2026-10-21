@@ -19,10 +19,10 @@ export default function ExploreMode() {
 
   if (loading) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-aph-white">
+      <div className="flex-1 flex items-center justify-center bg-page">
         <div className="text-center">
-          <div className="w-10 h-10 border-4 border-aph-blue border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-aph-dark-blue font-semibold text-sm">
+          <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-ink font-semibold text-sm">
             Loading map data…
           </p>
         </div>
@@ -32,8 +32,8 @@ export default function ExploreMode() {
 
   if (error) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-aph-white">
-        <p className="text-aph-red">{error}</p>
+      <div className="flex-1 flex items-center justify-center bg-page">
+        <p className="text-negative">{error}</p>
       </div>
     );
   }

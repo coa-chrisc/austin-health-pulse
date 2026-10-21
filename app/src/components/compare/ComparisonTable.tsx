@@ -1,5 +1,5 @@
 import { useHealthData } from "../../hooks/useHealthData";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME, withAlpha } from "../../lib/theme";
 import { isIndicatorAvailable } from "../../lib/indicators";
 import type { IndicatorKey } from "../../types/health";
 import {
@@ -64,14 +64,14 @@ export default function ComparisonTable({
   );
 
   return (
-    <div className="w-full bg-white rounded-xl shadow-sm p-4 sm:p-6 overflow-x-auto">
-      <h3 className="text-lg font-semibold text-aph-dark-blue mb-4">
+    <div className="w-full bg-surface rounded-card shadow-sm p-4 sm:p-6 overflow-x-auto">
+      <h3 className="text-lg font-semibold text-ink mb-4">
         Side-by-Side Comparison
       </h3>
       <table className="w-full text-sm font-geist min-w-[400px]">
         <thead>
-          <tr className="border-b-2 border-aph-dark-blue/20">
-            <th className="text-left py-3 px-2 sm:px-4 text-aph-dark-blue font-semibold">
+          <tr className="border-b-2 border-ink/20">
+            <th className="text-left py-3 px-2 sm:px-4 text-ink font-semibold">
               Indicator
             </th>
             {zctas.map((zcta, index) => (
@@ -91,7 +91,7 @@ export default function ComparisonTable({
                 </span>
               </th>
             ))}
-            <th className="text-center py-3 px-2 sm:px-4 text-aph-dark-blue font-semibold whitespace-nowrap">
+            <th className="text-center py-3 px-2 sm:px-4 text-ink font-semibold whitespace-nowrap">
               Area Average
             </th>
           </tr>
@@ -106,9 +106,9 @@ export default function ComparisonTable({
             return (
               <tr
                 key={key}
-                className="border-b border-aph-light-gray/40 hover:bg-aph-light-blue/20 transition-colors"
+                className="border-b border-line/40 hover:bg-primary-soft/20 transition-colors"
               >
-                <td className="py-3 px-2 sm:px-4 text-aph-dark-blue font-medium whitespace-nowrap">
+                <td className="py-3 px-2 sm:px-4 text-ink font-medium whitespace-nowrap">
                   {INDICATOR_LABELS[key]}
                 </td>
                 {zctas.map((zcta, index) => {
@@ -117,16 +117,16 @@ export default function ComparisonTable({
                   const isWorst = zcta === worst;
 
                   let bgColor = "transparent";
-                  let textColor: string = APH_COLORS.darkBlue;
+                  let textColor: string = THEME.colors.ink;
 
                   if (val === null) {
-                    textColor = APH_COLORS.darkGray;
+                    textColor = THEME.colors.muted;
                   } else if (isBest) {
-                    bgColor = `${APH_COLORS.green}18`;
-                    textColor = APH_COLORS.darkGreen;
+                    bgColor = withAlpha(THEME.colors.positiveFill, 0x18 / 255);
+                    textColor = THEME.colors.positive;
                   } else if (isWorst) {
-                    bgColor = `${APH_COLORS.red}18`;
-                    textColor = APH_COLORS.red;
+                    bgColor = withAlpha(THEME.colors.negative, 0x18 / 255);
+                    textColor = THEME.colors.negative;
                   }
 
                   return (
@@ -138,12 +138,12 @@ export default function ComparisonTable({
                       {val !== null ? (
                         formatValue(val, unit)
                       ) : (
-                        <span className="text-aph-dark-gray italic">N/A</span>
+                        <span className="text-muted italic">N/A</span>
                       )}
                     </td>
                   );
                 })}
-                <td className="text-center py-3 px-2 sm:px-4 text-aph-dark-gray font-medium">
+                <td className="text-center py-3 px-2 sm:px-4 text-muted font-medium">
                   {formatValue(countyAvg[key], unit)}
                 </td>
               </tr>

@@ -22,10 +22,10 @@ export default function Slider({
   return (
     <div>
       <div className="flex items-baseline justify-between mb-1">
-        <label htmlFor={id} className="text-sm text-aph-dark-blue font-medium">
+        <label htmlFor={id} className="text-sm text-ink font-medium">
           {label}
         </label>
-        <span className="text-aph-dark-blue font-bold text-base tabular-nums">
+        <span className="text-ink font-bold text-base tabular-nums">
           {display}
         </span>
       </div>
@@ -37,7 +37,7 @@ export default function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-aph-blue"
+        className="w-full accent-primary"
       />
     </div>
   );

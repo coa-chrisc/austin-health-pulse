@@ -7,7 +7,7 @@ import {
 import { useHealthData } from "../../hooks/useHealthData";
 import { formatValue, formatDifference } from "../../lib/formatters";
 import { getComparisonColor } from "../../lib/colorScales";
-import { APH_COLORS } from "../../lib/constants";
+import { THEME } from "../../lib/theme";
 import { getDataQualityNote } from "../../lib/dataQuality";
 import { isIndicatorAvailable } from "../../lib/indicators";
 import ServiceGuideZipLink from "../shared/ServiceGuideZipLink";
@@ -38,7 +38,7 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
   if (!data) {
     return (
       <Card zcta={zcta} onClose={onClose}>
-        <p className="text-sm text-aph-dark-gray py-4">
+        <p className="text-sm text-muted py-4">
           No health data available for this area.
         </p>
       </Card>
@@ -55,11 +55,11 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
   return (
     <Card zcta={zcta} onClose={onClose}>
       {/* Life Expectancy hero stat */}
-      <div className="bg-aph-light-blue/40 rounded-lg p-4 mb-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-wide text-aph-dark-gray mb-1">
+      <div className="bg-primary-soft/40 rounded-control p-4 mb-4 text-center">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted mb-1">
           Life Expectancy at Birth
         </p>
-        <p className="text-3xl font-bold text-aph-dark-blue">
+        <p className="text-3xl font-bold text-ink">
           {formatValue(lifeExpVal, "years")}
         </p>
         {lifeExpVal !== null && countyAvg && (
@@ -84,7 +84,7 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
       </div>
 
       {qualityNote && (
-        <p className="text-xs text-aph-dark-gray bg-aph-light-gray/20 rounded-lg px-3 py-2 mb-4">
+        <p className="text-xs text-muted bg-line/20 rounded-control px-3 py-2 mb-4">
           {qualityNote}
         </p>
       )}
@@ -108,19 +108,19 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
           const barColor =
             value !== null && avg !== null
               ? getComparisonColor(value, avg, higherIsBetter)
-              : APH_COLORS.lightGray;
+              : THEME.colors.noData;
 
           return (
             <div key={key}>
               <div className="flex justify-between items-baseline mb-1">
-                <span className="text-xs font-medium text-aph-dark-blue">
+                <span className="text-xs font-medium text-ink">
                   {label}
                 </span>
-                <span className="text-xs font-semibold text-aph-dark-gray">
+                <span className="text-xs font-semibold text-muted">
                   {formatValue(value, unit)}
                 </span>
               </div>
-              <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div className="relative h-3 bg-subtle rounded-full overflow-hidden">
                 {/* Value bar */}
                 <div
                   className="absolute inset-y-0 left-0 rounded-full transition-all duration-300"
@@ -135,14 +135,14 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
                     className="absolute top-[-2px] bottom-[-2px] w-0.5"
                     style={{
                       left: `${avgPct}%`,
-                      backgroundColor: APH_COLORS.darkBlue,
+                      backgroundColor: THEME.colors.ink,
                     }}
                     title={`Area average: ${formatValue(avg, unit)}`}
                   />
                 )}
               </div>
               {value !== null && avg !== null && (
-                <p className="text-[10px] mt-0.5" style={{ color: barColor }}>
+                <p className="text-3xs mt-0.5" style={{ color: barColor }}>
                   {formatDifference(value, avg, unit, higherIsBetter)}
                 </p>
               )}
@@ -152,12 +152,12 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
       </div>
 
       {/* Area average legend hint */}
-      <div className="flex items-center gap-2 mt-4 pt-3 border-t border-aph-light-gray/40">
+      <div className="flex items-center gap-2 mt-4 pt-3 border-t border-line/40">
         <div
           className="w-0.5 h-4"
-          style={{ backgroundColor: APH_COLORS.darkBlue }}
+          style={{ backgroundColor: THEME.colors.ink }}
         />
-        <span className="text-[10px] text-aph-dark-gray">Area average</span>
+        <span className="text-3xs text-muted">Area average</span>
       </div>
 
       <ServiceGuideZipLink zip={zcta} className="mt-4 w-full justify-center" />
@@ -177,7 +177,7 @@ function Card({ zcta, onClose, children }: CardProps) {
     <>
       {/* Backdrop on mobile */}
       <div
-        className="fixed inset-0 bg-black/20 md:hidden"
+        className="fixed inset-0 bg-scrim/20 md:hidden"
         style={{ zIndex: 1000 }}
         onClick={onClose}
       />
@@ -190,23 +190,23 @@ function Card({ zcta, onClose, children }: CardProps) {
           max-h-[70vh] md:max-h-[calc(100%-2rem)]
           md:bottom-auto md:left-auto md:top-4 md:right-4
           md:w-80
-          bg-white rounded-t-2xl md:rounded-xl shadow-2xl
+          bg-surface rounded-t-panel md:rounded-card shadow-2xl
           overflow-y-auto
           animate-slide-up md:animate-slide-left
         "
         style={{ zIndex: 1001 }}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-white px-5 py-4 flex items-center justify-between border-b border-aph-light-gray/30 z-10">
+        <div className="sticky top-0 bg-surface px-5 py-4 flex items-center justify-between border-b border-line/30 z-10">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-aph-dark-gray">
+            <p className="text-2xs font-semibold uppercase tracking-wide text-muted">
               ZIP Code Area
             </p>
-            <h2 className="text-xl font-bold text-aph-dark-blue">{zcta}</h2>
+            <h2 className="text-xl font-bold text-ink">{zcta}</h2>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-aph-light-gray/30 transition-colors text-aph-dark-gray"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-line/30 transition-colors text-muted"
             aria-label="Close detail panel"
           >
             <span className="material-symbols-outlined text-xl">close</span>
