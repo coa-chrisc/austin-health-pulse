@@ -11,10 +11,6 @@
 </p>
 
 <p align="center">
-  <sub>The live demo goes up once GitHub Pages is enabled on this repository.</sub>
-</p>
-
-<p align="center">
   An interactive public health data tool that lets Austin residents and policymakers explore health outcomes across <strong>63 ZIP codes</strong> in Greater Austin (Travis County and neighboring areas; see <a href="#known-limitations">known limitations</a>). City settings live in a configuration file, so another city can be added without code changes.
 </p>
 
@@ -50,7 +46,7 @@ Hardening work done in preparation for a grant review. Everything below is in th
 
 ## Adapting for another city
 
-Works today for Texas counties; other states need life-expectancy files first (see [Phase 2](#phase-2-roadmap-proposed-grant-funded)).
+Works today for Texas counties; other states need life-expectancy files first (see [Phase 2](#phase-2-roadmap-proposed-grant-funded)). To change the name, colors, logo, fonts, and About text, see the rebranding guide: [`docs/CUSTOMIZING.md`](docs/CUSTOMIZING.md).
 
 ```bash
 cp config/presets/partner-city-demo.json config/presets/my-city.json
@@ -89,6 +85,21 @@ Starting point today: FIPS-driven generation already works for Texas counties wh
 - The pipeline supports Texas only; crime data is Austin-only.
 
 ---
+
+## Screenshots
+
+| | |
+| --- | --- |
+| ![Check Your Neighborhood with ZIP 78721](docs/screenshots/02-neighborhood-zip.png) | ![Health indicator gauges for ZIP 78721](docs/screenshots/02b-zip-indicators.png) |
+| Check Your Neighborhood | Health indicators |
+| ![Explore the Map: life expectancy by ZIP code](docs/screenshots/01-map.png) | ![Compare ZIP codes 78721, 78732, and 78741](docs/screenshots/05-compare-zips.png) |
+| Explore the Map | Compare ZIP Codes |
+| ![Neighborhood Equity Scenario Simulator](docs/screenshots/06-scenario-simulator.png) | ![Lifespan estimator (optional build flag)](docs/screenshots/03-lifespan-estimator.png) |
+| Equity scenario simulator | Lifespan estimator (optional) |
+| ![Service Guide handoff from the estimator](docs/screenshots/04-service-handoff.png) | ![The partner-city demo: Harris County data with its own branding](docs/screenshots/07-partner-city.png) |
+| Service Guide handoff | Same app, partner-city config |
+
+Regenerate them with `npm run screenshots` from `app/` (needs Google Chrome; see [`app/scripts/screenshots.mjs`](app/scripts/screenshots.mjs)).
 
 ## Features
 
@@ -142,7 +153,7 @@ When the showcase starts, every view remounts and the app returns to the home sc
 
 ### About panel — methodology + build story
 
-A modal (centered on desktop, full-screen sheet on mobile) covers data sources, methodology, limitations, a per-session **build timeline**, and an **agency-cost comparison** that contextualizes the development effort.
+A modal (centered on desktop, full-screen sheet on mobile) covers data sources, methodology, and limitations. The Austin config also turns on (`showBuildStory`) a per-session **build timeline** and an **agency-cost comparison** that puts the development effort in context; other agencies' configs leave it off.
 
 ---
 
@@ -272,7 +283,7 @@ Sources, pipeline order, and known data gaps are in [`data/README.md`](data/READ
 ```
 ├── app/
 │   ├── plugins/               # Vite plugin serving virtual:city-config
-│   ├── scripts/               # validate-data.mjs
+│   ├── scripts/               # validate-data.mjs, screenshots.mjs
 │   ├── src/
 │   │   ├── components/        # neighborhood, scenario, lifespan (optional), explore,
 │   │   │                      # compare, layout, shared, showcase
@@ -284,10 +295,12 @@ Sources, pipeline order, and known data gaps are in [`data/README.md`](data/READ
 ├── config/
 │   ├── city.config.json       # Active city config
 │   ├── presets/               # austin-travis-tx, partner-city-demo (Harris TX)
+│   ├── brand/<id>/            # Logo files referenced by brand.logoUrl
 │   ├── data/<id>/             # zip-indicators, boundaries, county-summary per city
 │   └── *.schema.json
 ├── data/raw/                  # USALEEP source CSVs (see data/README.md)
 ├── deploy/                    # nginx.conf + AWS / Azure / GCP blueprints
+├── docs/                      # CUSTOMIZING.md (rebranding guide), screenshots/
 ├── scripts/                   # Python data pipeline
 ├── Dockerfile, docker-compose.yml
 ├── .github/workflows/         # CI + GitHub Pages deployment

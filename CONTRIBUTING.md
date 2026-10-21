@@ -31,6 +31,7 @@ npm run build
 - Describe what changed and how you checked it. For UI changes, include a screenshot.
 - Changes to the lifespan model math (`app/src/lib/lifespanModel.ts`) need a Vitest case and a citation for any new effect size.
 - Add new data files through the `data` block of the city config, not by fetching a hardcoded path. Keep `HashRouter`, which GitHub Pages requires.
-- Use the Austin Public Health palette (`APH_COLORS` / `aph-*` Tailwind utilities) rather than arbitrary colors.
+- Use the brand color tokens (`APH_COLORS` / `aph-*` Tailwind utilities, filled from the city config) rather than hex values, so other agencies can rebrand from config alone. See [`docs/CUSTOMIZING.md`](docs/CUSTOMIZING.md).
+- If you change the UI, regenerate the README screenshots with `npm run screenshots` from `app/`.
 
 By contributing, you agree that your contributions are licensed under the [Apache License 2.0](LICENSE).

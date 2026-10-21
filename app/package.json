@@ -19,7 +19,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "validate:data": "node scripts/validate-data.mjs"
+    "validate:data": "node scripts/validate-data.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "dependencies": {
     "@fontsource/geist": "^5.3.0",
