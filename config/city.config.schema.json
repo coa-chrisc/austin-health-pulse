@@ -30,7 +30,7 @@
       "required": ["name", "cityName", "state"],
       "additionalProperties": false,
       "properties": {
-        "name": { "type": "string", "minLength": 1, "description": "Geography the data covers, e.g. 'Travis County'." },
+        "name": { "type": "string", "minLength": 1, "description": "Name for the area the ZIP set covers, used as a proper noun in UI copy ('across X', 'the X average', 'X ZIPs'), e.g. 'Greater Austin' or 'Harris County'. It should describe the ZIP set accurately: the averages are taken across these ZIPs." },
         "cityName": { "type": "string", "minLength": 1 },
         "state": { "type": "string", "pattern": "^[A-Z]{2}$" }
       }

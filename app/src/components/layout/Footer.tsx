@@ -1,5 +1,8 @@
 import { cityConfig } from "../../lib/cityConfig";
-import { ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
+import {
+  ENABLE_PERSONAL_CALCULATOR,
+  SERVICE_GUIDE_URL,
+} from "../../lib/constants";
 
 export default function Footer() {
   const sources = [...new Set(cityConfig.dataSources.map((d) => d.source))].join(
@@ -43,11 +46,20 @@ export default function Footer() {
             Methodology &amp; Public Data
           </p>
           <p className="max-w-3xl">
-            Built exclusively on aggregate, de-identified public datasets (
-            {sources}). No personal or individual health information is
-            collected, processed, or stored.
-            {ENABLE_PERSONAL_CALCULATOR &&
-              " The optional personal lifespan estimator runs entirely in your browser; its inputs are never sent or stored."}
+            Neighborhood figures come only from aggregate, de-identified public
+            datasets: {sources}.
+          </p>
+          <p className="max-w-3xl mt-1">
+            What you enter here (a ZIP code, your age, your location
+            {ENABLE_PERSONAL_CALCULATOR && ", or your lifespan estimator answers"}
+            ) is used only in your browser. It is not sent anywhere or saved.
+            {SERVICE_GUIDE_URL &&
+              (ENABLE_PERSONAL_CALCULATOR
+                ? " If you open a Service Guide link, the link includes the ZIP code or the general service topics, never your answers."
+                : " If you open a Service Guide link, the link includes the ZIP code.")}{" "}
+            The map loads street tiles from OpenStreetMap. This site has no
+            accounts, cookies, or analytics; it only remembers, on your device,
+            whether you have seen the tour.
           </p>
         </div>
       </div>

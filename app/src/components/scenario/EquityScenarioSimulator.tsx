@@ -215,7 +215,10 @@ export default function EquityScenarioSimulator({
           percentage point, R&sup2; = {fit.r2.toFixed(2)}, n = {fit.n}. This is
           an association across {cityConfig.region.name} ZIPs in public data,
           not a forecast of what an intervention would do. Levers aren&rsquo;t
-          combined because these rates move together across ZIPs.
+          combined because these rates move together across ZIPs. It is not
+          adjusted for age: ZIPs with younger residents, such as campus areas,
+          tend to have both lower chronic-disease rates and different life
+          expectancy, which can inflate or mask the association.
         </p>
       </>
     );
