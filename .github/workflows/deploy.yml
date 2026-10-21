@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -38,12 +36,20 @@ jobs:
         working-directory: app
         run: npm test
 
+      - name: Validate city config and data
+        working-directory: app
+        run: npm run validate:data -- --all
+
       - name: Build
         working-directory: app
         env:
           # Optional repo variable (Settings > Secrets and variables > Actions >
-          # Variables). When unset the service-guide handoff link is hidden.
+          # Variables). Overrides serviceGuideUrl in the city config; when both
+          # are unset the Service Guide links are hidden.
           VITE_SERVICE_GUIDE_URL: ${{ vars.SERVICE_GUIDE_URL }}
+          # Individual lifespan calculator. On by default for the live demo; set the
+          # repo variable ENABLE_PERSONAL_CALCULATOR=false to turn it off.
+          VITE_ENABLE_PERSONAL_CALCULATOR: ${{ vars.ENABLE_PERSONAL_CALCULATOR || 'true' }}
         run: npm run build
 
       - name: Upload artifact
@@ -52,6 +58,9 @@ jobs:
           path: app/dist
 
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

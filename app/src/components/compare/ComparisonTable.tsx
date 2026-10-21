@@ -1,5 +1,6 @@
 import { useHealthData } from "../../hooks/useHealthData";
 import { APH_COLORS } from "../../lib/constants";
+import { isIndicatorAvailable } from "../../lib/indicators";
 import type { IndicatorKey } from "../../types/health";
 import {
   INDICATOR_LABELS,
@@ -53,11 +54,14 @@ export default function ComparisonTable({
   zctas,
   colors,
 }: ComparisonTableProps) {
-  const { healthData } = useHealthData();
+  const { healthData, summary } = useHealthData();
 
   if (!healthData || zctas.length === 0) return null;
 
   const countyAvg = healthData.meta.countyAverage;
+  const indicators = INDICATORS.filter((key) =>
+    isIndicatorAvailable(summary, key),
+  );
 
   return (
     <div className="w-full bg-white rounded-xl shadow-sm p-4 sm:p-6 overflow-x-auto">
@@ -88,12 +92,12 @@ export default function ComparisonTable({
               </th>
             ))}
             <th className="text-center py-3 px-2 sm:px-4 text-aph-dark-blue font-semibold whitespace-nowrap">
-              County Avg
+              Area Average
             </th>
           </tr>
         </thead>
         <tbody>
-          {INDICATORS.map((key) => {
+          {indicators.map((key) => {
             const unit = INDICATOR_UNITS[key];
             const higherIsBetter = INDICATOR_HIGHER_IS_BETTER[key];
             const values = zctas.map((z) => healthData.zctas[z]?.[key] ?? null);

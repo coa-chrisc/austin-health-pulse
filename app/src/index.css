@@ -10,7 +10,7 @@
   /* Supporting Palette */
   --color-aph-dark-blue: #22254E;
   --color-aph-dark-green: #005027;
-  --color-aph-complaint-green: #008743;
+  --color-aph-compliant-green: #008743;
   --color-aph-light-blue: #dcf2fd;
   --color-aph-light-green: #dff0e3;
 
@@ -24,8 +24,36 @@
   --color-aph-light-gray: #C6C5C4;
   --color-aph-dark-gray: #636262;
 
-  /* Typography */
+  /* Typography. To swap the font: install an @fontsource package, import its
+     weights in src/main.tsx, and change the family name below. */
   --font-geist: 'Geist', 'Helvetica', 'Aptos', sans-serif;
+}
+
+/* Icon ligature class (previously supplied by the Google Fonts stylesheet). */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Soft brand-tinted panel background (light-blue based). */
+.brand-soft-gradient {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-aph-light-blue) 45%, white) 0%,
+    var(--color-aph-light-blue) 100%
+  );
 }
 
 body {

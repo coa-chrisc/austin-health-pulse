@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { cityConfig } from "../../lib/cityConfig";
 
 interface AboutDrawerProps {
   isOpen: boolean;
@@ -95,7 +96,7 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
           ref={drawerRef}
           role="dialog"
           aria-modal="true"
-          aria-label="About Austin Health Pulse"
+          aria-label={`About ${cityConfig.appName}`}
           className={`bg-white shadow-2xl flex flex-col w-full md:max-w-2xl h-[92vh] md:h-auto md:max-h-[85vh] rounded-t-2xl md:rounded-2xl overflow-hidden transition-all duration-300 ease-out ${
             isOpen
               ? "pointer-events-auto translate-y-0 md:scale-100 opacity-100"
@@ -127,43 +128,23 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
           {/* Content */}
           <div className="overflow-y-auto flex-1 px-5 md:px-6 py-6 overscroll-contain">
             {/* About */}
-            <Section title="About Austin Health Pulse">
+            <Section title={`About ${cityConfig.appName}`}>
               <p>
-                Austin Health Pulse is an interactive data tool that allows
-                residents and policymakers to explore health indicators across
-                Travis County neighborhoods. Built by Austin Public Health, it
+                {cityConfig.appName} is an interactive data tool that allows
+                residents and policymakers to explore health indicators across{" "}
+                {cityConfig.region.name} neighborhoods. Built by{" "}
+                {cityConfig.agency.name}, it
                 combines life expectancy, chronic disease, and socioeconomic
-                data to reveal health patterns at the ZIP code level.
+                data to show health patterns at the ZIP code level.
               </p>
             </Section>
 
             {/* Data Sources */}
             <Section title="Data Sources">
-              <DataSourceItem
-                label="Life Expectancy"
-                source="CDC U.S. Small-Area Life Expectancy Estimates Project (USALEEP)"
-                period="2010-2015"
-              />
-              <DataSourceItem
-                label="Poverty & Insurance"
-                source="U.S. Census Bureau, American Community Survey 5-Year Estimates"
-                period="2022"
-              />
-              <DataSourceItem
-                label="Chronic Disease"
-                source="CDC PLACES: Local Data for Better Health"
-                period="2023"
-              />
-              <DataSourceItem
-                label="Asthma"
-                source="CDC PLACES: Local Data for Better Health (current asthma)"
-                period="2023"
-              />
-              <DataSourceItem
-                label="Violent Crime"
-                source="City of Austin Open Data Portal, APD Crime Reports (UCR Part 1 violent offenses)"
-                period="Rolling 12 months"
-              />
+              {cityConfig.dataSources.map((d) => (
+                <DataSourceItem key={d.label} label={d.label} source={d.source} />
+              ))}
+              <p className="text-xs">Data last updated {cityConfig.dataAsOf}. Each source covers its own time period.</p>
             </Section>
 
             {/* Methodology */}
@@ -185,12 +166,18 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 from the American Community Survey and represent 5-year period
                 estimates at the ZCTA level.
               </MethodologyItem>
+              <MethodologyItem>
+                The Neighborhood Equity Scenario Simulator uses one-variable
+                linear fits of ZIP-level life expectancy against a single
+                indicator across {cityConfig.region.name}. Results describe
+                associations across ZIPs, not the effect of any intervention.
+              </MethodologyItem>
             </Section>
 
             {/* Limitations */}
             <Section title="Limitations">
               <LimitationItem>
-                Life expectancy data is from 2010-2015 and may not reflect
+                Life expectancy data is from 2010–2015 and may not reflect
                 current conditions. More recent estimates are not yet available
                 at this geographic level.
               </LimitationItem>
@@ -200,111 +187,112 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 not captured here.
               </LimitationItem>
               <LimitationItem>
-                ZIP code level data may mask significant variation within
+                Data at the ZIP code level may hide significant variation within
                 neighborhoods. Health outcomes can differ substantially even
                 within a single ZIP code.
               </LimitationItem>
               <LimitationItem>
-                Model-based estimates from CDC PLACES have associated margins of
-                error and should be interpreted with appropriate caution.
+                CDC PLACES figures are model-based estimates with margins of
+                error. Use them with caution.
               </LimitationItem>
             </Section>
 
-            {/* How this was built */}
-            <Section title="How This Was Built">
-              <p>
-                Built by APH IT staff using modern development tools such as
-                Claude Code and Copilot, across three focused sessions of about
-                four hours each.
-              </p>
+            {cityConfig.showBuildStory && (
+              <Section title="How This Was Built">
+                <p>
+                  Built by APH IT staff using modern development tools such as
+                  Claude Code and Copilot, across three focused sessions of about
+                  four hours each.
+                </p>
 
-              {/* Timeline */}
-              <div className="mt-4 space-y-3">
-                <TimelineEntry
-                  icon="database"
-                  label="Session 1"
-                  title="Data foundation"
-                  detail="Pulled USALEEP, ACS, and CDC PLACES data; built the Python pipeline that joins census tracts to ZIP codes; rendered the first interactive Travis County map."
-                />
-                <TimelineEntry
-                  icon="dashboard"
-                  label="Session 2"
-                  title="Three audience modes"
-                  detail="Added the policy-maker explorer, neighborhood lookup, and indicator gauges; wired up geolocation and ZIP search; computed the county comparisons."
-                />
-                <TimelineEntry
-                  icon="auto_awesome"
-                  label="Session 3"
-                  title="Calculators & demo polish"
-                  detail="Added the smoking-impact and generations calculators; built the kiosk showcase mode; tightened mobile responsiveness; added this About panel."
-                />
-              </div>
+                {/* Timeline */}
+                <div className="mt-4 space-y-3">
+                  <TimelineEntry
+                    icon="database"
+                    label="Session 1"
+                    title="Data foundation"
+                    detail="Pulled USALEEP, ACS, and CDC PLACES data; built the Python pipeline that joins census tracts to ZIP codes; rendered the first interactive Travis County map."
+                  />
+                  <TimelineEntry
+                    icon="dashboard"
+                    label="Session 2"
+                    title="Three audience modes"
+                    detail="Added the policy-maker explorer, neighborhood lookup, and indicator gauges; wired up geolocation and ZIP search; computed the area comparisons."
+                  />
+                  <TimelineEntry
+                    icon="auto_awesome"
+                    label="Session 3"
+                    title="Calculators and demo polish"
+                    detail="Added the smoking-impact and generations calculators; built the kiosk showcase mode; tightened mobile responsiveness; added this About panel."
+                  />
+                </div>
 
-              {/* Agency comparison */}
-              <div className="mt-5 rounded-lg border border-aph-light-gray/60 overflow-hidden">
-                <div className="bg-aph-dark-blue text-white px-3 py-2">
-                  <p className="text-xs font-semibold uppercase tracking-wider">
-                    How this compares
+                {/* Agency comparison */}
+                <div className="mt-5 rounded-lg border border-aph-light-gray/60 overflow-hidden">
+                  <div className="bg-aph-dark-blue text-white px-3 py-2">
+                    <p className="text-xs font-semibold uppercase tracking-wider">
+                      How this compares
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 divide-x divide-aph-light-gray/60">
+                    <div className="p-3 bg-white">
+                      <p className="text-[10px] font-semibold text-aph-green uppercase tracking-wider mb-1">
+                        APH IT (this build)
+                      </p>
+                      <p className="text-2xl font-bold text-aph-dark-blue leading-none">
+                        ~12 hrs
+                      </p>
+                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                        3 × 4-hour sessions
+                      </p>
+                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                        Loaded staff cost:{" "}
+                        <span className="font-semibold">~$1.5K</span>
+                      </p>
+                    </div>
+                    <div className="p-3 bg-aph-white">
+                      <p className="text-[10px] font-semibold text-aph-dark-gray uppercase tracking-wider mb-1">
+                        Typical agency
+                      </p>
+                      <p className="text-2xl font-bold text-aph-dark-blue leading-none">
+                        6-8 wks
+                      </p>
+                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                        250-400 hours
+                      </p>
+                      <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
+                        Estimated cost:{" "}
+                        <span className="font-semibold">$50K-$100K</span>
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-aph-dark-gray px-3 py-2 bg-aph-white/60 border-t border-aph-light-gray/60 leading-snug">
+                    Agency estimate based on typical small-to-mid agency rates
+                    ($175-$250/hr blended) for an interactive data product with
+                    pipeline, map, three modes, and calculators.
                   </p>
                 </div>
-                <div className="grid grid-cols-2 divide-x divide-aph-light-gray/60">
-                  <div className="p-3 bg-white">
-                    <p className="text-[10px] font-semibold text-aph-green uppercase tracking-wider mb-1">
-                      APH IT (this build)
-                    </p>
-                    <p className="text-2xl font-bold text-aph-dark-blue leading-none">
-                      ~12 hrs
-                    </p>
-                    <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
-                      3 × 4-hour sessions
-                    </p>
-                    <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
-                      Loaded staff cost:{" "}
-                      <span className="font-semibold">~$1.5K</span>
-                    </p>
-                  </div>
-                  <div className="p-3 bg-aph-white">
-                    <p className="text-[10px] font-semibold text-aph-dark-gray uppercase tracking-wider mb-1">
-                      Typical agency
-                    </p>
-                    <p className="text-2xl font-bold text-aph-dark-blue leading-none">
-                      6-8 wks
-                    </p>
-                    <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
-                      250-400 hours
-                    </p>
-                    <p className="text-[11px] text-aph-dark-gray mt-1 leading-tight">
-                      Estimated cost:{" "}
-                      <span className="font-semibold">$50K-$100K</span>
-                    </p>
-                  </div>
-                </div>
-                <p className="text-[10px] text-aph-dark-gray px-3 py-2 bg-aph-white/60 border-t border-aph-light-gray/60 leading-snug">
-                  Agency estimate based on typical small-to-mid agency rates
-                  ($175-$250/hr blended) for an interactive data product with
-                  pipeline, map, three modes, and calculators.
-                </p>
-              </div>
 
-              <div className="mt-5">
-                <p className="font-semibold text-aph-dark-blue text-xs uppercase tracking-wider mb-2">
-                  A production deployment would add
-                </p>
-                <ul className="text-xs space-y-1.5 list-disc pl-4">
-                  <li>
-                    Authenticated APH-hosted environment with audit logging
-                  </li>
-                  <li>Automated data refresh as new vintages publish</li>
-                  <li>Full WCAG 2.1 AA accessibility audit and remediation</li>
-                  <li>
-                    Stakeholder review of indicator selection and methodology
-                    notes
-                  </li>
-                  <li>Spanish-language localization</li>
-                  <li>Privacy and data-governance review</li>
-                </ul>
-              </div>
-            </Section>
+                <div className="mt-5">
+                  <p className="font-semibold text-aph-dark-blue text-xs uppercase tracking-wider mb-2">
+                    A production deployment would add
+                  </p>
+                  <ul className="text-xs space-y-1.5 list-disc pl-4">
+                    <li>
+                      Authenticated APH-hosted environment with audit logging
+                    </li>
+                    <li>Automated data refresh as new vintages publish</li>
+                    <li>Full WCAG 2.1 AA accessibility audit and remediation</li>
+                    <li>
+                      Stakeholder review of indicator selection and methodology
+                      notes
+                    </li>
+                    <li>Spanish-language localization</li>
+                    <li>Privacy and data-governance review</li>
+                  </ul>
+                </div>
+              </Section>
+            )}
 
             {/* Credits */}
             <Section title="Credits" last>
@@ -316,10 +304,10 @@ export default function AboutDrawer({ isOpen, onClose }: AboutDrawerProps) {
                 </div>
                 <div>
                   <p className="font-semibold text-aph-dark-blue">
-                    Austin Public Health
+                    {cityConfig.agency.name}
                   </p>
                   <p className="text-sm text-aph-dark-gray">
-                    City of Austin, Texas
+                    {cityConfig.agency.parent}
                   </p>
                 </div>
               </div>
@@ -357,17 +345,14 @@ function Section({
 function DataSourceItem({
   label,
   source,
-  period,
 }: {
   label: string;
   source: string;
-  period: string;
 }) {
   return (
     <div className="bg-aph-white rounded-lg p-3 border border-aph-light-gray/30">
       <p className="font-semibold text-aph-dark-blue text-sm">{label}</p>
       <p className="text-xs text-aph-dark-gray mt-1">{source}</p>
-      <p className="text-xs text-aph-blue mt-0.5">Data period: {period}</p>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   HISTORICAL_LE_MAX_YEAR,
 } from "../../lib/historicalLE";
 import { APH_COLORS } from "../../lib/constants";
+import { cityConfig } from "../../lib/cityConfig";
 
 export default function ParentsCompare() {
   const { healthData } = useHealthData();
@@ -74,12 +75,12 @@ export default function ParentsCompare() {
               >
                 {parentLE.toFixed(1)}
               </p>
-              <p className="text-xs text-aph-dark-gray mt-1">years (US avg)</p>
+              <p className="text-xs text-aph-dark-gray mt-1">years (U.S. average)</p>
             </div>
             {todayLE !== null && (
               <div>
                 <p className="text-xs font-semibold text-aph-dark-gray uppercase tracking-wide mb-1">
-                  Travis County today
+                  {cityConfig.region.name} today
                 </p>
                 <p
                   className="text-3xl font-bold leading-none"
@@ -93,13 +94,12 @@ export default function ParentsCompare() {
           </div>
           {gain !== null && (
             <p className="text-sm text-aph-dark-blue mt-4 leading-relaxed">
-              Travis County residents today live about{" "}
+              Life expectancy in {cityConfig.region.name} today is about{" "}
               <span className="font-bold" style={{ color: APH_COLORS.green }}>
-                {gain >= 0 ? "+" : ""}
-                {gain.toFixed(1)} years
+                {Math.abs(gain).toFixed(1)} years
               </span>{" "}
               {gain >= 0 ? "longer" : "shorter"} than the U.S. average for
-              someone born in {birthYear}.
+              people born in {birthYear}.
             </p>
           )}
         </div>

@@ -12,6 +12,7 @@ import {
   type StressScore,
 } from "../../lib/lifespanModel";
 import type { SmokingStatus } from "../../lib/smokingDeltas";
+import Slider from "../shared/Slider";
 import FactorWaterfall from "./FactorWaterfall";
 import ServiceMatchCTA from "./ServiceMatchCTA";
 
@@ -28,8 +29,8 @@ const SMOKING_OPTIONS: { value: SmokingStatus; label: string }[] = [
 ];
 
 const DIET_LABELS: Record<DietScore, string> = {
-  1: "Mostly fast food / processed",
-  2: "Some home cooking, lots of red meat & sugar",
+  1: "Mostly fast food and processed food",
+  2: "Some home cooking, lots of red meat and sugar",
   3: "Typical American mix",
   4: "Mostly whole foods, some red meat",
   5: "Mediterranean-style: vegetables, fish, whole grains",
@@ -91,49 +92,6 @@ function Segmented<T extends string>({
           {opt.label}
         </button>
       ))}
-    </div>
-  );
-}
-
-interface SliderProps {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  step?: number;
-  display: string;
-  onChange: (v: number) => void;
-}
-function Slider({
-  label,
-  value,
-  min,
-  max,
-  step = 1,
-  display,
-  onChange,
-}: SliderProps) {
-  const id = useId();
-  return (
-    <div>
-      <div className="flex items-baseline justify-between mb-1">
-        <label htmlFor={id} className="text-sm text-aph-dark-blue font-medium">
-          {label}
-        </label>
-        <span className="text-aph-dark-blue font-bold text-base tabular-nums">
-          {display}
-        </span>
-      </div>
-      <input
-        id={id}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-aph-blue"
-      />
     </div>
   );
 }
@@ -200,8 +158,9 @@ export default function LifespanCalculator() {
         </h3>
       </div>
       <p className="text-sm text-aph-dark-gray mb-5">
-        Combines your age with six modifiable factors from large prospective
-        cohort studies. Move any control to see how it changes the estimate.
+        Combines your age with six factors you can change, based on large
+        long-term studies. Move any control to see how it changes the estimate.
+        Your answers stay in your browser.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -435,10 +394,7 @@ export default function LifespanCalculator() {
         {/* ------------------ Result column ------------------ */}
         <div className="space-y-5">
           <div
-            className="rounded-2xl p-6 text-center text-aph-dark-blue border border-aph-blue/20 shadow-sm"
-            style={{
-              background: "linear-gradient(135deg, #eef4fb 0%, #dceaf6 100%)",
-            }}
+            className="rounded-2xl p-6 text-center text-aph-dark-blue border border-aph-blue/20 shadow-sm brand-soft-gradient"
           >
             <p className="text-xs font-semibold uppercase tracking-wider text-aph-dark-blue/75">
               Estimated lifespan

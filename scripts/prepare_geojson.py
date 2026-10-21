@@ -1,14 +1,18 @@
 """
-Prepare ZCTA GeoJSON for Travis County
-=======================================
-Downloads Census cartographic boundary shapefile for ZCTAs, filters to
-Travis County ZCTAs, simplifies geometry for web mapping, and exports GeoJSON.
+Prepare ZCTA GeoJSON for a City Preset
+======================================
+Downloads Census cartographic boundary shapefile for ZCTAs, filters to the
+preset's ZCTAs (explicit `pipeline.zctas`, or derived from the county when
+null), simplifies geometry for web mapping, and exports GeoJSON.
 
 Requirements:
-    pip install geopandas requests
+    pip install geopandas requests pandas
 
-Output:
-    app/public/data/zcta_boundaries.geojson
+Output (path from the preset's `data.boundaries`, relative to config/):
+    e.g. config/data/<presetId>/boundaries.geojson
+
+Usage:
+    python scripts/prepare_geojson.py [--preset config/presets/<id>.json]
 """
 
 import os
@@ -18,11 +22,9 @@ import zipfile
 import requests
 import geopandas as gpd
 
-# ── CONFIG ────────────────────────────────────────────────────────────────────
+from pipeline_preset import load_preset, parse_preset_arg, resolve_zctas
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, "app", "public", "data")
-OUTPUT_FILE = os.path.join(OUTPUT_DIR, "zcta_boundaries.geojson")
+# ── CONFIG ────────────────────────────────────────────────────────────────────
 
 # Census cartographic boundary shapefile for ZCTAs (500k resolution)
 SHAPEFILE_URL = (
@@ -31,74 +33,6 @@ SHAPEFILE_URL = (
 
 # Geometry simplification tolerance (degrees; ~0.001 is good for web mapping)
 SIMPLIFY_TOLERANCE = 0.001
-
-# Travis County ZCTAs (from existing pipeline fallback list)
-TRAVIS_COUNTY_ZCTAS = [
-    "78610",
-    "78613",
-    "78617",
-    "78620",
-    "78621",
-    "78634",
-    "78640",
-    "78641",
-    "78642",
-    "78644",
-    "78645",
-    "78646",
-    "78652",
-    "78653",
-    "78660",
-    "78664",
-    "78669",
-    "78676",
-    "78681",
-    "78701",
-    "78702",
-    "78703",
-    "78704",
-    "78705",
-    "78712",
-    "78717",
-    "78719",
-    "78721",
-    "78722",
-    "78723",
-    "78724",
-    "78725",
-    "78726",
-    "78727",
-    "78728",
-    "78729",
-    "78730",
-    "78731",
-    "78732",
-    "78733",
-    "78734",
-    "78735",
-    "78736",
-    "78737",
-    "78738",
-    "78739",
-    "78741",
-    "78742",
-    "78744",
-    "78745",
-    "78746",
-    "78747",
-    "78748",
-    "78749",
-    "78750",
-    "78751",
-    "78752",
-    "78753",
-    "78754",
-    "78756",
-    "78757",
-    "78758",
-    "78759",
-]
-
 
 def download_shapefile():
     """Download and extract Census ZCTA cartographic boundary shapefile."""
@@ -146,9 +80,9 @@ def download_shapefile():
     return gdf
 
 
-def filter_to_travis_county(gdf):
-    """Filter the nationwide ZCTA GeoDataFrame to Travis County ZCTAs."""
-    print("[2/3] Filtering to Travis County ZCTAs...")
+def filter_to_zctas(gdf, zctas):
+    """Filter the nationwide ZCTA GeoDataFrame to the preset's ZCTAs."""
+    print("[2/3] Filtering to preset ZCTAs...")
 
     # The ZCTA column in the Census shapefile
     # Identify the ZCTA column name (varies by vintage)
@@ -169,16 +103,15 @@ def filter_to_travis_county(gdf):
     # Ensure string type for matching
     gdf[zcta_col] = gdf[zcta_col].astype(str).str.zfill(5)
 
-    # Filter to Travis County ZCTAs
-    mask = gdf[zcta_col].isin(TRAVIS_COUNTY_ZCTAS)
+    mask = gdf[zcta_col].isin(zctas)
     filtered = gdf[mask].copy()
 
     matched_zctas = set(filtered[zcta_col].tolist())
-    requested_zctas = set(TRAVIS_COUNTY_ZCTAS)
+    requested_zctas = set(zctas)
     missing = requested_zctas - matched_zctas
 
     print(
-        f"      Matched {len(filtered)} of {len(TRAVIS_COUNTY_ZCTAS)} requested ZCTAs."
+        f"      Matched {len(filtered)} of {len(zctas)} requested ZCTAs."
     )
     if missing:
         print(f"      Not found in shapefile (likely PO Box ZCTAs): {sorted(missing)}")
@@ -194,7 +127,7 @@ def filter_to_travis_county(gdf):
     return filtered
 
 
-def simplify_and_export(gdf):
+def simplify_and_export(gdf, output_file):
     """Simplify geometry and export as GeoJSON."""
     print("[3/3] Simplifying geometry and exporting GeoJSON...")
 
@@ -210,26 +143,30 @@ def simplify_and_export(gdf):
         gdf = gdf.to_crs(epsg=4326)
 
     # Create output directory if needed
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
     # Export to GeoJSON
-    gdf.to_file(OUTPUT_FILE, driver="GeoJSON")
+    gdf.to_file(output_file, driver="GeoJSON")
 
-    file_size = os.path.getsize(OUTPUT_FILE) / 1024
-    print(f"      Exported to: {OUTPUT_FILE}")
+    file_size = os.path.getsize(output_file) / 1024
+    print(f"      Exported to: {output_file}")
     print(f"      File size: {file_size:.1f} KB")
     print(f"      Features: {len(gdf)} ZCTAs")
 
 
 def main():
+    args = parse_preset_arg("Prepare ZCTA GeoJSON for a city preset").parse_args()
+    preset = load_preset(args.preset)
+
     print("=" * 60)
-    print("Prepare ZCTA GeoJSON for Travis County")
+    print(f"Prepare ZCTA GeoJSON for preset {preset['id']}")
     print("=" * 60)
     print()
 
+    zctas = resolve_zctas(preset)
     gdf = download_shapefile()
-    filtered = filter_to_travis_county(gdf)
-    simplify_and_export(filtered)
+    filtered = filter_to_zctas(gdf, zctas)
+    simplify_and_export(filtered, preset["output_paths"]["boundaries"])
 
     print()
     print("Done.")

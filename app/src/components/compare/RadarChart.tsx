@@ -49,8 +49,9 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
   if (!healthData || !summary || zctas.length === 0) return null;
 
   // Build data points for each indicator
-  const data = RADAR_INDICATORS.map(({ key, shortLabel }) => {
+  const data = RADAR_INDICATORS.flatMap(({ key, shortLabel }) => {
     const ind = summary.indicators[key];
+    if (ind === null) return []; // region has no source for this indicator
     const entry: Record<string, string | number | null> = {
       indicator: shortLabel,
       fullMark: 100,
@@ -67,7 +68,7 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
       );
     }
 
-    return entry;
+    return [entry];
   });
 
   return (
@@ -76,7 +77,7 @@ export default function RadarChart({ zctas, colors }: RadarChartProps) {
         Health Profile Comparison
       </h3>
       <p className="text-sm text-aph-dark-gray mb-4">
-        Higher values indicate better health outcomes across all indicators.
+        Each indicator is scaled from 0 to 100 across all ZIP codes. A higher score always means a better outcome, and a larger shape means better outcomes overall.
       </p>
       <div className="w-full" style={{ height: "min(380px, 60vw)" }}>
         <ResponsiveContainer width="100%" height="100%">

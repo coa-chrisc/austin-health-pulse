@@ -8,11 +8,11 @@ export function formatValue(value: number | null | undefined, unit: string): str
 
 export function formatDifference(
   value: number,
-  countyAvg: number,
+  areaAvg: number,
   unit: string,
   higherIsBetter: boolean,
 ): string {
-  const diff = value - countyAvg;
+  const diff = value - areaAvg;
   const sign = diff > 0 ? "+" : "";
   let formatted: string;
   if (unit === "years") formatted = diff.toFixed(1);
@@ -25,5 +25,5 @@ export function formatDifference(
     : diff < 0
       ? "better than"
       : "worse than";
-  return `${sign}${formatted} ${qualifier} county avg`;
+  return `${sign}${formatted} ${qualifier} area average`;
 }

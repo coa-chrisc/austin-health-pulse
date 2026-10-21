@@ -9,11 +9,11 @@ const INDICATOR_DESCRIPTIONS: Record<string, string> = {
   "Uninsured Rate":
     "Percentage of civilian population without health insurance (ACS 2022)",
   "Diabetes Prevalence":
-    "Estimated percentage of adults aged 18+ diagnosed with diabetes (CDC PLACES 2023)",
+    "Estimated percentage of adults aged 18+ diagnosed with diabetes (CDC PLACES 2025 release, 2023 BRFSS data)",
   "Hypertension Prevalence":
-    "Estimated percentage of adults aged 18+ with high blood pressure (CDC PLACES 2023)",
+    "Estimated percentage of adults aged 18+ with high blood pressure (CDC PLACES 2025 release, 2023 BRFSS data)",
   "Obesity Prevalence":
-    "Estimated percentage of adults aged 18+ with BMI \u2265 30 (CDC PLACES 2023)",
+    "Estimated percentage of adults aged 18+ with BMI \u2265 30 (CDC PLACES 2025 release, 2023 BRFSS data)",
 };
 
 interface GaugeChartProps {
@@ -50,7 +50,7 @@ export default function GaugeChart({
         : Math.max(0, Math.min(1, (value - min) / range))
       : 0;
 
-  // Clamp county avg marker to 0-1 range so it stays on the arc
+  // Clamp area average marker to 0-1 range so it stays on the arc
   const avgFraction = isDegenerate
     ? 0.5
     : Math.max(0, Math.min(1, (countyAvg - min) / range));
@@ -134,7 +134,7 @@ export default function GaugeChart({
             unit === "years"
               ? diff.toFixed(1)
               : diff.toFixed(1) + (unit === "%" ? "pp" : "");
-          return `${sign}${formatted} vs avg`;
+          return `${sign}${formatted} vs. area average`;
         })()
       : "";
 
@@ -163,7 +163,7 @@ export default function GaugeChart({
           />
         )}
 
-        {/* County average marker */}
+        {/* Area average marker */}
         {value !== null && (
           <g>
             <line
@@ -269,7 +269,7 @@ export default function GaugeChart({
         )}
       </div>
 
-      {/* Difference vs county avg */}
+      {/* Difference vs area average */}
       {value !== null ? (
         <p className="text-xs mt-0.5 text-center" style={{ color: fillColor }}>
           {diffText}

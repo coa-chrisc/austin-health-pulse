@@ -1,4 +1,5 @@
 import { APH_COLORS, SERVICE_GUIDE_URL } from "../../lib/constants";
+import { cityConfig } from "../../lib/cityConfig";
 import {
   FACTOR_ICONS,
   type ImprovementOpportunity,
@@ -59,12 +60,12 @@ export default function ServiceMatchCTA({
           </span>
           <div>
             <p className="font-semibold text-lg">
-              You're already covering the modifiable factors well.
+              Your answers show no factors with room to improve.
             </p>
             <p className="text-white/85 text-sm mt-1">
               Keep doing what you're doing.
               {SERVICE_GUIDE_URL &&
-                " If anything changes, the Austin Service Guide can help match you to local resources."}
+                ` If anything changes, the ${cityConfig.region.cityName} Service Guide can help match you to local resources.`}
             </p>
           </div>
         </div>
@@ -75,7 +76,7 @@ export default function ServiceMatchCTA({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 mt-4 px-4 py-2 rounded-lg bg-white text-aph-dark-green font-semibold text-sm hover:bg-white/90 transition"
           >
-            Browse Austin services
+            Browse {cityConfig.region.cityName} services
             <span className="material-symbols-outlined text-base">
               open_in_new
             </span>
@@ -92,10 +93,7 @@ export default function ServiceMatchCTA({
 
   return (
     <div
-      className="rounded-2xl shadow-md p-6 md:p-7 text-aph-dark-blue border border-aph-blue/20"
-      style={{
-        background: "linear-gradient(135deg, #eef4fb 0%, #dceaf6 100%)",
-      }}
+      className="rounded-2xl shadow-md p-6 md:p-7 text-aph-dark-blue border border-aph-blue/20 brand-soft-gradient"
     >
       <div className="flex items-start gap-3 mb-1">
         <span
@@ -110,13 +108,13 @@ export default function ServiceMatchCTA({
             <span style={{ color: APH_COLORS.darkGreen }}>
               +{totalGain.toFixed(1)} years
             </span>{" "}
-            could be on the table
+            of estimated gain
           </h4>
           <p className="text-sm text-aph-dark-blue/80 mt-1">
-            Based on your inputs, these are the factors with the most years
-            recoverable.
+            Based on your answers, these factors offer the largest estimated
+            gains.
             {url &&
-              " Austin Public Health partners with services that can help."}
+              ` ${cityConfig.agency.name} partners with services that can help.`}
           </p>
         </div>
       </div>
@@ -140,7 +138,7 @@ export default function ServiceMatchCTA({
               className="text-sm font-bold tabular-nums whitespace-nowrap"
               style={{ color: APH_COLORS.darkGreen }}
             >
-              +{o.potentialGain.toFixed(1)} yrs
+              +{o.potentialGain.toFixed(1)} years
             </span>
           </li>
         ))}
@@ -157,14 +155,14 @@ export default function ServiceMatchCTA({
             <span className="material-symbols-outlined text-base">
               handshake
             </span>
-            Find Austin services that can help
+            Find {cityConfig.region.cityName} services that can help
             <span className="material-symbols-outlined text-base">
               arrow_forward
             </span>
           </a>
           <p className="text-xs text-aph-dark-gray mt-3">
-            Opens the Austin Service Guide. Your responses on this page are not
-            sent — only the factor categories are shared.
+            Opens the {cityConfig.region.cityName} Service Guide. Your answers stay in your browser. The link
+            includes only general service topics.
           </p>
         </>
       )}

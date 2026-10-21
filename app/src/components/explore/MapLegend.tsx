@@ -51,8 +51,7 @@ export default function MapLegend({ indicator, min, max }: MapLegendProps) {
       {/* Missing data indicator */}
       <div className="flex items-center gap-2 mt-2 pt-2 border-t border-aph-light-gray/50">
         <div
-          className="w-4 h-3 rounded-sm"
-          style={{ backgroundColor: "#C6C5C4", opacity: 0.3 }}
+          className="w-4 h-3 rounded-sm bg-aph-light-gray opacity-30"
         />
         <span className="text-[11px] text-aph-dark-gray">No data</span>
       </div>

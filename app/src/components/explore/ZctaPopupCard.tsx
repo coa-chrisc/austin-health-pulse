@@ -9,6 +9,8 @@ import { formatValue, formatDifference } from "../../lib/formatters";
 import { getComparisonColor } from "../../lib/colorScales";
 import { APH_COLORS } from "../../lib/constants";
 import { getDataQualityNote } from "../../lib/dataQuality";
+import { isIndicatorAvailable } from "../../lib/indicators";
+import ServiceGuideZipLink from "../shared/ServiceGuideZipLink";
 
 interface ZctaPopupCardProps {
   zcta: string | null;
@@ -45,13 +47,17 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
 
   const lifeExpVal = data.lifeExpectancy;
   const qualityNote = getDataQualityNote(zcta);
+  // Skip indicators the region has no source for (null in the summary)
+  const barIndicators = BAR_INDICATORS.filter((key) =>
+    isIndicatorAvailable(summary, key),
+  );
 
   return (
     <Card zcta={zcta} onClose={onClose}>
       {/* Life Expectancy hero stat */}
       <div className="bg-aph-light-blue/40 rounded-lg p-4 mb-4 text-center">
         <p className="text-xs font-semibold uppercase tracking-wide text-aph-dark-gray mb-1">
-          Life Expectancy
+          Life Expectancy at Birth
         </p>
         <p className="text-3xl font-bold text-aph-dark-blue">
           {formatValue(lifeExpVal, "years")}
@@ -85,7 +91,7 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
 
       {/* Mini bar charts */}
       <div className="space-y-3">
-        {BAR_INDICATORS.map((key) => {
+        {barIndicators.map((key) => {
           const value = data[key] as number | null;
           const avg = countyAvg?.[key] ?? null;
           const indSummary = summary?.indicators[key];
@@ -123,7 +129,7 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
                     backgroundColor: barColor,
                   }}
                 />
-                {/* County average marker */}
+                {/* Area average marker */}
                 {avg !== null && avgPct > 0 && (
                   <div
                     className="absolute top-[-2px] bottom-[-2px] w-0.5"
@@ -131,7 +137,7 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
                       left: `${avgPct}%`,
                       backgroundColor: APH_COLORS.darkBlue,
                     }}
-                    title={`County avg: ${formatValue(avg, unit)}`}
+                    title={`Area average: ${formatValue(avg, unit)}`}
                   />
                 )}
               </div>
@@ -145,14 +151,16 @@ export default function ZctaPopupCard({ zcta, onClose }: ZctaPopupCardProps) {
         })}
       </div>
 
-      {/* County average legend hint */}
+      {/* Area average legend hint */}
       <div className="flex items-center gap-2 mt-4 pt-3 border-t border-aph-light-gray/40">
         <div
           className="w-0.5 h-4"
           style={{ backgroundColor: APH_COLORS.darkBlue }}
         />
-        <span className="text-[10px] text-aph-dark-gray">County average</span>
+        <span className="text-[10px] text-aph-dark-gray">Area average</span>
       </div>
+
+      <ServiceGuideZipLink zip={zcta} className="mt-4 w-full justify-center" />
     </Card>
   );
 }

@@ -1,0 +1,20 @@
+# Single-tenant local/VM run. Usage: docker compose up --build
+services:
+  web:
+    build:
+      context: .
+      args:
+        BASE_PATH: ${BASE_PATH:-/}
+        CITY_CONFIG: ${CITY_CONFIG:-city.config.json}
+        VITE_SERVICE_GUIDE_URL: ${VITE_SERVICE_GUIDE_URL:-}
+        VITE_ENABLE_PERSONAL_CALCULATOR: ${VITE_ENABLE_PERSONAL_CALCULATOR:-false}
+    image: austin-health-pulse:local
+    ports:
+      - "8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp  # nginx pid file and temp dirs
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped

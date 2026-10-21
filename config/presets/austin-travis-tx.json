@@ -1,0 +1,174 @@
+{
+  "$schema": "../city.config.schema.json",
+  "id": "austin-travis-tx",
+  "appName": "Austin Health Pulse",
+  "agency": {
+    "name": "Austin Public Health",
+    "shortName": "APH",
+    "parent": "City of Austin"
+  },
+  "region": {
+    "name": "Greater Austin",
+    "cityName": "Austin",
+    "state": "TX"
+  },
+  "showBuildStory": true,
+  "brand": {
+    "logoUrl": null,
+    "colors": {
+      "blue": "#44499C",
+      "green": "#009F4D",
+      "white": "#f7f6f5",
+      "darkBlue": "#22254E",
+      "darkGreen": "#005027",
+      "compliantGreen": "#008743",
+      "lightBlue": "#dcf2fd",
+      "lightGreen": "#dff0e3",
+      "red": "#F83125",
+      "orange": "#FF8F00",
+      "yellow": "#FFC600",
+      "cyan": "#009CDE",
+      "purple": "#9F3CC9",
+      "brown": "#8F5201",
+      "lightGray": "#C6C5C4",
+      "darkGray": "#636262"
+    }
+  },
+  "map": {
+    "center": [
+      30.2672,
+      -97.7431
+    ],
+    "zoom": 11,
+    "minZoom": 9,
+    "maxZoom": 16
+  },
+  "featuredZips": [
+    {
+      "label": "Downtown",
+      "zip": "78701"
+    },
+    {
+      "label": "East Austin",
+      "zip": "78702"
+    },
+    {
+      "label": "South Austin",
+      "zip": "78704"
+    },
+    {
+      "label": "West Lake",
+      "zip": "78746"
+    },
+    {
+      "label": "Pflugerville",
+      "zip": "78660"
+    },
+    {
+      "label": "North Austin",
+      "zip": "78758"
+    }
+  ],
+  "dataQualityNotes": {
+    "78712": "Campus ZIP — small residential population; estimates unreliable."
+  },
+  "serviceGuideUrl": null,
+  "data": {
+    "indicators": "data/austin-travis-tx/zip-indicators.json",
+    "boundaries": "data/austin-travis-tx/boundaries.geojson",
+    "summary": "data/austin-travis-tx/county-summary.json"
+  },
+  "dataSources": [
+    {
+      "label": "Life Expectancy",
+      "source": "CDC USALEEP (2010-2015)"
+    },
+    {
+      "label": "Poverty & Insurance",
+      "source": "ACS 5-Year (2022)"
+    },
+    {
+      "label": "Chronic Disease",
+      "source": "CDC PLACES (2025 release, 2023 BRFSS data)"
+    },
+    {
+      "label": "Asthma",
+      "source": "CDC PLACES (2025 release, 2023 BRFSS data)"
+    },
+    {
+      "label": "Violent Crime",
+      "source": "APD Crime Reports (City of Austin Open Data)"
+    }
+  ],
+  "dataAsOf": "March 2026",
+  "pipeline": {
+    "stateFips": "48",
+    "countyFips": "453",
+    "zctas": [
+      "78610",
+      "78613",
+      "78617",
+      "78620",
+      "78621",
+      "78634",
+      "78640",
+      "78641",
+      "78642",
+      "78644",
+      "78645",
+      "78646",
+      "78652",
+      "78653",
+      "78660",
+      "78664",
+      "78669",
+      "78676",
+      "78681",
+      "78701",
+      "78702",
+      "78703",
+      "78704",
+      "78705",
+      "78712",
+      "78717",
+      "78719",
+      "78721",
+      "78722",
+      "78723",
+      "78724",
+      "78725",
+      "78726",
+      "78727",
+      "78728",
+      "78729",
+      "78730",
+      "78731",
+      "78732",
+      "78733",
+      "78734",
+      "78735",
+      "78736",
+      "78737",
+      "78738",
+      "78739",
+      "78741",
+      "78742",
+      "78744",
+      "78745",
+      "78746",
+      "78747",
+      "78748",
+      "78749",
+      "78750",
+      "78751",
+      "78752",
+      "78753",
+      "78754",
+      "78756",
+      "78757",
+      "78758",
+      "78759"
+    ],
+    "crimeSource": "apd-austin"
+  }
+}

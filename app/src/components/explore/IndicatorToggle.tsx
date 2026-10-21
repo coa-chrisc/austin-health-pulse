@@ -1,17 +1,24 @@
 import type { IndicatorKey } from "../../types/health";
 import { INDICATOR_LABELS, INDICATOR_UNITS } from "../../types/health";
+import { useHealthData } from "../../hooks/useHealthData";
+import { isIndicatorAvailable } from "../../lib/indicators";
 
 interface IndicatorToggleProps {
   selected: IndicatorKey;
   onChange: (indicator: IndicatorKey) => void;
 }
 
-const INDICATORS = Object.keys(INDICATOR_LABELS) as IndicatorKey[];
+const ALL_INDICATORS = Object.keys(INDICATOR_LABELS) as IndicatorKey[];
 
 export default function IndicatorToggle({
   selected,
   onChange,
 }: IndicatorToggleProps) {
+  const { summary } = useHealthData();
+  // Hide layers the region has no data source for (e.g. violent crime)
+  const INDICATORS = ALL_INDICATORS.filter((key) =>
+    isIndicatorAvailable(summary, key),
+  );
   const unit = INDICATOR_UNITS[selected];
   const unitLabel =
     unit === "years"

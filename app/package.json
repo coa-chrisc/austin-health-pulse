@@ -2,15 +2,29 @@
   "name": "austin-health-pulse",
   "private": true,
   "version": "0.0.0",
+  "description": "Neighborhood life expectancy and health indicator explorer, configurable for any city or county health department.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coa-chrisc/austin-health-pulse.git",
+    "directory": "app"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "validate:data": "node scripts/validate-data.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "dependencies": {
+    "@fontsource/geist": "^5.3.0",
+    "@fontsource/material-symbols-outlined": "^5.3.9",
     "leaflet": "^1.9.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -29,6 +43,8 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",

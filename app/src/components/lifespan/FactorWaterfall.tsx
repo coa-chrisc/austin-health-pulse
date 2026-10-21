@@ -90,7 +90,7 @@ export default function FactorWaterfall({
       <div className="mt-5 pt-4 border-t border-aph-light-gray/40 grid grid-cols-3 gap-3 text-center">
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-aph-dark-gray">
-            Avg. for your age
+            Average for your age
           </p>
           <p className="text-lg font-bold text-aph-dark-blue tabular-nums">
             {baseline.toFixed(1)}

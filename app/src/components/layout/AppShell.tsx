@@ -1,5 +1,11 @@
-import { useState, lazy, Suspense } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useState, useEffect, lazy, Suspense } from "react";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useHealthData } from "../../hooks/useHealthData";
@@ -19,6 +25,19 @@ export default function AppShell() {
   const { loading, error } = useHealthData();
   const { isIdle } = useIdleTimer();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  // Each idle period ends a kiosk "visit": remount the views so the next
+  // visitor never sees the previous visitor's ZIP, age, or calculator inputs.
+  const [visit, setVisit] = useState(0);
+  const [wasIdle, setWasIdle] = useState(false);
+  if (isIdle !== wasIdle) {
+    setWasIdle(isIdle);
+    if (isIdle) setVisit((v) => v + 1);
+  }
+  useEffect(() => {
+    // Also drop any ZIP carried in the URL (e.g. #/explore?zcta=78741).
+    if (isIdle) navigate("/", { replace: true });
+  }, [isIdle, navigate]);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
   const [hasSeenTour, setHasSeenTour] = useState(() => {
@@ -74,7 +93,7 @@ export default function AppShell() {
     <div className="min-h-screen flex flex-col bg-aph-white">
       <Header onInfoClick={() => setAboutOpen(true)} />
       <main className="flex-1">
-        <ErrorBoundary key={pathname}>
+        <ErrorBoundary key={`${pathname}:${visit}`}>
           <Suspense
             fallback={
               <div className="flex items-center justify-center h-64">

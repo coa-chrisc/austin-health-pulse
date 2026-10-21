@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { cityConfig, logoSrc } from "../../lib/cityConfig";
 
 const modes = [
   {
@@ -10,7 +11,7 @@ const modes = [
   { to: "/explore", label: "Explore the Map", shortLabel: "Map", icon: "map" },
   {
     to: "/compare",
-    label: "Compare Zip Codes",
+    label: "Compare ZIP Codes",
     shortLabel: "Compare",
     icon: "compare_arrows",
   },
@@ -26,16 +27,24 @@ export default function Header({ onInfoClick }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-aph-green rounded-lg flex items-center justify-center">
-            <span className="material-symbols-outlined text-white text-2xl">
-              health_and_safety
-            </span>
+            {logoSrc ? (
+              <img
+                src={logoSrc}
+                alt=""
+                className="w-7 h-7 object-contain"
+              />
+            ) : (
+              <span className="material-symbols-outlined text-white text-2xl">
+                health_and_safety
+              </span>
+            )}
           </div>
           <div>
             <h1 className="text-lg font-semibold leading-tight">
-              Austin Health Pulse
+              {cityConfig.appName}
             </h1>
             <p className="text-xs text-aph-light-blue opacity-80">
-              Austin Public Health
+              {cityConfig.agency.name}
             </p>
           </div>
         </div>

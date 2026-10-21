@@ -1,3 +1,5 @@
+import type { ScenarioModel } from "./scenario";
+
 export type AgeGroupKey =
   | "Under 1"
   | "1-4"
@@ -39,7 +41,7 @@ export interface CountyAverage {
   hypertension: number;
   obesity: number;
   asthma: number;
-  violentCrimeRate: number;
+  violentCrimeRate: number | null;
 }
 
 export interface HealthDataMeta {
@@ -73,10 +75,12 @@ export interface CountySummary {
     hypertension: CountySummaryIndicator;
     obesity: CountySummaryIndicator;
     asthma: CountySummaryIndicator;
-    violentCrimeRate: CountySummaryIndicator;
+    /** null when the region has no violent-crime source. */
+    violentCrimeRate: CountySummaryIndicator | null;
   };
   totalZctas: number;
   zctasWithCompleteData: number;
+  scenarioModel: ScenarioModel;
 }
 
 export type IndicatorKey =

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { cityConfig } from "../../lib/cityConfig";
+import { ENABLE_PERSONAL_CALCULATOR } from "../../lib/constants";
 
 interface TourStep {
   icon: string;
@@ -10,23 +12,29 @@ const STEPS: TourStep[] = [
   {
     icon: "location_on",
     title: "Start with your ZIP code",
-    body: "Enter a Travis County ZIP — or tap the location pin to use your current location. Try one of the featured neighborhood pills if you're just exploring.",
+    body: `Enter a ${cityConfig.region.name} ZIP code, or tap the location pin to use your current location. Not sure where to start? Pick one of the example neighborhoods.`,
   },
   {
     icon: "monitoring",
     title: "See how your ZIP compares",
-    body: "Life expectancy, poverty, uninsured rates, and chronic-disease prevalence are shown alongside the county average — green means better than average, red means worse.",
+    body: "You will see life expectancy, poverty, uninsured rates, and chronic disease rates next to the area average. Green means better than average. Red means worse.",
   },
   {
     icon: "social_distance",
     title: "Look at the gap",
-    body: "Travis County's longest- and shortest-living ZIP codes can differ by years. The bar strip below shows where your ZIP ranks among all 60+ ZIPs in the county.",
+    body: `Life expectancy can differ by years between ${cityConfig.region.name}'s longest- and shortest-lived ZIPs. The bar chart below shows where your ZIP ranks among all ZIPs in the area.`,
   },
-  {
-    icon: "calculate",
-    title: "Try the personal-factors calculators",
-    body: "Scroll down to see how personal factors like smoking, exercise, diet, and sleep, plus generational change, shift life expectancy. These are population-level estimates from peer-reviewed sources.",
-  },
+  ENABLE_PERSONAL_CALCULATOR
+    ? {
+        icon: "calculate",
+        title: "Try the lifespan estimator",
+        body: "Scroll down to see how habits like smoking, exercise, diet, and sleep are linked to life expectancy. These are group-level estimates from published research, not predictions for one person.",
+      }
+    : {
+        icon: "tune",
+        title: "Explore an equity scenario",
+        body: "Scroll down to the scenario simulator. It shows how lower poverty, more insurance coverage, or lower chronic disease rates in a ZIP are linked to differences in life expectancy across the area.",
+      },
 ];
 
 interface TourOverlayProps {

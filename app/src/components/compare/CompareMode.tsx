@@ -4,6 +4,7 @@ import ZctaPicker from "./ZctaPicker";
 import RadarChart from "./RadarChart";
 import ComparisonBarChart from "./ComparisonBarChart";
 import ComparisonTable from "./ComparisonTable";
+import { cityConfig } from "../../lib/cityConfig";
 
 const COMPARISON_COLORS = [
   APH_COLORS.blue,
@@ -34,11 +35,11 @@ export default function CompareMode() {
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-aph-dark-blue">
-          Compare Zip Codes
+          Compare ZIP Codes
         </h1>
         <p className="text-aph-dark-gray mt-2 text-sm sm:text-base max-w-2xl">
-          How do health outcomes differ across Travis County neighborhoods?
-          Select 2 or 3 zip codes below to see a side-by-side comparison of life
+          How do health outcomes differ across {cityConfig.region.name} neighborhoods?
+          Select 2 or 3 ZIP codes below to see a side-by-side comparison of life
           expectancy, chronic disease, and socioeconomic indicators.
         </p>
       </div>
@@ -70,7 +71,7 @@ export default function CompareMode() {
         </div>
       )}
 
-      {/* Empty state — only when no zips selected */}
+      {/* Empty state — only when no ZIPs selected */}
       {selectedZctas.length === 0 && (
         <div className="bg-white rounded-xl shadow-sm p-6 sm:p-10 text-center border border-aph-light-gray/30">
           <span className="material-symbols-outlined text-5xl text-aph-blue/30 mb-4 block">
@@ -84,7 +85,7 @@ export default function CompareMode() {
               <span className="w-7 h-7 rounded-full bg-aph-blue/10 text-aph-blue flex items-center justify-center text-xs font-bold">
                 1
               </span>
-              <span>Pick a zip code above</span>
+              <span>Pick a ZIP code above</span>
             </div>
             <span className="hidden sm:block material-symbols-outlined text-aph-light-gray text-lg">
               arrow_forward
@@ -108,14 +109,14 @@ export default function CompareMode() {
         </div>
       )}
 
-      {/* Waiting for second zip */}
+      {/* Waiting for second ZIP */}
       {selectedZctas.length === 1 && (
         <div className="bg-aph-light-blue/30 rounded-xl p-5 sm:p-6 text-center border border-aph-blue/15">
           <span className="material-symbols-outlined text-3xl text-aph-blue/60 mb-2 block">
             pending
           </span>
           <p className="text-sm text-aph-dark-blue font-medium">
-            Add one more zip code to see the comparison charts and table.
+            Add one more ZIP code to see the comparison charts and table.
           </p>
         </div>
       )}
