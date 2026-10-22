@@ -176,6 +176,10 @@
       "pattern": "^https?://",
       "description": "Base URL of the city's service guide. The ZIP card links to <url>/services?zip=<ZIP>. VITE_SERVICE_GUIDE_URL at build time overrides this."
     },
+    "serviceGuide": {
+      "type": "object",
+      "description": "Settings read only by Austin Service Guide (dark-mode colors, category colors, copy, map tweaks), so one city config can drive both apps. Validated by the Service Guide's own schema; Health Pulse ignores it and strips it from the browser bundle."
+    },
     "data": {
       "type": "object",
       "required": ["indicators", "boundaries", "summary"],
