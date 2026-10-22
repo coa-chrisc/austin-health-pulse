@@ -20,7 +20,7 @@
     "colors": {
       "primary": "#44499C",
       "primarySoft": "#dcf2fd",
-      "accent": "#009F4D",
+      "accent": "#008743",
       "accentSoft": "#dff0e3",
       "ink": "#22254E",
       "onBrand": "#ffffff",
@@ -32,9 +32,9 @@
       "line": "#C6C5C4",
       "noData": "#C6C5C4",
       "positive": "#005027",
-      "positiveFill": "#009F4D",
-      "negative": "#F83125",
-      "warning": "#FF8F00",
+      "positiveFill": "#008743",
+      "negative": "#D52B1E",
+      "warning": "#C25E00",
       "scrim": "#000000"
     },
     "dataScale": [
