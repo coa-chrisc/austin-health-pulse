@@ -115,6 +115,7 @@ export default function cityConfigPlugin(): Plugin {
     }
     const raw = JSON.parse(fs.readFileSync(configPath, "utf8")) as {
       pipeline: unknown;
+      serviceGuide?: unknown;
       appName: string;
       region: { name: string };
       agency: { name: string };
@@ -136,7 +137,7 @@ export default function cityConfigPlugin(): Plugin {
       );
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars -- stripped on purpose
-    const { pipeline, $schema, ...cityConfig } = raw;
+    const { pipeline, serviceGuide, $schema, ...cityConfig } = raw;
     return cityConfig;
   }
 
