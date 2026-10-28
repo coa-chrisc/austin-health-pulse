@@ -24,7 +24,7 @@ WORKDIR /src/app
 RUN npm run validate:data && npm run build
 
 # Runtime: non-root nginx on 8080. The alpine variant ships busybox wget for HEALTHCHECK.
-FROM nginxinc/nginx-unprivileged:1.28-alpine
+FROM nginxinc/nginx-unprivileged:1.31-alpine
 COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /src/app/dist /usr/share/nginx/html
 EXPOSE 8080
